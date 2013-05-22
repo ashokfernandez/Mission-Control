@@ -39,10 +39,7 @@ void _USB_sendMidiMessage(int command, int channel, int value)
     midiMessage[0] = command;
     midiMessage[1] = channel;
     midiMessage[2] = value;
-    virtualMidiOutput->sendMessage( &midiMessage );
-
-    printf("MIDI message sent\n");
-    
+    virtualMidiOutput->sendMessage( &midiMessage );    
 }
 
 // Init the virtual midi port
