@@ -2,17 +2,18 @@
 #include "RtMidi.h"
 #include <stdio.h>
 #include <iostream>
+#include <vector>
 
 // RtMidi parameters
 #define VIRTUAL_MIDI_PORT_NAME "Mission Control Hardware Emulator"
-#define MACOSX_CORE
+#define __MACOSX_CORE__
 
 // Virtual midi port
 static RtMidiOut::RtMidiOut *virtualMidiOutput;
+using namespace std;
 
-// Init the virtual midi port
-void USB_init(void){
-	// Open a midi port   
+void _USB_init(void){
+	//Open a midi port   
     try 
     {
         virtualMidiOutput = new RtMidiOut::RtMidiOut();
@@ -24,19 +25,16 @@ void USB_init(void){
         exit( EXIT_FAILURE );
     }
 
-    printf("Initilaised MIDI out\n");
+	    printf("Initilaised MIDI out\n");
 }
 
-
-/// Used to send a midi message down a virtual midi port with a given note and velocity.
-/// Waits 500ms after sending the on signal to send the off signal.
-void USB_sendMidiMessage(int command, int channel, int value)
+void _USB_sendMidiMessage(int command, int channel, int value)
 {
     
-    /// Send message down channel 10, the convention for percussion
-    /// For more on how this message is constructed see table 2
-    /// at http://www.midi.org/techspecs/midimessages.php
-    std::vector<unsigned char> midiMessage(3);
+    // Send message down channel 10, the convention for percussion
+    // For more on how this message is constructed see table 2
+    // at http://www.midi.org/techspecs/midimessages.php
+    vector<unsigned char> midiMessage(3);
 
     midiMessage[0] = command;
     midiMessage[1] = channel;
@@ -46,3 +44,19 @@ void USB_sendMidiMessage(int command, int channel, int value)
     printf("MIDI message sent\n");
     
 }
+
+// Init the virtual midi port
+extern "C" {
+	void USB_init(void){
+		_USB_init();
+	}
+
+	/// Used to send a midi message down a virtual midi port with a given note and velocity.
+	/// Waits 500ms after sending the on signal to send the off signal.
+	void USB_sendMidiMessage(int command, int channel, int value)
+	{
+	    _USB_sendMidiMessage(command, channel, value);
+	    
+	}
+}
+

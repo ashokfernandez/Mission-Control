@@ -1,0 +1,288 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B02F85CB174D191700E5A2AB /* PyGuiBindings.c in Sources */ = {isa = PBXBuildFile; fileRef = B02F85C4174D191700E5A2AB /* PyGuiBindings.c */; };
+		B02F85CC174D191700E5A2AB /* test_server.c in Sources */ = {isa = PBXBuildFile; fileRef = B02F85C8174D191700E5A2AB /* test_server.c */; };
+		B02F85CD174D191700E5A2AB /* USB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B02F85C9174D191700E5A2AB /* USB.cpp */; };
+		B02F85D1174D193A00E5A2AB /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02F85CE174D193A00E5A2AB /* CoreAudio.framework */; };
+		B02F85D2174D193A00E5A2AB /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02F85CF174D193A00E5A2AB /* CoreFoundation.framework */; };
+		B02F85D3174D193A00E5A2AB /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02F85D0174D193A00E5A2AB /* CoreMIDI.framework */; };
+		B02F85D5174D194D00E5A2AB /* librtmidi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B02F85D4174D194D00E5A2AB /* librtmidi.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B02F85B4174D18E100E5A2AB /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		B02F85B6174D18E100E5A2AB /* HardwareEmulator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HardwareEmulator; sourceTree = BUILT_PRODUCTS_DIR; };
+		B02F85C2174D191700E5A2AB /* DataTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataTypes.h; path = ../../DataTypes.h; sourceTree = "<group>"; };
+		B02F85C3174D191700E5A2AB /* MidiDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MidiDefinitions.h; path = ../../MidiDefinitions.h; sourceTree = "<group>"; };
+		B02F85C4174D191700E5A2AB /* PyGuiBindings.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = PyGuiBindings.c; path = ../../PyGuiBindings.c; sourceTree = "<group>"; };
+		B02F85C5174D191700E5A2AB /* PyGuiBindings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PyGuiBindings.h; path = ../../PyGuiBindings.h; sourceTree = "<group>"; };
+		B02F85C7174D191700E5A2AB /* Target_Emulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Target_Emulator.h; path = ../../Target_Emulator.h; sourceTree = "<group>"; };
+		B02F85C8174D191700E5A2AB /* test_server.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = test_server.c; path = ../../test_server.c; sourceTree = "<group>"; };
+		B02F85C9174D191700E5A2AB /* USB.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = USB.cpp; path = ../../USB.cpp; sourceTree = "<group>"; };
+		B02F85CA174D191700E5A2AB /* USB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = USB.h; path = ../../USB.h; sourceTree = "<group>"; };
+		B02F85CE174D193A00E5A2AB /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		B02F85CF174D193A00E5A2AB /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		B02F85D0174D193A00E5A2AB /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
+		B02F85D4174D194D00E5A2AB /* librtmidi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librtmidi.a; path = ../../../../../../../../../../../opt/local/lib/librtmidi.a; sourceTree = "<group>"; };
+		B02F85D6174D1B6200E5A2AB /* MessageStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageStrings.h; path = ../../MessageStrings.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B02F85B3174D18E100E5A2AB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B02F85D5174D194D00E5A2AB /* librtmidi.a in Frameworks */,
+				B02F85D1174D193A00E5A2AB /* CoreAudio.framework in Frameworks */,
+				B02F85D2174D193A00E5A2AB /* CoreFoundation.framework in Frameworks */,
+				B02F85D3174D193A00E5A2AB /* CoreMIDI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B02F85AD174D18E100E5A2AB = {
+			isa = PBXGroup;
+			children = (
+				B02F85D6174D1B6200E5A2AB /* MessageStrings.h */,
+				B02F85D4174D194D00E5A2AB /* librtmidi.a */,
+				B02F85CE174D193A00E5A2AB /* CoreAudio.framework */,
+				B02F85CF174D193A00E5A2AB /* CoreFoundation.framework */,
+				B02F85D0174D193A00E5A2AB /* CoreMIDI.framework */,
+				B02F85C2174D191700E5A2AB /* DataTypes.h */,
+				B02F85C3174D191700E5A2AB /* MidiDefinitions.h */,
+				B02F85C4174D191700E5A2AB /* PyGuiBindings.c */,
+				B02F85C5174D191700E5A2AB /* PyGuiBindings.h */,
+				B02F85C7174D191700E5A2AB /* Target_Emulator.h */,
+				B02F85C8174D191700E5A2AB /* test_server.c */,
+				B02F85C9174D191700E5A2AB /* USB.cpp */,
+				B02F85CA174D191700E5A2AB /* USB.h */,
+				B02F85B8174D18E100E5A2AB /* HardwareEmulator */,
+				B02F85B7174D18E100E5A2AB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B02F85B7174D18E100E5A2AB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B02F85B6174D18E100E5A2AB /* HardwareEmulator */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B02F85B8174D18E100E5A2AB /* HardwareEmulator */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HardwareEmulator;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B02F85B5174D18E100E5A2AB /* HardwareEmulator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B02F85BF174D18E100E5A2AB /* Build configuration list for PBXNativeTarget "HardwareEmulator" */;
+			buildPhases = (
+				B02F85B2174D18E100E5A2AB /* Sources */,
+				B02F85B3174D18E100E5A2AB /* Frameworks */,
+				B02F85B4174D18E100E5A2AB /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HardwareEmulator;
+			productName = HardwareEmulator;
+			productReference = B02F85B6174D18E100E5A2AB /* HardwareEmulator */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B02F85AE174D18E100E5A2AB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Ashok Fernandez";
+			};
+			buildConfigurationList = B02F85B1174D18E100E5A2AB /* Build configuration list for PBXProject "HardwareEmulator" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = B02F85AD174D18E100E5A2AB;
+			productRefGroup = B02F85B7174D18E100E5A2AB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B02F85B5174D18E100E5A2AB /* HardwareEmulator */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B02F85B2174D18E100E5A2AB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B02F85CB174D191700E5A2AB /* PyGuiBindings.c in Sources */,
+				B02F85CC174D191700E5A2AB /* test_server.c in Sources */,
+				B02F85CD174D191700E5A2AB /* USB.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		B02F85BD174D18E100E5A2AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					/opt/local/include/,
+					/usr/local/include/,
+				);
+				LIBRARY_SEARCH_PATHS = /opt/local/lib/;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		B02F85BE174D18E100E5A2AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					/opt/local/include/,
+					/usr/local/include/,
+				);
+				LIBRARY_SEARCH_PATHS = /opt/local/lib/;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		B02F85C0174D18E100E5A2AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				GCC_FAST_MATH = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = "/opt/local/include/**";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/local/lib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B02F85C1174D18E100E5A2AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				GCC_FAST_MATH = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = "/opt/local/include/**";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/local/lib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B02F85B1174D18E100E5A2AB /* Build configuration list for PBXProject "HardwareEmulator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B02F85BD174D18E100E5A2AB /* Debug */,
+				B02F85BE174D18E100E5A2AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B02F85BF174D18E100E5A2AB /* Build configuration list for PBXNativeTarget "HardwareEmulator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B02F85C0174D18E100E5A2AB /* Debug */,
+				B02F85C1174D18E100E5A2AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B02F85AE174D18E100E5A2AB /* Project object */;
+}

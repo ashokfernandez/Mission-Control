@@ -28,7 +28,7 @@
 #include <stdbool.h>         // True / False definitions
 
 // Mission Control includes
-#include "Strings.h"        // Info and error message strings
+#include "MessageStrings.h"        // Info and error message strings
 #include "PyGuiBindings.h"  // Include function declarations
 #include "DataTypes.h"      // Mission Control datatypes
 #include "Target_Emulator.h" // Defines the amount of analogue and digital pins avaliable

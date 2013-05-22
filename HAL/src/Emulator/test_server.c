@@ -13,15 +13,18 @@ int main(void){
 
 	// printf("GUI connection establised");
 	USB_init();
-	int count = 0;
+	int count = 60;
 	while(1){
 		// PyGuiBindings_update();
 		// digital = PyGuiBindings_getDigital(DIGITAL_7);
 		// analogue = PyGuiBindings_getAnalogue(ANALOGUE_1);
 
 		// printf("Digital 7 is %i, analogue 1 is %i\n", digital, analogue);
-		USB_sendMidi(CC_CHANGE, CC_CHANNEL_1, count);
+		USB_sendMidiMessage(CC_CHANGE, CC_CHANNEL_1, count);
 		count = (count + 1) % 127;
 		sleep(1);
+		
+		
 	}
+	return 0;
 }

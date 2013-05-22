@@ -4,4 +4,4 @@
 typedef int Pin_analogue_t;
 typedef int Pin_digital_t;
 
-#endif __DATATYPES_H__
+#endif /* __DATATYPES_H__ */

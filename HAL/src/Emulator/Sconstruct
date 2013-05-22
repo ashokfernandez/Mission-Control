@@ -1,15 +1,17 @@
 sourceFiles = ['test_server.c', 'PyGuiBindings.c', 'USB.cpp']#['Py_GUI_Bindings.c']
 
-includeDirs = ['/opt/local/include']#['/Library/Frameworks/Python.framework/Versions/Current/Headers/']
+includeDirs = ['']#['/Library/Frameworks/Python.framework/Versions/Current/Headers/']
 
-libDirs = ['/System/Library/Frameworks', '/opt/local/lib']#['/Library/Frameworks/Python.framework/Versions/Current/lib']
+libDirs = ['./']#/System/Library/Frameworks', '/opt/local/lib']#['/Library/Frameworks/Python.framework/Versions/Current/lib']
 
-libs = ['librtmidi.a']#['python2.7', 'pthread']
+libs = ['librtmidi']#['python2.7', 'pthread']
 
-linkFrameworks = ['-framework CoreAudio', '-framework CoreMIDI']
+linkFrameworks = ['-framework CoreAudio', '-framework CoreMIDI', '-framework CoreFoundation']
 
 # Scons environment variable
 env = Environment()
+	# CC = "clang",
+	# CFLAGS = "-arch i386 -arch x86_64")
 
 # Append frameworks to link with
 env.Append (LINKFLAGS = linkFrameworks)
@@ -18,7 +20,7 @@ env.Append (LINKFLAGS = linkFrameworks)
 env.Append(CPPPATH = includeDirs)
 
 # Add compile-time flags
-#env.Append(CCFLAGS = ['-m64','-O0'])
+env.Append(CCFLAGS = ['-O0'] )
 
 #Add define
 #env.Append(CPPDEFINES=['BIG_ENDIAN'])
