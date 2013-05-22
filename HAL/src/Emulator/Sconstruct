@@ -1,0 +1,35 @@
+sourceFiles = ['test_server.c', 'PyGuiBindings.c', 'USB.cpp']#['Py_GUI_Bindings.c']
+
+includeDirs = ['/opt/local/include']#['/Library/Frameworks/Python.framework/Versions/Current/Headers/']
+
+libDirs = ['/System/Library/Frameworks', '/opt/local/lib']#['/Library/Frameworks/Python.framework/Versions/Current/lib']
+
+libs = ['librtmidi.a']#['python2.7', 'pthread']
+
+linkFrameworks = ['-framework CoreAudio', '-framework CoreMIDI']
+
+# Scons environment variable
+env = Environment()
+
+# Append frameworks to link with
+env.Append (LINKFLAGS = linkFrameworks)
+
+# Add header search path
+env.Append(CPPPATH = includeDirs)
+
+# Add compile-time flags
+#env.Append(CCFLAGS = ['-m64','-O0'])
+
+#Add define
+#env.Append(CPPDEFINES=['BIG_ENDIAN'])
+
+#Add define with value (e.g. -DRELEASE_BUILD=1)
+#env.Append(CPPDEFINES={'RELEASE_BUILD' : '1'})
+
+#Add library search path
+env.Append(LIBPATH = libDirs)
+
+#Add libraries to link against
+env.Append(LIBS = libs)
+
+env.Program(target='GuiServer', source=sourceFiles)

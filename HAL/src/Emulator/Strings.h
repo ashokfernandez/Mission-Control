@@ -1,0 +1,10 @@
+#define PYGUIBINDINGS_INFO__UPDATE_WHEN_NO_CONNECTION "PyGui Bindings : INFO : Socket has been closed, old input will persist until program exit\n"
+#define PYGUIBINDINGS_INFO__CLIENT_CONNECTION_LOST "PyGui Bindings : INFO : Connection to client closed\n"
+
+#define PYGUIBINDINGS_ERROR__LISTENING_SOCKET_CREATE "PyGui Bindings : ERROR : creating listening socket.\n"
+#define PYGUIBINDINGS_ERROR__BIND_CALL_FAILED "PyGui Bindings : ERROR : Error calling bind()\n"
+#define PYGUIBINDINGS_ERROR__LISTEN_CALL_FAILED "PyGui Bindings : ERROR : Error calling listen()\n"
+#define PYGUIBINDINGS_ERROR__ACCEPT_CALL_FAILED "PyGui Bindings : ERROR : Error calling accept()\n"
+#define PYGUIBINDINGS_ERROR__CLOSE_CALL_FAILED "PyGui Bindings : ERROR : Error calling close()\n"
+#define PYGUIBINDINGS_ERROR__INVALID_ANALOGUE_PIN "PyGui Bindings : ERROR : Invalid analogue pin requested\n"
+#define PYGUIBINDINGS_ERROR__INVALID_DIGITAL_PIN "PyGui Bindings : ERROR : Invalid digital pin requested\n"

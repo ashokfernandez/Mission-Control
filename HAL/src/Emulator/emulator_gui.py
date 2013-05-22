@@ -1,4 +1,17 @@
 from Tkinter import *
+import socket
+import sys
+
+# Create a socket to send data down
+try:
+	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	s.connect(("localhost", 1414)) # SMTP
+	socketConnected = True
+except:
+	print "\nemulator_gui.py: Could not connect to GUI server\n"
+	sys.exit(0)
+
+
 
 VERSION = "0.1"
 NUM_ANALOG_CHANNELS = 8
@@ -29,7 +42,7 @@ class ADC(HardwareEmulator):
 		self.GUI = Scale( TkinterRoot, label=self.name, variable = self.value, command=self.moved, from_=maxVal, to=0 )
 		
 	def moved(self, newVal):
-		print self.name + " set to " + newVal
+		s.send(self.name + newVal + "-\n")
 
 # Emulates a GPIO pin on a MCU that is connected to a push button
 class GPIO_BUTTON(HardwareEmulator):
@@ -44,11 +57,11 @@ class GPIO_BUTTON(HardwareEmulator):
 
 	def click(self):
 		if(self.value.get()):
-			clicked = "clicked"
+			clicked = '1'
 		else:
-			clicked = "released"
+			clicked = '0'
 		
-		print self.name + " " + clicked
+		s.send(self.name + clicked + "-\n")
 
 
 # Create a Tkinter root variable and name the main window
@@ -62,7 +75,7 @@ title.grid(row=0, columnspan=8, pady=(15,20))
 # Create an ADC objects to emulate a set of analog inputs
 ANALOG = []
 for i in range(NUM_ANALOG_CHANNELS):
-	name = "Analog %i" % i
+	name = "-A-%i-" % i
 	adcObject = ADC(root, name)
 
 	# Append the object to the list of objects and pack it into the container
@@ -73,7 +86,7 @@ for i in range(NUM_ANALOG_CHANNELS):
 # Create an array of GPIO objects to emulate a set of digital inputs
 DIGITAL = []
 for i in range(NUM_DIGITAL_CHANNELS):
-	name = "Digital %i" % i
+	name = "-D-%i-" % i
 	gpioObject = GPIO_BUTTON(root, name)
 	
 	# Append the object to the list and pack it into the container
@@ -81,16 +94,29 @@ for i in range(NUM_DIGITAL_CHANNELS):
 	DIGITAL.append(gpioObject)
 
 
+def handler():
+	try:
+		# Send a close signal down the socket and wait for confirmation
+		s.send('-X-\n')
+		signal = s.read(100)
+
+		# Check if the server has closed nicely
+		if signal == "__CloseSocket":
+			print "Closing connection with server"
+			s.close()
+			print "Server connection closed, closing GUI"
+
+	except:
+		# Catches the race condition if the server closes before the GUI
+		print "Server connection closed, closing GUI"
 
 
-# var = "junk"
-# scale = Scale( root, variable = var )
-# 
+	# Quit the program	
+	root.quit()
+	sys.exit(0)
 
-# button = Button(root, text="Get Scale Value", command=sel)
-# button.pack(anchor=CENTER)
+# Add a handler for when the window is closed
+root.protocol("WM_DELETE_WINDOW", handler)
 
-# label = Label(root)
-# label.pack()
-
+# Enter the main loop
 root.mainloop()
