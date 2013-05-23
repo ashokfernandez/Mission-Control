@@ -1,3 +1,5 @@
+#define PYGUIBINDINGS_INFO__WAITING_FOR_CLIENT "PyGui Bindings : INFO : Server initialising - waiting for GUI client to connect...\n"
+#define PYGUIBINDINGS_INFO__CLIENT_CONNECTED "PyGui Bindings : INFO : Server initialed OK!\n"
 #define PYGUIBINDINGS_INFO__UPDATE_WHEN_NO_CONNECTION "PyGui Bindings : INFO : Socket has been closed, old input will persist until program exit\n"
 #define PYGUIBINDINGS_INFO__CLIENT_CONNECTION_LOST "PyGui Bindings : INFO : Connection to client closed\n"
 

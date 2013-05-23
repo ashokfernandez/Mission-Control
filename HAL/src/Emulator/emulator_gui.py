@@ -30,7 +30,7 @@ class HardwareEmulator(object):
 
 # Emulates an 8-ADC channel on a MCU and provides a slider widget to change the value of the ADC module
 class ADC(HardwareEmulator):
-	resolution = 10
+	resolution = 7
 
 	def __init__(self, TkinterRoot, name):
 		# Save the name of the slider
@@ -42,7 +42,7 @@ class ADC(HardwareEmulator):
 		self.GUI = Scale( TkinterRoot, label=self.name, variable = self.value, command=self.moved, from_=maxVal, to=0 )
 		
 	def moved(self, newVal):
-		s.send(self.name + newVal + "-\n")
+		s.send("-"+self.name +"-"+ newVal + "-\n")
 
 # Emulates a GPIO pin on a MCU that is connected to a push button
 class GPIO_BUTTON(HardwareEmulator):
@@ -53,15 +53,17 @@ class GPIO_BUTTON(HardwareEmulator):
 		
 		# Initiliase the button widget
 		self.value = BooleanVar(False)
-		self.GUI = Checkbutton( TkinterRoot, text=self.name, variable = self.value, onvalue=True, offvalue=False, command=self.click)
+		self.GUI = Button( TkinterRoot, text=self.name, command=self.click) #onvalue=True, offvalue=False, variable = self.value, 
 
 	def click(self):
 		if(self.value.get()):
+			self.value.set(False)
 			clicked = '1'
 		else:
+			self.value.set(True)
 			clicked = '0'
 		
-		s.send(self.name + clicked + "-\n")
+		s.send("-"+self.name+"-"+ clicked + "-\n")
 
 
 # Create a Tkinter root variable and name the main window
@@ -75,7 +77,7 @@ title.grid(row=0, columnspan=8, pady=(15,20))
 # Create an ADC objects to emulate a set of analog inputs
 ANALOG = []
 for i in range(NUM_ANALOG_CHANNELS):
-	name = "-A-%i-" % i
+	name = "A-%i" % i
 	adcObject = ADC(root, name)
 
 	# Append the object to the list of objects and pack it into the container
@@ -86,7 +88,7 @@ for i in range(NUM_ANALOG_CHANNELS):
 # Create an array of GPIO objects to emulate a set of digital inputs
 DIGITAL = []
 for i in range(NUM_DIGITAL_CHANNELS):
-	name = "-D-%i-" % i
+	name = "D-%i" % i
 	gpioObject = GPIO_BUTTON(root, name)
 	
 	# Append the object to the list and pack it into the container

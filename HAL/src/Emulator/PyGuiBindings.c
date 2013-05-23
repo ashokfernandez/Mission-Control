@@ -247,6 +247,8 @@ bool PyGuiBindings_initConnection(void) {
     short int   port;                   //  port number
     struct      sockaddr_in servaddr;   //  socket address structure
 
+    // Display text to show init has begun
+    printf(PYGUIBINDINGS_INFO__WAITING_FOR_CLIENT);
 
     //  Set the port number
     port = ECHO_PORT;
@@ -290,7 +292,10 @@ bool PyGuiBindings_initConnection(void) {
     // Set the socket to be non-blocking on read calls
     fcntl(connection_socket, F_SETFL, O_NONBLOCK); 
 
+
+
     // Return the socketID so the caller can reference the created socket
+    printf(PYGUIBINDINGS_INFO__CLIENT_CONNECTED);
     return true;
 }
 

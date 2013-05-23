@@ -97,15 +97,15 @@ int main(void){
 				// If the pin is not high send a midi on message
 				if (value > 0){
 					digital_pins[i].value = 1;
-					digital_pins[i].command = digital_on_command_definitions;
 				}
 				// Otherwise send a midi low message
 				else{
 					digital_pins[i].value = 0;
-					digital_pins[i].command = digital_off_command_definitions;
 				}
 
-				USB_sendMidiMessage(digital_pins[i].command, digital_pins[i].channel, digital_pins[i].value);
+				USB_sendMidiMessage(digital_on_command_definitions, digital_pins[i].channel, 127);
+				Sleep_ms(10);
+				USB_sendMidiMessage(digital_off_command_definitions, digital_pins[i].channel, 127);
 			}
 		}
 
@@ -113,11 +113,11 @@ int main(void){
 			value = PyGuiBindings_getAnalogue(analogue_pins[i].pin);
 			// If the value doesnt match the current one
 			if (value != analogue_pins[i].value){
-				printf("Analogue %i changed to %i (%i)\n",(i+1), value, (value >> 2) );
+				printf("Analogue %i changed to %i\n",(i+1), value);
 				// Save the new value and send a midi message
 				analogue_pins[i].value = value;
 				
-				USB_sendMidiMessage(analogue_pins[i].command, analogue_pins[i].channel, (analogue_pins[i].value >> 2));
+				USB_sendMidiMessage(analogue_pins[i].command, analogue_pins[i].channel, analogue_pins[i].value);
 			}
 		}
 
