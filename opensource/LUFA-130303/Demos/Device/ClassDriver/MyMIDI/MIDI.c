@@ -37,6 +37,10 @@
 #include "MIDI.h"
 #include "adc.h"
 
+// My CC midi definitions
+ #define MIDI_CC_CHANGE 0xB0
+ #define GENERAL_PURPOSE_CC_CHANGE 0x10
+
 /** LUFA MIDI Class driver interface configuration and state information. This structure is
  *  passed to all MIDI Class driver functions, so that multiple instances of the same class
  *  within a device can be differentiated from one another.
@@ -46,14 +50,18 @@ USB_ClassInfo_MIDI_Device_t Keyboard_MIDI_Interface =
 		.Config =
 			{
 				.StreamingInterfaceNumber = 1,
-
-				.DataINEndpointNumber      = MIDI_STREAM_IN_EPNUM,
-				.DataINEndpointSize        = MIDI_STREAM_EPSIZE,
-				.DataINEndpointDoubleBank  = false,
-
-				.DataOUTEndpointNumber     = MIDI_STREAM_OUT_EPNUM,
-				.DataOUTEndpointSize       = MIDI_STREAM_EPSIZE,
-				.DataOUTEndpointDoubleBank = false,
+				.DataINEndpoint           =
+					{
+						.Address          = MIDI_STREAM_IN_EPADDR,
+						.Size             = MIDI_STREAM_EPSIZE,
+						.Banks            = 1,
+					},
+				.DataOUTEndpoint          =
+					{
+						.Address          = MIDI_STREAM_OUT_EPADDR,
+						.Size             = MIDI_STREAM_EPSIZE,
+						.Banks            = 1,
+					},
 			},
 	};
 
@@ -69,12 +77,13 @@ int main(void)
 
 	for (;;)
 	{
-		CheckJoystickMovement();
+		CheckButtonPress();
+		CheckDialChange();
 
 		MIDI_EventPacket_t ReceivedMIDIEvent;
 		while (MIDI_Device_ReceiveEventPacket(&Keyboard_MIDI_Interface, &ReceivedMIDIEvent))
 		{
-			if ((ReceivedMIDIEvent.Command == (MIDI_COMMAND_NOTE_ON >> 4)) && (ReceivedMIDIEvent.Data3 > 0))
+			if ((ReceivedMIDIEvent.Event == MIDI_EVENT(0, MIDI_COMMAND_NOTE_ON)) && (ReceivedMIDIEvent.Data3 > 0))
 			  LEDs_SetAllLEDs(ReceivedMIDIEvent.Data2 > 64 ? LEDS_LED1 : LEDS_LED2);
 			else
 			  LEDs_SetAllLEDs(LEDS_NO_LEDS);
@@ -96,63 +105,35 @@ void SetupHardware(void)
 	clock_prescale_set(clock_div_1);
 
 	/* Hardware Initialization */
-	Joystick_Init();
+	adc_init(ADC_REF_AVCC | ADC_8_BIT | ADC_SINGLE_ENDED | ADC_PRESCALE_2);
 	LEDs_Init();
 	Buttons_Init();
 	USB_Init();
 }
 
 /** Checks for changes in the position of the board joystick, sending MIDI events to the host upon each change. */
-void CheckJoystickMovement(void)
+void CheckButtonPress(void)
 {
-	static uint8_t PrevJoystickStatus;
+	static uint8_t PrevButtonPress;
 
 	uint8_t MIDICommand = 0;
 	uint8_t MIDIPitch;
 
 	/* Get current joystick mask, XOR with previous to detect joystick changes */
-	uint8_t JoystickStatus  = Joystick_GetStatus();
-	uint8_t JoystickChanges = (JoystickStatus ^ PrevJoystickStatus);
+	uint8_t ButtonPress  = Buttons_GetStatus();
+	uint8_t ButtonChanged = (ButtonPress ^ PrevButtonPress);
 
 	/* Get board button status - if pressed use channel 10 (percussion), otherwise use channel 1 */
-	uint8_t Channel = ((Buttons_GetStatus() & BUTTONS_BUTTON1) ? MIDI_CHANNEL(10) : MIDI_CHANNEL(1));
+	uint8_t Channel = MIDI_CHANNEL(1);
 
-	if (JoystickChanges & JOY_LEFT)
+	if (ButtonChanged)
 	{
-		MIDICommand = ((JoystickStatus & JOY_LEFT)? MIDI_COMMAND_NOTE_ON : MIDI_COMMAND_NOTE_OFF);
+		MIDICommand = (ButtonPress ? MIDI_COMMAND_NOTE_ON : MIDI_COMMAND_NOTE_OFF);
 		MIDIPitch   = 0x3C;
-	}
-
-	if (JoystickChanges & JOY_UP)
-	{
-		MIDICommand = ((JoystickStatus & JOY_UP)? MIDI_COMMAND_NOTE_ON : MIDI_COMMAND_NOTE_OFF);
-		MIDIPitch   = 0x3D;
-	}
-
-	if (JoystickChanges & JOY_RIGHT)
-	{
-		MIDICommand = ((JoystickStatus & JOY_RIGHT)? MIDI_COMMAND_NOTE_ON : MIDI_COMMAND_NOTE_OFF);
-		MIDIPitch   = 0x3E;
-	}
-
-	if (JoystickChanges & JOY_DOWN)
-	{
-		MIDICommand = ((JoystickStatus & JOY_DOWN)? MIDI_COMMAND_NOTE_ON : MIDI_COMMAND_NOTE_OFF);
-		MIDIPitch   = 0x3F;
-	}
-
-	if (JoystickChanges & JOY_PRESS)
-	{
-		MIDICommand = ((JoystickStatus & JOY_PRESS)? MIDI_COMMAND_NOTE_ON : MIDI_COMMAND_NOTE_OFF);
-		MIDIPitch   = 0x3B;
-	}
-
-	if (MIDICommand)
-	{
+	
 		MIDI_EventPacket_t MIDIEvent = (MIDI_EventPacket_t)
 			{
-				.CableNumber = 0,
-				.Command     = (MIDICommand >> 4),
+				.Event    	 = MIDI_EVENT(0, MIDICommand),
 
 				.Data1       = MIDICommand | Channel,
 				.Data2       = MIDIPitch,
@@ -163,7 +144,41 @@ void CheckJoystickMovement(void)
 		MIDI_Device_Flush(&Keyboard_MIDI_Interface);
 	}
 
-	PrevJoystickStatus = JoystickStatus;
+	PrevButtonPress = ButtonPress;
+}
+
+/** Checks for changes in the position of the board joystick, sending MIDI events to the host upon each change. */
+void CheckDialChange(void)
+{
+	static uint8_t PrevDialValue;
+
+	uint8_t MIDICommand = 0;
+	uint8_t MIDIPitch;
+
+	/* Get current joystick mask, XOR with previous to detect joystick changes */
+	adc_startConversion(7);
+	uint8_t DialValue  = adc_read();
+	DialValue = DialValue >> 1; // Convert to 7 bit
+
+	/* Get board button status - if pressed use channel 10 (percussion), otherwise use channel 1 */
+	uint8_t Channel = MIDI_CHANNEL(1);
+
+	if (DialValue != PrevDialValue)
+	{
+		MIDI_EventPacket_t MIDIEvent = (MIDI_EventPacket_t)
+			{
+				.Event 		 = MIDI_EVENT(0, MIDI_CC_CHANGE),
+
+				.Data1       = MIDI_CC_CHANGE | Channel,
+				.Data2       = GENERAL_PURPOSE_CC_CHANGE,
+				.Data3       = DialValue,
+			};
+
+		MIDI_Device_SendEventPacket(&Keyboard_MIDI_Interface, &MIDIEvent);
+		MIDI_Device_Flush(&Keyboard_MIDI_Interface);
+	}
+
+	PrevDialValue = DialValue;
 }
 
 /** Event handler for the library USB Connection event. */
