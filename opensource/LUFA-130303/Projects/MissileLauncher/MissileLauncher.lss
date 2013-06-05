@@ -1,0 +1,4078 @@
+
+MissileLauncher.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         0000006a  00800100  00000fea  0000107e  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000fea  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          0000004f  0080016a  0080016a  000010e8  2**0
+                  ALLOC
+  3 .stab         000009d8  00000000  00000000  000010e8  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  4 .stabstr      000001f1  00000000  00000000  00001ac0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_aranges 00000800  00000000  00000000  00001cb8  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   0000ccfd  00000000  00000000  000024b8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00002de9  00000000  00000000  0000f1b5  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   0000557a  00000000  00000000  00011f9e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  000017f4  00000000  00000000  00017518  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00004dc1  00000000  00000000  00018d0c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    00009055  00000000  00000000  0001dacd  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000a08  00000000  00000000  00026b22  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	4b c0       	rjmp	.+150    	; 0x98 <__ctors_end>
+   2:	00 00       	nop
+   4:	67 c0       	rjmp	.+206    	; 0xd4 <__bad_interrupt>
+   6:	00 00       	nop
+   8:	65 c0       	rjmp	.+202    	; 0xd4 <__bad_interrupt>
+   a:	00 00       	nop
+   c:	63 c0       	rjmp	.+198    	; 0xd4 <__bad_interrupt>
+   e:	00 00       	nop
+  10:	61 c0       	rjmp	.+194    	; 0xd4 <__bad_interrupt>
+  12:	00 00       	nop
+  14:	5f c0       	rjmp	.+190    	; 0xd4 <__bad_interrupt>
+  16:	00 00       	nop
+  18:	5d c0       	rjmp	.+186    	; 0xd4 <__bad_interrupt>
+  1a:	00 00       	nop
+  1c:	5b c0       	rjmp	.+182    	; 0xd4 <__bad_interrupt>
+  1e:	00 00       	nop
+  20:	59 c0       	rjmp	.+178    	; 0xd4 <__bad_interrupt>
+  22:	00 00       	nop
+  24:	57 c0       	rjmp	.+174    	; 0xd4 <__bad_interrupt>
+  26:	00 00       	nop
+  28:	57 c5       	rjmp	.+2734   	; 0xad8 <__vector_10>
+  2a:	00 00       	nop
+  2c:	53 c0       	rjmp	.+166    	; 0xd4 <__bad_interrupt>
+  2e:	00 00       	nop
+  30:	51 c0       	rjmp	.+162    	; 0xd4 <__bad_interrupt>
+  32:	00 00       	nop
+  34:	4f c0       	rjmp	.+158    	; 0xd4 <__bad_interrupt>
+  36:	00 00       	nop
+  38:	4d c0       	rjmp	.+154    	; 0xd4 <__bad_interrupt>
+  3a:	00 00       	nop
+  3c:	4b c0       	rjmp	.+150    	; 0xd4 <__bad_interrupt>
+  3e:	00 00       	nop
+  40:	49 c0       	rjmp	.+146    	; 0xd4 <__bad_interrupt>
+  42:	00 00       	nop
+  44:	47 c0       	rjmp	.+142    	; 0xd4 <__bad_interrupt>
+  46:	00 00       	nop
+  48:	45 c0       	rjmp	.+138    	; 0xd4 <__bad_interrupt>
+  4a:	00 00       	nop
+  4c:	43 c0       	rjmp	.+134    	; 0xd4 <__bad_interrupt>
+  4e:	00 00       	nop
+  50:	41 c0       	rjmp	.+130    	; 0xd4 <__bad_interrupt>
+  52:	00 00       	nop
+  54:	3f c0       	rjmp	.+126    	; 0xd4 <__bad_interrupt>
+  56:	00 00       	nop
+  58:	3d c0       	rjmp	.+122    	; 0xd4 <__bad_interrupt>
+  5a:	00 00       	nop
+  5c:	3b c0       	rjmp	.+118    	; 0xd4 <__bad_interrupt>
+  5e:	00 00       	nop
+  60:	39 c0       	rjmp	.+114    	; 0xd4 <__bad_interrupt>
+  62:	00 00       	nop
+  64:	37 c0       	rjmp	.+110    	; 0xd4 <__bad_interrupt>
+  66:	00 00       	nop
+  68:	35 c0       	rjmp	.+106    	; 0xd4 <__bad_interrupt>
+  6a:	00 00       	nop
+  6c:	33 c0       	rjmp	.+102    	; 0xd4 <__bad_interrupt>
+  6e:	00 00       	nop
+  70:	31 c0       	rjmp	.+98     	; 0xd4 <__bad_interrupt>
+  72:	00 00       	nop
+  74:	2f c0       	rjmp	.+94     	; 0xd4 <__bad_interrupt>
+  76:	00 00       	nop
+  78:	2d c0       	rjmp	.+90     	; 0xd4 <__bad_interrupt>
+  7a:	00 00       	nop
+  7c:	2b c0       	rjmp	.+86     	; 0xd4 <__bad_interrupt>
+  7e:	00 00       	nop
+  80:	29 c0       	rjmp	.+82     	; 0xd4 <__bad_interrupt>
+  82:	00 00       	nop
+  84:	27 c0       	rjmp	.+78     	; 0xd4 <__bad_interrupt>
+  86:	00 00       	nop
+  88:	25 c0       	rjmp	.+74     	; 0xd4 <__bad_interrupt>
+  8a:	00 00       	nop
+  8c:	23 c0       	rjmp	.+70     	; 0xd4 <__bad_interrupt>
+  8e:	00 00       	nop
+  90:	21 c0       	rjmp	.+66     	; 0xd4 <__bad_interrupt>
+  92:	00 00       	nop
+  94:	1f c0       	rjmp	.+62     	; 0xd4 <__bad_interrupt>
+  96:	00 00       	nop
+
+00000098 <__ctors_end>:
+  98:	11 24       	eor	r1, r1
+  9a:	1f be       	out	0x3f, r1	; 63
+  9c:	cf ef       	ldi	r28, 0xFF	; 255
+  9e:	d0 e2       	ldi	r29, 0x20	; 32
+  a0:	de bf       	out	0x3e, r29	; 62
+  a2:	cd bf       	out	0x3d, r28	; 61
+
+000000a4 <__do_copy_data>:
+  a4:	11 e0       	ldi	r17, 0x01	; 1
+  a6:	a0 e0       	ldi	r26, 0x00	; 0
+  a8:	b1 e0       	ldi	r27, 0x01	; 1
+  aa:	ea ee       	ldi	r30, 0xEA	; 234
+  ac:	ff e0       	ldi	r31, 0x0F	; 15
+  ae:	00 e0       	ldi	r16, 0x00	; 0
+  b0:	0b bf       	out	0x3b, r16	; 59
+  b2:	02 c0       	rjmp	.+4      	; 0xb8 <__do_copy_data+0x14>
+  b4:	07 90       	elpm	r0, Z+
+  b6:	0d 92       	st	X+, r0
+  b8:	aa 36       	cpi	r26, 0x6A	; 106
+  ba:	b1 07       	cpc	r27, r17
+  bc:	d9 f7       	brne	.-10     	; 0xb4 <__do_copy_data+0x10>
+  be:	1b be       	out	0x3b, r1	; 59
+
+000000c0 <__do_clear_bss>:
+  c0:	11 e0       	ldi	r17, 0x01	; 1
+  c2:	aa e6       	ldi	r26, 0x6A	; 106
+  c4:	b1 e0       	ldi	r27, 0x01	; 1
+  c6:	01 c0       	rjmp	.+2      	; 0xca <.do_clear_bss_start>
+
+000000c8 <.do_clear_bss_loop>:
+  c8:	1d 92       	st	X+, r1
+
+000000ca <.do_clear_bss_start>:
+  ca:	a9 3b       	cpi	r26, 0xB9	; 185
+  cc:	b1 07       	cpc	r27, r17
+  ce:	e1 f7       	brne	.-8      	; 0xc8 <.do_clear_bss_loop>
+  d0:	0a d1       	rcall	.+532    	; 0x2e6 <main>
+  d2:	89 c7       	rjmp	.+3858   	; 0xfe6 <_exit>
+
+000000d4 <__bad_interrupt>:
+  d4:	95 cf       	rjmp	.-214    	; 0x0 <__vectors>
+
+000000d6 <LEDs_SetAllLEDs>:
+				PORTD &= ~LEDMask;
+			}
+
+			static inline void LEDs_SetAllLEDs(const uint8_t LEDMask)
+			{
+				PORTD = ((PORTD & ~LEDS_ALL_LEDS) | LEDMask);
+  d6:	9b b1       	in	r25, 0x0b	; 11
+  d8:	9f 70       	andi	r25, 0x0F	; 15
+  da:	98 2b       	or	r25, r24
+  dc:	9b b9       	out	0x0b, r25	; 11
+			}
+  de:	08 95       	ret
+
+000000e0 <SetupHardware>:
+
+/** Configures the board hardware and chip peripherals for the demo's functionality. */
+void SetupHardware(void)
+{
+	/* Disable watchdog if enabled by bootloader/fuses */
+	MCUSR &= ~(1 << WDRF);
+  e0:	84 b7       	in	r24, 0x34	; 52
+  e2:	87 7f       	andi	r24, 0xF7	; 247
+  e4:	84 bf       	out	0x34, r24	; 52
+	wdt_disable();
+  e6:	88 e1       	ldi	r24, 0x18	; 24
+  e8:	0f b6       	in	r0, 0x3f	; 63
+  ea:	f8 94       	cli
+  ec:	80 93 60 00 	sts	0x0060, r24
+  f0:	10 92 60 00 	sts	0x0060, r1
+  f4:	0f be       	out	0x3f, r0	; 63
+The type of x is clock_div_t.
+*/
+void clock_prescale_set(clock_div_t __x)
+{
+    uint8_t __tmp = _BV(CLKPCE);
+    __asm__ __volatile__ (
+  f6:	90 e0       	ldi	r25, 0x00	; 0
+  f8:	80 e8       	ldi	r24, 0x80	; 128
+  fa:	0f b6       	in	r0, 0x3f	; 63
+  fc:	f8 94       	cli
+  fe:	80 93 61 00 	sts	0x0061, r24
+ 102:	90 93 61 00 	sts	0x0061, r25
+ 106:	0f be       	out	0x3f, r0	; 63
+
+		/* Inline Functions: */
+		#if !defined(__DOXYGEN__)
+			static inline void LEDs_Init(void)
+			{
+				DDRD  |=  LEDS_ALL_LEDS;
+ 108:	8a b1       	in	r24, 0x0a	; 10
+ 10a:	80 6f       	ori	r24, 0xF0	; 240
+ 10c:	8a b9       	out	0x0a, r24	; 10
+				PORTD &= ~LEDS_ALL_LEDS;
+ 10e:	8b b1       	in	r24, 0x0b	; 11
+ 110:	8f 70       	andi	r24, 0x0F	; 15
+ 112:	8b b9       	out	0x0b, r24	; 11
+	/* Disable clock division */
+	clock_prescale_set(clock_div_1);
+
+	/* Hardware Initialization */
+	LEDs_Init();
+	USB_Init();
+ 114:	c6 d4       	rcall	.+2444   	; 0xaa2 <USB_Init>
+ 116:	84 b1       	in	r24, 0x04	; 4
+
+		/* Inline Functions: */
+		#if !defined(__DOXYGEN__)
+			static inline void Joystick_Init(void)
+			{
+				DDRB  &= ~JOY_BMASK;
+ 118:	8f 71       	andi	r24, 0x1F	; 31
+ 11a:	84 b9       	out	0x04, r24	; 4
+ 11c:	8d b1       	in	r24, 0x0d	; 13
+				DDRE  &= ~JOY_EMASK;
+ 11e:	8f 7c       	andi	r24, 0xCF	; 207
+ 120:	8d b9       	out	0x0d, r24	; 13
+ 122:	85 b1       	in	r24, 0x05	; 5
+
+				PORTB |=  JOY_BMASK;
+ 124:	80 6e       	ori	r24, 0xE0	; 224
+ 126:	85 b9       	out	0x05, r24	; 5
+ 128:	8e b1       	in	r24, 0x0e	; 14
+				PORTE |=  JOY_EMASK;
+ 12a:	80 63       	ori	r24, 0x30	; 48
+ 12c:	8e b9       	out	0x0e, r24	; 14
+ 12e:	6a 98       	cbi	0x0d, 2	; 13
+
+		/* Inline Functions: */
+		#if !defined(__DOXYGEN__)
+			static inline void Buttons_Init(void)
+			{
+				DDRE  &= ~BUTTONS_BUTTON1;
+ 130:	72 9a       	sbi	0x0e, 2	; 14
+				PORTE |=  BUTTONS_BUTTON1;
+ 132:	08 95       	ret
+
+00000134 <EVENT_USB_Host_DeviceAttached>:
+	Joystick_Init();
+	Buttons_Init();
+}
+ 134:	80 ea       	ldi	r24, 0xA0	; 160
+/** Event handler for the USB_DeviceAttached event. This indicates that a device has been attached to the host, and
+ *  starts the library USB task to begin the enumeration and USB management process.
+ */
+void EVENT_USB_Host_DeviceAttached(void)
+{
+	LEDs_SetAllLEDs(LEDMASK_USB_ENUMERATING);
+ 136:	cf cf       	rjmp	.-98     	; 0xd6 <LEDs_SetAllLEDs>
+
+00000138 <EVENT_USB_Host_DeviceUnattached>:
+ 138:	80 e1       	ldi	r24, 0x10	; 16
+}
+ 13a:	cd cf       	rjmp	.-102    	; 0xd6 <LEDs_SetAllLEDs>
+
+0000013c <EVENT_USB_Host_DeviceEnumerationComplete>:
+/** Event handler for the USB_DeviceUnattached event. This indicates that a device has been removed from the host, and
+ *  stops the library USB task management process.
+ */
+void EVENT_USB_Host_DeviceUnattached(void)
+{
+	LEDs_SetAllLEDs(LEDMASK_USB_NOTREADY);
+ 13c:	80 ea       	ldi	r24, 0xA0	; 160
+}
+ 13e:	cb df       	rcall	.-106    	; 0xd6 <LEDs_SetAllLEDs>
+/** Event handler for the USB_DeviceEnumerationComplete event. This indicates that a device has been successfully
+ *  enumerated by the host and is now ready to be used by the application.
+ */
+void EVENT_USB_Host_DeviceEnumerationComplete(void)
+{
+	LEDs_SetAllLEDs(LEDMASK_USB_ENUMERATING);
+ 140:	f7 d0       	rcall	.+494    	; 0x330 <ProcessConfigurationDescriptor>
+
+	/* Get and process the configuration descriptor data */
+	if (ProcessConfigurationDescriptor() != SuccessfulConfigRead)
+ 142:	88 23       	and	r24, r24
+ 144:	21 f4       	brne	.+8      	; 0x14e <EVENT_USB_Host_DeviceEnumerationComplete+0x12>
+ 146:	81 e0       	ldi	r24, 0x01	; 1
+ 148:	1d d7       	rcall	.+3642   	; 0xf84 <USB_Host_SetDeviceConfiguration>
+		LEDs_SetAllLEDs(LEDMASK_USB_ERROR);
+		return;
+	}
+
+	/* Set the device configuration to the first configuration (rarely do devices use multiple configurations) */
+	if (USB_Host_SetDeviceConfiguration(1) != HOST_SENDCONTROL_Successful)
+ 14a:	88 23       	and	r24, r24
+ 14c:	11 f0       	breq	.+4      	; 0x152 <EVENT_USB_Host_DeviceEnumerationComplete+0x16>
+ 14e:	80 e9       	ldi	r24, 0x90	; 144
+ 150:	01 c0       	rjmp	.+2      	; 0x154 <EVENT_USB_Host_DeviceEnumerationComplete+0x18>
+ 152:	80 e6       	ldi	r24, 0x60	; 96
+	{
+		LEDs_SetAllLEDs(LEDMASK_USB_ERROR);
+ 154:	c0 cf       	rjmp	.-128    	; 0xd6 <LEDs_SetAllLEDs>
+
+00000156 <EVENT_USB_Host_HostError>:
+ 156:	3e d4       	rcall	.+2172   	; 0x9d4 <USB_Disable>
+		return;
+	}
+
+	LEDs_SetAllLEDs(LEDMASK_USB_READY);
+ 158:	80 e9       	ldi	r24, 0x90	; 144
+ 15a:	bd df       	rcall	.-134    	; 0xd6 <LEDs_SetAllLEDs>
+ 15c:	ff cf       	rjmp	.-2      	; 0x15c <EVENT_USB_Host_HostError+0x6>
+
+0000015e <EVENT_USB_Host_DeviceEnumerationFailed>:
+ 15e:	80 e9       	ldi	r24, 0x90	; 144
+/** Event handler for the USB_HostError event. This indicates that a hardware error occurred while in host mode. */
+void EVENT_USB_Host_HostError(const uint8_t ErrorCode)
+{
+	USB_Disable();
+
+	LEDs_SetAllLEDs(LEDMASK_USB_ERROR);
+ 160:	ba cf       	rjmp	.-140    	; 0xd6 <LEDs_SetAllLEDs>
+
+00000162 <DiscardNextReport>:
+ *  enumerating an attached USB device.
+ */
+void EVENT_USB_Host_DeviceEnumerationFailed(const uint8_t ErrorCode,
+                                            const uint8_t SubErrorCode)
+{
+	LEDs_SetAllLEDs(LEDMASK_USB_ERROR);
+ 162:	8e b3       	in	r24, 0x1e	; 30
+}
+ 164:	8b 30       	cpi	r24, 0x0B	; 11
+
+/** Reads in and discards the next report from the attached device. */
+void DiscardNextReport(void)
+{
+	if (USB_HostState != HOST_STATE_Configured)
+ 166:	e1 f4       	brne	.+56     	; 0x1a0 <DiscardNextReport+0x3e>
+			 *  \param[in] Address  Address of the pipe to select.
+			 */
+			static inline void Pipe_SelectPipe(const uint8_t Address) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_SelectPipe(const uint8_t Address)
+			{
+				UPNUM = (Address & PIPE_PIPENUM_MASK);
+ 168:	81 e0       	ldi	r24, 0x01	; 1
+ 16a:	80 93 a7 00 	sts	0x00A7, r24
+
+			/** Unfreezes the selected pipe, allowing it to communicate with an attached device. */
+			static inline void Pipe_Unfreeze(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_Unfreeze(void)
+			{
+				UPCONX &= ~(1 << PFREEZE);
+ 16e:	80 91 a9 00 	lds	r24, 0x00A9
+ 172:	8f 7b       	andi	r24, 0xBF	; 191
+ 174:	80 93 a9 00 	sts	0x00A9, r24
+			 *  \return Boolean \c true if the current pipe has received an IN packet, \c false otherwise.
+			 */
+			static inline bool Pipe_IsINReceived(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
+			static inline bool Pipe_IsINReceived(void)
+			{
+				return ((UPINTX & (1 << RXINI)) ? true : false);
+ 178:	80 91 a6 00 	lds	r24, 0x00A6
+	/* Select and unfreeze HID data IN pipe */
+	Pipe_SelectPipe(HID_DATA_IN_PIPE);
+	Pipe_Unfreeze();
+
+	/* Check to see if a packet has been received */
+	if (!(Pipe_IsINReceived()))
+ 17c:	80 fd       	sbrc	r24, 0
+ 17e:	06 c0       	rjmp	.+12     	; 0x18c <DiscardNextReport+0x2a>
+
+			/** Freezes the selected pipe, preventing it from communicating with an attached device. */
+			static inline void Pipe_Freeze(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_Freeze(void)
+			{
+				UPCONX |= (1 << PFREEZE);
+ 180:	80 91 a9 00 	lds	r24, 0x00A9
+ 184:	80 64       	ori	r24, 0x40	; 64
+ 186:	80 93 a9 00 	sts	0x00A9, r24
+ 18a:	08 95       	ret
+			 *  \ingroup Group_PipePacketManagement_AVR8
+			 */
+			static inline void Pipe_ClearIN(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_ClearIN(void)
+			{
+				UPINTX &= ~((1 << RXINI) | (1 << FIFOCON));
+ 18c:	80 91 a6 00 	lds	r24, 0x00A6
+ 190:	8e 77       	andi	r24, 0x7E	; 126
+ 192:	80 93 a6 00 	sts	0x00A6, r24
+
+			/** Freezes the selected pipe, preventing it from communicating with an attached device. */
+			static inline void Pipe_Freeze(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_Freeze(void)
+			{
+				UPCONX |= (1 << PFREEZE);
+ 196:	80 91 a9 00 	lds	r24, 0x00A9
+ 19a:	80 64       	ori	r24, 0x40	; 64
+ 19c:	80 93 a9 00 	sts	0x00A9, r24
+ 1a0:	08 95       	ret
+
+000001a2 <WriteNextReport>:
+ *  \param[in] ReportLength  Length of the report to send
+ */
+void WriteNextReport(uint8_t* const ReportOUTData,
+                     const uint16_t ReportLength)
+{
+	if (USB_HostState != HOST_STATE_Configured)
+ 1a2:	2e b3       	in	r18, 0x1e	; 30
+ 1a4:	2b 30       	cpi	r18, 0x0B	; 11
+ 1a6:	b9 f5       	brne	.+110    	; 0x216 <WriteNextReport+0x74>
+			 *  \param[in] Address  Address of the pipe to select.
+			 */
+			static inline void Pipe_SelectPipe(const uint8_t Address) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_SelectPipe(const uint8_t Address)
+			{
+				UPNUM = (Address & PIPE_PIPENUM_MASK);
+ 1a8:	22 e0       	ldi	r18, 0x02	; 2
+ 1aa:	20 93 a7 00 	sts	0x00A7, r18
+			 *  \return Boolean \c true if the selected pipe is configured, \c false otherwise.
+			 */
+			static inline bool Pipe_IsConfigured(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
+			static inline bool Pipe_IsConfigured(void)
+			{
+				return ((UPSTAX & (1 << CFGOK)) ? true : false);
+ 1ae:	20 91 ac 00 	lds	r18, 0x00AC
+	/* Select and unfreeze HID data OUT pipe */
+	Pipe_SelectPipe(HID_DATA_OUT_PIPE);
+
+	/* Not all HID devices have an OUT endpoint (some require OUT reports to be sent over the
+	 * control endpoint instead) - check to see if the OUT endpoint has been initialized */
+	if (Pipe_IsConfigured())
+ 1b2:	27 ff       	sbrs	r18, 7
+ 1b4:	17 c0       	rjmp	.+46     	; 0x1e4 <WriteNextReport+0x42>
+
+			/** Unfreezes the selected pipe, allowing it to communicate with an attached device. */
+			static inline void Pipe_Unfreeze(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_Unfreeze(void)
+			{
+				UPCONX &= ~(1 << PFREEZE);
+ 1b6:	20 91 a9 00 	lds	r18, 0x00A9
+ 1ba:	2f 7b       	andi	r18, 0xBF	; 191
+ 1bc:	20 93 a9 00 	sts	0x00A9, r18
+			 *  \return Boolean \c true if the current pipe is ready for an OUT packet, \c false otherwise.
+			 */
+			static inline bool Pipe_IsOUTReady(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
+			static inline bool Pipe_IsOUTReady(void)
+			{
+				return ((UPINTX & (1 << TXOUTI)) ? true : false);
+ 1c0:	20 91 a6 00 	lds	r18, 0x00A6
+	{
+		Pipe_Unfreeze();
+
+		/* Ensure pipe is ready to be written to before continuing */
+		if (!(Pipe_IsOUTReady()))
+ 1c4:	22 ff       	sbrs	r18, 2
+ 1c6:	08 c0       	rjmp	.+16     	; 0x1d8 <WriteNextReport+0x36>
+
+			return;
+		}
+
+		/* Write out HID report data */
+		Pipe_Write_Stream_LE(ReportOUTData, ReportLength, NULL);
+ 1c8:	40 e0       	ldi	r20, 0x00	; 0
+ 1ca:	50 e0       	ldi	r21, 0x00	; 0
+ 1cc:	06 d3       	rcall	.+1548   	; 0x7da <Pipe_Write_Stream_LE>
+ 1ce:	80 91 a6 00 	lds	r24, 0x00A6
+			 *  \ingroup Group_PipePacketManagement_AVR8
+			 */
+			static inline void Pipe_ClearOUT(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_ClearOUT(void)
+			{
+				UPINTX &= ~((1 << TXOUTI) | (1 << FIFOCON));
+ 1d2:	8b 77       	andi	r24, 0x7B	; 123
+ 1d4:	80 93 a6 00 	sts	0x00A6, r24
+ 1d8:	80 91 a9 00 	lds	r24, 0x00A9
+
+			/** Freezes the selected pipe, preventing it from communicating with an attached device. */
+			static inline void Pipe_Freeze(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_Freeze(void)
+			{
+				UPCONX |= (1 << PFREEZE);
+ 1dc:	80 64       	ori	r24, 0x40	; 64
+ 1de:	80 93 a9 00 	sts	0x00A9, r24
+ 1e2:	08 95       	ret
+ 1e4:	21 e2       	ldi	r18, 0x21	; 33
+		Pipe_Freeze();
+	}
+	else
+	{
+		/* Class specific request to send a HID report to the device */
+		USB_ControlRequest = (USB_Request_Header_t)
+ 1e6:	20 93 b1 01 	sts	0x01B1, r18
+ 1ea:	29 e0       	ldi	r18, 0x09	; 9
+ 1ec:	20 93 b2 01 	sts	0x01B2, r18
+ 1f0:	22 e0       	ldi	r18, 0x02	; 2
+ 1f2:	30 e0       	ldi	r19, 0x00	; 0
+ 1f4:	30 93 b4 01 	sts	0x01B4, r19
+ 1f8:	20 93 b3 01 	sts	0x01B3, r18
+ 1fc:	21 e0       	ldi	r18, 0x01	; 1
+ 1fe:	30 e0       	ldi	r19, 0x00	; 0
+ 200:	30 93 b6 01 	sts	0x01B6, r19
+ 204:	20 93 b5 01 	sts	0x01B5, r18
+ 208:	70 93 b8 01 	sts	0x01B8, r23
+ 20c:	60 93 b7 01 	sts	0x01B7, r22
+ 210:	10 92 a7 00 	sts	0x00A7, r1
+			 *  \param[in] Address  Address of the pipe to select.
+			 */
+			static inline void Pipe_SelectPipe(const uint8_t Address) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_SelectPipe(const uint8_t Address)
+			{
+				UPNUM = (Address & PIPE_PIPENUM_MASK);
+ 214:	b9 c5       	rjmp	.+2930   	; 0xd88 <USB_Host_SendControlRequest>
+
+		/* Select the control pipe for the request transfer */
+		Pipe_SelectPipe(PIPE_CONTROLPIPE);
+
+		/* Send the request to the device */
+		USB_Host_SendControlRequest(ReportOUTData);
+ 216:	08 95       	ret
+
+00000218 <Send_Command_Report>:
+ 218:	ec e6       	ldi	r30, 0x6C	; 108
+ 21a:	f1 e0       	ldi	r31, 0x01	; 1
+ *  \param[in] ReportSize  Report length in bytes.
+ */
+void Send_Command_Report(const uint8_t* const Report,
+                         const uint16_t ReportSize)
+{
+	memcpy(CmdBuffer, Report, 8);
+ 21c:	dc 01       	movw	r26, r24
+ 21e:	88 e0       	ldi	r24, 0x08	; 8
+ 220:	0d 90       	ld	r0, X+
+ 222:	01 92       	st	Z+, r0
+ 224:	81 50       	subi	r24, 0x01	; 1
+ 226:	e1 f7       	brne	.-8      	; 0x220 <Send_Command_Report+0x8>
+	WriteNextReport(CmdBuffer, ReportSize);
+ 228:	8c e6       	ldi	r24, 0x6C	; 108
+ 22a:	91 e0       	ldi	r25, 0x01	; 1
+ 22c:	ba cf       	rjmp	.-140    	; 0x1a2 <WriteNextReport>
+
+0000022e <Send_Command>:
+ 22e:	cf 93       	push	r28
+}
+ 230:	df 93       	push	r29
+/** Sends one of the \c CMD_* command constants to the attached device.
+ *
+ *  \param[in] Command  One of the command constants.
+ */
+void Send_Command(const uint8_t* const Command)
+{
+ 232:	ec 01       	movw	r28, r24
+	if ((CmdState == CMD_STOP && Command != CMD_STOP) ||
+ 234:	80 91 6a 01 	lds	r24, 0x016A
+ 238:	90 91 6b 01 	lds	r25, 0x016B
+ 23c:	21 e0       	ldi	r18, 0x01	; 1
+ 23e:	80 30       	cpi	r24, 0x00	; 0
+ 240:	92 07       	cpc	r25, r18
+ 242:	21 f4       	brne	.+8      	; 0x24c <Send_Command+0x1e>
+ 244:	c8 17       	cp	r28, r24
+ 246:	d9 07       	cpc	r29, r25
+ 248:	29 f4       	brne	.+10     	; 0x254 <Send_Command+0x26>
+ 24a:	14 c0       	rjmp	.+40     	; 0x274 <Send_Command+0x46>
+		(CmdState != CMD_STOP && Command == CMD_STOP))
+ 24c:	81 e0       	ldi	r24, 0x01	; 1
+ 24e:	c0 30       	cpi	r28, 0x00	; 0
+ 250:	d8 07       	cpc	r29, r24
+ 252:	81 f4       	brne	.+32     	; 0x274 <Send_Command+0x46>
+				PORTD = ((PORTD & ~LEDMask) | ActiveMask);
+			}
+
+			static inline void LEDs_ToggleLEDs(const uint8_t LEDMask)
+			{
+				PIND  = LEDMask;
+ 254:	80 e4       	ldi	r24, 0x40	; 64
+ 256:	89 b9       	out	0x09, r24	; 9
+	{
+		LEDs_ToggleLEDs(LEDS_LED4);
+
+		Send_Command_Report(CMD_INITA, 8);
+ 258:	80 e3       	ldi	r24, 0x30	; 48
+ 25a:	91 e0       	ldi	r25, 0x01	; 1
+ 25c:	68 e0       	ldi	r22, 0x08	; 8
+ 25e:	70 e0       	ldi	r23, 0x00	; 0
+ 260:	db df       	rcall	.-74     	; 0x218 <Send_Command_Report>
+ 262:	88 e3       	ldi	r24, 0x38	; 56
+		Send_Command_Report(CMD_INITB, 8);
+ 264:	91 e0       	ldi	r25, 0x01	; 1
+ 266:	68 e0       	ldi	r22, 0x08	; 8
+ 268:	70 e0       	ldi	r23, 0x00	; 0
+ 26a:	d6 df       	rcall	.-84     	; 0x218 <Send_Command_Report>
+ 26c:	ce 01       	movw	r24, r28
+ 26e:	60 e4       	ldi	r22, 0x40	; 64
+		Send_Command_Report(Command, LAUNCHER_CMD_BUFFER_SIZE);
+ 270:	70 e0       	ldi	r23, 0x00	; 0
+ 272:	d2 df       	rcall	.-92     	; 0x218 <Send_Command_Report>
+ 274:	d0 93 6b 01 	sts	0x016B, r29
+ 278:	c0 93 6a 01 	sts	0x016A, r28
+	}
+
+	CmdState = Command;
+ 27c:	df 91       	pop	r29
+ 27e:	cf 91       	pop	r28
+ 280:	08 95       	ret
+
+00000282 <Read_Joystick_Status>:
+}
+ 282:	23 b1       	in	r18, 0x03	; 3
+ 284:	8c b1       	in	r24, 0x0c	; 12
+ 286:	9c b1       	in	r25, 0x0c	; 12
+void Read_Joystick_Status(void)
+{
+	uint8_t JoyStatus_LCL = Joystick_GetStatus();
+	uint8_t Buttons_LCL   = Buttons_GetStatus();
+
+	if (Buttons_LCL & BUTTONS_BUTTON1)
+ 288:	92 fd       	sbrc	r25, 2
+ 28a:	03 c0       	rjmp	.+6      	; 0x292 <Read_Joystick_Status+0x10>
+	  Send_Command(CMD_FIRE);
+ 28c:	88 e0       	ldi	r24, 0x08	; 8
+ 28e:	91 e0       	ldi	r25, 0x01	; 1
+ 290:	1d c0       	rjmp	.+58     	; 0x2cc <Read_Joystick_Status+0x4a>
+			}
+
+			static inline uint8_t Joystick_GetStatus(void) ATTR_WARN_UNUSED_RESULT;
+			static inline uint8_t Joystick_GetStatus(void)
+			{
+				return (((uint8_t)~PINB & JOY_BMASK) | (((uint8_t)~PINE & JOY_EMASK) >> JOY_PORTE_MASK_SHIFT));
+ 292:	80 95       	com	r24
+ 294:	90 e0       	ldi	r25, 0x00	; 0
+ 296:	80 73       	andi	r24, 0x30	; 48
+ 298:	90 70       	andi	r25, 0x00	; 0
+ 29a:	95 95       	asr	r25
+ 29c:	87 95       	ror	r24
+ 29e:	92 2f       	mov	r25, r18
+ 2a0:	90 95       	com	r25
+ 2a2:	90 7e       	andi	r25, 0xE0	; 224
+ 2a4:	98 2b       	or	r25, r24
+	else if (JoyStatus_LCL & JOY_UP)
+ 2a6:	97 ff       	sbrs	r25, 7
+ 2a8:	03 c0       	rjmp	.+6      	; 0x2b0 <Read_Joystick_Status+0x2e>
+	  Send_Command(CMD_UP);
+ 2aa:	80 e1       	ldi	r24, 0x10	; 16
+ 2ac:	91 e0       	ldi	r25, 0x01	; 1
+ 2ae:	0e c0       	rjmp	.+28     	; 0x2cc <Read_Joystick_Status+0x4a>
+	else if (JoyStatus_LCL & JOY_DOWN)
+ 2b0:	94 ff       	sbrs	r25, 4
+ 2b2:	03 c0       	rjmp	.+6      	; 0x2ba <Read_Joystick_Status+0x38>
+	  Send_Command(CMD_DOWN);
+ 2b4:	88 e1       	ldi	r24, 0x18	; 24
+ 2b6:	91 e0       	ldi	r25, 0x01	; 1
+ 2b8:	09 c0       	rjmp	.+18     	; 0x2cc <Read_Joystick_Status+0x4a>
+	else if (JoyStatus_LCL & JOY_LEFT)
+ 2ba:	96 ff       	sbrs	r25, 6
+ 2bc:	03 c0       	rjmp	.+6      	; 0x2c4 <Read_Joystick_Status+0x42>
+	  Send_Command(CMD_LEFT);
+ 2be:	80 e2       	ldi	r24, 0x20	; 32
+ 2c0:	91 e0       	ldi	r25, 0x01	; 1
+ 2c2:	04 c0       	rjmp	.+8      	; 0x2cc <Read_Joystick_Status+0x4a>
+	else if (JoyStatus_LCL & JOY_RIGHT)
+ 2c4:	93 ff       	sbrs	r25, 3
+ 2c6:	03 c0       	rjmp	.+6      	; 0x2ce <Read_Joystick_Status+0x4c>
+	  Send_Command(CMD_RIGHT);
+ 2c8:	88 e2       	ldi	r24, 0x28	; 40
+ 2ca:	91 e0       	ldi	r25, 0x01	; 1
+ 2cc:	b0 cf       	rjmp	.-160    	; 0x22e <Send_Command>
+ 2ce:	80 91 6a 01 	lds	r24, 0x016A
+	else if (CmdState != CMD_STOP)
+ 2d2:	90 91 6b 01 	lds	r25, 0x016B
+ 2d6:	21 e0       	ldi	r18, 0x01	; 1
+ 2d8:	80 30       	cpi	r24, 0x00	; 0
+ 2da:	92 07       	cpc	r25, r18
+ 2dc:	19 f0       	breq	.+6      	; 0x2e4 <Read_Joystick_Status+0x62>
+ 2de:	80 e0       	ldi	r24, 0x00	; 0
+ 2e0:	91 e0       	ldi	r25, 0x01	; 1
+	  Send_Command(CMD_STOP);
+ 2e2:	a5 cf       	rjmp	.-182    	; 0x22e <Send_Command>
+ 2e4:	08 95       	ret
+
+000002e6 <main>:
+ 2e6:	fc de       	rcall	.-520    	; 0xe0 <SetupHardware>
+ 2e8:	80 e0       	ldi	r24, 0x00	; 0
+ 2ea:	91 e0       	ldi	r25, 0x01	; 1
+ */
+int main(void)
+{
+	SetupHardware();
+
+	CmdState = CMD_STOP;
+ 2ec:	90 93 6b 01 	sts	0x016B, r25
+ 2f0:	80 93 6a 01 	sts	0x016A, r24
+ 2f4:	80 e1       	ldi	r24, 0x10	; 16
+
+	LEDs_SetAllLEDs(LEDMASK_USB_NOTREADY);
+ 2f6:	ef de       	rcall	.-546    	; 0xd6 <LEDs_SetAllLEDs>
+ 2f8:	78 94       	sei
+ 2fa:	c3 df       	rcall	.-122    	; 0x282 <Read_Joystick_Status>
+			static inline void GlobalInterruptEnable(void)
+			{
+				GCC_MEMORY_BARRIER();
+
+				#if (ARCH == ARCH_AVR8)
+				sei();
+ 2fc:	32 df       	rcall	.-412    	; 0x162 <DiscardNextReport>
+	GlobalInterruptEnable();
+
+	for (;;)
+	{
+		Read_Joystick_Status();
+ 2fe:	66 d6       	rcall	.+3276   	; 0xfcc <USB_USBTask>
+ 300:	fc cf       	rjmp	.-8      	; 0x2fa <main+0x14>
+
+00000302 <DComp_NextHIDInterface>:
+ *  This comparator searches for the next Interface descriptor of the correct HID Class value.
+ *
+ *  \return A value from the DSEARCH_Return_ErrorCodes_t enum
+ */
+uint8_t DComp_NextHIDInterface(void* CurrentDescriptor)
+{
+ 302:	fc 01       	movw	r30, r24
+	USB_Descriptor_Header_t* Header = DESCRIPTOR_PCAST(CurrentDescriptor, USB_Descriptor_Header_t);
+
+	/* Determine if the current descriptor is an interface descriptor */
+	if (Header->Type == DTYPE_Interface)
+ 304:	81 81       	ldd	r24, Z+1	; 0x01
+ 306:	84 30       	cpi	r24, 0x04	; 4
+ 308:	19 f4       	brne	.+6      	; 0x310 <DComp_NextHIDInterface+0xe>
+	{
+		USB_Descriptor_Interface_t* Interface = DESCRIPTOR_PCAST(CurrentDescriptor, USB_Descriptor_Interface_t);
+
+		/* Check the HID descriptor class and protocol, break out if correct class/protocol interface found */
+		if (Interface->Class == HID_CLASS)
+ 30a:	85 81       	ldd	r24, Z+5	; 0x05
+ 30c:	83 30       	cpi	r24, 0x03	; 3
+ 30e:	11 f0       	breq	.+4      	; 0x314 <DComp_NextHIDInterface+0x12>
+			return DESCRIPTOR_SEARCH_Found;
+		}
+	}
+
+	/* Current descriptor does not match what this comparator is looking for */
+	return DESCRIPTOR_SEARCH_NotFound;
+ 310:	82 e0       	ldi	r24, 0x02	; 2
+ 312:	08 95       	ret
+
+		/* Check the HID descriptor class and protocol, break out if correct class/protocol interface found */
+		if (Interface->Class == HID_CLASS)
+		{
+			/* Indicate that the descriptor being searched for has been found */
+			return DESCRIPTOR_SEARCH_Found;
+ 314:	80 e0       	ldi	r24, 0x00	; 0
+		}
+	}
+
+	/* Current descriptor does not match what this comparator is looking for */
+	return DESCRIPTOR_SEARCH_NotFound;
+}
+ 316:	08 95       	ret
+
+00000318 <DComp_NextHIDInterfaceDataEndpoint>:
+uint8_t DComp_NextHIDInterfaceDataEndpoint(void* CurrentDescriptor)
+{
+	USB_Descriptor_Header_t* Header = DESCRIPTOR_PCAST(CurrentDescriptor, USB_Descriptor_Header_t);
+
+	/* Determine the type of the current descriptor */
+	if (Header->Type == DTYPE_Endpoint)
+ 318:	fc 01       	movw	r30, r24
+ 31a:	81 81       	ldd	r24, Z+1	; 0x01
+ 31c:	85 30       	cpi	r24, 0x05	; 5
+ 31e:	21 f0       	breq	.+8      	; 0x328 <DComp_NextHIDInterfaceDataEndpoint+0x10>
+	{
+		/* Indicate that the descriptor being searched for has been found */
+		return DESCRIPTOR_SEARCH_Found;
+	}
+	else if (Header->Type == DTYPE_Interface)
+ 320:	84 30       	cpi	r24, 0x04	; 4
+ 322:	21 f4       	brne	.+8      	; 0x32c <DComp_NextHIDInterfaceDataEndpoint+0x14>
+	{
+		/* Indicate that the search has failed prematurely and should be aborted */
+		return DESCRIPTOR_SEARCH_Fail;
+ 324:	81 e0       	ldi	r24, 0x01	; 1
+ 326:	08 95       	ret
+
+	/* Determine the type of the current descriptor */
+	if (Header->Type == DTYPE_Endpoint)
+	{
+		/* Indicate that the descriptor being searched for has been found */
+		return DESCRIPTOR_SEARCH_Found;
+ 328:	80 e0       	ldi	r24, 0x00	; 0
+ 32a:	08 95       	ret
+		return DESCRIPTOR_SEARCH_Fail;
+	}
+	else
+	{
+		/* Current descriptor does not match what this comparator is looking for */
+		return DESCRIPTOR_SEARCH_NotFound;
+ 32c:	82 e0       	ldi	r24, 0x02	; 2
+	}
+}
+ 32e:	08 95       	ret
+
+00000330 <ProcessConfigurationDescriptor>:
+ *  This routine searches for a HID interface descriptor containing at least one Interrupt type IN endpoint.
+ *
+ *  \return An error code from the GenericHIDHost_GetConfigDescriptorDataCodes_t enum.
+ */
+uint8_t ProcessConfigurationDescriptor(void)
+{
+ 330:	af 92       	push	r10
+ 332:	bf 92       	push	r11
+ 334:	cf 92       	push	r12
+ 336:	df 92       	push	r13
+ 338:	ef 92       	push	r14
+ 33a:	ff 92       	push	r15
+ 33c:	0f 93       	push	r16
+ 33e:	1f 93       	push	r17
+ 340:	cf 93       	push	r28
+ 342:	df 93       	push	r29
+ 344:	cd b7       	in	r28, 0x3d	; 61
+ 346:	de b7       	in	r29, 0x3e	; 62
+ 348:	c4 50       	subi	r28, 0x04	; 4
+ 34a:	d2 40       	sbci	r29, 0x02	; 2
+ 34c:	0f b6       	in	r0, 0x3f	; 63
+ 34e:	f8 94       	cli
+ 350:	de bf       	out	0x3e, r29	; 62
+ 352:	0f be       	out	0x3f, r0	; 63
+ 354:	cd bf       	out	0x3d, r28	; 61
+	uint8_t  ConfigDescriptorData[512];
+	void*    CurrConfigLocation = ConfigDescriptorData;
+ 356:	ae 01       	movw	r20, r28
+ 358:	4b 5f       	subi	r20, 0xFB	; 251
+ 35a:	5f 4f       	sbci	r21, 0xFF	; 255
+ 35c:	5c 83       	std	Y+4, r21	; 0x04
+ 35e:	4b 83       	std	Y+3, r20	; 0x03
+	USB_Descriptor_Interface_t* HIDInterface    = NULL;
+	USB_Descriptor_Endpoint_t*  DataINEndpoint  = NULL;
+	USB_Descriptor_Endpoint_t*  DataOUTEndpoint = NULL;
+
+	/* Retrieve the entire configuration descriptor into the allocated buffer */
+	switch (USB_Host_GetDeviceConfigDescriptor(1, &CurrConfigBytesRem, ConfigDescriptorData, sizeof(ConfigDescriptorData)))
+ 360:	81 e0       	ldi	r24, 0x01	; 1
+ 362:	8e 01       	movw	r16, r28
+ 364:	0f 5f       	subi	r16, 0xFF	; 255
+ 366:	1f 4f       	sbci	r17, 0xFF	; 255
+ 368:	b8 01       	movw	r22, r16
+ 36a:	20 e0       	ldi	r18, 0x00	; 0
+ 36c:	32 e0       	ldi	r19, 0x02	; 2
+ 36e:	45 d4       	rcall	.+2186   	; 0xbfa <USB_Host_GetDeviceConfigDescriptor>
+ 370:	85 30       	cpi	r24, 0x05	; 5
+ 372:	09 f4       	brne	.+2      	; 0x376 <ProcessConfigurationDescriptor+0x46>
+ 374:	51 c0       	rjmp	.+162    	; 0x418 <ProcessConfigurationDescriptor+0xe8>
+ 376:	86 30       	cpi	r24, 0x06	; 6
+ 378:	19 f0       	breq	.+6      	; 0x380 <ProcessConfigurationDescriptor+0x50>
+ 37a:	88 23       	and	r24, r24
+ 37c:	29 f0       	breq	.+10     	; 0x388 <ProcessConfigurationDescriptor+0x58>
+ 37e:	02 c0       	rjmp	.+4      	; 0x384 <ProcessConfigurationDescriptor+0x54>
+ 380:	83 e0       	ldi	r24, 0x03	; 3
+	{
+		case HOST_GETCONFIG_Successful:
+			break;
+		case HOST_GETCONFIG_InvalidData:
+			return InvalidConfigDataReturned;
+ 382:	4f c0       	rjmp	.+158    	; 0x422 <ProcessConfigurationDescriptor+0xf2>
+ 384:	81 e0       	ldi	r24, 0x01	; 1
+		case HOST_GETCONFIG_BuffOverflow:
+			return DescriptorTooLarge;
+		default:
+			return ControlError;
+ 386:	4d c0       	rjmp	.+154    	; 0x422 <ProcessConfigurationDescriptor+0xf2>
+ 388:	cc 24       	eor	r12, r12
+	USB_Descriptor_Interface_t* HIDInterface    = NULL;
+	USB_Descriptor_Endpoint_t*  DataINEndpoint  = NULL;
+	USB_Descriptor_Endpoint_t*  DataOUTEndpoint = NULL;
+
+	/* Retrieve the entire configuration descriptor into the allocated buffer */
+	switch (USB_Host_GetDeviceConfigDescriptor(1, &CurrConfigBytesRem, ConfigDescriptorData, sizeof(ConfigDescriptorData)))
+ 38a:	dd 24       	eor	r13, r13
+ 38c:	ee 24       	eor	r14, r14
+ 38e:	ff 24       	eor	r15, r15
+ 390:	aa 24       	eor	r10, r10
+ 392:	bb 24       	eor	r11, r11
+ 394:	a1 14       	cp	r10, r1
+	}
+
+	while (!(DataINEndpoint) || !(DataOUTEndpoint))
+	{
+		/* See if we've found a likely compatible interface, and if there is an endpoint within that interface */
+		if (!(HIDInterface) ||
+ 396:	b1 04       	cpc	r11, r1
+ 398:	49 f0       	breq	.+18     	; 0x3ac <ProcessConfigurationDescriptor+0x7c>
+ 39a:	c8 01       	movw	r24, r16
+		    USB_GetNextDescriptorComp(&CurrConfigBytesRem, &CurrConfigLocation,
+ 39c:	be 01       	movw	r22, r28
+ 39e:	6d 5f       	subi	r22, 0xFD	; 253
+ 3a0:	7f 4f       	sbci	r23, 0xFF	; 255
+ 3a2:	4c e8       	ldi	r20, 0x8C	; 140
+ 3a4:	51 e0       	ldi	r21, 0x01	; 1
+ 3a6:	80 d4       	rcall	.+2304   	; 0xca8 <USB_GetNextDescriptorComp>
+ 3a8:	88 23       	and	r24, r24
+ 3aa:	89 f0       	breq	.+34     	; 0x3ce <ProcessConfigurationDescriptor+0x9e>
+	}
+
+	while (!(DataINEndpoint) || !(DataOUTEndpoint))
+	{
+		/* See if we've found a likely compatible interface, and if there is an endpoint within that interface */
+		if (!(HIDInterface) ||
+ 3ac:	e1 14       	cp	r14, r1
+ 3ae:	f1 04       	cpc	r15, r1
+		    USB_GetNextDescriptorComp(&CurrConfigBytesRem, &CurrConfigLocation,
+		                              DComp_NextHIDInterfaceDataEndpoint) != DESCRIPTOR_SEARCH_COMP_Found)
+		{
+			/* Not all HID devices have an OUT endpoint - if we've reached the end of the HID descriptor
+			 * but only found the mandatory IN endpoint, it's safe to continue with the device enumeration */
+			if (DataINEndpoint)
+ 3b0:	e1 f4       	brne	.+56     	; 0x3ea <ProcessConfigurationDescriptor+0xba>
+ 3b2:	c8 01       	movw	r24, r16
+ 3b4:	be 01       	movw	r22, r28
+			  break;
+
+			/* Get the next HID interface from the configuration descriptor */
+			if (USB_GetNextDescriptorComp(&CurrConfigBytesRem, &CurrConfigLocation,
+ 3b6:	6d 5f       	subi	r22, 0xFD	; 253
+ 3b8:	7f 4f       	sbci	r23, 0xFF	; 255
+ 3ba:	41 e8       	ldi	r20, 0x81	; 129
+ 3bc:	51 e0       	ldi	r21, 0x01	; 1
+ 3be:	74 d4       	rcall	.+2280   	; 0xca8 <USB_GetNextDescriptorComp>
+ 3c0:	88 23       	and	r24, r24
+ 3c2:	61 f5       	brne	.+88     	; 0x41c <ProcessConfigurationDescriptor+0xec>
+ 3c4:	ab 80       	ldd	r10, Y+3	; 0x03
+ 3c6:	bc 80       	ldd	r11, Y+4	; 0x04
+ 3c8:	cc 24       	eor	r12, r12
+				/* Descriptor not found, error out */
+				return NoCompatibleInterfaceFound;
+			}
+
+			/* Save the interface in case we need to refer back to it later */
+			HIDInterface = DESCRIPTOR_PCAST(CurrConfigLocation, USB_Descriptor_Interface_t);
+ 3ca:	dd 24       	eor	r13, r13
+ 3cc:	e3 cf       	rjmp	.-58     	; 0x394 <ProcessConfigurationDescriptor+0x64>
+
+			/* Clear any found endpoints */
+			DataOUTEndpoint = NULL;
+ 3ce:	eb 81       	ldd	r30, Y+3	; 0x03
+ 3d0:	fc 81       	ldd	r31, Y+4	; 0x04
+ 3d2:	82 81       	ldd	r24, Z+2	; 0x02
+			/* Skip the remainder of the loop as we have not found an endpoint yet */
+			continue;
+		}
+
+		/* Retrieve the endpoint address from the endpoint descriptor */
+		USB_Descriptor_Endpoint_t* EndpointData = DESCRIPTOR_PCAST(CurrConfigLocation, USB_Descriptor_Endpoint_t);
+ 3d4:	87 ff       	sbrs	r24, 7
+ 3d6:	02 c0       	rjmp	.+4      	; 0x3dc <ProcessConfigurationDescriptor+0xac>
+
+		/* If the endpoint is a IN type endpoint */
+		if ((EndpointData->EndpointAddress & ENDPOINT_DIR_MASK) == ENDPOINT_DIR_IN)
+ 3d8:	7f 01       	movw	r14, r30
+ 3da:	01 c0       	rjmp	.+2      	; 0x3de <ProcessConfigurationDescriptor+0xae>
+ 3dc:	6f 01       	movw	r12, r30
+		  DataINEndpoint  = EndpointData;
+ 3de:	e1 14       	cp	r14, r1
+ 3e0:	f1 04       	cpc	r15, r1
+		else
+		  DataOUTEndpoint = EndpointData;
+ 3e2:	c1 f2       	breq	.-80     	; 0x394 <ProcessConfigurationDescriptor+0x64>
+			return DescriptorTooLarge;
+		default:
+			return ControlError;
+	}
+
+	while (!(DataINEndpoint) || !(DataOUTEndpoint))
+ 3e4:	c1 14       	cp	r12, r1
+ 3e6:	d1 04       	cpc	r13, r1
+ 3e8:	a9 f2       	breq	.-86     	; 0x394 <ProcessConfigurationDescriptor+0x64>
+ 3ea:	f7 01       	movw	r30, r14
+ 3ec:	24 81       	ldd	r18, Z+4	; 0x04
+ 3ee:	35 81       	ldd	r19, Z+5	; 0x05
+		else
+		  DataOUTEndpoint = EndpointData;
+	}
+
+	/* Configure the HID data IN pipe */
+	Pipe_ConfigurePipe(HID_DATA_IN_PIPE, EP_TYPE_INTERRUPT, DataINEndpoint->EndpointAddress, DataINEndpoint->EndpointSize, 1);
+ 3f0:	81 e8       	ldi	r24, 0x81	; 129
+ 3f2:	63 e0       	ldi	r22, 0x03	; 3
+ 3f4:	42 81       	ldd	r20, Z+2	; 0x02
+ 3f6:	01 e0       	ldi	r16, 0x01	; 1
+ 3f8:	47 d2       	rcall	.+1166   	; 0x888 <Pipe_ConfigurePipe>
+ 3fa:	f7 01       	movw	r30, r14
+ 3fc:	86 81       	ldd	r24, Z+6	; 0x06
+ 3fe:	80 93 ad 00 	sts	0x00AD, r24
+	Pipe_SetInterruptPeriod(DataINEndpoint->PollingIntervalMS);
+ 402:	c1 14       	cp	r12, r1
+ 404:	d1 04       	cpc	r13, r1
+			 *  \param[in] Milliseconds  Number of milliseconds between each pipe poll.
+			 */
+			static inline void Pipe_SetInterruptPeriod(const uint8_t Milliseconds) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_SetInterruptPeriod(const uint8_t Milliseconds)
+			{
+				UPCFG2X = Milliseconds;
+ 406:	61 f0       	breq	.+24     	; 0x420 <ProcessConfigurationDescriptor+0xf0>
+ 408:	f6 01       	movw	r30, r12
+
+	/* Check if the HID interface contained an optional OUT data endpoint */
+	if (DataOUTEndpoint)
+ 40a:	24 81       	ldd	r18, Z+4	; 0x04
+ 40c:	35 81       	ldd	r19, Z+5	; 0x05
+ 40e:	82 e0       	ldi	r24, 0x02	; 2
+	{
+		/* Configure the HID data OUT pipe */
+		Pipe_ConfigurePipe(HID_DATA_OUT_PIPE, EP_TYPE_INTERRUPT, DataOUTEndpoint->EndpointAddress, DataOUTEndpoint->EndpointSize, 1);
+ 410:	63 e0       	ldi	r22, 0x03	; 3
+ 412:	42 81       	ldd	r20, Z+2	; 0x02
+ 414:	39 d2       	rcall	.+1138   	; 0x888 <Pipe_ConfigurePipe>
+ 416:	04 c0       	rjmp	.+8      	; 0x420 <ProcessConfigurationDescriptor+0xf0>
+ 418:	82 e0       	ldi	r24, 0x02	; 2
+ 41a:	03 c0       	rjmp	.+6      	; 0x422 <ProcessConfigurationDescriptor+0xf2>
+ 41c:	84 e0       	ldi	r24, 0x04	; 4
+ 41e:	01 c0       	rjmp	.+2      	; 0x422 <ProcessConfigurationDescriptor+0xf2>
+ 420:	80 e0       	ldi	r24, 0x00	; 0
+		case HOST_GETCONFIG_Successful:
+			break;
+		case HOST_GETCONFIG_InvalidData:
+			return InvalidConfigDataReturned;
+		case HOST_GETCONFIG_BuffOverflow:
+			return DescriptorTooLarge;
+ 422:	cc 5f       	subi	r28, 0xFC	; 252
+ 424:	dd 4f       	sbci	r29, 0xFD	; 253
+			/* Get the next HID interface from the configuration descriptor */
+			if (USB_GetNextDescriptorComp(&CurrConfigBytesRem, &CurrConfigLocation,
+										  DComp_NextHIDInterface) != DESCRIPTOR_SEARCH_COMP_Found)
+			{
+				/* Descriptor not found, error out */
+				return NoCompatibleInterfaceFound;
+ 426:	0f b6       	in	r0, 0x3f	; 63
+ 428:	f8 94       	cli
+		/* Configure the HID data OUT pipe */
+		Pipe_ConfigurePipe(HID_DATA_OUT_PIPE, EP_TYPE_INTERRUPT, DataOUTEndpoint->EndpointAddress, DataOUTEndpoint->EndpointSize, 1);
+	}
+
+	/* Valid data found, return success */
+	return SuccessfulConfigRead;
+ 42a:	de bf       	out	0x3e, r29	; 62
+}
+ 42c:	0f be       	out	0x3f, r0	; 63
+ 42e:	cd bf       	out	0x3d, r28	; 61
+ 430:	df 91       	pop	r29
+ 432:	cf 91       	pop	r28
+ 434:	1f 91       	pop	r17
+ 436:	0f 91       	pop	r16
+ 438:	ff 90       	pop	r15
+ 43a:	ef 90       	pop	r14
+ 43c:	df 90       	pop	r13
+ 43e:	cf 90       	pop	r12
+ 440:	bf 90       	pop	r11
+ 442:	af 90       	pop	r10
+ 444:	08 95       	ret
+
+00000446 <USB_Host_ResetDevice>:
+			 *  \return Boolean \c true if the bus is currently suspended, \c false otherwise.
+			 */
+			static inline bool USB_Host_IsBusSuspended(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
+			static inline bool USB_Host_IsBusSuspended(void)
+			{
+				return ((UHCON & (1 << SOFEN)) ? false : true);
+ 446:	80 91 9e 00 	lds	r24, 0x009E
+ 44a:	90 e0       	ldi	r25, 0x00	; 0
+ 44c:	81 70       	andi	r24, 0x01	; 1
+ 44e:	90 70       	andi	r25, 0x00	; 0
+						break;
+					case USB_INT_DCONNI:
+						UHIEN  &= ~(1 << DCONNE);
+						break;
+					case USB_INT_DDISCI:
+						UHIEN  &= ~(1 << DDISCE);
+ 450:	20 91 a0 00 	lds	r18, 0x00A0
+ 454:	2d 7f       	andi	r18, 0xFD	; 253
+ 456:	20 93 a0 00 	sts	0x00A0, r18
+			 *  woken up automatically and the bus resumed after the reset has been correctly issued.
+			 */
+			static inline void USB_Host_ResetBus(void) ATTR_ALWAYS_INLINE;
+			static inline void USB_Host_ResetBus(void)
+			{
+				UHCON |=  (1 << RESET);
+ 45a:	20 91 9e 00 	lds	r18, 0x009E
+ 45e:	22 60       	ori	r18, 0x02	; 2
+ 460:	20 93 9e 00 	sts	0x009E, r18
+			 *  \return Boolean \c true if no bus reset is currently being sent, \c false otherwise.
+			 */
+			static inline bool USB_Host_IsBusResetComplete(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
+			static inline bool USB_Host_IsBusResetComplete(void)
+			{
+				return ((UHCON & (1 << RESET)) ? false : true);
+ 464:	20 91 9e 00 	lds	r18, 0x009E
+	bool BusSuspended = USB_Host_IsBusSuspended();
+
+	USB_INT_Disable(USB_INT_DDISCI);
+
+	USB_Host_ResetBus();
+	while (!(USB_Host_IsBusResetComplete()));
+ 468:	21 fd       	sbrc	r18, 1
+ 46a:	fc cf       	rjmp	.-8      	; 0x464 <USB_Host_ResetDevice+0x1e>
+			 *  host and attached device may occur.
+			 */
+			static inline void USB_Host_ResumeBus(void) ATTR_ALWAYS_INLINE;
+			static inline void USB_Host_ResumeBus(void)
+			{
+				UHCON |=  (1 << SOFEN);
+ 46c:	20 91 9e 00 	lds	r18, 0x009E
+ 470:	21 60       	ori	r18, 0x01	; 1
+ 472:	20 93 9e 00 	sts	0x009E, r18
+	USB_Host_ResumeBus();
+
+	USB_Host_ConfigurationNumber = 0;
+ 476:	10 92 af 01 	sts	0x01AF, r1
+					case USB_INT_RXSTPI:
+						return (UEIENX & (1 << RXSTPE));
+					#endif
+					#if defined(USB_CAN_BE_HOST)
+					case USB_INT_HSOFI:
+						return (UHIEN  & (1 << HSOFE));
+ 47a:	20 91 a0 00 	lds	r18, 0x00A0
+ 47e:	30 e0       	ldi	r19, 0x00	; 0
+ 480:	20 72       	andi	r18, 0x20	; 32
+ 482:	30 70       	andi	r19, 0x00	; 0
+						UEIENX &= ~(1 << RXSTPE);
+						break;
+					#endif
+					#if defined(USB_CAN_BE_HOST)
+					case USB_INT_HSOFI:
+						UHIEN  &= ~(1 << HSOFE);
+ 484:	40 91 a0 00 	lds	r20, 0x00A0
+ 488:	4f 7d       	andi	r20, 0xDF	; 223
+ 48a:	40 93 a0 00 	sts	0x00A0, r20
+						UEINTX &= ~(1 << RXSTPI);
+						break;
+					#endif
+					#if defined(USB_CAN_BE_HOST)
+					case USB_INT_HSOFI:
+						UHINT  &= ~(1 << HSOFI);
+ 48e:	40 91 9f 00 	lds	r20, 0x009F
+ 492:	4f 7d       	andi	r20, 0xDF	; 223
+ 494:	40 93 9f 00 	sts	0x009F, r20
+ 498:	4a e0       	ldi	r20, 0x0A	; 10
+					case USB_INT_RXSTPI:
+						return (UEINTX & (1 << RXSTPI));
+					#endif
+					#if defined(USB_CAN_BE_HOST)
+					case USB_INT_HSOFI:
+						return (UHINT  & (1 << HSOFI));
+ 49a:	50 91 9f 00 	lds	r21, 0x009F
+		/* Workaround for powerless-pull-up devices. After a USB bus reset,
+		   all disconnection interrupts are suppressed while a USB frame is
+		   looked for - if it is found within 10ms, the device is still
+		   present.                                                        */
+
+		if (USB_INT_HasOccurred(USB_INT_HSOFI))
+ 49e:	55 ff       	sbrs	r21, 5
+ 4a0:	0b c0       	rjmp	.+22     	; 0x4b8 <USB_Host_ResetDevice+0x72>
+						UEINTX &= ~(1 << RXSTPI);
+						break;
+					#endif
+					#if defined(USB_CAN_BE_HOST)
+					case USB_INT_HSOFI:
+						UHINT  &= ~(1 << HSOFI);
+ 4a2:	40 91 9f 00 	lds	r20, 0x009F
+ 4a6:	4f 7d       	andi	r20, 0xDF	; 223
+ 4a8:	40 93 9f 00 	sts	0x009F, r20
+						break;
+					case USB_INT_DCONNI:
+						UHINT  &= ~(1 << DCONNI);
+						break;
+					case USB_INT_DDISCI:
+						UHINT  &= ~(1 << DDISCI);
+ 4ac:	40 91 9f 00 	lds	r20, 0x009F
+ 4b0:	4d 7f       	andi	r20, 0xFD	; 253
+ 4b2:	40 93 9f 00 	sts	0x009F, r20
+ 4b6:	08 c0       	rjmp	.+16     	; 0x4c8 <USB_Host_ResetDevice+0x82>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 4b8:	ef ec       	ldi	r30, 0xCF	; 207
+ 4ba:	f7 e0       	ldi	r31, 0x07	; 7
+ 4bc:	31 97       	sbiw	r30, 0x01	; 1
+ 4be:	f1 f7       	brne	.-4      	; 0x4bc <USB_Host_ResetDevice+0x76>
+ 4c0:	00 c0       	rjmp	.+0      	; 0x4c2 <USB_Host_ResetDevice+0x7c>
+ 4c2:	00 00       	nop
+ 4c4:	41 50       	subi	r20, 0x01	; 1
+	bool HSOFIEnabled = USB_INT_IsEnabled(USB_INT_HSOFI);
+
+	USB_INT_Disable(USB_INT_HSOFI);
+	USB_INT_Clear(USB_INT_HSOFI);
+
+	for (uint8_t MSRem = 10; MSRem != 0; MSRem--)
+ 4c6:	49 f7       	brne	.-46     	; 0x49a <USB_Host_ResetDevice+0x54>
+		}
+
+		Delay_MS(1);
+	}
+
+	if (HSOFIEnabled)
+ 4c8:	21 15       	cp	r18, r1
+ 4ca:	31 05       	cpc	r19, r1
+ 4cc:	29 f0       	breq	.+10     	; 0x4d8 <USB_Host_ResetDevice+0x92>
+						UEIENX |= (1 << RXSTPE);
+						break;
+					#endif
+					#if defined(USB_CAN_BE_HOST)
+					case USB_INT_HSOFI:
+						UHIEN  |= (1 << HSOFE);
+ 4ce:	20 91 a0 00 	lds	r18, 0x00A0
+ 4d2:	20 62       	ori	r18, 0x20	; 32
+ 4d4:	20 93 a0 00 	sts	0x00A0, r18
+	  USB_INT_Enable(USB_INT_HSOFI);
+
+	if (BusSuspended)
+ 4d8:	00 97       	sbiw	r24, 0x00	; 0
+ 4da:	29 f4       	brne	.+10     	; 0x4e6 <USB_Host_ResetDevice+0xa0>
+			 *             some events (such as device disconnections) will not fire until the bus is resumed.
+			 */
+			static inline void USB_Host_SuspendBus(void) ATTR_ALWAYS_INLINE;
+			static inline void USB_Host_SuspendBus(void)
+			{
+				UHCON &= ~(1 << SOFEN);
+ 4dc:	80 91 9e 00 	lds	r24, 0x009E
+ 4e0:	8e 7f       	andi	r24, 0xFE	; 254
+ 4e2:	80 93 9e 00 	sts	0x009E, r24
+						break;
+					case USB_INT_DCONNI:
+						UHIEN  |= (1 << DCONNE);
+						break;
+					case USB_INT_DDISCI:
+						UHIEN  |= (1 << DDISCE);
+ 4e6:	80 91 a0 00 	lds	r24, 0x00A0
+ 4ea:	82 60       	ori	r24, 0x02	; 2
+ 4ec:	80 93 a0 00 	sts	0x00A0, r24
+	  USB_Host_SuspendBus();
+
+	USB_INT_Enable(USB_INT_DDISCI);
+}
+ 4f0:	08 95       	ret
+
+000004f2 <USB_Host_WaitMS>:
+			 *  \return Boolean \c true if the bus is currently suspended, \c false otherwise.
+			 */
+			static inline bool USB_Host_IsBusSuspended(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
+			static inline bool USB_Host_IsBusSuspended(void)
+			{
+				return ((UHCON & (1 << SOFEN)) ? false : true);
+ 4f2:	40 91 9e 00 	lds	r20, 0x009E
+ 4f6:	50 e0       	ldi	r21, 0x00	; 0
+ 4f8:	41 70       	andi	r20, 0x01	; 1
+ 4fa:	50 70       	andi	r21, 0x00	; 0
+					case USB_INT_RXSTPI:
+						return (UEIENX & (1 << RXSTPE));
+					#endif
+					#if defined(USB_CAN_BE_HOST)
+					case USB_INT_HSOFI:
+						return (UHIEN  & (1 << HSOFE));
+ 4fc:	20 91 a0 00 	lds	r18, 0x00A0
+ 500:	30 e0       	ldi	r19, 0x00	; 0
+ 502:	20 72       	andi	r18, 0x20	; 32
+ 504:	30 70       	andi	r19, 0x00	; 0
+						UEIENX &= ~(1 << RXSTPE);
+						break;
+					#endif
+					#if defined(USB_CAN_BE_HOST)
+					case USB_INT_HSOFI:
+						UHIEN  &= ~(1 << HSOFE);
+ 506:	90 91 a0 00 	lds	r25, 0x00A0
+ 50a:	9f 7d       	andi	r25, 0xDF	; 223
+ 50c:	90 93 a0 00 	sts	0x00A0, r25
+						UEINTX &= ~(1 << RXSTPI);
+						break;
+					#endif
+					#if defined(USB_CAN_BE_HOST)
+					case USB_INT_HSOFI:
+						UHINT  &= ~(1 << HSOFI);
+ 510:	90 91 9f 00 	lds	r25, 0x009F
+ 514:	9f 7d       	andi	r25, 0xDF	; 223
+ 516:	90 93 9f 00 	sts	0x009F, r25
+			 *  host and attached device may occur.
+			 */
+			static inline void USB_Host_ResumeBus(void) ATTR_ALWAYS_INLINE;
+			static inline void USB_Host_ResumeBus(void)
+			{
+				UHCON |=  (1 << SOFEN);
+ 51a:	90 91 9e 00 	lds	r25, 0x009E
+ 51e:	91 60       	ori	r25, 0x01	; 1
+ 520:	90 93 9e 00 	sts	0x009E, r25
+ 524:	25 c0       	rjmp	.+74     	; 0x570 <USB_Host_WaitMS+0x7e>
+					case USB_INT_RXSTPI:
+						return (UEINTX & (1 << RXSTPI));
+					#endif
+					#if defined(USB_CAN_BE_HOST)
+					case USB_INT_HSOFI:
+						return (UHINT  & (1 << HSOFI));
+ 526:	90 91 9f 00 	lds	r25, 0x009F
+
+	USB_Host_ResumeBus();
+
+	while (MS)
+	{
+		if (USB_INT_HasOccurred(USB_INT_HSOFI))
+ 52a:	95 ff       	sbrs	r25, 5
+ 52c:	06 c0       	rjmp	.+12     	; 0x53a <USB_Host_WaitMS+0x48>
+						UEINTX &= ~(1 << RXSTPI);
+						break;
+					#endif
+					#if defined(USB_CAN_BE_HOST)
+					case USB_INT_HSOFI:
+						UHINT  &= ~(1 << HSOFI);
+ 52e:	90 91 9f 00 	lds	r25, 0x009F
+ 532:	9f 7d       	andi	r25, 0xDF	; 223
+ 534:	90 93 9f 00 	sts	0x009F, r25
+		{
+			USB_INT_Clear(USB_INT_HSOFI);
+			MS--;
+ 538:	81 50       	subi	r24, 0x01	; 1
+		}
+
+		if ((USB_HostState == HOST_STATE_Unattached) || (USB_CurrentMode != USB_MODE_Host))
+ 53a:	9e b3       	in	r25, 0x1e	; 30
+ 53c:	91 30       	cpi	r25, 0x01	; 1
+ 53e:	d9 f0       	breq	.+54     	; 0x576 <USB_Host_WaitMS+0x84>
+			 *  \return Boolean \c true if an error has occurred on the selected pipe, \c false otherwise.
+			 */
+			static inline bool Pipe_IsError(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
+			static inline bool Pipe_IsError(void)
+			{
+				return ((UPINTX & (1 << PERRI)) ? true : false);
+ 540:	90 91 a6 00 	lds	r25, 0x00A6
+			ErrorCode = HOST_WAITERROR_DeviceDisconnect;
+
+			break;
+		}
+
+		if (Pipe_IsError())
+ 544:	94 ff       	sbrs	r25, 4
+ 546:	09 c0       	rjmp	.+18     	; 0x55a <USB_Host_WaitMS+0x68>
+
+			/** Clears the error flags for the currently selected pipe. */
+			static inline void Pipe_ClearError(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_ClearError(void)
+			{
+				UPERRX = 0;
+ 548:	10 92 f5 00 	sts	0x00F5, r1
+				UPINTX &= ~(1 << PERRI);
+ 54c:	80 91 a6 00 	lds	r24, 0x00A6
+ 550:	8f 7e       	andi	r24, 0xEF	; 239
+ 552:	80 93 a6 00 	sts	0x00A6, r24
+		{
+			Pipe_ClearError();
+			ErrorCode = HOST_WAITERROR_PipeError;
+ 556:	82 e0       	ldi	r24, 0x02	; 2
+
+			break;
+ 558:	0f c0       	rjmp	.+30     	; 0x578 <USB_Host_WaitMS+0x86>
+			 *  \return Boolean \c true if the current pipe has been stalled by the attached device, \c false otherwise.
+			 */
+			static inline bool Pipe_IsStalled(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
+			static inline bool Pipe_IsStalled(void)
+			{
+				return ((UPINTX & (1 << RXSTALLI)) ? true : false);
+ 55a:	90 91 a6 00 	lds	r25, 0x00A6
+		}
+
+		if (Pipe_IsStalled())
+ 55e:	91 ff       	sbrs	r25, 1
+ 560:	07 c0       	rjmp	.+14     	; 0x570 <USB_Host_WaitMS+0x7e>
+			 *  \ingroup Group_PipePacketManagement_AVR8
+			 */
+			static inline void Pipe_ClearStall(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_ClearStall(void)
+			{
+				UPINTX &= ~(1 << RXSTALLI);
+ 562:	80 91 a6 00 	lds	r24, 0x00A6
+ 566:	8d 7f       	andi	r24, 0xFD	; 253
+ 568:	80 93 a6 00 	sts	0x00A6, r24
+		{
+			Pipe_ClearStall();
+			ErrorCode = HOST_WAITERROR_SetupStalled;
+ 56c:	83 e0       	ldi	r24, 0x03	; 3
+
+			break;
+ 56e:	04 c0       	rjmp	.+8      	; 0x578 <USB_Host_WaitMS+0x86>
+	USB_INT_Disable(USB_INT_HSOFI);
+	USB_INT_Clear(USB_INT_HSOFI);
+
+	USB_Host_ResumeBus();
+
+	while (MS)
+ 570:	88 23       	and	r24, r24
+ 572:	c9 f6       	brne	.-78     	; 0x526 <USB_Host_WaitMS+0x34>
+ 574:	01 c0       	rjmp	.+2      	; 0x578 <USB_Host_WaitMS+0x86>
+			MS--;
+		}
+
+		if ((USB_HostState == HOST_STATE_Unattached) || (USB_CurrentMode != USB_MODE_Host))
+		{
+			ErrorCode = HOST_WAITERROR_DeviceDisconnect;
+ 576:	81 e0       	ldi	r24, 0x01	; 1
+
+			break;
+		}
+	}
+
+	if (BusSuspended)
+ 578:	41 15       	cp	r20, r1
+ 57a:	51 05       	cpc	r21, r1
+ 57c:	29 f4       	brne	.+10     	; 0x588 <USB_Host_WaitMS+0x96>
+			 *             some events (such as device disconnections) will not fire until the bus is resumed.
+			 */
+			static inline void USB_Host_SuspendBus(void) ATTR_ALWAYS_INLINE;
+			static inline void USB_Host_SuspendBus(void)
+			{
+				UHCON &= ~(1 << SOFEN);
+ 57e:	90 91 9e 00 	lds	r25, 0x009E
+ 582:	9e 7f       	andi	r25, 0xFE	; 254
+ 584:	90 93 9e 00 	sts	0x009E, r25
+	  USB_Host_SuspendBus();
+
+	if (HSOFIEnabled)
+ 588:	21 15       	cp	r18, r1
+ 58a:	31 05       	cpc	r19, r1
+ 58c:	29 f0       	breq	.+10     	; 0x598 <USB_Host_WaitMS+0xa6>
+						UEIENX |= (1 << RXSTPE);
+						break;
+					#endif
+					#if defined(USB_CAN_BE_HOST)
+					case USB_INT_HSOFI:
+						UHIEN  |= (1 << HSOFE);
+ 58e:	90 91 a0 00 	lds	r25, 0x00A0
+ 592:	90 62       	ori	r25, 0x20	; 32
+ 594:	90 93 a0 00 	sts	0x00A0, r25
+	  USB_INT_Enable(USB_INT_HSOFI);
+
+	return ErrorCode;
+}
+ 598:	08 95       	ret
+
+0000059a <USB_Host_ProcessNextHostState>:
+
+#define  __INCLUDE_FROM_HOST_C
+#include "../Host.h"
+
+void USB_Host_ProcessNextHostState(void)
+{
+ 59a:	0f 93       	push	r16
+ 59c:	1f 93       	push	r17
+ 59e:	cf 93       	push	r28
+ 5a0:	df 93       	push	r29
+ 5a2:	cd b7       	in	r28, 0x3d	; 61
+ 5a4:	de b7       	in	r29, 0x3e	; 62
+ 5a6:	28 97       	sbiw	r28, 0x08	; 8
+ 5a8:	0f b6       	in	r0, 0x3f	; 63
+ 5aa:	f8 94       	cli
+ 5ac:	de bf       	out	0x3e, r29	; 62
+ 5ae:	0f be       	out	0x3f, r0	; 63
+ 5b0:	cd bf       	out	0x3d, r28	; 61
+	uint8_t SubErrorCode = HOST_ENUMERROR_NoError;
+
+	static uint16_t WaitMSRemaining;
+	static uint8_t  PostWaitState;
+
+	switch (USB_HostState)
+ 5b2:	8e b3       	in	r24, 0x1e	; 30
+ 5b4:	85 30       	cpi	r24, 0x05	; 5
+ 5b6:	09 f4       	brne	.+2      	; 0x5ba <USB_Host_ProcessNextHostState+0x20>
+ 5b8:	96 c0       	rjmp	.+300    	; 0x6e6 <USB_Host_ProcessNextHostState+0x14c>
+ 5ba:	86 30       	cpi	r24, 0x06	; 6
+ 5bc:	68 f4       	brcc	.+26     	; 0x5d8 <USB_Host_ProcessNextHostState+0x3e>
+ 5be:	82 30       	cpi	r24, 0x02	; 2
+ 5c0:	b9 f1       	breq	.+110    	; 0x630 <USB_Host_ProcessNextHostState+0x96>
+ 5c2:	83 30       	cpi	r24, 0x03	; 3
+ 5c4:	18 f4       	brcc	.+6      	; 0x5cc <USB_Host_ProcessNextHostState+0x32>
+ 5c6:	88 23       	and	r24, r24
+ 5c8:	a1 f0       	breq	.+40     	; 0x5f2 <USB_Host_ProcessNextHostState+0x58>
+ 5ca:	fc c0       	rjmp	.+504    	; 0x7c4 <USB_Host_ProcessNextHostState+0x22a>
+ 5cc:	83 30       	cpi	r24, 0x03	; 3
+ 5ce:	c9 f1       	breq	.+114    	; 0x642 <USB_Host_ProcessNextHostState+0xa8>
+ 5d0:	84 30       	cpi	r24, 0x04	; 4
+ 5d2:	09 f0       	breq	.+2      	; 0x5d6 <USB_Host_ProcessNextHostState+0x3c>
+ 5d4:	f7 c0       	rjmp	.+494    	; 0x7c4 <USB_Host_ProcessNextHostState+0x22a>
+ 5d6:	60 c0       	rjmp	.+192    	; 0x698 <USB_Host_ProcessNextHostState+0xfe>
+ 5d8:	87 30       	cpi	r24, 0x07	; 7
+ 5da:	09 f4       	brne	.+2      	; 0x5de <USB_Host_ProcessNextHostState+0x44>
+ 5dc:	9a c0       	rjmp	.+308    	; 0x712 <USB_Host_ProcessNextHostState+0x178>
+ 5de:	87 30       	cpi	r24, 0x07	; 7
+ 5e0:	08 f4       	brcc	.+2      	; 0x5e4 <USB_Host_ProcessNextHostState+0x4a>
+ 5e2:	8b c0       	rjmp	.+278    	; 0x6fa <USB_Host_ProcessNextHostState+0x160>
+ 5e4:	88 30       	cpi	r24, 0x08	; 8
+ 5e6:	09 f4       	brne	.+2      	; 0x5ea <USB_Host_ProcessNextHostState+0x50>
+ 5e8:	b3 c0       	rjmp	.+358    	; 0x750 <USB_Host_ProcessNextHostState+0x1b6>
+ 5ea:	89 30       	cpi	r24, 0x09	; 9
+ 5ec:	09 f0       	breq	.+2      	; 0x5f0 <USB_Host_ProcessNextHostState+0x56>
+ 5ee:	ea c0       	rjmp	.+468    	; 0x7c4 <USB_Host_ProcessNextHostState+0x22a>
+ 5f0:	d3 c0       	rjmp	.+422    	; 0x798 <USB_Host_ProcessNextHostState+0x1fe>
+	{
+		case HOST_STATE_WaitForDevice:
+			if (WaitMSRemaining)
+ 5f2:	00 91 ac 01 	lds	r16, 0x01AC
+ 5f6:	10 91 ad 01 	lds	r17, 0x01AD
+ 5fa:	01 15       	cp	r16, r1
+ 5fc:	11 05       	cpc	r17, r1
+ 5fe:	09 f4       	brne	.+2      	; 0x602 <USB_Host_ProcessNextHostState+0x68>
+ 600:	e1 c0       	rjmp	.+450    	; 0x7c4 <USB_Host_ProcessNextHostState+0x22a>
+			{
+				if ((SubErrorCode = USB_Host_WaitMS(1)) != HOST_WAITERROR_Successful)
+ 602:	81 e0       	ldi	r24, 0x01	; 1
+ 604:	76 df       	rcall	.-276    	; 0x4f2 <USB_Host_WaitMS>
+ 606:	68 2f       	mov	r22, r24
+ 608:	88 23       	and	r24, r24
+ 60a:	29 f0       	breq	.+10     	; 0x616 <USB_Host_ProcessNextHostState+0x7c>
+ 60c:	80 91 ae 01 	lds	r24, 0x01AE
+				{
+					USB_HostState = PostWaitState;
+ 610:	8e bb       	out	0x1e, r24	; 30
+ 612:	81 e0       	ldi	r24, 0x01	; 1
+					ErrorCode     = HOST_ENUMERROR_WaitStage;
+ 614:	cc c0       	rjmp	.+408    	; 0x7ae <USB_Host_ProcessNextHostState+0x214>
+					break;
+ 616:	01 50       	subi	r16, 0x01	; 1
+				}
+
+				if (!(--WaitMSRemaining))
+ 618:	10 40       	sbci	r17, 0x00	; 0
+ 61a:	10 93 ad 01 	sts	0x01AD, r17
+ 61e:	00 93 ac 01 	sts	0x01AC, r16
+ 622:	01 15       	cp	r16, r1
+ 624:	11 05       	cpc	r17, r1
+ 626:	09 f0       	breq	.+2      	; 0x62a <USB_Host_ProcessNextHostState+0x90>
+ 628:	cd c0       	rjmp	.+410    	; 0x7c4 <USB_Host_ProcessNextHostState+0x22a>
+ 62a:	80 91 ae 01 	lds	r24, 0x01AE
+				  USB_HostState = PostWaitState;
+ 62e:	07 c0       	rjmp	.+14     	; 0x63e <USB_Host_ProcessNextHostState+0xa4>
+ 630:	88 ee       	ldi	r24, 0xE8	; 232
+			}
+
+			break;
+		case HOST_STATE_Powered:
+			WaitMSRemaining = HOST_DEVICE_SETTLE_DELAY_MS;
+ 632:	93 e0       	ldi	r25, 0x03	; 3
+ 634:	90 93 ad 01 	sts	0x01AD, r25
+ 638:	80 93 ac 01 	sts	0x01AC, r24
+ 63c:	83 e0       	ldi	r24, 0x03	; 3
+
+			USB_HostState = HOST_STATE_Powered_WaitForDeviceSettle;
+ 63e:	8e bb       	out	0x1e, r24	; 30
+ 640:	c1 c0       	rjmp	.+386    	; 0x7c4 <USB_Host_ProcessNextHostState+0x22a>
+			break;
+ 642:	80 91 ac 01 	lds	r24, 0x01AC
+		case HOST_STATE_Powered_WaitForDeviceSettle:
+			if (WaitMSRemaining--)
+ 646:	90 91 ad 01 	lds	r25, 0x01AD
+ 64a:	9c 01       	movw	r18, r24
+ 64c:	21 50       	subi	r18, 0x01	; 1
+ 64e:	30 40       	sbci	r19, 0x00	; 0
+ 650:	30 93 ad 01 	sts	0x01AD, r19
+ 654:	20 93 ac 01 	sts	0x01AC, r18
+ 658:	00 97       	sbiw	r24, 0x00	; 0
+ 65a:	39 f0       	breq	.+14     	; 0x66a <USB_Host_ProcessNextHostState+0xd0>
+ 65c:	8f ec       	ldi	r24, 0xCF	; 207
+ 65e:	97 e0       	ldi	r25, 0x07	; 7
+ 660:	01 97       	sbiw	r24, 0x01	; 1
+ 662:	f1 f7       	brne	.-4      	; 0x660 <USB_Host_ProcessNextHostState+0xc6>
+ 664:	00 c0       	rjmp	.+0      	; 0x666 <USB_Host_ProcessNextHostState+0xcc>
+ 666:	00 00       	nop
+ 668:	ad c0       	rjmp	.+346    	; 0x7c4 <USB_Host_ProcessNextHostState+0x22a>
+ 66a:	77 98       	cbi	0x0e, 7	; 14
+			static inline void USB_Host_VBUS_Manual_Off(void)
+			{
+				#if defined(INVERTED_VBUS_ENABLE_LINE)
+				PORTE  |=  (1 << 7);
+				#else
+				PORTE  &= ~(1 << 7);
+ 66c:	80 91 d8 00 	lds	r24, 0x00D8
+
+			#if defined(USB_SERIES_4_AVR) || defined(USB_SERIES_6_AVR) || defined(USB_SERIES_7_AVR)
+			static inline void USB_OTGPAD_On(void) ATTR_ALWAYS_INLINE;
+			static inline void USB_OTGPAD_On(void)
+			{
+				USBCON |=  (1 << OTGPADE);
+ 670:	80 61       	ori	r24, 0x10	; 16
+ 672:	80 93 d8 00 	sts	0x00D8, r24
+ 676:	80 91 dd 00 	lds	r24, 0x00DD
+			}
+
+			static inline void USB_Host_VBUS_Auto_Enable(void) ATTR_ALWAYS_INLINE;
+			static inline void USB_Host_VBUS_Auto_Enable(void)
+			{
+				OTGCON &= ~(1 << VBUSHWC);
+ 67a:	8b 7f       	andi	r24, 0xFB	; 251
+ 67c:	80 93 dd 00 	sts	0x00DD, r24
+ 680:	80 91 d7 00 	lds	r24, 0x00D7
+				UHWCON |=  (1 << UVCONE);
+ 684:	80 61       	ori	r24, 0x10	; 16
+ 686:	80 93 d7 00 	sts	0x00D7, r24
+ 68a:	80 91 dd 00 	lds	r24, 0x00DD
+			}
+
+			static inline void USB_Host_VBUS_Auto_On(void) ATTR_ALWAYS_INLINE;
+			static inline void USB_Host_VBUS_Auto_On(void)
+			{
+				OTGCON |=  (1 << VBUSREQ);
+ 68e:	82 60       	ori	r24, 0x02	; 2
+ 690:	80 93 dd 00 	sts	0x00DD, r24
+ 694:	84 e0       	ldi	r24, 0x04	; 4
+				#if defined(NO_AUTO_VBUS_MANAGEMENT)
+				USB_Host_VBUS_Manual_Enable();
+				USB_Host_VBUS_Manual_On();
+				#endif
+
+				USB_HostState = HOST_STATE_Powered_WaitForConnect;
+ 696:	d3 cf       	rjmp	.-90     	; 0x63e <USB_Host_ProcessNextHostState+0xa4>
+ 698:	80 91 9f 00 	lds	r24, 0x009F
+					#endif
+					#if defined(USB_CAN_BE_HOST)
+					case USB_INT_HSOFI:
+						return (UHINT  & (1 << HSOFI));
+					case USB_INT_DCONNI:
+						return (UHINT  & (1 << DCONNI));
+ 69c:	80 ff       	sbrs	r24, 0
+			}
+
+			break;
+		case HOST_STATE_Powered_WaitForConnect:
+			if (USB_INT_HasOccurred(USB_INT_DCONNI))
+ 69e:	92 c0       	rjmp	.+292    	; 0x7c4 <USB_Host_ProcessNextHostState+0x22a>
+ 6a0:	80 91 9f 00 	lds	r24, 0x009F
+					#if defined(USB_CAN_BE_HOST)
+					case USB_INT_HSOFI:
+						UHINT  &= ~(1 << HSOFI);
+						break;
+					case USB_INT_DCONNI:
+						UHINT  &= ~(1 << DCONNI);
+ 6a4:	8e 7f       	andi	r24, 0xFE	; 254
+ 6a6:	80 93 9f 00 	sts	0x009F, r24
+ 6aa:	80 91 9f 00 	lds	r24, 0x009F
+						break;
+					case USB_INT_DDISCI:
+						UHINT  &= ~(1 << DDISCI);
+ 6ae:	8d 7f       	andi	r24, 0xFD	; 253
+ 6b0:	80 93 9f 00 	sts	0x009F, r24
+ 6b4:	80 91 df 00 	lds	r24, 0x00DF
+						break;
+					case USB_INT_BCERRI:
+						OTGINT &= ~(1 << BCERRI);
+						break;
+					case USB_INT_VBERRI:
+						OTGINT &= ~(1 << VBERRI);
+ 6b8:	8d 7f       	andi	r24, 0xFD	; 253
+ 6ba:	80 93 df 00 	sts	0x00DF, r24
+ 6be:	80 91 de 00 	lds	r24, 0x00DE
+						break;
+					case USB_INT_BCERRI:
+						OTGIEN |= (1 << BCERRE);
+						break;
+					case USB_INT_VBERRI:
+						OTGIEN |= (1 << VBERRE);
+ 6c2:	82 60       	ori	r24, 0x02	; 2
+ 6c4:	80 93 de 00 	sts	0x00DE, r24
+ 6c8:	80 91 9e 00 	lds	r24, 0x009E
+			 *  host and attached device may occur.
+			 */
+			static inline void USB_Host_ResumeBus(void) ATTR_ALWAYS_INLINE;
+			static inline void USB_Host_ResumeBus(void)
+			{
+				UHCON |=  (1 << SOFEN);
+ 6cc:	81 60       	ori	r24, 0x01	; 1
+ 6ce:	80 93 9e 00 	sts	0x009E, r24
+ 6d2:	3f d1       	rcall	.+638    	; 0x952 <Pipe_ClearPipes>
+
+				USB_INT_Clear(USB_INT_VBERRI);
+				USB_INT_Enable(USB_INT_VBERRI);
+
+				USB_Host_ResumeBus();
+				Pipe_ClearPipes();
+ 6d4:	1e ba       	out	0x1e, r1	; 30
+ 6d6:	84 e6       	ldi	r24, 0x64	; 100
+
+				HOST_TASK_NONBLOCK_WAIT(100, HOST_STATE_Powered_DoReset);
+ 6d8:	90 e0       	ldi	r25, 0x00	; 0
+ 6da:	90 93 ad 01 	sts	0x01AD, r25
+ 6de:	80 93 ac 01 	sts	0x01AC, r24
+ 6e2:	85 e0       	ldi	r24, 0x05	; 5
+ 6e4:	56 c0       	rjmp	.+172    	; 0x792 <USB_Host_ProcessNextHostState+0x1f8>
+ 6e6:	af de       	rcall	.-674    	; 0x446 <USB_Host_ResetDevice>
+ 6e8:	1e ba       	out	0x1e, r1	; 30
+			}
+
+			break;
+		case HOST_STATE_Powered_DoReset:
+			USB_Host_ResetDevice();
+ 6ea:	88 ec       	ldi	r24, 0xC8	; 200
+ 6ec:	90 e0       	ldi	r25, 0x00	; 0
+
+			HOST_TASK_NONBLOCK_WAIT(200, HOST_STATE_Powered_ConfigPipe);
+ 6ee:	90 93 ad 01 	sts	0x01AD, r25
+ 6f2:	80 93 ac 01 	sts	0x01AC, r24
+ 6f6:	86 e0       	ldi	r24, 0x06	; 6
+ 6f8:	4c c0       	rjmp	.+152    	; 0x792 <USB_Host_ProcessNextHostState+0x1f8>
+ 6fa:	80 e0       	ldi	r24, 0x00	; 0
+ 6fc:	60 e0       	ldi	r22, 0x00	; 0
+ 6fe:	40 e0       	ldi	r20, 0x00	; 0
+			break;
+		case HOST_STATE_Powered_ConfigPipe:
+			if (!(Pipe_ConfigurePipe(PIPE_CONTROLPIPE, EP_TYPE_CONTROL, ENDPOINT_CONTROLEP, PIPE_CONTROLPIPE_DEFAULT_SIZE, 1)))
+ 700:	20 e4       	ldi	r18, 0x40	; 64
+ 702:	30 e0       	ldi	r19, 0x00	; 0
+ 704:	01 e0       	ldi	r16, 0x01	; 1
+ 706:	c0 d0       	rcall	.+384    	; 0x888 <Pipe_ConfigurePipe>
+ 708:	88 23       	and	r24, r24
+ 70a:	09 f4       	brne	.+2      	; 0x70e <USB_Host_ProcessNextHostState+0x174>
+ 70c:	4c c0       	rjmp	.+152    	; 0x7a6 <USB_Host_ProcessNextHostState+0x20c>
+ 70e:	87 e0       	ldi	r24, 0x07	; 7
+ 710:	96 cf       	rjmp	.-212    	; 0x63e <USB_Host_ProcessNextHostState+0xa4>
+ 712:	a1 eb       	ldi	r26, 0xB1	; 177
+ 714:	b1 e0       	ldi	r27, 0x01	; 1
+				ErrorCode    = HOST_ENUMERROR_PipeConfigError;
+				SubErrorCode = 0;
+				break;
+			}
+
+			USB_HostState = HOST_STATE_Default;
+ 716:	e0 e4       	ldi	r30, 0x40	; 64
+ 718:	f1 e0       	ldi	r31, 0x01	; 1
+			break;
+		case HOST_STATE_Default:
+			USB_ControlRequest = (USB_Request_Header_t)
+ 71a:	88 e0       	ldi	r24, 0x08	; 8
+ 71c:	01 90       	ld	r0, Z+
+ 71e:	0d 92       	st	X+, r0
+ 720:	81 50       	subi	r24, 0x01	; 1
+ 722:	e1 f7       	brne	.-8      	; 0x71c <USB_Host_ProcessNextHostState+0x182>
+ 724:	10 92 a7 00 	sts	0x00A7, r1
+ 728:	ce 01       	movw	r24, r28
+ 72a:	01 96       	adiw	r24, 0x01	; 1
+			 *  \param[in] Address  Address of the pipe to select.
+			 */
+			static inline void Pipe_SelectPipe(const uint8_t Address) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_SelectPipe(const uint8_t Address)
+			{
+				UPNUM = (Address & PIPE_PIPENUM_MASK);
+ 72c:	2d d3       	rcall	.+1626   	; 0xd88 <USB_Host_SendControlRequest>
+ 72e:	68 2f       	mov	r22, r24
+				};
+
+			uint8_t DataBuffer[8];
+
+			Pipe_SelectPipe(PIPE_CONTROLPIPE);
+			if ((SubErrorCode = USB_Host_SendControlRequest(DataBuffer)) != HOST_SENDCONTROL_Successful)
+ 730:	88 23       	and	r24, r24
+ 732:	09 f0       	breq	.+2      	; 0x736 <USB_Host_ProcessNextHostState+0x19c>
+ 734:	3b c0       	rjmp	.+118    	; 0x7ac <USB_Host_ProcessNextHostState+0x212>
+ 736:	88 85       	ldd	r24, Y+8	; 0x08
+ 738:	80 93 50 01 	sts	0x0150, r24
+ 73c:	84 de       	rcall	.-760    	; 0x446 <USB_Host_ResetDevice>
+ 73e:	1e ba       	out	0x1e, r1	; 30
+			{
+				ErrorCode = HOST_ENUMERROR_ControlError;
+				break;
+			}
+
+			USB_Host_ControlPipeSize = DataBuffer[offsetof(USB_Descriptor_Device_t, Endpoint0Size)];
+ 740:	88 ec       	ldi	r24, 0xC8	; 200
+ 742:	90 e0       	ldi	r25, 0x00	; 0
+ 744:	90 93 ad 01 	sts	0x01AD, r25
+
+			USB_Host_ResetDevice();
+ 748:	80 93 ac 01 	sts	0x01AC, r24
+
+			HOST_TASK_NONBLOCK_WAIT(200, HOST_STATE_Default_PostReset);
+ 74c:	88 e0       	ldi	r24, 0x08	; 8
+ 74e:	21 c0       	rjmp	.+66     	; 0x792 <USB_Host_ProcessNextHostState+0x1f8>
+ 750:	20 91 50 01 	lds	r18, 0x0150
+ 754:	80 e0       	ldi	r24, 0x00	; 0
+ 756:	60 e0       	ldi	r22, 0x00	; 0
+ 758:	40 e0       	ldi	r20, 0x00	; 0
+ 75a:	30 e0       	ldi	r19, 0x00	; 0
+			break;
+		case HOST_STATE_Default_PostReset:
+			if (!(Pipe_ConfigurePipe(PIPE_CONTROLPIPE, EP_TYPE_CONTROL, ENDPOINT_CONTROLEP, USB_Host_ControlPipeSize, 1)))
+ 75c:	01 e0       	ldi	r16, 0x01	; 1
+ 75e:	94 d0       	rcall	.+296    	; 0x888 <Pipe_ConfigurePipe>
+ 760:	88 23       	and	r24, r24
+ 762:	09 f1       	breq	.+66     	; 0x7a6 <USB_Host_ProcessNextHostState+0x20c>
+ 764:	a1 eb       	ldi	r26, 0xB1	; 177
+ 766:	b1 e0       	ldi	r27, 0x01	; 1
+ 768:	e8 e4       	ldi	r30, 0x48	; 72
+ 76a:	f1 e0       	ldi	r31, 0x01	; 1
+ 76c:	88 e0       	ldi	r24, 0x08	; 8
+ 76e:	01 90       	ld	r0, Z+
+ 770:	0d 92       	st	X+, r0
+				ErrorCode    = HOST_ENUMERROR_PipeConfigError;
+				SubErrorCode = 0;
+				break;
+			}
+
+			USB_ControlRequest = (USB_Request_Header_t)
+ 772:	81 50       	subi	r24, 0x01	; 1
+ 774:	e1 f7       	brne	.-8      	; 0x76e <USB_Host_ProcessNextHostState+0x1d4>
+ 776:	80 e0       	ldi	r24, 0x00	; 0
+ 778:	90 e0       	ldi	r25, 0x00	; 0
+ 77a:	06 d3       	rcall	.+1548   	; 0xd88 <USB_Host_SendControlRequest>
+ 77c:	68 2f       	mov	r22, r24
+ 77e:	88 23       	and	r24, r24
+ 780:	a9 f4       	brne	.+42     	; 0x7ac <USB_Host_ProcessNextHostState+0x212>
+ 782:	1e ba       	out	0x1e, r1	; 30
+					.wValue        = USB_HOST_DEVICEADDRESS,
+					.wIndex        = 0,
+					.wLength       = 0,
+				};
+
+			if ((SubErrorCode = USB_Host_SendControlRequest(NULL)) != HOST_SENDCONTROL_Successful)
+ 784:	84 e6       	ldi	r24, 0x64	; 100
+ 786:	90 e0       	ldi	r25, 0x00	; 0
+ 788:	90 93 ad 01 	sts	0x01AD, r25
+ 78c:	80 93 ac 01 	sts	0x01AC, r24
+ 790:	89 e0       	ldi	r24, 0x09	; 9
+			{
+				ErrorCode = HOST_ENUMERROR_ControlError;
+				break;
+			}
+
+			HOST_TASK_NONBLOCK_WAIT(100, HOST_STATE_Default_PostAddressSet);
+ 792:	80 93 ae 01 	sts	0x01AE, r24
+ 796:	16 c0       	rjmp	.+44     	; 0x7c4 <USB_Host_ProcessNextHostState+0x22a>
+ 798:	81 e0       	ldi	r24, 0x01	; 1
+ 79a:	80 93 a1 00 	sts	0x00A1, r24
+ 79e:	8a e0       	ldi	r24, 0x0A	; 10
+ 7a0:	8e bb       	out	0x1e, r24	; 30
+ 7a2:	cc dc       	rcall	.-1640   	; 0x13c <EVENT_USB_Host_DeviceEnumerationComplete>
+ 7a4:	0f c0       	rjmp	.+30     	; 0x7c4 <USB_Host_ProcessNextHostState+0x22a>
+			break;
+ 7a6:	60 e0       	ldi	r22, 0x00	; 0
+			}
+
+			static inline void USB_Host_SetDeviceAddress(const uint8_t Address) ATTR_ALWAYS_INLINE;
+			static inline void USB_Host_SetDeviceAddress(const uint8_t Address)
+			{
+				UHADDR  =  (Address & 0x7F);
+ 7a8:	84 e0       	ldi	r24, 0x04	; 4
+ 7aa:	01 c0       	rjmp	.+2      	; 0x7ae <USB_Host_ProcessNextHostState+0x214>
+ 7ac:	83 e0       	ldi	r24, 0x03	; 3
+		case HOST_STATE_Default_PostAddressSet:
+			USB_Host_SetDeviceAddress(USB_HOST_DEVICEADDRESS);
+
+			USB_HostState = HOST_STATE_Addressed;
+ 7ae:	9e b3       	in	r25, 0x1e	; 30
+ 7b0:	91 30       	cpi	r25, 0x01	; 1
+
+			EVENT_USB_Host_DeviceEnumerationComplete();
+ 7b2:	41 f0       	breq	.+16     	; 0x7c4 <USB_Host_ProcessNextHostState+0x22a>
+ 7b4:	d4 dc       	rcall	.-1624   	; 0x15e <EVENT_USB_Host_DeviceEnumerationFailed>
+			break;
+ 7b6:	80 91 dd 00 	lds	r24, 0x00DD
+			HOST_TASK_NONBLOCK_WAIT(200, HOST_STATE_Default_PostReset);
+			break;
+		case HOST_STATE_Default_PostReset:
+			if (!(Pipe_ConfigurePipe(PIPE_CONTROLPIPE, EP_TYPE_CONTROL, ENDPOINT_CONTROLEP, USB_Host_ControlPipeSize, 1)))
+			{
+				ErrorCode    = HOST_ENUMERROR_PipeConfigError;
+ 7ba:	81 60       	ori	r24, 0x01	; 1
+ 7bc:	80 93 dd 00 	sts	0x00DD, r24
+
+		default:
+			break;
+	}
+
+	if ((ErrorCode != HOST_ENUMERROR_NoError) && (USB_HostState != HOST_STATE_Unattached))
+ 7c0:	bb dc       	rcall	.-1674   	; 0x138 <EVENT_USB_Host_DeviceUnattached>
+ 7c2:	20 d1       	rcall	.+576    	; 0xa04 <USB_ResetInterface>
+ 7c4:	28 96       	adiw	r28, 0x08	; 8
+	{
+		EVENT_USB_Host_DeviceEnumerationFailed(ErrorCode, SubErrorCode);
+ 7c6:	0f b6       	in	r0, 0x3f	; 63
+ 7c8:	f8 94       	cli
+			}
+
+			static inline void USB_Host_VBUS_Auto_Off(void) ATTR_ALWAYS_INLINE;
+			static inline void USB_Host_VBUS_Auto_Off(void)
+			{
+				OTGCON |=  (1 << VBUSRQC);
+ 7ca:	de bf       	out	0x3e, r29	; 62
+ 7cc:	0f be       	out	0x3f, r0	; 63
+ 7ce:	cd bf       	out	0x3d, r28	; 61
+ 7d0:	df 91       	pop	r29
+ 7d2:	cf 91       	pop	r28
+
+		USB_Host_VBUS_Auto_Off();
+
+		EVENT_USB_Host_DeviceUnattached();
+ 7d4:	1f 91       	pop	r17
+ 7d6:	0f 91       	pop	r16
+
+		USB_ResetInterface();
+ 7d8:	08 95       	ret
+
+000007da <Pipe_Write_Stream_LE>:
+#if defined(TEMPLATE_FUNC_NAME)
+
+uint8_t TEMPLATE_FUNC_NAME (TEMPLATE_BUFFER_TYPE const Buffer,
+                            uint16_t Length,
+                            uint16_t* const BytesProcessed)
+{
+ 7da:	af 92       	push	r10
+ 7dc:	bf 92       	push	r11
+ 7de:	cf 92       	push	r12
+ 7e0:	df 92       	push	r13
+ 7e2:	ff 92       	push	r15
+ 7e4:	0f 93       	push	r16
+ 7e6:	1f 93       	push	r17
+ 7e8:	cf 93       	push	r28
+ 7ea:	df 93       	push	r29
+ 7ec:	5c 01       	movw	r10, r24
+ 7ee:	eb 01       	movw	r28, r22
+ 7f0:	6a 01       	movw	r12, r20
+			 *  \param[in] Token  New pipe token to set the selected pipe to, as a \c PIPE_TOKEN_* mask.
+			 */
+			static inline void Pipe_SetPipeToken(const uint8_t Token) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_SetPipeToken(const uint8_t Token)
+			{
+				UPCFG0X = ((UPCFG0X & ~(0x03 << PTOKEN0)) | Token);
+ 7f2:	80 91 aa 00 	lds	r24, 0x00AA
+ 7f6:	8f 7c       	andi	r24, 0xCF	; 207
+ 7f8:	80 62       	ori	r24, 0x20	; 32
+ 7fa:	80 93 aa 00 	sts	0x00AA, r24
+	uint16_t BytesInTransfer = 0;
+	uint8_t  ErrorCode;
+
+	Pipe_SetPipeToken(TEMPLATE_TOKEN);
+
+	if ((ErrorCode = Pipe_WaitUntilReady()))
+ 7fe:	bd d0       	rcall	.+378    	; 0x97a <Pipe_WaitUntilReady>
+ 800:	f8 2e       	mov	r15, r24
+ 802:	88 23       	and	r24, r24
+ 804:	b1 f5       	brne	.+108    	; 0x872 <Pipe_Write_Stream_LE+0x98>
+ 806:	c1 14       	cp	r12, r1
+	  return ErrorCode;
+
+	if (BytesProcessed != NULL)
+ 808:	d1 04       	cpc	r13, r1
+ 80a:	41 f0       	breq	.+16     	; 0x81c <Pipe_Write_Stream_LE+0x42>
+ 80c:	f6 01       	movw	r30, r12
+	{
+		Length -= *BytesProcessed;
+ 80e:	00 81       	ld	r16, Z
+ 810:	11 81       	ldd	r17, Z+1	; 0x01
+ 812:	c0 1b       	sub	r28, r16
+ 814:	d1 0b       	sbc	r29, r17
+ 816:	0a 0d       	add	r16, r10
+		TEMPLATE_BUFFER_MOVE(DataStream, *BytesProcessed);
+ 818:	1b 1d       	adc	r17, r11
+ 81a:	01 c0       	rjmp	.+2      	; 0x81e <Pipe_Write_Stream_LE+0x44>
+ 81c:	85 01       	movw	r16, r10
+
+uint8_t TEMPLATE_FUNC_NAME (TEMPLATE_BUFFER_TYPE const Buffer,
+                            uint16_t Length,
+                            uint16_t* const BytesProcessed)
+{
+	uint8_t* DataStream      = ((uint8_t*)Buffer + TEMPLATE_BUFFER_OFFSET(Length));
+ 81e:	aa 24       	eor	r10, r10
+ 820:	bb 24       	eor	r11, r11
+ 822:	23 c0       	rjmp	.+70     	; 0x86a <Pipe_Write_Stream_LE+0x90>
+ 824:	80 91 a6 00 	lds	r24, 0x00A6
+			 *          on its direction.
+			 */
+			static inline bool Pipe_IsReadWriteAllowed(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
+			static inline bool Pipe_IsReadWriteAllowed(void)
+			{
+				return ((UPINTX & (1 << RWAL)) ? true : false);
+ 828:	85 fd       	sbrc	r24, 5
+		TEMPLATE_BUFFER_MOVE(DataStream, *BytesProcessed);
+	}
+
+	while (Length)
+	{
+		if (!(Pipe_IsReadWriteAllowed()))
+ 82a:	16 c0       	rjmp	.+44     	; 0x858 <Pipe_Write_Stream_LE+0x7e>
+ 82c:	80 91 a6 00 	lds	r24, 0x00A6
+			 *  \ingroup Group_PipePacketManagement_AVR8
+			 */
+			static inline void Pipe_ClearOUT(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_ClearOUT(void)
+			{
+				UPINTX &= ~((1 << TXOUTI) | (1 << FIFOCON));
+ 830:	8b 77       	andi	r24, 0x7B	; 123
+ 832:	80 93 a6 00 	sts	0x00A6, r24
+ 836:	c1 14       	cp	r12, r1
+		{
+			TEMPLATE_CLEAR_PIPE();
+
+			if (BytesProcessed != NULL)
+ 838:	d1 04       	cpc	r13, r1
+ 83a:	51 f0       	breq	.+20     	; 0x850 <Pipe_Write_Stream_LE+0x76>
+ 83c:	f6 01       	movw	r30, r12
+			{
+				*BytesProcessed += BytesInTransfer;
+ 83e:	80 81       	ld	r24, Z
+ 840:	91 81       	ldd	r25, Z+1	; 0x01
+ 842:	8a 0d       	add	r24, r10
+ 844:	9b 1d       	adc	r25, r11
+ 846:	91 83       	std	Z+1, r25	; 0x01
+ 848:	80 83       	st	Z, r24
+ 84a:	44 e0       	ldi	r20, 0x04	; 4
+				return PIPE_RWSTREAM_IncompleteTransfer;
+ 84c:	f4 2e       	mov	r15, r20
+ 84e:	11 c0       	rjmp	.+34     	; 0x872 <Pipe_Write_Stream_LE+0x98>
+ 850:	94 d0       	rcall	.+296    	; 0x97a <Pipe_WaitUntilReady>
+			}
+
+			if ((ErrorCode = Pipe_WaitUntilReady()))
+ 852:	88 23       	and	r24, r24
+ 854:	51 f0       	breq	.+20     	; 0x86a <Pipe_Write_Stream_LE+0x90>
+ 856:	0c c0       	rjmp	.+24     	; 0x870 <Pipe_Write_Stream_LE+0x96>
+ 858:	f8 01       	movw	r30, r16
+ 85a:	81 91       	ld	r24, Z+
+			  return ErrorCode;
+		}
+		else
+		{
+			TEMPLATE_TRANSFER_BYTE(DataStream);
+ 85c:	8f 01       	movw	r16, r30
+ 85e:	80 93 af 00 	sts	0x00AF, r24
+			 *  \param[in] Data  Data to write into the the currently selected pipe's FIFO buffer.
+			 */
+			static inline void Pipe_Write_8(const uint8_t Data) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_Write_8(const uint8_t Data)
+			{
+				UPDATX = Data;
+ 862:	21 97       	sbiw	r28, 0x01	; 1
+ 864:	08 94       	sec
+			TEMPLATE_BUFFER_MOVE(DataStream, 1);
+			Length--;
+ 866:	a1 1c       	adc	r10, r1
+			BytesInTransfer++;
+ 868:	b1 1c       	adc	r11, r1
+ 86a:	20 97       	sbiw	r28, 0x00	; 0
+ 86c:	d9 f6       	brne	.-74     	; 0x824 <Pipe_Write_Stream_LE+0x4a>
+	{
+		Length -= *BytesProcessed;
+		TEMPLATE_BUFFER_MOVE(DataStream, *BytesProcessed);
+	}
+
+	while (Length)
+ 86e:	01 c0       	rjmp	.+2      	; 0x872 <Pipe_Write_Stream_LE+0x98>
+ 870:	f8 2e       	mov	r15, r24
+ 872:	8f 2d       	mov	r24, r15
+			{
+				*BytesProcessed += BytesInTransfer;
+				return PIPE_RWSTREAM_IncompleteTransfer;
+			}
+
+			if ((ErrorCode = Pipe_WaitUntilReady()))
+ 874:	df 91       	pop	r29
+			BytesInTransfer++;
+		}
+	}
+
+	return PIPE_RWSTREAM_NoError;
+}
+ 876:	cf 91       	pop	r28
+ 878:	1f 91       	pop	r17
+ 87a:	0f 91       	pop	r16
+ 87c:	ff 90       	pop	r15
+ 87e:	df 90       	pop	r13
+ 880:	cf 90       	pop	r12
+ 882:	bf 90       	pop	r11
+ 884:	af 90       	pop	r10
+ 886:	08 95       	ret
+
+00000888 <Pipe_ConfigurePipe>:
+bool Pipe_ConfigurePipe(const uint8_t Address,
+                        const uint8_t Type,
+                        const uint8_t EndpointAddress,
+                        const uint16_t Size,
+                        const uint8_t Banks)
+{
+ 888:	0f 93       	push	r16
+	uint8_t Number = (Address & PIPE_EPNUM_MASK);
+ 88a:	58 2f       	mov	r21, r24
+ 88c:	5f 70       	andi	r21, 0x0F	; 15
+	uint8_t Token  = (Address & PIPE_DIR_IN) ? PIPE_TOKEN_IN : PIPE_TOKEN_OUT;
+ 88e:	87 ff       	sbrs	r24, 7
+ 890:	02 c0       	rjmp	.+4      	; 0x896 <Pipe_ConfigurePipe+0xe>
+ 892:	80 e1       	ldi	r24, 0x10	; 16
+ 894:	01 c0       	rjmp	.+2      	; 0x898 <Pipe_ConfigurePipe+0x10>
+ 896:	80 e2       	ldi	r24, 0x20	; 32
+	
+	if (Number >= PIPE_TOTAL_PIPES)
+ 898:	57 30       	cpi	r21, 0x07	; 7
+ 89a:	08 f0       	brcs	.+2      	; 0x89e <Pipe_ConfigurePipe+0x16>
+ 89c:	57 c0       	rjmp	.+174    	; 0x94c <Pipe_ConfigurePipe+0xc4>
+	  return false;
+
+	if (Type == EP_TYPE_CONTROL)
+ 89e:	66 23       	and	r22, r22
+ 8a0:	09 f4       	brne	.+2      	; 0x8a4 <Pipe_ConfigurePipe+0x1c>
+	  Token = PIPE_TOKEN_SETUP;
+ 8a2:	80 e0       	ldi	r24, 0x00	; 0
+
+		Pipe_SelectPipe(PNum);
+
+		if (PNum == Number)
+		{
+			UPCFG0XTemp = ((Type << EPTYPE0) | Token | ((EndpointAddress & PIPE_EPNUM_MASK) << PEPNUM0));
+ 8a4:	4f 70       	andi	r20, 0x0F	; 15
+ 8a6:	62 95       	swap	r22
+ 8a8:	66 0f       	add	r22, r22
+ 8aa:	66 0f       	add	r22, r22
+ 8ac:	60 7c       	andi	r22, 0xC0	; 192
+ 8ae:	64 2b       	or	r22, r20
+ 8b0:	68 2b       	or	r22, r24
+ 8b2:	45 2f       	mov	r20, r21
+			UPCFG1XTemp = ((1 << ALLOC) | Banks | Pipe_BytesToEPSizeMask(Size));
+ 8b4:	02 60       	ori	r16, 0x02	; 2
+			 *  \param[in] Address  Address of the pipe to select.
+			 */
+			static inline void Pipe_SelectPipe(const uint8_t Address) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_SelectPipe(const uint8_t Address)
+			{
+				UPNUM = (Address & PIPE_PIPENUM_MASK);
+ 8b6:	40 93 a7 00 	sts	0x00A7, r20
+		uint8_t UPCFG2XTemp;
+		uint8_t UPIENXTemp;
+
+		Pipe_SelectPipe(PNum);
+
+		if (PNum == Number)
+ 8ba:	45 17       	cp	r20, r21
+ 8bc:	a9 f4       	brne	.+42     	; 0x8e8 <Pipe_ConfigurePipe+0x60>
+ 8be:	04 c0       	rjmp	.+8      	; 0x8c8 <Pipe_ConfigurePipe+0x40>
+				uint8_t  MaskVal    = 0;
+				uint16_t CheckBytes = 8;
+
+				while ((CheckBytes < Bytes) && (CheckBytes < PIPE_MAX_SIZE))
+				{
+					MaskVal++;
+ 8c0:	7f 5f       	subi	r23, 0xFF	; 255
+					CheckBytes <<= 1;
+ 8c2:	88 0f       	add	r24, r24
+ 8c4:	99 1f       	adc	r25, r25
+ 8c6:	03 c0       	rjmp	.+6      	; 0x8ce <Pipe_ConfigurePipe+0x46>
+ 8c8:	88 e0       	ldi	r24, 0x08	; 8
+ 8ca:	90 e0       	ldi	r25, 0x00	; 0
+ 8cc:	70 e0       	ldi	r23, 0x00	; 0
+			static inline uint8_t Pipe_BytesToEPSizeMask(const uint16_t Bytes)
+			{
+				uint8_t  MaskVal    = 0;
+				uint16_t CheckBytes = 8;
+
+				while ((CheckBytes < Bytes) && (CheckBytes < PIPE_MAX_SIZE))
+ 8ce:	82 17       	cp	r24, r18
+ 8d0:	93 07       	cpc	r25, r19
+ 8d2:	10 f4       	brcc	.+4      	; 0x8d8 <Pipe_ConfigurePipe+0x50>
+ 8d4:	75 30       	cpi	r23, 0x05	; 5
+ 8d6:	a1 f7       	brne	.-24     	; 0x8c0 <Pipe_ConfigurePipe+0x38>
+				{
+					MaskVal++;
+					CheckBytes <<= 1;
+				}
+
+				return (MaskVal << EPSIZE0);
+ 8d8:	87 2f       	mov	r24, r23
+ 8da:	82 95       	swap	r24
+ 8dc:	80 7f       	andi	r24, 0xF0	; 240
+		{
+			UPCFG0XTemp = ((Type << EPTYPE0) | Token | ((EndpointAddress & PIPE_EPNUM_MASK) << PEPNUM0));
+			UPCFG1XTemp = ((1 << ALLOC) | Banks | Pipe_BytesToEPSizeMask(Size));
+ 8de:	80 2b       	or	r24, r16
+
+		Pipe_SelectPipe(PNum);
+
+		if (PNum == Number)
+		{
+			UPCFG0XTemp = ((Type << EPTYPE0) | Token | ((EndpointAddress & PIPE_EPNUM_MASK) << PEPNUM0));
+ 8e0:	f6 2f       	mov	r31, r22
+			UPCFG1XTemp = ((1 << ALLOC) | Banks | Pipe_BytesToEPSizeMask(Size));
+			UPCFG2XTemp = 0;
+			UPIENXTemp  = 0;
+ 8e2:	70 e0       	ldi	r23, 0x00	; 0
+
+		if (PNum == Number)
+		{
+			UPCFG0XTemp = ((Type << EPTYPE0) | Token | ((EndpointAddress & PIPE_EPNUM_MASK) << PEPNUM0));
+			UPCFG1XTemp = ((1 << ALLOC) | Banks | Pipe_BytesToEPSizeMask(Size));
+			UPCFG2XTemp = 0;
+ 8e4:	e0 e0       	ldi	r30, 0x00	; 0
+ 8e6:	08 c0       	rjmp	.+16     	; 0x8f8 <Pipe_ConfigurePipe+0x70>
+			UPIENXTemp  = 0;
+		}
+		else
+		{
+			UPCFG0XTemp = UPCFG0X;
+ 8e8:	f0 91 aa 00 	lds	r31, 0x00AA
+			UPCFG1XTemp = UPCFG1X;
+ 8ec:	80 91 ab 00 	lds	r24, 0x00AB
+			UPCFG2XTemp = UPCFG2X;
+ 8f0:	e0 91 ad 00 	lds	r30, 0x00AD
+			UPIENXTemp  = UPIENX;
+ 8f4:	70 91 ae 00 	lds	r23, 0x00AE
+		}
+
+		if (!(UPCFG1XTemp & (1 << ALLOC)))
+ 8f8:	81 ff       	sbrs	r24, 1
+ 8fa:	20 c0       	rjmp	.+64     	; 0x93c <Pipe_ConfigurePipe+0xb4>
+			 *  from an attached device.
+			 */
+			static inline void Pipe_DisablePipe(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_DisablePipe(void)
+			{
+				UPCONX &= ~(1 << PEN);
+ 8fc:	90 91 a9 00 	lds	r25, 0x00A9
+ 900:	9e 7f       	andi	r25, 0xFE	; 254
+ 902:	90 93 a9 00 	sts	0x00A9, r25
+		  continue;
+
+		Pipe_DisablePipe();
+		UPCFG1X &= ~(1 << ALLOC);
+ 906:	90 91 ab 00 	lds	r25, 0x00AB
+ 90a:	9d 7f       	andi	r25, 0xFD	; 253
+ 90c:	90 93 ab 00 	sts	0x00AB, r25
+			 *  \pre The currently selected pipe must first be configured properly via \ref Pipe_ConfigurePipe().
+			 */
+			static inline void Pipe_EnablePipe(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_EnablePipe(void)
+			{
+				UPCONX |= (1 << PEN);
+ 910:	90 91 a9 00 	lds	r25, 0x00A9
+ 914:	91 60       	ori	r25, 0x01	; 1
+ 916:	90 93 a9 00 	sts	0x00A9, r25
+
+		Pipe_EnablePipe();
+		UPCFG0X = UPCFG0XTemp;
+ 91a:	f0 93 aa 00 	sts	0x00AA, r31
+		UPCFG1X = UPCFG1XTemp;
+ 91e:	80 93 ab 00 	sts	0x00AB, r24
+		UPCFG2X = UPCFG2XTemp;
+ 922:	e0 93 ad 00 	sts	0x00AD, r30
+		UPIENX  = UPIENXTemp;
+ 926:	70 93 ae 00 	sts	0x00AE, r23
+
+			/** Configures the currently selected pipe to allow for an unlimited number of IN requests. */
+			static inline void Pipe_SetInfiniteINRequests(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_SetInfiniteINRequests(void)
+			{
+				UPCONX |= (1 << INMODE);
+ 92a:	80 91 a9 00 	lds	r24, 0x00A9
+ 92e:	80 62       	ori	r24, 0x20	; 32
+ 930:	80 93 a9 00 	sts	0x00A9, r24
+			 *  \return Boolean \c true if the selected pipe is configured, \c false otherwise.
+			 */
+			static inline bool Pipe_IsConfigured(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
+			static inline bool Pipe_IsConfigured(void)
+			{
+				return ((UPSTAX & (1 << CFGOK)) ? true : false);
+ 934:	80 91 ac 00 	lds	r24, 0x00AC
+
+		Pipe_SetInfiniteINRequests();
+
+		if (!(Pipe_IsConfigured()))
+ 938:	87 ff       	sbrs	r24, 7
+ 93a:	08 c0       	rjmp	.+16     	; 0x94c <Pipe_ConfigurePipe+0xc4>
+
+	Pipe_SetInfiniteINRequests();
+
+	return Pipe_IsConfigured();
+#else
+	for (uint8_t PNum = Number; PNum < PIPE_TOTAL_PIPES; PNum++)
+ 93c:	4f 5f       	subi	r20, 0xFF	; 255
+ 93e:	47 30       	cpi	r20, 0x07	; 7
+ 940:	09 f0       	breq	.+2      	; 0x944 <Pipe_ConfigurePipe+0xbc>
+ 942:	b9 cf       	rjmp	.-142    	; 0x8b6 <Pipe_ConfigurePipe+0x2e>
+			 *  \param[in] Address  Address of the pipe to select.
+			 */
+			static inline void Pipe_SelectPipe(const uint8_t Address) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_SelectPipe(const uint8_t Address)
+			{
+				UPNUM = (Address & PIPE_PIPENUM_MASK);
+ 944:	50 93 a7 00 	sts	0x00A7, r21
+		if (!(Pipe_IsConfigured()))
+		  return false;
+	}
+
+	Pipe_SelectPipe(Number);
+	return true;
+ 948:	81 e0       	ldi	r24, 0x01	; 1
+ 94a:	01 c0       	rjmp	.+2      	; 0x94e <Pipe_ConfigurePipe+0xc6>
+		UPIENX  = UPIENXTemp;
+
+		Pipe_SetInfiniteINRequests();
+
+		if (!(Pipe_IsConfigured()))
+		  return false;
+ 94c:	80 e0       	ldi	r24, 0x00	; 0
+	}
+
+	Pipe_SelectPipe(Number);
+	return true;
+#endif
+}
+ 94e:	0f 91       	pop	r16
+ 950:	08 95       	ret
+
+00000952 <Pipe_ClearPipes>:
+
+void Pipe_ClearPipes(void)
+{
+	UPINT = 0;
+ 952:	10 92 f8 00 	sts	0x00F8, r1
+
+	for (uint8_t PNum = 0; PNum < PIPE_TOTAL_PIPES; PNum++)
+ 956:	80 e0       	ldi	r24, 0x00	; 0
+ 958:	80 93 a7 00 	sts	0x00A7, r24
+	{
+		Pipe_SelectPipe(PNum);
+		UPIENX  = 0;
+ 95c:	10 92 ae 00 	sts	0x00AE, r1
+		UPINTX  = 0;
+ 960:	10 92 a6 00 	sts	0x00A6, r1
+		UPCFG1X = 0;
+ 964:	10 92 ab 00 	sts	0x00AB, r1
+			 *  from an attached device.
+			 */
+			static inline void Pipe_DisablePipe(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_DisablePipe(void)
+			{
+				UPCONX &= ~(1 << PEN);
+ 968:	90 91 a9 00 	lds	r25, 0x00A9
+ 96c:	9e 7f       	andi	r25, 0xFE	; 254
+ 96e:	90 93 a9 00 	sts	0x00A9, r25
+
+void Pipe_ClearPipes(void)
+{
+	UPINT = 0;
+
+	for (uint8_t PNum = 0; PNum < PIPE_TOTAL_PIPES; PNum++)
+ 972:	8f 5f       	subi	r24, 0xFF	; 255
+ 974:	87 30       	cpi	r24, 0x07	; 7
+ 976:	81 f7       	brne	.-32     	; 0x958 <Pipe_ClearPipes+0x6>
+		UPIENX  = 0;
+		UPINTX  = 0;
+		UPCFG1X = 0;
+		Pipe_DisablePipe();
+	}
+}
+ 978:	08 95       	ret
+
+0000097a <Pipe_WaitUntilReady>:
+			 *  \return Current USB frame number from the USB controller.
+			 */
+			static inline uint16_t USB_Host_GetFrameNumber(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
+			static inline uint16_t USB_Host_GetFrameNumber(void)
+			{
+				return UHFNUM;
+ 97a:	80 91 a2 00 	lds	r24, 0x00A2
+ 97e:	90 91 a3 00 	lds	r25, 0x00A3
+ 982:	45 e6       	ldi	r20, 0x65	; 101
+ 984:	01 c0       	rjmp	.+2      	; 0x988 <Pipe_WaitUntilReady+0xe>
+ 986:	c9 01       	movw	r24, r18
+			 *  \return The current pipe token, as a \c PIPE_TOKEN_* mask.
+			 */
+			static inline uint8_t Pipe_GetPipeToken(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
+			static inline uint8_t Pipe_GetPipeToken(void)
+			{
+				return (UPCFG0X & (0x03 << PTOKEN0));
+ 988:	20 91 aa 00 	lds	r18, 0x00AA
+ 98c:	20 73       	andi	r18, 0x30	; 48
+
+	uint16_t PreviousFrameNumber = USB_Host_GetFrameNumber();
+
+	for (;;)
+	{
+		if (Pipe_GetPipeToken() == PIPE_TOKEN_IN)
+ 98e:	20 31       	cpi	r18, 0x10	; 16
+ 990:	29 f4       	brne	.+10     	; 0x99c <Pipe_WaitUntilReady+0x22>
+			 *  \return Boolean \c true if the current pipe has received an IN packet, \c false otherwise.
+			 */
+			static inline bool Pipe_IsINReceived(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
+			static inline bool Pipe_IsINReceived(void)
+			{
+				return ((UPINTX & (1 << RXINI)) ? true : false);
+ 992:	20 91 a6 00 	lds	r18, 0x00A6
+		{
+			if (Pipe_IsINReceived())
+ 996:	20 ff       	sbrs	r18, 0
+ 998:	05 c0       	rjmp	.+10     	; 0x9a4 <Pipe_WaitUntilReady+0x2a>
+ 99a:	16 c0       	rjmp	.+44     	; 0x9c8 <Pipe_WaitUntilReady+0x4e>
+			 *  \return Boolean \c true if the current pipe is ready for an OUT packet, \c false otherwise.
+			 */
+			static inline bool Pipe_IsOUTReady(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
+			static inline bool Pipe_IsOUTReady(void)
+			{
+				return ((UPINTX & (1 << TXOUTI)) ? true : false);
+ 99c:	20 91 a6 00 	lds	r18, 0x00A6
+			  return PIPE_READYWAIT_NoError;
+		}
+		else
+		{
+			if (Pipe_IsOUTReady())
+ 9a0:	22 fd       	sbrc	r18, 2
+ 9a2:	12 c0       	rjmp	.+36     	; 0x9c8 <Pipe_WaitUntilReady+0x4e>
+			 *  \return Boolean \c true if the current pipe has been stalled by the attached device, \c false otherwise.
+			 */
+			static inline bool Pipe_IsStalled(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
+			static inline bool Pipe_IsStalled(void)
+			{
+				return ((UPINTX & (1 << RXSTALLI)) ? true : false);
+ 9a4:	20 91 a6 00 	lds	r18, 0x00A6
+			  return PIPE_READYWAIT_NoError;
+		}
+
+		if (Pipe_IsStalled())
+ 9a8:	21 fd       	sbrc	r18, 1
+ 9aa:	10 c0       	rjmp	.+32     	; 0x9cc <Pipe_WaitUntilReady+0x52>
+		  return PIPE_READYWAIT_PipeStalled;
+		else if (USB_HostState == HOST_STATE_Unattached)
+ 9ac:	2e b3       	in	r18, 0x1e	; 30
+ 9ae:	21 30       	cpi	r18, 0x01	; 1
+ 9b0:	79 f0       	breq	.+30     	; 0x9d0 <Pipe_WaitUntilReady+0x56>
+ 9b2:	20 91 a2 00 	lds	r18, 0x00A2
+ 9b6:	30 91 a3 00 	lds	r19, 0x00A3
+		  return PIPE_READYWAIT_DeviceDisconnected;
+
+		uint16_t CurrentFrameNumber = USB_Host_GetFrameNumber();
+
+		if (CurrentFrameNumber != PreviousFrameNumber)
+ 9ba:	28 17       	cp	r18, r24
+ 9bc:	39 07       	cpc	r19, r25
+ 9be:	21 f3       	breq	.-56     	; 0x988 <Pipe_WaitUntilReady+0xe>
+ 9c0:	41 50       	subi	r20, 0x01	; 1
+		{
+			PreviousFrameNumber = CurrentFrameNumber;
+
+			if (!(TimeoutMSRem--))
+ 9c2:	09 f7       	brne	.-62     	; 0x986 <Pipe_WaitUntilReady+0xc>
+			  return PIPE_READYWAIT_Timeout;
+ 9c4:	83 e0       	ldi	r24, 0x03	; 3
+ 9c6:	08 95       	ret
+			  return PIPE_READYWAIT_NoError;
+		}
+		else
+		{
+			if (Pipe_IsOUTReady())
+			  return PIPE_READYWAIT_NoError;
+ 9c8:	80 e0       	ldi	r24, 0x00	; 0
+ 9ca:	08 95       	ret
+		}
+
+		if (Pipe_IsStalled())
+		  return PIPE_READYWAIT_PipeStalled;
+ 9cc:	81 e0       	ldi	r24, 0x01	; 1
+ 9ce:	08 95       	ret
+		else if (USB_HostState == HOST_STATE_Unattached)
+		  return PIPE_READYWAIT_DeviceDisconnected;
+ 9d0:	82 e0       	ldi	r24, 0x02	; 2
+
+			if (!(TimeoutMSRem--))
+			  return PIPE_READYWAIT_Timeout;
+		}
+	}
+}
+ 9d2:	08 95       	ret
+
+000009d4 <USB_Disable>:
+	USB_ResetInterface();
+}
+
+void USB_Disable(void)
+{
+	USB_INT_DisableAllInterrupts();
+ 9d4:	74 d0       	rcall	.+232    	; 0xabe <USB_INT_DisableAllInterrupts>
+ 9d6:	7b d0       	rcall	.+246    	; 0xace <USB_INT_ClearAllInterrupts>
+	USB_INT_ClearAllInterrupts();
+ 9d8:	e0 ee       	ldi	r30, 0xE0	; 224
+ 9da:	f0 e0       	ldi	r31, 0x00	; 0
+			 *  enumerating the device once attached until \ref USB_Attach() is called.
+			 */
+			static inline void USB_Detach(void) ATTR_ALWAYS_INLINE;
+			static inline void USB_Detach(void)
+			{
+				UDCON  |=  (1 << DETACH);
+ 9dc:	80 81       	ld	r24, Z
+ 9de:	81 60       	ori	r24, 0x01	; 1
+ 9e0:	80 83       	st	Z, r24
+ 9e2:	e8 ed       	ldi	r30, 0xD8	; 216
+ 9e4:	f0 e0       	ldi	r31, 0x00	; 0
+			}
+
+			static inline void USB_Controller_Disable(void) ATTR_ALWAYS_INLINE;
+			static inline void USB_Controller_Disable(void)
+			{
+				USBCON &= ~(1 << USBE);
+ 9e6:	80 81       	ld	r24, Z
+ 9e8:	8f 77       	andi	r24, 0x7F	; 127
+ 9ea:	80 83       	st	Z, r24
+ 9ec:	19 bc       	out	0x29, r1	; 41
+ 9ee:	a7 ed       	ldi	r26, 0xD7	; 215
+			}
+
+			static inline void USB_PLL_Off(void) ATTR_ALWAYS_INLINE;
+			static inline void USB_PLL_Off(void)
+			{
+				PLLCSR = 0;
+ 9f0:	b0 e0       	ldi	r27, 0x00	; 0
+
+			static inline void USB_REG_Off(void) ATTR_ALWAYS_INLINE;
+			static inline void USB_REG_Off(void)
+			{
+			#if defined(USB_SERIES_4_AVR) || defined(USB_SERIES_6_AVR) || defined(USB_SERIES_7_AVR)
+				UHWCON &= ~(1 << UVREGE);
+ 9f2:	8c 91       	ld	r24, X
+ 9f4:	8e 7f       	andi	r24, 0xFE	; 254
+ 9f6:	8c 93       	st	X, r24
+ 9f8:	80 81       	ld	r24, Z
+ 9fa:	8f 7e       	andi	r24, 0xEF	; 239
+			}
+
+			static inline void USB_OTGPAD_Off(void) ATTR_ALWAYS_INLINE;
+			static inline void USB_OTGPAD_Off(void)
+			{
+				USBCON &= ~(1 << OTGPADE);
+ 9fc:	80 83       	st	Z, r24
+ 9fe:	10 92 b0 01 	sts	0x01B0, r1
+
+	#if defined(USB_CAN_BE_BOTH)
+	USB_CurrentMode = USB_MODE_None;
+	#endif
+
+	USB_IsInitialized = false;
+ a02:	08 95       	ret
+
+00000a04 <USB_ResetInterface>:
+ a04:	5c d0       	rcall	.+184    	; 0xabe <USB_INT_DisableAllInterrupts>
+}
+ a06:	63 d0       	rcall	.+198    	; 0xace <USB_INT_ClearAllInterrupts>
+	#if defined(USB_CAN_BE_BOTH)
+	bool UIDModeSelectEnabled = ((UHWCON & (1 << UIDE)) != 0);
+	#endif
+
+	USB_INT_DisableAllInterrupts();
+	USB_INT_ClearAllInterrupts();
+ a08:	80 91 d8 00 	lds	r24, 0x00D8
+			}
+
+			static inline void USB_Controller_Reset(void) ATTR_ALWAYS_INLINE;
+			static inline void USB_Controller_Reset(void)
+			{
+				USBCON &= ~(1 << USBE);
+ a0c:	8f 77       	andi	r24, 0x7F	; 127
+ a0e:	80 93 d8 00 	sts	0x00D8, r24
+ a12:	80 91 d8 00 	lds	r24, 0x00D8
+				USBCON |=  (1 << USBE);
+ a16:	80 68       	ori	r24, 0x80	; 128
+ a18:	80 93 d8 00 	sts	0x00D8, r24
+ a1c:	80 91 d8 00 	lds	r24, 0x00D8
+			}
+
+			static inline void USB_CLK_Unfreeze(void) ATTR_ALWAYS_INLINE;
+			static inline void USB_CLK_Unfreeze(void)
+			{
+				USBCON &= ~(1 << FRZCLK);
+ a20:	8f 7d       	andi	r24, 0xDF	; 223
+ a22:	80 93 d8 00 	sts	0x00D8, r24
+ a26:	80 91 d7 00 	lds	r24, 0x00D7
+		#endif
+	}
+	else if (USB_CurrentMode == USB_MODE_Host)
+	{
+		#if defined(USB_CAN_BE_HOST)
+		UHWCON &= ~(1 << UIMOD);
+ a2a:	8f 77       	andi	r24, 0x7F	; 127
+ a2c:	80 93 d7 00 	sts	0x00D7, r24
+ a30:	8c e0       	ldi	r24, 0x0C	; 12
+ a32:	89 bd       	out	0x29, r24	; 41
+
+		/* Inline Functions: */
+			static inline void USB_PLL_On(void) ATTR_ALWAYS_INLINE;
+			static inline void USB_PLL_On(void)
+			{
+				PLLCSR = USB_PLL_PSC;
+ a34:	8e e0       	ldi	r24, 0x0E	; 14
+ a36:	89 bd       	out	0x29, r24	; 41
+				PLLCSR = (USB_PLL_PSC | (1 << PLLE));
+ a38:	09 b4       	in	r0, 0x29	; 41
+ a3a:	00 fe       	sbrs	r0, 0
+
+		if (!(USB_Options & USB_OPT_MANUAL_PLL))
+		{
+			#if defined(USB_CAN_BE_HOST)
+			USB_PLL_On();
+			while (!(USB_PLL_IsReady()));
+ a3c:	fd cf       	rjmp	.-6      	; 0xa38 <USB_ResetInterface+0x34>
+ a3e:	81 e0       	ldi	r24, 0x01	; 1
+ a40:	8e bb       	out	0x1e, r24	; 30
+#endif
+
+#if defined(USB_CAN_BE_HOST)
+static void USB_Init_Host(void)
+{
+	USB_HostState                = HOST_STATE_Unattached;
+ a42:	10 92 af 01 	sts	0x01AF, r1
+	USB_Host_ConfigurationNumber = 0;
+ a46:	80 e4       	ldi	r24, 0x40	; 64
+ a48:	80 93 50 01 	sts	0x0150, r24
+	USB_Host_ControlPipeSize     = PIPE_CONTROLPIPE_DEFAULT_SIZE;
+ a4c:	80 91 d8 00 	lds	r24, 0x00D8
+	#if !defined(__DOXYGEN__)
+		/* Macros: */
+			static inline void USB_Host_HostMode_On(void) ATTR_ALWAYS_INLINE;
+			static inline void USB_Host_HostMode_On(void)
+			{
+				USBCON |=  (1 << HOST);
+ a50:	80 64       	ori	r24, 0x40	; 64
+ a52:	80 93 d8 00 	sts	0x00D8, r24
+ a56:	80 91 dd 00 	lds	r24, 0x00DD
+			}
+
+			static inline void USB_Host_VBUS_Auto_Off(void) ATTR_ALWAYS_INLINE;
+			static inline void USB_Host_VBUS_Auto_Off(void)
+			{
+				OTGCON |=  (1 << VBUSRQC);
+ a5a:	81 60       	ori	r24, 0x01	; 1
+ a5c:	80 93 dd 00 	sts	0x00DD, r24
+ a60:	80 91 dd 00 	lds	r24, 0x00DD
+			}
+
+			static inline void USB_Host_VBUS_Manual_Enable(void) ATTR_ALWAYS_INLINE;
+			static inline void USB_Host_VBUS_Manual_Enable(void)
+			{
+				OTGCON |=  (1 << VBUSHWC);
+ a64:	84 60       	ori	r24, 0x04	; 4
+ a66:	80 93 dd 00 	sts	0x00DD, r24
+ a6a:	80 91 d7 00 	lds	r24, 0x00D7
+				UHWCON &= ~(1 << UVCONE);
+ a6e:	8f 7e       	andi	r24, 0xEF	; 239
+ a70:	80 93 d7 00 	sts	0x00D7, r24
+ a74:	6f 9a       	sbi	0x0d, 7	; 13
+ a76:	77 9a       	sbi	0x0e, 7	; 14
+
+				DDRE   |=  (1 << 7);
+ a78:	80 91 de 00 	lds	r24, 0x00DE
+						break;
+					case USB_INT_VBERRI:
+						OTGIEN |= (1 << VBERRE);
+						break;
+					case USB_INT_SRPI:
+						OTGIEN |= (1 << SRPE);
+ a7c:	81 60       	ori	r24, 0x01	; 1
+ a7e:	80 93 de 00 	sts	0x00DE, r24
+ a82:	80 91 de 00 	lds	r24, 0x00DE
+						break;
+					case USB_INT_RSTI:
+						UHIEN  |= (1 << RSTE);
+						break;
+					case USB_INT_BCERRI:
+						OTGIEN |= (1 << BCERRE);
+ a86:	84 60       	ori	r24, 0x04	; 4
+ a88:	80 93 de 00 	sts	0x00DE, r24
+ a8c:	80 91 e0 00 	lds	r24, 0x00E0
+			 *  register and despite the datasheet making no mention of its requirement in host mode.
+			 */
+			static inline void USB_Attach(void) ATTR_ALWAYS_INLINE;
+			static inline void USB_Attach(void)
+			{
+				UDCON  &= ~(1 << DETACH);
+ a90:	8e 7f       	andi	r24, 0xFE	; 254
+ a92:	80 93 e0 00 	sts	0x00E0, r24
+ a96:	80 91 d8 00 	lds	r24, 0x00D8
+
+			#if defined(USB_SERIES_4_AVR) || defined(USB_SERIES_6_AVR) || defined(USB_SERIES_7_AVR)
+			static inline void USB_OTGPAD_On(void) ATTR_ALWAYS_INLINE;
+			static inline void USB_OTGPAD_On(void)
+			{
+				USBCON |=  (1 << OTGPADE);
+ a9a:	80 61       	ori	r24, 0x10	; 16
+ a9c:	80 93 d8 00 	sts	0x00D8, r24
+ aa0:	08 95       	ret
+
+00000aa2 <USB_Init>:
+ aa2:	e8 ed       	ldi	r30, 0xD8	; 216
+	}
+
+	#if (defined(USB_SERIES_4_AVR) || defined(USB_SERIES_6_AVR) || defined(USB_SERIES_7_AVR))
+	USB_OTGPAD_On();
+	#endif
+}
+ aa4:	f0 e0       	ldi	r31, 0x00	; 0
+			}
+
+			static inline void USB_OTGPAD_Off(void) ATTR_ALWAYS_INLINE;
+			static inline void USB_OTGPAD_Off(void)
+			{
+				USBCON &= ~(1 << OTGPADE);
+ aa6:	80 81       	ld	r24, Z
+ aa8:	8f 7e       	andi	r24, 0xEF	; 239
+ aaa:	80 83       	st	Z, r24
+
+			static inline void USB_REG_On(void) ATTR_ALWAYS_INLINE;
+			static inline void USB_REG_On(void)
+			{
+			#if defined(USB_SERIES_4_AVR) || defined(USB_SERIES_6_AVR) || defined(USB_SERIES_7_AVR)
+				UHWCON |=  (1 << UVREGE);
+ aac:	e7 ed       	ldi	r30, 0xD7	; 215
+ aae:	f0 e0       	ldi	r31, 0x00	; 0
+ ab0:	80 81       	ld	r24, Z
+ ab2:	81 60       	ori	r24, 0x01	; 1
+ ab4:	80 83       	st	Z, r24
+		UHWCON &= ~(1 << UIDE);
+		USB_CurrentMode = Mode;
+	}
+	#endif
+
+	USB_IsInitialized = true;
+ ab6:	81 e0       	ldi	r24, 0x01	; 1
+ ab8:	80 93 b0 01 	sts	0x01B0, r24
+
+	USB_ResetInterface();
+ abc:	a3 cf       	rjmp	.-186    	; 0xa04 <USB_ResetInterface>
+
+00000abe <USB_INT_DisableAllInterrupts>:
+#include "../USBInterrupt.h"
+
+void USB_INT_DisableAllInterrupts(void)
+{
+	#if defined(USB_SERIES_6_AVR) || defined(USB_SERIES_7_AVR)
+	USBCON &= ~((1 << VBUSTE) | (1 << IDTE));
+ abe:	e8 ed       	ldi	r30, 0xD8	; 216
+ ac0:	f0 e0       	ldi	r31, 0x00	; 0
+ ac2:	80 81       	ld	r24, Z
+ ac4:	8c 7f       	andi	r24, 0xFC	; 252
+ ac6:	80 83       	st	Z, r24
+	#if defined(USB_CAN_BE_BOTH)
+	OTGIEN  = 0;
+	#endif
+
+	#if defined(USB_CAN_BE_HOST)
+	UHIEN   = 0;
+ ac8:	10 92 a0 00 	sts	0x00A0, r1
+	#endif
+
+	#if defined(USB_CAN_BE_DEVICE)
+	UDIEN   = 0;
+	#endif
+}
+ acc:	08 95       	ret
+
+00000ace <USB_INT_ClearAllInterrupts>:
+
+void USB_INT_ClearAllInterrupts(void)
+{
+	#if defined(USB_SERIES_4_AVR) || defined(USB_SERIES_6_AVR) || defined(USB_SERIES_7_AVR)
+	USBINT = 0;
+ ace:	10 92 da 00 	sts	0x00DA, r1
+	#if defined(USB_CAN_BE_BOTH)
+	OTGINT = 0;
+	#endif
+
+	#if defined(USB_CAN_BE_HOST)
+	UHINT  = 0;
+ ad2:	10 92 9f 00 	sts	0x009F, r1
+	#endif
+
+	#if defined(USB_CAN_BE_DEVICE)
+	UDINT  = 0;
+	#endif
+}
+ ad6:	08 95       	ret
+
+00000ad8 <__vector_10>:
+
+ISR(USB_GEN_vect, ISR_BLOCK)
+{
+ ad8:	1f 92       	push	r1
+ ada:	0f 92       	push	r0
+ adc:	0f b6       	in	r0, 0x3f	; 63
+ ade:	0f 92       	push	r0
+ ae0:	0b b6       	in	r0, 0x3b	; 59
+ ae2:	0f 92       	push	r0
+ ae4:	11 24       	eor	r1, r1
+ ae6:	2f 93       	push	r18
+ ae8:	3f 93       	push	r19
+ aea:	4f 93       	push	r20
+ aec:	5f 93       	push	r21
+ aee:	6f 93       	push	r22
+ af0:	7f 93       	push	r23
+ af2:	8f 93       	push	r24
+ af4:	9f 93       	push	r25
+ af6:	af 93       	push	r26
+ af8:	bf 93       	push	r27
+ afa:	ef 93       	push	r30
+ afc:	ff 93       	push	r31
+					case USB_INT_RXSTPI:
+						return (UEINTX & (1 << RXSTPI));
+					#endif
+					#if defined(USB_CAN_BE_HOST)
+					case USB_INT_HSOFI:
+						return (UHINT  & (1 << HSOFI));
+ afe:	80 91 9f 00 	lds	r24, 0x009F
+	}
+	#endif
+
+	#if defined(USB_CAN_BE_HOST)
+	#if !defined(NO_SOF_EVENTS)
+	if (USB_INT_HasOccurred(USB_INT_HSOFI) && USB_INT_IsEnabled(USB_INT_HSOFI))
+ b02:	85 ff       	sbrs	r24, 5
+ b04:	0a c0       	rjmp	.+20     	; 0xb1a <__vector_10+0x42>
+					case USB_INT_RXSTPI:
+						return (UEIENX & (1 << RXSTPE));
+					#endif
+					#if defined(USB_CAN_BE_HOST)
+					case USB_INT_HSOFI:
+						return (UHIEN  & (1 << HSOFE));
+ b06:	80 91 a0 00 	lds	r24, 0x00A0
+ b0a:	85 ff       	sbrs	r24, 5
+ b0c:	06 c0       	rjmp	.+12     	; 0xb1a <__vector_10+0x42>
+						UEINTX &= ~(1 << RXSTPI);
+						break;
+					#endif
+					#if defined(USB_CAN_BE_HOST)
+					case USB_INT_HSOFI:
+						UHINT  &= ~(1 << HSOFI);
+ b0e:	80 91 9f 00 	lds	r24, 0x009F
+ b12:	8f 7d       	andi	r24, 0xDF	; 223
+ b14:	80 93 9f 00 	sts	0x009F, r24
+	{
+		USB_INT_Clear(USB_INT_HSOFI);
+
+		EVENT_USB_Host_StartOfFrame();
+ b18:	0e d1       	rcall	.+540    	; 0xd36 <USB_Event_Stub>
+ b1a:	80 91 9f 00 	lds	r24, 0x009F
+					case USB_INT_HSOFI:
+						return (UHINT  & (1 << HSOFI));
+					case USB_INT_DCONNI:
+						return (UHINT  & (1 << DCONNI));
+					case USB_INT_DDISCI:
+						return (UHINT  & (1 << DDISCI));
+ b1e:	81 ff       	sbrs	r24, 1
+	}
+	#endif
+
+	if (USB_INT_HasOccurred(USB_INT_DDISCI) && USB_INT_IsEnabled(USB_INT_DDISCI))
+ b20:	15 c0       	rjmp	.+42     	; 0xb4c <__vector_10+0x74>
+ b22:	80 91 a0 00 	lds	r24, 0x00A0
+					case USB_INT_HSOFI:
+						return (UHIEN  & (1 << HSOFE));
+					case USB_INT_DCONNI:
+						return (UHIEN  & (1 << DCONNE));
+					case USB_INT_DDISCI:
+						return (UHIEN  & (1 << DDISCE));
+ b26:	81 ff       	sbrs	r24, 1
+ b28:	11 c0       	rjmp	.+34     	; 0xb4c <__vector_10+0x74>
+ b2a:	80 91 9f 00 	lds	r24, 0x009F
+						break;
+					case USB_INT_DCONNI:
+						UHINT  &= ~(1 << DCONNI);
+						break;
+					case USB_INT_DDISCI:
+						UHINT  &= ~(1 << DDISCI);
+ b2e:	8d 7f       	andi	r24, 0xFD	; 253
+ b30:	80 93 9f 00 	sts	0x009F, r24
+ b34:	80 91 9f 00 	lds	r24, 0x009F
+					#if defined(USB_CAN_BE_HOST)
+					case USB_INT_HSOFI:
+						UHINT  &= ~(1 << HSOFI);
+						break;
+					case USB_INT_DCONNI:
+						UHINT  &= ~(1 << DCONNI);
+ b38:	8e 7f       	andi	r24, 0xFE	; 254
+ b3a:	80 93 9f 00 	sts	0x009F, r24
+ b3e:	80 91 a0 00 	lds	r24, 0x00A0
+						break;
+					case USB_INT_DCONNI:
+						UHIEN  &= ~(1 << DCONNE);
+						break;
+					case USB_INT_DDISCI:
+						UHIEN  &= ~(1 << DDISCE);
+ b42:	8d 7f       	andi	r24, 0xFD	; 253
+ b44:	80 93 a0 00 	sts	0x00A0, r24
+ b48:	f7 da       	rcall	.-2578   	; 0x138 <EVENT_USB_Host_DeviceUnattached>
+	{
+		USB_INT_Clear(USB_INT_DDISCI);
+		USB_INT_Clear(USB_INT_DCONNI);
+		USB_INT_Disable(USB_INT_DDISCI);
+
+		EVENT_USB_Host_DeviceUnattached();
+ b4a:	5c df       	rcall	.-328    	; 0xa04 <USB_ResetInterface>
+ b4c:	80 91 df 00 	lds	r24, 0x00DF
+
+		USB_ResetInterface();
+ b50:	81 ff       	sbrs	r24, 1
+					case USB_INT_RSTI:
+						return (UHINT  & (1 << RSTI));
+					case USB_INT_BCERRI:
+						return (OTGINT & (1 << BCERRI));
+					case USB_INT_VBERRI:
+						return (OTGINT & (1 << VBERRI));
+ b52:	14 c0       	rjmp	.+40     	; 0xb7c <__vector_10+0xa4>
+ b54:	80 91 de 00 	lds	r24, 0x00DE
+	}
+
+	if (USB_INT_HasOccurred(USB_INT_VBERRI) && USB_INT_IsEnabled(USB_INT_VBERRI))
+ b58:	81 ff       	sbrs	r24, 1
+					case USB_INT_RSTI:
+						return (UHIEN  & (1 << RSTE));
+					case USB_INT_BCERRI:
+						return (OTGIEN & (1 << BCERRE));
+					case USB_INT_VBERRI:
+						return (OTGIEN & (1 << VBERRE));
+ b5a:	10 c0       	rjmp	.+32     	; 0xb7c <__vector_10+0xa4>
+ b5c:	80 91 df 00 	lds	r24, 0x00DF
+ b60:	8d 7f       	andi	r24, 0xFD	; 253
+						break;
+					case USB_INT_BCERRI:
+						OTGINT &= ~(1 << BCERRI);
+						break;
+					case USB_INT_VBERRI:
+						OTGINT &= ~(1 << VBERRI);
+ b62:	80 93 df 00 	sts	0x00DF, r24
+ b66:	77 98       	cbi	0x0e, 7	; 14
+ b68:	80 91 dd 00 	lds	r24, 0x00DD
+			static inline void USB_Host_VBUS_Manual_Off(void)
+			{
+				#if defined(INVERTED_VBUS_ENABLE_LINE)
+				PORTE  |=  (1 << 7);
+				#else
+				PORTE  &= ~(1 << 7);
+ b6c:	81 60       	ori	r24, 0x01	; 1
+			}
+
+			static inline void USB_Host_VBUS_Auto_Off(void) ATTR_ALWAYS_INLINE;
+			static inline void USB_Host_VBUS_Auto_Off(void)
+			{
+				OTGCON |=  (1 << VBUSRQC);
+ b6e:	80 93 dd 00 	sts	0x00DD, r24
+ b72:	80 e0       	ldi	r24, 0x00	; 0
+ b74:	f0 da       	rcall	.-2592   	; 0x156 <EVENT_USB_Host_HostError>
+ b76:	e0 da       	rcall	.-2624   	; 0x138 <EVENT_USB_Host_DeviceUnattached>
+		USB_INT_Clear(USB_INT_VBERRI);
+
+		USB_Host_VBUS_Manual_Off();
+		USB_Host_VBUS_Auto_Off();
+
+		EVENT_USB_Host_HostError(HOST_ERROR_VBusVoltageDip);
+ b78:	81 e0       	ldi	r24, 0x01	; 1
+ b7a:	8e bb       	out	0x1e, r24	; 30
+ b7c:	80 91 df 00 	lds	r24, 0x00DF
+		EVENT_USB_Host_DeviceUnattached();
+ b80:	80 ff       	sbrs	r24, 0
+
+		USB_HostState = HOST_STATE_Unattached;
+ b82:	16 c0       	rjmp	.+44     	; 0xbb0 <__vector_10+0xd8>
+ b84:	80 91 de 00 	lds	r24, 0x00DE
+					case USB_INT_BCERRI:
+						return (OTGINT & (1 << BCERRI));
+					case USB_INT_VBERRI:
+						return (OTGINT & (1 << VBERRI));
+					case USB_INT_SRPI:
+						return (OTGINT & (1 << SRPI));
+ b88:	80 ff       	sbrs	r24, 0
+	}
+
+	if (USB_INT_HasOccurred(USB_INT_SRPI) && USB_INT_IsEnabled(USB_INT_SRPI))
+ b8a:	12 c0       	rjmp	.+36     	; 0xbb0 <__vector_10+0xd8>
+ b8c:	80 91 df 00 	lds	r24, 0x00DF
+					case USB_INT_BCERRI:
+						return (OTGIEN & (1 << BCERRE));
+					case USB_INT_VBERRI:
+						return (OTGIEN & (1 << VBERRE));
+					case USB_INT_SRPI:
+						return (OTGIEN & (1 << SRPE));
+ b90:	8e 7f       	andi	r24, 0xFE	; 254
+ b92:	80 93 df 00 	sts	0x00DF, r24
+						break;
+					case USB_INT_VBERRI:
+						OTGINT &= ~(1 << VBERRI);
+						break;
+					case USB_INT_SRPI:
+						OTGINT &= ~(1 << SRPI);
+ b96:	80 91 de 00 	lds	r24, 0x00DE
+ b9a:	8e 7f       	andi	r24, 0xFE	; 254
+ b9c:	80 93 de 00 	sts	0x00DE, r24
+						break;
+					case USB_INT_VBERRI:
+						OTGIEN &= ~(1 << VBERRE);
+						break;
+					case USB_INT_SRPI:
+						OTGIEN &= ~(1 << SRPE);
+ ba0:	c9 da       	rcall	.-2670   	; 0x134 <EVENT_USB_Host_DeviceAttached>
+ ba2:	80 91 a0 00 	lds	r24, 0x00A0
+ ba6:	82 60       	ori	r24, 0x02	; 2
+ ba8:	80 93 a0 00 	sts	0x00A0, r24
+	{
+		USB_INT_Clear(USB_INT_SRPI);
+		USB_INT_Disable(USB_INT_SRPI);
+
+		EVENT_USB_Host_DeviceAttached();
+ bac:	82 e0       	ldi	r24, 0x02	; 2
+						break;
+					case USB_INT_DCONNI:
+						UHIEN  |= (1 << DCONNE);
+						break;
+					case USB_INT_DDISCI:
+						UHIEN  |= (1 << DDISCE);
+ bae:	8e bb       	out	0x1e, r24	; 30
+ bb0:	80 91 df 00 	lds	r24, 0x00DF
+ bb4:	82 ff       	sbrs	r24, 2
+ bb6:	0e c0       	rjmp	.+28     	; 0xbd4 <__vector_10+0xfc>
+
+		USB_INT_Enable(USB_INT_DDISCI);
+
+		USB_HostState = HOST_STATE_Powered;
+ bb8:	80 91 de 00 	lds	r24, 0x00DE
+					case USB_INT_DDISCI:
+						return (UHINT  & (1 << DDISCI));
+					case USB_INT_RSTI:
+						return (UHINT  & (1 << RSTI));
+					case USB_INT_BCERRI:
+						return (OTGINT & (1 << BCERRI));
+ bbc:	82 ff       	sbrs	r24, 2
+ bbe:	0a c0       	rjmp	.+20     	; 0xbd4 <__vector_10+0xfc>
+	}
+
+	if (USB_INT_HasOccurred(USB_INT_BCERRI) && USB_INT_IsEnabled(USB_INT_BCERRI))
+ bc0:	80 91 df 00 	lds	r24, 0x00DF
+					case USB_INT_DDISCI:
+						return (UHIEN  & (1 << DDISCE));
+					case USB_INT_RSTI:
+						return (UHIEN  & (1 << RSTE));
+					case USB_INT_BCERRI:
+						return (OTGIEN & (1 << BCERRE));
+ bc4:	8b 7f       	andi	r24, 0xFB	; 251
+ bc6:	80 93 df 00 	sts	0x00DF, r24
+ bca:	82 e0       	ldi	r24, 0x02	; 2
+						break;
+					case USB_INT_RSTI:
+						UHINT  &= ~(1 << RSTI);
+						break;
+					case USB_INT_BCERRI:
+						OTGINT &= ~(1 << BCERRI);
+ bcc:	60 e0       	ldi	r22, 0x00	; 0
+ bce:	c7 da       	rcall	.-2674   	; 0x15e <EVENT_USB_Host_DeviceEnumerationFailed>
+ bd0:	b3 da       	rcall	.-2714   	; 0x138 <EVENT_USB_Host_DeviceUnattached>
+ bd2:	18 df       	rcall	.-464    	; 0xa04 <USB_ResetInterface>
+ bd4:	ff 91       	pop	r31
+	{
+		USB_INT_Clear(USB_INT_BCERRI);
+
+		EVENT_USB_Host_DeviceEnumerationFailed(HOST_ENUMERROR_NoDeviceDetected, 0);
+ bd6:	ef 91       	pop	r30
+ bd8:	bf 91       	pop	r27
+ bda:	af 91       	pop	r26
+ bdc:	9f 91       	pop	r25
+		EVENT_USB_Host_DeviceUnattached();
+ bde:	8f 91       	pop	r24
+ be0:	7f 91       	pop	r23
+
+		USB_ResetInterface();
+ be2:	6f 91       	pop	r22
+ be4:	5f 91       	pop	r21
+		USB_ResetInterface();
+
+		EVENT_USB_UIDChange();
+	}
+	#endif
+}
+ be6:	4f 91       	pop	r20
+ be8:	3f 91       	pop	r19
+ bea:	2f 91       	pop	r18
+ bec:	0f 90       	pop	r0
+ bee:	0b be       	out	0x3b, r0	; 59
+ bf0:	0f 90       	pop	r0
+ bf2:	0f be       	out	0x3f, r0	; 63
+ bf4:	0f 90       	pop	r0
+ bf6:	1f 90       	pop	r1
+ bf8:	18 95       	reti
+
+00000bfa <USB_Host_GetDeviceConfigDescriptor>:
+#if defined(USB_CAN_BE_HOST)
+uint8_t USB_Host_GetDeviceConfigDescriptor(const uint8_t ConfigNumber,
+                                           uint16_t* const ConfigSizePtr,
+                                           void* const BufferPtr,
+                                           const uint16_t BufferSize)
+{
+ bfa:	cf 92       	push	r12
+ bfc:	df 92       	push	r13
+ bfe:	ef 92       	push	r14
+ c00:	ff 92       	push	r15
+ c02:	0f 93       	push	r16
+ c04:	1f 93       	push	r17
+ c06:	cf 93       	push	r28
+ c08:	df 93       	push	r29
+ c0a:	cd b7       	in	r28, 0x3d	; 61
+ c0c:	de b7       	in	r29, 0x3e	; 62
+ c0e:	29 97       	sbiw	r28, 0x09	; 9
+ c10:	0f b6       	in	r0, 0x3f	; 63
+ c12:	f8 94       	cli
+ c14:	de bf       	out	0x3e, r29	; 62
+ c16:	0f be       	out	0x3f, r0	; 63
+ c18:	cd bf       	out	0x3d, r28	; 61
+ c1a:	6b 01       	movw	r12, r22
+ c1c:	8a 01       	movw	r16, r20
+ c1e:	79 01       	movw	r14, r18
+	uint8_t ErrorCode;
+	uint8_t ConfigHeader[sizeof(USB_Descriptor_Configuration_Header_t)];
+
+	USB_ControlRequest = (USB_Request_Header_t)
+ c20:	90 e8       	ldi	r25, 0x80	; 128
+ c22:	90 93 b1 01 	sts	0x01B1, r25
+ c26:	96 e0       	ldi	r25, 0x06	; 6
+ c28:	90 93 b2 01 	sts	0x01B2, r25
+		{
+			.bmRequestType = (REQDIR_DEVICETOHOST | REQTYPE_STANDARD | REQREC_DEVICE),
+			.bRequest      = REQ_GetDescriptor,
+			.wValue        = ((DTYPE_Configuration << 8) | (ConfigNumber - 1)),
+ c2c:	90 e0       	ldi	r25, 0x00	; 0
+ c2e:	01 97       	sbiw	r24, 0x01	; 1
+ c30:	92 60       	ori	r25, 0x02	; 2
+                                           const uint16_t BufferSize)
+{
+	uint8_t ErrorCode;
+	uint8_t ConfigHeader[sizeof(USB_Descriptor_Configuration_Header_t)];
+
+	USB_ControlRequest = (USB_Request_Header_t)
+ c32:	90 93 b4 01 	sts	0x01B4, r25
+ c36:	80 93 b3 01 	sts	0x01B3, r24
+ c3a:	10 92 b6 01 	sts	0x01B6, r1
+ c3e:	10 92 b5 01 	sts	0x01B5, r1
+ c42:	89 e0       	ldi	r24, 0x09	; 9
+ c44:	90 e0       	ldi	r25, 0x00	; 0
+ c46:	90 93 b8 01 	sts	0x01B8, r25
+ c4a:	80 93 b7 01 	sts	0x01B7, r24
+ c4e:	10 92 a7 00 	sts	0x00A7, r1
+			.wLength       = sizeof(USB_Descriptor_Configuration_Header_t),
+		};
+
+	Pipe_SelectPipe(PIPE_CONTROLPIPE);
+
+	if ((ErrorCode = USB_Host_SendControlRequest(ConfigHeader)) != HOST_SENDCONTROL_Successful)
+ c52:	ce 01       	movw	r24, r28
+ c54:	01 96       	adiw	r24, 0x01	; 1
+ c56:	98 d0       	rcall	.+304    	; 0xd88 <USB_Host_SendControlRequest>
+ c58:	88 23       	and	r24, r24
+ c5a:	b9 f4       	brne	.+46     	; 0xc8a <USB_Host_GetDeviceConfigDescriptor+0x90>
+ c5c:	8b 81       	ldd	r24, Y+3	; 0x03
+	  return ErrorCode;
+
+	*ConfigSizePtr = le16_to_cpu(DESCRIPTOR_PCAST(ConfigHeader, USB_Descriptor_Configuration_Header_t)->TotalConfigurationSize);
+ c5e:	9c 81       	ldd	r25, Y+4	; 0x04
+ c60:	f6 01       	movw	r30, r12
+ c62:	91 83       	std	Z+1, r25	; 0x01
+ c64:	80 83       	st	Z, r24
+ c66:	e8 16       	cp	r14, r24
+
+	if (*ConfigSizePtr > BufferSize)
+ c68:	f9 06       	cpc	r15, r25
+ c6a:	70 f0       	brcs	.+28     	; 0xc88 <USB_Host_GetDeviceConfigDescriptor+0x8e>
+ c6c:	90 93 b8 01 	sts	0x01B8, r25
+	  return HOST_GETCONFIG_BuffOverflow;
+
+	USB_ControlRequest.wLength = *ConfigSizePtr;
+ c70:	80 93 b7 01 	sts	0x01B7, r24
+ c74:	c8 01       	movw	r24, r16
+
+	if ((ErrorCode = USB_Host_SendControlRequest(BufferPtr)) != HOST_SENDCONTROL_Successful)
+ c76:	88 d0       	rcall	.+272    	; 0xd88 <USB_Host_SendControlRequest>
+ c78:	88 23       	and	r24, r24
+ c7a:	39 f4       	brne	.+14     	; 0xc8a <USB_Host_GetDeviceConfigDescriptor+0x90>
+ c7c:	f8 01       	movw	r30, r16
+ c7e:	91 81       	ldd	r25, Z+1	; 0x01
+	  return ErrorCode;
+
+	if (DESCRIPTOR_TYPE(BufferPtr) != DTYPE_Configuration)
+ c80:	92 30       	cpi	r25, 0x02	; 2
+ c82:	19 f0       	breq	.+6      	; 0xc8a <USB_Host_GetDeviceConfigDescriptor+0x90>
+ c84:	86 e0       	ldi	r24, 0x06	; 6
+ c86:	01 c0       	rjmp	.+2      	; 0xc8a <USB_Host_GetDeviceConfigDescriptor+0x90>
+	  return HOST_GETCONFIG_InvalidData;
+ c88:	85 e0       	ldi	r24, 0x05	; 5
+ c8a:	29 96       	adiw	r28, 0x09	; 9
+	  return ErrorCode;
+
+	*ConfigSizePtr = le16_to_cpu(DESCRIPTOR_PCAST(ConfigHeader, USB_Descriptor_Configuration_Header_t)->TotalConfigurationSize);
+
+	if (*ConfigSizePtr > BufferSize)
+	  return HOST_GETCONFIG_BuffOverflow;
+ c8c:	0f b6       	in	r0, 0x3f	; 63
+
+	if (DESCRIPTOR_TYPE(BufferPtr) != DTYPE_Configuration)
+	  return HOST_GETCONFIG_InvalidData;
+
+	return HOST_GETCONFIG_Successful;
+}
+ c8e:	f8 94       	cli
+ c90:	de bf       	out	0x3e, r29	; 62
+ c92:	0f be       	out	0x3f, r0	; 63
+ c94:	cd bf       	out	0x3d, r28	; 61
+ c96:	df 91       	pop	r29
+ c98:	cf 91       	pop	r28
+ c9a:	1f 91       	pop	r17
+ c9c:	0f 91       	pop	r16
+ c9e:	ff 90       	pop	r15
+ ca0:	ef 90       	pop	r14
+ ca2:	df 90       	pop	r13
+ ca4:	cf 90       	pop	r12
+ ca6:	08 95       	ret
+
+00000ca8 <USB_GetNextDescriptorComp>:
+ ca8:	af 92       	push	r10
+ caa:	bf 92       	push	r11
+}
+
+uint8_t USB_GetNextDescriptorComp(uint16_t* const BytesRem,
+                                  void** const CurrConfigLoc,
+                                  ConfigComparatorPtr_t const ComparatorRoutine)
+{
+ cac:	cf 92       	push	r12
+ cae:	df 92       	push	r13
+ cb0:	ef 92       	push	r14
+ cb2:	ff 92       	push	r15
+ cb4:	0f 93       	push	r16
+ cb6:	1f 93       	push	r17
+ cb8:	cf 93       	push	r28
+ cba:	df 93       	push	r29
+ cbc:	7c 01       	movw	r14, r24
+ cbe:	8b 01       	movw	r16, r22
+ cc0:	5a 01       	movw	r10, r20
+	uint8_t ErrorCode;
+
+	while (*BytesRem)
+ cc2:	28 c0       	rjmp	.+80     	; 0xd14 <USB_GetNextDescriptorComp+0x6c>
+	{
+		uint8_t* PrevDescLoc  = *CurrConfigLoc;
+ cc4:	f8 01       	movw	r30, r16
+ cc6:	c0 80       	ld	r12, Z
+ cc8:	d1 80       	ldd	r13, Z+1	; 0x01
+			static inline void USB_GetNextDescriptor(uint16_t* const BytesRem,
+			                                         void** CurrConfigLoc) ATTR_NON_NULL_PTR_ARG(1) ATTR_NON_NULL_PTR_ARG(2);
+			static inline void USB_GetNextDescriptor(uint16_t* const BytesRem,
+			                                         void** CurrConfigLoc)
+			{
+				uint16_t CurrDescriptorSize = DESCRIPTOR_CAST(*CurrConfigLoc, USB_Descriptor_Header_t).Size;
+ cca:	f6 01       	movw	r30, r12
+ ccc:	80 81       	ld	r24, Z
+ cce:	90 e0       	ldi	r25, 0x00	; 0
+ cd0:	9e 01       	movw	r18, r28
+ cd2:	8c 17       	cp	r24, r28
+ cd4:	9d 07       	cpc	r25, r29
+ cd6:	08 f4       	brcc	.+2      	; 0xcda <USB_GetNextDescriptorComp+0x32>
+ cd8:	9c 01       	movw	r18, r24
+
+				if (*BytesRem < CurrDescriptorSize)
+				  CurrDescriptorSize = *BytesRem;
+
+				*CurrConfigLoc  = (void*)((uintptr_t)*CurrConfigLoc + CurrDescriptorSize);
+ cda:	c6 01       	movw	r24, r12
+ cdc:	82 0f       	add	r24, r18
+ cde:	93 1f       	adc	r25, r19
+ ce0:	f8 01       	movw	r30, r16
+ ce2:	91 83       	std	Z+1, r25	; 0x01
+ ce4:	80 83       	st	Z, r24
+				*BytesRem      -= CurrDescriptorSize;
+ ce6:	f7 01       	movw	r30, r14
+ ce8:	80 81       	ld	r24, Z
+ cea:	91 81       	ldd	r25, Z+1	; 0x01
+ cec:	82 1b       	sub	r24, r18
+ cee:	93 0b       	sbc	r25, r19
+ cf0:	91 83       	std	Z+1, r25	; 0x01
+ cf2:	80 83       	st	Z, r24
+		uint16_t PrevBytesRem = *BytesRem;
+
+		USB_GetNextDescriptor(BytesRem, CurrConfigLoc);
+
+		if ((ErrorCode = ComparatorRoutine(*CurrConfigLoc)) != DESCRIPTOR_SEARCH_NotFound)
+ cf4:	f8 01       	movw	r30, r16
+ cf6:	80 81       	ld	r24, Z
+ cf8:	91 81       	ldd	r25, Z+1	; 0x01
+ cfa:	f5 01       	movw	r30, r10
+ cfc:	09 95       	icall
+ cfe:	82 30       	cpi	r24, 0x02	; 2
+ d00:	49 f0       	breq	.+18     	; 0xd14 <USB_GetNextDescriptorComp+0x6c>
+		{
+			if (ErrorCode == DESCRIPTOR_SEARCH_Fail)
+ d02:	81 30       	cpi	r24, 0x01	; 1
+ d04:	69 f4       	brne	.+26     	; 0xd20 <USB_GetNextDescriptorComp+0x78>
+			{
+				*CurrConfigLoc = PrevDescLoc;
+ d06:	f8 01       	movw	r30, r16
+ d08:	d1 82       	std	Z+1, r13	; 0x01
+ d0a:	c0 82       	st	Z, r12
+				*BytesRem      = PrevBytesRem;
+ d0c:	f7 01       	movw	r30, r14
+ d0e:	d1 83       	std	Z+1, r29	; 0x01
+ d10:	c0 83       	st	Z, r28
+ d12:	06 c0       	rjmp	.+12     	; 0xd20 <USB_GetNextDescriptorComp+0x78>
+                                  void** const CurrConfigLoc,
+                                  ConfigComparatorPtr_t const ComparatorRoutine)
+{
+	uint8_t ErrorCode;
+
+	while (*BytesRem)
+ d14:	f7 01       	movw	r30, r14
+ d16:	c0 81       	ld	r28, Z
+ d18:	d1 81       	ldd	r29, Z+1	; 0x01
+ d1a:	20 97       	sbiw	r28, 0x00	; 0
+ d1c:	99 f6       	brne	.-90     	; 0xcc4 <USB_GetNextDescriptorComp+0x1c>
+
+			return ErrorCode;
+		}
+	}
+
+	return DESCRIPTOR_SEARCH_COMP_EndOfDescriptor;
+ d1e:	82 e0       	ldi	r24, 0x02	; 2
+}
+ d20:	df 91       	pop	r29
+ d22:	cf 91       	pop	r28
+ d24:	1f 91       	pop	r17
+ d26:	0f 91       	pop	r16
+ d28:	ff 90       	pop	r15
+ d2a:	ef 90       	pop	r14
+ d2c:	df 90       	pop	r13
+ d2e:	cf 90       	pop	r12
+ d30:	bf 90       	pop	r11
+ d32:	af 90       	pop	r10
+ d34:	08 95       	ret
+
+00000d36 <USB_Event_Stub>:
+#include "Events.h"
+
+void USB_Event_Stub(void)
+{
+
+}
+ d36:	08 95       	ret
+
+00000d38 <USB_Host_WaitForIOS>:
+	
+	return ReturnStatus;
+}
+
+static uint8_t USB_Host_WaitForIOS(const uint8_t WaitType)
+{
+ d38:	1f 93       	push	r17
+ d3a:	cf 93       	push	r28
+ d3c:	df 93       	push	r29
+ d3e:	18 2f       	mov	r17, r24
+	uint8_t  TimeoutCounter = USB_HOST_TIMEOUT_MS;
+	#else
+	uint16_t TimeoutCounter = USB_HOST_TIMEOUT_MS;
+	#endif
+
+	while (!(((WaitType == USB_HOST_WAITFOR_SetupSent)  && Pipe_IsSETUPSent())  ||
+ d40:	c9 ee       	ldi	r28, 0xE9	; 233
+ d42:	d3 e0       	ldi	r29, 0x03	; 3
+ d44:	06 c0       	rjmp	.+12     	; 0xd52 <USB_Host_WaitForIOS+0x1a>
+	         ((WaitType == USB_HOST_WAITFOR_InReceived) && Pipe_IsINReceived()) ||
+	         ((WaitType == USB_HOST_WAITFOR_OutReady)   && Pipe_IsOUTReady())))
+	{
+		uint8_t ErrorCode;
+
+		if ((ErrorCode = USB_Host_WaitMS(1)) != HOST_WAITERROR_Successful)
+ d46:	81 e0       	ldi	r24, 0x01	; 1
+ d48:	d4 db       	rcall	.-2136   	; 0x4f2 <USB_Host_WaitMS>
+ d4a:	88 23       	and	r24, r24
+ d4c:	c9 f4       	brne	.+50     	; 0xd80 <USB_Host_WaitForIOS+0x48>
+ d4e:	21 97       	sbiw	r28, 0x01	; 1
+ d50:	b1 f0       	breq	.+44     	; 0xd7e <USB_Host_WaitForIOS+0x46>
+		  return ErrorCode;
+
+		if (!(TimeoutCounter--))
+ d52:	11 23       	and	r17, r17
+	uint8_t  TimeoutCounter = USB_HOST_TIMEOUT_MS;
+	#else
+	uint16_t TimeoutCounter = USB_HOST_TIMEOUT_MS;
+	#endif
+
+	while (!(((WaitType == USB_HOST_WAITFOR_SetupSent)  && Pipe_IsSETUPSent())  ||
+ d54:	29 f4       	brne	.+10     	; 0xd60 <USB_Host_WaitForIOS+0x28>
+ d56:	80 91 a6 00 	lds	r24, 0x00A6
+			 *  \return Boolean \c true if the current pipe is ready for a SETUP packet, \c false otherwise.
+			 */
+			static inline bool Pipe_IsSETUPSent(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
+			static inline bool Pipe_IsSETUPSent(void)
+			{
+				return ((UPINTX & (1 << TXSTPI)) ? true : false);
+ d5a:	83 ff       	sbrs	r24, 3
+ d5c:	f4 cf       	rjmp	.-24     	; 0xd46 <USB_Host_WaitForIOS+0xe>
+ d5e:	0d c0       	rjmp	.+26     	; 0xd7a <USB_Host_WaitForIOS+0x42>
+ d60:	11 30       	cpi	r17, 0x01	; 1
+ d62:	29 f4       	brne	.+10     	; 0xd6e <USB_Host_WaitForIOS+0x36>
+ d64:	80 91 a6 00 	lds	r24, 0x00A6
+			 *  \return Boolean \c true if the current pipe has received an IN packet, \c false otherwise.
+			 */
+			static inline bool Pipe_IsINReceived(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
+			static inline bool Pipe_IsINReceived(void)
+			{
+				return ((UPINTX & (1 << RXINI)) ? true : false);
+ d68:	80 ff       	sbrs	r24, 0
+	         ((WaitType == USB_HOST_WAITFOR_InReceived) && Pipe_IsINReceived()) ||
+ d6a:	ed cf       	rjmp	.-38     	; 0xd46 <USB_Host_WaitForIOS+0xe>
+ d6c:	06 c0       	rjmp	.+12     	; 0xd7a <USB_Host_WaitForIOS+0x42>
+ d6e:	12 30       	cpi	r17, 0x02	; 2
+	uint8_t  TimeoutCounter = USB_HOST_TIMEOUT_MS;
+	#else
+	uint16_t TimeoutCounter = USB_HOST_TIMEOUT_MS;
+	#endif
+
+	while (!(((WaitType == USB_HOST_WAITFOR_SetupSent)  && Pipe_IsSETUPSent())  ||
+ d70:	51 f7       	brne	.-44     	; 0xd46 <USB_Host_WaitForIOS+0xe>
+ d72:	80 91 a6 00 	lds	r24, 0x00A6
+			 *  \return Boolean \c true if the current pipe is ready for an OUT packet, \c false otherwise.
+			 */
+			static inline bool Pipe_IsOUTReady(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
+			static inline bool Pipe_IsOUTReady(void)
+			{
+				return ((UPINTX & (1 << TXOUTI)) ? true : false);
+ d76:	82 ff       	sbrs	r24, 2
+	         ((WaitType == USB_HOST_WAITFOR_InReceived) && Pipe_IsINReceived()) ||
+	         ((WaitType == USB_HOST_WAITFOR_OutReady)   && Pipe_IsOUTReady())))
+ d78:	e6 cf       	rjmp	.-52     	; 0xd46 <USB_Host_WaitForIOS+0xe>
+ d7a:	80 e0       	ldi	r24, 0x00	; 0
+
+		if (!(TimeoutCounter--))
+		  return HOST_SENDCONTROL_SoftwareTimeOut;
+	}
+
+	return HOST_SENDCONTROL_Successful;
+ d7c:	01 c0       	rjmp	.+2      	; 0xd80 <USB_Host_WaitForIOS+0x48>
+ d7e:	84 e0       	ldi	r24, 0x04	; 4
+
+		if ((ErrorCode = USB_Host_WaitMS(1)) != HOST_WAITERROR_Successful)
+		  return ErrorCode;
+
+		if (!(TimeoutCounter--))
+		  return HOST_SENDCONTROL_SoftwareTimeOut;
+ d80:	df 91       	pop	r29
+	}
+
+	return HOST_SENDCONTROL_Successful;
+}
+ d82:	cf 91       	pop	r28
+ d84:	1f 91       	pop	r17
+ d86:	08 95       	ret
+
+00000d88 <USB_Host_SendControlRequest>:
+ d88:	ef 92       	push	r14
+
+uint8_t USB_Host_SendControlRequest(void* const BufferPtr)
+{
+ d8a:	ff 92       	push	r15
+ d8c:	0f 93       	push	r16
+ d8e:	1f 93       	push	r17
+ d90:	cf 93       	push	r28
+ d92:	df 93       	push	r29
+ d94:	ec 01       	movw	r28, r24
+			 *  \return Boolean \c true if the bus is currently suspended, \c false otherwise.
+			 */
+			static inline bool USB_Host_IsBusSuspended(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
+			static inline bool USB_Host_IsBusSuspended(void)
+			{
+				return ((UHCON & (1 << SOFEN)) ? false : true);
+ d96:	e0 90 9e 00 	lds	r14, 0x009E
+ d9a:	ff 24       	eor	r15, r15
+ d9c:	81 e0       	ldi	r24, 0x01	; 1
+ d9e:	e8 22       	and	r14, r24
+ da0:	ff 24       	eor	r15, r15
+
+static uint8_t USB_Host_SendControlRequest_PRV(void* const BufferPtr)
+{
+	uint8_t* DataStream   = (uint8_t*)BufferPtr;
+	uint8_t  ReturnStatus = HOST_SENDCONTROL_Successful;
+	uint16_t DataLen      = USB_ControlRequest.wLength;
+ da2:	00 91 b7 01 	lds	r16, 0x01B7
+ da6:	10 91 b8 01 	lds	r17, 0x01B8
+			 *  host and attached device may occur.
+			 */
+			static inline void USB_Host_ResumeBus(void) ATTR_ALWAYS_INLINE;
+			static inline void USB_Host_ResumeBus(void)
+			{
+				UHCON |=  (1 << SOFEN);
+ daa:	80 91 9e 00 	lds	r24, 0x009E
+ dae:	81 60       	ori	r24, 0x01	; 1
+ db0:	80 93 9e 00 	sts	0x009E, r24
+
+	USB_Host_ResumeBus();
+
+	if ((ReturnStatus = USB_Host_WaitMS(1)) != HOST_WAITERROR_Successful)
+ db4:	81 e0       	ldi	r24, 0x01	; 1
+ db6:	9d db       	rcall	.-2246   	; 0x4f2 <USB_Host_WaitMS>
+ db8:	88 23       	and	r24, r24
+ dba:	09 f0       	breq	.+2      	; 0xdbe <USB_Host_SendControlRequest+0x36>
+ dbc:	ca c0       	rjmp	.+404    	; 0xf52 <USB_Host_SendControlRequest+0x1ca>
+ dbe:	80 91 aa 00 	lds	r24, 0x00AA
+			 *  \param[in] Token  New pipe token to set the selected pipe to, as a \c PIPE_TOKEN_* mask.
+			 */
+			static inline void Pipe_SetPipeToken(const uint8_t Token) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_SetPipeToken(const uint8_t Token)
+			{
+				UPCFG0X = ((UPCFG0X & ~(0x03 << PTOKEN0)) | Token);
+ dc2:	8f 7c       	andi	r24, 0xCF	; 207
+ dc4:	80 93 aa 00 	sts	0x00AA, r24
+ dc8:	10 92 f5 00 	sts	0x00F5, r1
+
+			/** Clears the error flags for the currently selected pipe. */
+			static inline void Pipe_ClearError(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_ClearError(void)
+			{
+				UPERRX = 0;
+ dcc:	80 91 a6 00 	lds	r24, 0x00A6
+				UPINTX &= ~(1 << PERRI);
+ dd0:	8f 7e       	andi	r24, 0xEF	; 239
+ dd2:	80 93 a6 00 	sts	0x00A6, r24
+ dd6:	80 91 a9 00 	lds	r24, 0x00A9
+
+			/** Unfreezes the selected pipe, allowing it to communicate with an attached device. */
+			static inline void Pipe_Unfreeze(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_Unfreeze(void)
+			{
+				UPCONX &= ~(1 << PFREEZE);
+ dda:	8f 7b       	andi	r24, 0xBF	; 191
+ ddc:	80 93 a9 00 	sts	0x00A9, r24
+ de0:	88 e0       	ldi	r24, 0x08	; 8
+ de2:	e1 eb       	ldi	r30, 0xB1	; 177
+	Pipe_Write_8(USB_ControlRequest.bRequest);
+	Pipe_Write_16_LE(USB_ControlRequest.wValue);
+	Pipe_Write_16_LE(USB_ControlRequest.wIndex);
+	Pipe_Write_16_LE(USB_ControlRequest.wLength);
+	#else
+	uint8_t* HeaderStream = (uint8_t*)&USB_ControlRequest;
+ de4:	f1 e0       	ldi	r31, 0x01	; 1
+ de6:	91 91       	ld	r25, Z+
+
+	for (uint8_t HeaderByte = 0; HeaderByte < sizeof(USB_Request_Header_t); HeaderByte++)
+	  Pipe_Write_8(*(HeaderStream++));
+ de8:	90 93 af 00 	sts	0x00AF, r25
+			 *  \param[in] Data  Data to write into the the currently selected pipe's FIFO buffer.
+			 */
+			static inline void Pipe_Write_8(const uint8_t Data) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_Write_8(const uint8_t Data)
+			{
+				UPDATX = Data;
+ dec:	81 50       	subi	r24, 0x01	; 1
+ dee:	d9 f7       	brne	.-10     	; 0xde6 <USB_Host_SendControlRequest+0x5e>
+	Pipe_Write_16_LE(USB_ControlRequest.wIndex);
+	Pipe_Write_16_LE(USB_ControlRequest.wLength);
+	#else
+	uint8_t* HeaderStream = (uint8_t*)&USB_ControlRequest;
+
+	for (uint8_t HeaderByte = 0; HeaderByte < sizeof(USB_Request_Header_t); HeaderByte++)
+ df0:	80 91 a6 00 	lds	r24, 0x00A6
+			 *  \ingroup Group_PipePacketManagement_AVR8
+			 */
+			static inline void Pipe_ClearSETUP(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_ClearSETUP(void)
+			{
+				UPINTX &= ~((1 << TXSTPI) | (1 << FIFOCON));
+ df4:	87 77       	andi	r24, 0x77	; 119
+ df6:	80 93 a6 00 	sts	0x00A6, r24
+ dfa:	80 e0       	ldi	r24, 0x00	; 0
+	  Pipe_Write_8(*(HeaderStream++));
+	#endif
+
+	Pipe_ClearSETUP();
+
+	if ((ReturnStatus = USB_Host_WaitForIOS(USB_HOST_WAITFOR_SetupSent)) != HOST_SENDCONTROL_Successful)
+ dfc:	9d df       	rcall	.-198    	; 0xd38 <USB_Host_WaitForIOS>
+ dfe:	88 23       	and	r24, r24
+ e00:	09 f0       	breq	.+2      	; 0xe04 <USB_Host_SendControlRequest+0x7c>
+ e02:	a7 c0       	rjmp	.+334    	; 0xf52 <USB_Host_SendControlRequest+0x1ca>
+ e04:	80 91 a9 00 	lds	r24, 0x00A9
+
+			/** Freezes the selected pipe, preventing it from communicating with an attached device. */
+			static inline void Pipe_Freeze(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_Freeze(void)
+			{
+				UPCONX |= (1 << PFREEZE);
+ e08:	80 64       	ori	r24, 0x40	; 64
+ e0a:	80 93 a9 00 	sts	0x00A9, r24
+ e0e:	81 e0       	ldi	r24, 0x01	; 1
+ e10:	70 db       	rcall	.-2336   	; 0x4f2 <USB_Host_WaitMS>
+	  return ReturnStatus;
+
+	Pipe_Freeze();
+
+	if ((ReturnStatus = USB_Host_WaitMS(1)) != HOST_WAITERROR_Successful)
+ e12:	88 23       	and	r24, r24
+ e14:	09 f0       	breq	.+2      	; 0xe18 <USB_Host_SendControlRequest+0x90>
+ e16:	9d c0       	rjmp	.+314    	; 0xf52 <USB_Host_SendControlRequest+0x1ca>
+ e18:	80 91 b1 01 	lds	r24, 0x01B1
+ e1c:	87 ff       	sbrs	r24, 7
+	  return ReturnStatus;
+
+	if ((USB_ControlRequest.bmRequestType & CONTROL_REQTYPE_DIRECTION) == REQDIR_DEVICETOHOST)
+ e1e:	4f c0       	rjmp	.+158    	; 0xebe <USB_Host_SendControlRequest+0x136>
+ e20:	80 91 aa 00 	lds	r24, 0x00AA
+ e24:	8f 7c       	andi	r24, 0xCF	; 207
+			 *  \param[in] Token  New pipe token to set the selected pipe to, as a \c PIPE_TOKEN_* mask.
+			 */
+			static inline void Pipe_SetPipeToken(const uint8_t Token) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_SetPipeToken(const uint8_t Token)
+			{
+				UPCFG0X = ((UPCFG0X & ~(0x03 << PTOKEN0)) | Token);
+ e26:	80 61       	ori	r24, 0x10	; 16
+ e28:	80 93 aa 00 	sts	0x00AA, r24
+ e2c:	20 97       	sbiw	r28, 0x00	; 0
+ e2e:	61 f5       	brne	.+88     	; 0xe88 <USB_Host_SendControlRequest+0x100>
+ e30:	2e c0       	rjmp	.+92     	; 0xe8e <USB_Host_SendControlRequest+0x106>
+	{
+		Pipe_SetPipeToken(PIPE_TOKEN_IN);
+
+		if (DataStream != NULL)
+ e32:	80 91 a9 00 	lds	r24, 0x00A9
+ e36:	8f 7b       	andi	r24, 0xBF	; 191
+
+			/** Unfreezes the selected pipe, allowing it to communicate with an attached device. */
+			static inline void Pipe_Unfreeze(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_Unfreeze(void)
+			{
+				UPCONX &= ~(1 << PFREEZE);
+ e38:	80 93 a9 00 	sts	0x00A9, r24
+ e3c:	81 e0       	ldi	r24, 0x01	; 1
+ e3e:	7c df       	rcall	.-264    	; 0xd38 <USB_Host_WaitForIOS>
+ e40:	88 23       	and	r24, r24
+		{
+			while (DataLen)
+			{
+				Pipe_Unfreeze();
+
+				if ((ReturnStatus = USB_Host_WaitForIOS(USB_HOST_WAITFOR_InReceived)) != HOST_SENDCONTROL_Successful)
+ e42:	09 f0       	breq	.+2      	; 0xe46 <USB_Host_SendControlRequest+0xbe>
+ e44:	86 c0       	rjmp	.+268    	; 0xf52 <USB_Host_SendControlRequest+0x1ca>
+ e46:	80 91 f6 00 	lds	r24, 0x00F6
+ e4a:	90 91 f7 00 	lds	r25, 0x00F7
+			 *  \return Total number of bytes in the currently selected pipe's FIFO buffer.
+			 */
+			static inline uint16_t Pipe_BytesInPipe(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
+			static inline uint16_t Pipe_BytesInPipe(void)
+			{
+				return UPBCX;
+ e4e:	00 97       	sbiw	r24, 0x00	; 0
+ e50:	41 f4       	brne	.+16     	; 0xe62 <USB_Host_SendControlRequest+0xda>
+ e52:	00 e0       	ldi	r16, 0x00	; 0
+ e54:	10 e0       	ldi	r17, 0x00	; 0
+				  return ReturnStatus;
+
+				if (!(Pipe_BytesInPipe()))
+ e56:	05 c0       	rjmp	.+10     	; 0xe62 <USB_Host_SendControlRequest+0xda>
+ e58:	80 91 af 00 	lds	r24, 0x00AF
+				  DataLen = 0;
+ e5c:	89 93       	st	Y+, r24
+ e5e:	01 50       	subi	r16, 0x01	; 1
+			 *  \return Next byte in the currently selected pipe's FIFO buffer.
+			 */
+			static inline uint8_t Pipe_Read_8(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
+			static inline uint8_t Pipe_Read_8(void)
+			{
+				return UPDATX;
+ e60:	10 40       	sbci	r17, 0x00	; 0
+ e62:	80 91 f6 00 	lds	r24, 0x00F6
+
+				while (Pipe_BytesInPipe() && DataLen)
+				{
+					*(DataStream++) = Pipe_Read_8();
+					DataLen--;
+ e66:	90 91 f7 00 	lds	r25, 0x00F7
+			 *  \return Total number of bytes in the currently selected pipe's FIFO buffer.
+			 */
+			static inline uint16_t Pipe_BytesInPipe(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
+			static inline uint16_t Pipe_BytesInPipe(void)
+			{
+				return UPBCX;
+ e6a:	00 97       	sbiw	r24, 0x00	; 0
+ e6c:	19 f0       	breq	.+6      	; 0xe74 <USB_Host_SendControlRequest+0xec>
+ e6e:	01 15       	cp	r16, r1
+ e70:	11 05       	cpc	r17, r1
+				  return ReturnStatus;
+
+				if (!(Pipe_BytesInPipe()))
+				  DataLen = 0;
+
+				while (Pipe_BytesInPipe() && DataLen)
+ e72:	91 f7       	brne	.-28     	; 0xe58 <USB_Host_SendControlRequest+0xd0>
+ e74:	80 91 a9 00 	lds	r24, 0x00A9
+ e78:	80 64       	ori	r24, 0x40	; 64
+ e7a:	80 93 a9 00 	sts	0x00A9, r24
+
+			/** Freezes the selected pipe, preventing it from communicating with an attached device. */
+			static inline void Pipe_Freeze(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_Freeze(void)
+			{
+				UPCONX |= (1 << PFREEZE);
+ e7e:	80 91 a6 00 	lds	r24, 0x00A6
+ e82:	8e 77       	andi	r24, 0x7E	; 126
+ e84:	80 93 a6 00 	sts	0x00A6, r24
+			 *  \ingroup Group_PipePacketManagement_AVR8
+			 */
+			static inline void Pipe_ClearIN(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_ClearIN(void)
+			{
+				UPINTX &= ~((1 << RXINI) | (1 << FIFOCON));
+ e88:	01 15       	cp	r16, r1
+ e8a:	11 05       	cpc	r17, r1
+ e8c:	91 f6       	brne	.-92     	; 0xe32 <USB_Host_SendControlRequest+0xaa>
+ e8e:	80 91 aa 00 	lds	r24, 0x00AA
+	{
+		Pipe_SetPipeToken(PIPE_TOKEN_IN);
+
+		if (DataStream != NULL)
+		{
+			while (DataLen)
+ e92:	8f 7c       	andi	r24, 0xCF	; 207
+ e94:	80 62       	ori	r24, 0x20	; 32
+			 *  \param[in] Token  New pipe token to set the selected pipe to, as a \c PIPE_TOKEN_* mask.
+			 */
+			static inline void Pipe_SetPipeToken(const uint8_t Token) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_SetPipeToken(const uint8_t Token)
+			{
+				UPCFG0X = ((UPCFG0X & ~(0x03 << PTOKEN0)) | Token);
+ e96:	80 93 aa 00 	sts	0x00AA, r24
+ e9a:	80 91 a9 00 	lds	r24, 0x00A9
+ e9e:	8f 7b       	andi	r24, 0xBF	; 191
+ ea0:	80 93 a9 00 	sts	0x00A9, r24
+
+			/** Unfreezes the selected pipe, allowing it to communicate with an attached device. */
+			static inline void Pipe_Unfreeze(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_Unfreeze(void)
+			{
+				UPCONX &= ~(1 << PFREEZE);
+ ea4:	82 e0       	ldi	r24, 0x02	; 2
+ ea6:	48 df       	rcall	.-368    	; 0xd38 <USB_Host_WaitForIOS>
+ ea8:	88 23       	and	r24, r24
+ eaa:	09 f0       	breq	.+2      	; 0xeae <USB_Host_SendControlRequest+0x126>
+		}
+
+		Pipe_SetPipeToken(PIPE_TOKEN_OUT);
+		Pipe_Unfreeze();
+
+		if ((ReturnStatus = USB_Host_WaitForIOS(USB_HOST_WAITFOR_OutReady)) != HOST_SENDCONTROL_Successful)
+ eac:	52 c0       	rjmp	.+164    	; 0xf52 <USB_Host_SendControlRequest+0x1ca>
+ eae:	80 91 a6 00 	lds	r24, 0x00A6
+ eb2:	8b 77       	andi	r24, 0x7B	; 123
+ eb4:	80 93 a6 00 	sts	0x00A6, r24
+			 *  \ingroup Group_PipePacketManagement_AVR8
+			 */
+			static inline void Pipe_ClearOUT(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_ClearOUT(void)
+			{
+				UPINTX &= ~((1 << TXOUTI) | (1 << FIFOCON));
+ eb8:	82 e0       	ldi	r24, 0x02	; 2
+ eba:	3e df       	rcall	.-388    	; 0xd38 <USB_Host_WaitForIOS>
+ ebc:	4a c0       	rjmp	.+148    	; 0xf52 <USB_Host_SendControlRequest+0x1ca>
+ ebe:	20 97       	sbiw	r28, 0x00	; 0
+ ec0:	a1 f1       	breq	.+104    	; 0xf2a <USB_Host_SendControlRequest+0x1a2>
+		  return ReturnStatus;
+
+		Pipe_ClearOUT();
+
+		if ((ReturnStatus = USB_Host_WaitForIOS(USB_HOST_WAITFOR_OutReady)) != HOST_SENDCONTROL_Successful)
+ ec2:	80 91 aa 00 	lds	r24, 0x00AA
+ ec6:	8f 7c       	andi	r24, 0xCF	; 207
+ ec8:	80 62       	ori	r24, 0x20	; 32
+		  return ReturnStatus;
+	}
+	else
+	{
+		if (DataStream != NULL)
+ eca:	80 93 aa 00 	sts	0x00AA, r24
+			 *  \param[in] Token  New pipe token to set the selected pipe to, as a \c PIPE_TOKEN_* mask.
+			 */
+			static inline void Pipe_SetPipeToken(const uint8_t Token) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_SetPipeToken(const uint8_t Token)
+			{
+				UPCFG0X = ((UPCFG0X & ~(0x03 << PTOKEN0)) | Token);
+ ece:	80 91 a9 00 	lds	r24, 0x00A9
+ ed2:	8f 7b       	andi	r24, 0xBF	; 191
+ ed4:	80 93 a9 00 	sts	0x00A9, r24
+ ed8:	1c c0       	rjmp	.+56     	; 0xf12 <USB_Host_SendControlRequest+0x18a>
+
+			/** Unfreezes the selected pipe, allowing it to communicate with an attached device. */
+			static inline void Pipe_Unfreeze(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_Unfreeze(void)
+			{
+				UPCONX &= ~(1 << PFREEZE);
+ eda:	2e df       	rcall	.-420    	; 0xd38 <USB_Host_WaitForIOS>
+ edc:	88 23       	and	r24, r24
+ ede:	c9 f5       	brne	.+114    	; 0xf52 <USB_Host_SendControlRequest+0x1ca>
+ ee0:	fe 01       	movw	r30, r28
+ ee2:	07 c0       	rjmp	.+14     	; 0xef2 <USB_Host_SendControlRequest+0x16a>
+ ee4:	81 91       	ld	r24, Z+
+			Pipe_SetPipeToken(PIPE_TOKEN_OUT);
+			Pipe_Unfreeze();
+
+			while (DataLen)
+			{
+				if ((ReturnStatus = USB_Host_WaitForIOS(USB_HOST_WAITFOR_OutReady)) != HOST_SENDCONTROL_Successful)
+ ee6:	ef 01       	movw	r28, r30
+ ee8:	80 93 af 00 	sts	0x00AF, r24
+ eec:	01 50       	subi	r16, 0x01	; 1
+ eee:	10 40       	sbci	r17, 0x00	; 0
+ ef0:	59 f0       	breq	.+22     	; 0xf08 <USB_Host_SendControlRequest+0x180>
+				  return ReturnStatus;
+
+				while (DataLen && (Pipe_BytesInPipe() < USB_Host_ControlPipeSize))
+				{
+					Pipe_Write_8(*(DataStream++));
+ ef2:	ef 01       	movw	r28, r30
+ ef4:	20 91 f6 00 	lds	r18, 0x00F6
+			 *  \param[in] Data  Data to write into the the currently selected pipe's FIFO buffer.
+			 */
+			static inline void Pipe_Write_8(const uint8_t Data) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_Write_8(const uint8_t Data)
+			{
+				UPDATX = Data;
+ ef8:	30 91 f7 00 	lds	r19, 0x00F7
+					DataLen--;
+ efc:	80 91 50 01 	lds	r24, 0x0150
+			while (DataLen)
+			{
+				if ((ReturnStatus = USB_Host_WaitForIOS(USB_HOST_WAITFOR_OutReady)) != HOST_SENDCONTROL_Successful)
+				  return ReturnStatus;
+
+				while (DataLen && (Pipe_BytesInPipe() < USB_Host_ControlPipeSize))
+ f00:	90 e0       	ldi	r25, 0x00	; 0
+			 *  \return Total number of bytes in the currently selected pipe's FIFO buffer.
+			 */
+			static inline uint16_t Pipe_BytesInPipe(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
+			static inline uint16_t Pipe_BytesInPipe(void)
+			{
+				return UPBCX;
+ f02:	28 17       	cp	r18, r24
+ f04:	39 07       	cpc	r19, r25
+ f06:	70 f3       	brcs	.-36     	; 0xee4 <USB_Host_SendControlRequest+0x15c>
+ f08:	80 91 a6 00 	lds	r24, 0x00A6
+ f0c:	8b 77       	andi	r24, 0x7B	; 123
+ f0e:	80 93 a6 00 	sts	0x00A6, r24
+ f12:	82 e0       	ldi	r24, 0x02	; 2
+ f14:	01 15       	cp	r16, r1
+			 *  \ingroup Group_PipePacketManagement_AVR8
+			 */
+			static inline void Pipe_ClearOUT(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_ClearOUT(void)
+			{
+				UPINTX &= ~((1 << TXOUTI) | (1 << FIFOCON));
+ f16:	11 05       	cpc	r17, r1
+ f18:	01 f7       	brne	.-64     	; 0xeda <USB_Host_SendControlRequest+0x152>
+ f1a:	0e df       	rcall	.-484    	; 0xd38 <USB_Host_WaitForIOS>
+ f1c:	88 23       	and	r24, r24
+ f1e:	c9 f4       	brne	.+50     	; 0xf52 <USB_Host_SendControlRequest+0x1ca>
+			Pipe_SetPipeToken(PIPE_TOKEN_OUT);
+			Pipe_Unfreeze();
+
+			while (DataLen)
+			{
+				if ((ReturnStatus = USB_Host_WaitForIOS(USB_HOST_WAITFOR_OutReady)) != HOST_SENDCONTROL_Successful)
+ f20:	80 91 a9 00 	lds	r24, 0x00A9
+		if (DataStream != NULL)
+		{
+			Pipe_SetPipeToken(PIPE_TOKEN_OUT);
+			Pipe_Unfreeze();
+
+			while (DataLen)
+ f24:	80 64       	ori	r24, 0x40	; 64
+ f26:	80 93 a9 00 	sts	0x00A9, r24
+				}
+
+				Pipe_ClearOUT();
+			}
+
+			if ((ReturnStatus = USB_Host_WaitForIOS(USB_HOST_WAITFOR_OutReady)) != HOST_SENDCONTROL_Successful)
+ f2a:	80 91 aa 00 	lds	r24, 0x00AA
+ f2e:	8f 7c       	andi	r24, 0xCF	; 207
+
+			/** Freezes the selected pipe, preventing it from communicating with an attached device. */
+			static inline void Pipe_Freeze(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_Freeze(void)
+			{
+				UPCONX |= (1 << PFREEZE);
+ f30:	80 61       	ori	r24, 0x10	; 16
+ f32:	80 93 aa 00 	sts	0x00AA, r24
+ f36:	80 91 a9 00 	lds	r24, 0x00A9
+			 *  \param[in] Token  New pipe token to set the selected pipe to, as a \c PIPE_TOKEN_* mask.
+			 */
+			static inline void Pipe_SetPipeToken(const uint8_t Token) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_SetPipeToken(const uint8_t Token)
+			{
+				UPCFG0X = ((UPCFG0X & ~(0x03 << PTOKEN0)) | Token);
+ f3a:	8f 7b       	andi	r24, 0xBF	; 191
+ f3c:	80 93 a9 00 	sts	0x00A9, r24
+ f40:	81 e0       	ldi	r24, 0x01	; 1
+ f42:	fa de       	rcall	.-524    	; 0xd38 <USB_Host_WaitForIOS>
+ f44:	88 23       	and	r24, r24
+
+			/** Unfreezes the selected pipe, allowing it to communicate with an attached device. */
+			static inline void Pipe_Unfreeze(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_Unfreeze(void)
+			{
+				UPCONX &= ~(1 << PFREEZE);
+ f46:	29 f4       	brne	.+10     	; 0xf52 <USB_Host_SendControlRequest+0x1ca>
+ f48:	90 91 a6 00 	lds	r25, 0x00A6
+ f4c:	9e 77       	andi	r25, 0x7E	; 126
+ f4e:	90 93 a6 00 	sts	0x00A6, r25
+		}
+
+		Pipe_SetPipeToken(PIPE_TOKEN_IN);
+		Pipe_Unfreeze();
+
+		if ((ReturnStatus = USB_Host_WaitForIOS(USB_HOST_WAITFOR_InReceived)) != HOST_SENDCONTROL_Successful)
+ f52:	90 91 a9 00 	lds	r25, 0x00A9
+ f56:	90 64       	ori	r25, 0x40	; 64
+ f58:	90 93 a9 00 	sts	0x00A9, r25
+			 *  \ingroup Group_PipePacketManagement_AVR8
+			 */
+			static inline void Pipe_ClearIN(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_ClearIN(void)
+			{
+				UPINTX &= ~((1 << RXINI) | (1 << FIFOCON));
+ f5c:	e1 14       	cp	r14, r1
+ f5e:	f1 04       	cpc	r15, r1
+ f60:	29 f4       	brne	.+10     	; 0xf6c <USB_Host_SendControlRequest+0x1e4>
+ f62:	90 91 9e 00 	lds	r25, 0x009E
+
+			/** Freezes the selected pipe, preventing it from communicating with an attached device. */
+			static inline void Pipe_Freeze(void) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_Freeze(void)
+			{
+				UPCONX |= (1 << PFREEZE);
+ f66:	9e 7f       	andi	r25, 0xFE	; 254
+ f68:	90 93 9e 00 	sts	0x009E, r25
+ f6c:	91 e0       	ldi	r25, 0x01	; 1
+	bool BusSuspended    = USB_Host_IsBusSuspended();
+	uint8_t ReturnStatus = USB_Host_SendControlRequest_PRV(BufferPtr);
+
+	Pipe_Freeze();
+
+	if (BusSuspended)
+ f6e:	90 93 a8 00 	sts	0x00A8, r25
+ f72:	10 92 a8 00 	sts	0x00A8, r1
+			 *             some events (such as device disconnections) will not fire until the bus is resumed.
+			 */
+			static inline void USB_Host_SuspendBus(void) ATTR_ALWAYS_INLINE;
+			static inline void USB_Host_SuspendBus(void)
+			{
+				UHCON &= ~(1 << SOFEN);
+ f76:	df 91       	pop	r29
+ f78:	cf 91       	pop	r28
+ f7a:	1f 91       	pop	r17
+ f7c:	0f 91       	pop	r16
+			 *  \param[in] Address  Address of the pipe to reset.
+			 */
+			static inline void Pipe_ResetPipe(const uint8_t Address) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_ResetPipe(const uint8_t Address)
+			{
+				UPRST = (1 << (Address & PIPE_PIPENUM_MASK));
+ f7e:	ff 90       	pop	r15
+ f80:	ef 90       	pop	r14
+ f82:	08 95       	ret
+
+00000f84 <USB_Host_SetDeviceConfiguration>:
+				UPRST = 0;
+ f84:	cf 93       	push	r28
+ f86:	c8 2f       	mov	r28, r24
+	  USB_Host_SuspendBus();
+
+	Pipe_ResetPipe(PIPE_CONTROLPIPE);
+
+	return ReturnStatus;
+}
+ f88:	10 92 b1 01 	sts	0x01B1, r1
+ f8c:	89 e0       	ldi	r24, 0x09	; 9
+ f8e:	80 93 b2 01 	sts	0x01B2, r24
+ f92:	c0 93 b3 01 	sts	0x01B3, r28
+
+uint8_t USB_Host_SetDeviceConfiguration(const uint8_t ConfigNumber)
+{
+	uint8_t ErrorCode;
+
+	USB_ControlRequest = (USB_Request_Header_t)
+ f96:	10 92 b4 01 	sts	0x01B4, r1
+ f9a:	10 92 b6 01 	sts	0x01B6, r1
+ f9e:	10 92 b5 01 	sts	0x01B5, r1
+ fa2:	10 92 b8 01 	sts	0x01B8, r1
+ fa6:	10 92 b7 01 	sts	0x01B7, r1
+			 *  \param[in] Address  Address of the pipe to select.
+			 */
+			static inline void Pipe_SelectPipe(const uint8_t Address) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_SelectPipe(const uint8_t Address)
+			{
+				UPNUM = (Address & PIPE_PIPENUM_MASK);
+ faa:	10 92 a7 00 	sts	0x00A7, r1
+			.wLength       = 0,
+		};
+
+	Pipe_SelectPipe(PIPE_CONTROLPIPE);
+
+	if ((ErrorCode = USB_Host_SendControlRequest(NULL)) == HOST_SENDCONTROL_Successful)
+ fae:	80 e0       	ldi	r24, 0x00	; 0
+ fb0:	90 e0       	ldi	r25, 0x00	; 0
+ fb2:	ea de       	rcall	.-556    	; 0xd88 <USB_Host_SendControlRequest>
+ fb4:	88 23       	and	r24, r24
+ fb6:	41 f4       	brne	.+16     	; 0xfc8 <USB_Host_SetDeviceConfiguration+0x44>
+ fb8:	c0 93 af 01 	sts	0x01AF, r28
+	{
+		USB_Host_ConfigurationNumber = ConfigNumber;
+ fbc:	cc 23       	and	r28, r28
+		USB_HostState                = (ConfigNumber) ? HOST_STATE_Configured : HOST_STATE_Addressed;
+ fbe:	11 f0       	breq	.+4      	; 0xfc4 <USB_Host_SetDeviceConfiguration+0x40>
+ fc0:	9b e0       	ldi	r25, 0x0B	; 11
+ fc2:	01 c0       	rjmp	.+2      	; 0xfc6 <USB_Host_SetDeviceConfiguration+0x42>
+ fc4:	9a e0       	ldi	r25, 0x0A	; 10
+ fc6:	9e bb       	out	0x1e, r25	; 30
+ fc8:	cf 91       	pop	r28
+	}
+
+	return ErrorCode;
+}
+ fca:	08 95       	ret
+
+00000fcc <USB_USBTask>:
+#if defined(USB_CAN_BE_DEVICE) && !defined(DEVICE_STATE_AS_GPIOR)
+volatile uint8_t     USB_DeviceState;
+#endif
+
+void USB_USBTask(void)
+{
+ fcc:	cf 93       	push	r28
+			 *  \return Index of the currently selected pipe.
+			 */
+			static inline uint8_t Pipe_GetCurrentPipe(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
+			static inline uint8_t Pipe_GetCurrentPipe(void)
+			{
+				return ((UPNUM & PIPE_PIPENUM_MASK) | Pipe_GetPipeDirection());
+ fce:	c0 91 a7 00 	lds	r28, 0x00A7
+ fd2:	cf 70       	andi	r28, 0x0F	; 15
+			 *  \return The currently selected pipe's direction, as a \c PIPE_DIR_* mask.
+			 */
+			static inline uint8_t Pipe_GetPipeDirection(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
+			static inline uint8_t Pipe_GetPipeDirection(void)
+			{
+				return (UPCFG0X & (1 << EPDIR)) ? PIPE_DIR_IN : PIPE_DIR_OUT;
+ fd4:	80 91 aa 00 	lds	r24, 0x00AA
+			 *  \param[in] Address  Address of the pipe to select.
+			 */
+			static inline void Pipe_SelectPipe(const uint8_t Address) ATTR_ALWAYS_INLINE;
+			static inline void Pipe_SelectPipe(const uint8_t Address)
+			{
+				UPNUM = (Address & PIPE_PIPENUM_MASK);
+ fd8:	10 92 a7 00 	sts	0x00A7, r1
+{
+	uint8_t PrevPipe = Pipe_GetCurrentPipe();
+
+	Pipe_SelectPipe(PIPE_CONTROLPIPE);
+
+	USB_Host_ProcessNextHostState();
+ fdc:	de da       	rcall	.-2628   	; 0x59a <USB_Host_ProcessNextHostState>
+ fde:	c0 93 a7 00 	sts	0x00A7, r28
+ fe2:	cf 91       	pop	r28
+	#elif defined(USB_CAN_BE_HOST)
+		USB_HostTask();
+	#elif defined(USB_CAN_BE_DEVICE)
+		USB_DeviceTask();
+	#endif
+}
+ fe4:	08 95       	ret
+
+00000fe6 <_exit>:
+ fe6:	f8 94       	cli
+
+00000fe8 <__stop_program>:
+ fe8:	ff cf       	rjmp	.-2      	; 0xfe8 <__stop_program>

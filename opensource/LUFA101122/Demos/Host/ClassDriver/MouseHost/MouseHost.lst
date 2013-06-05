@@ -1,0 +1,685 @@
+   1               		.file	"MouseHost.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.EVENT_USB_Host_DeviceEnumerationComplete,"ax",@progbits
+  17               	.global	EVENT_USB_Host_DeviceEnumerationComplete
+  19               	EVENT_USB_Host_DeviceEnumerationComplete:
+  20               	.LFB132:
+  21               	.LSM0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LBB52:
+  25               	.LBB53:
+  26               	.LSM1:
+  27 0000 8BB1      		in r24,43-32
+  28 0002 8F70      		andi r24,lo8(15)
+  29 0004 8066      		ori r24,lo8(96)
+  30 0006 8BB9      		out 43-32,r24
+  31               	/* epilogue start */
+  32               	.LBE53:
+  33               	.LBE52:
+  34               	.LSM2:
+  35 0008 0895      		ret
+  36               	.LFE132:
+  38               		.section	.text.EVENT_USB_Host_DeviceEnumerationFailed,"ax",@progbits
+  39               	.global	EVENT_USB_Host_DeviceEnumerationFailed
+  41               	EVENT_USB_Host_DeviceEnumerationFailed:
+  42               	.LFB134:
+  43               	.LSM3:
+  44               	.LVL0:
+  45               	/* prologue: function */
+  46               	/* frame size = 0 */
+  47               	.LSM4:
+  48 0000 9091 0000 		lds r25,USB_HostState
+  49 0004 2DB7      		in r18,__SP_L__
+  50 0006 3EB7      		in r19,__SP_H__
+  51 0008 2850      		subi r18,lo8(-(-8))
+  52 000a 3040      		sbci r19,hi8(-(-8))
+  53 000c 0FB6      		in __tmp_reg__,__SREG__
+  54 000e F894      		cli
+  55 0010 3EBF      		out __SP_H__,r19
+  56 0012 0FBE      		out __SREG__,__tmp_reg__
+  57 0014 2DBF      		out __SP_L__,r18
+  58 0016 EDB7      		in r30,__SP_L__
+  59 0018 FEB7      		in r31,__SP_H__
+  60 001a 3196      		adiw r30,1
+  61 001c 20E0      		ldi r18,lo8(__c.4162)
+  62 001e 30E0      		ldi r19,hi8(__c.4162)
+  63 0020 ADB7      		in r26,__SP_L__
+  64 0022 BEB7      		in r27,__SP_H__
+  65 0024 1296      		adiw r26,1+1
+  66 0026 3C93      		st X,r19
+  67 0028 2E93      		st -X,r18
+  68 002a 1197      		sbiw r26,1
+  69 002c 8283      		std Z+2,r24
+  70 002e 1382      		std Z+3,__zero_reg__
+  71 0030 6483      		std Z+4,r22
+  72 0032 1582      		std Z+5,__zero_reg__
+  73 0034 9683      		std Z+6,r25
+  74 0036 1782      		std Z+7,__zero_reg__
+  75 0038 0E94 0000 		call printf_P
+  76               	.LVL1:
+  77               	.LBB54:
+  78               	.LBB55:
+  79               	.LSM5:
+  80 003c 8BB1      		in r24,43-32
+  81 003e 8F70      		andi r24,lo8(15)
+  82 0040 8069      		ori r24,lo8(-112)
+  83 0042 8BB9      		out 43-32,r24
+  84 0044 2DB7      		in r18,__SP_L__
+  85 0046 3EB7      		in r19,__SP_H__
+  86 0048 285F      		subi r18,lo8(-(8))
+  87 004a 3F4F      		sbci r19,hi8(-(8))
+  88 004c 0FB6      		in __tmp_reg__,__SREG__
+  89 004e F894      		cli
+  90 0050 3EBF      		out __SP_H__,r19
+  91 0052 0FBE      		out __SREG__,__tmp_reg__
+  92 0054 2DBF      		out __SP_L__,r18
+  93               	/* epilogue start */
+  94               	.LBE55:
+  95               	.LBE54:
+  96               	.LSM6:
+  97 0056 0895      		ret
+  98               	.LFE134:
+ 100               		.section	.text.EVENT_USB_Host_HostError,"ax",@progbits
+ 101               	.global	EVENT_USB_Host_HostError
+ 103               	EVENT_USB_Host_HostError:
+ 104               	.LFB133:
+ 105               	.LSM7:
+ 106               	.LVL2:
+ 107 0000 1F93      		push r17
+ 108               	/* prologue: function */
+ 109               	/* frame size = 0 */
+ 110 0002 182F      		mov r17,r24
+ 111               	.LSM8:
+ 112 0004 0E94 0000 		call USB_ShutDown
+ 113               	.LVL3:
+ 114               	.LSM9:
+ 115 0008 00D0      		rcall .
+ 116 000a 00D0      		rcall .
+ 117 000c EDB7      		in r30,__SP_L__
+ 118 000e FEB7      		in r31,__SP_H__
+ 119 0010 3196      		adiw r30,1
+ 120 0012 80E0      		ldi r24,lo8(__c.4154)
+ 121 0014 90E0      		ldi r25,hi8(__c.4154)
+ 122 0016 ADB7      		in r26,__SP_L__
+ 123 0018 BEB7      		in r27,__SP_H__
+ 124 001a 1296      		adiw r26,1+1
+ 125 001c 9C93      		st X,r25
+ 126 001e 8E93      		st -X,r24
+ 127 0020 1197      		sbiw r26,1
+ 128 0022 1283      		std Z+2,r17
+ 129 0024 1382      		std Z+3,__zero_reg__
+ 130 0026 0E94 0000 		call printf_P
+ 131               	.LBB56:
+ 132               	.LBB57:
+ 133               	.LSM10:
+ 134 002a 8BB1      		in r24,43-32
+ 135 002c 8F70      		andi r24,lo8(15)
+ 136 002e 8069      		ori r24,lo8(-112)
+ 137 0030 8BB9      		out 43-32,r24
+ 138 0032 0F90      		pop __tmp_reg__
+ 139 0034 0F90      		pop __tmp_reg__
+ 140 0036 0F90      		pop __tmp_reg__
+ 141 0038 0F90      		pop __tmp_reg__
+ 142               	.L6:
+ 143 003a 00C0      		rjmp .L6
+ 144               	.LBE57:
+ 145               	.LBE56:
+ 146               	.LFE133:
+ 148               		.section	.text.EVENT_USB_Host_DeviceUnattached,"ax",@progbits
+ 149               	.global	EVENT_USB_Host_DeviceUnattached
+ 151               	EVENT_USB_Host_DeviceUnattached:
+ 152               	.LFB131:
+ 153               	.LSM11:
+ 154               	/* prologue: function */
+ 155               	/* frame size = 0 */
+ 156               	.LSM12:
+ 157 0000 80E0      		ldi r24,lo8(__c.4146)
+ 158 0002 90E0      		ldi r25,hi8(__c.4146)
+ 159 0004 0E94 0000 		call puts_P
+ 160               	.LBB58:
+ 161               	.LBB59:
+ 162               	.LSM13:
+ 163 0008 8BB1      		in r24,43-32
+ 164 000a 8F70      		andi r24,lo8(15)
+ 165 000c 8061      		ori r24,lo8(16)
+ 166 000e 8BB9      		out 43-32,r24
+ 167               	/* epilogue start */
+ 168               	.LBE59:
+ 169               	.LBE58:
+ 170               	.LSM14:
+ 171 0010 0895      		ret
+ 172               	.LFE131:
+ 174               		.section	.text.EVENT_USB_Host_DeviceAttached,"ax",@progbits
+ 175               	.global	EVENT_USB_Host_DeviceAttached
+ 177               	EVENT_USB_Host_DeviceAttached:
+ 178               	.LFB130:
+ 179               	.LSM15:
+ 180               	/* prologue: function */
+ 181               	/* frame size = 0 */
+ 182               	.LSM16:
+ 183 0000 80E0      		ldi r24,lo8(__c.4141)
+ 184 0002 90E0      		ldi r25,hi8(__c.4141)
+ 185 0004 0E94 0000 		call puts_P
+ 186               	.LBB60:
+ 187               	.LBB61:
+ 188               	.LSM17:
+ 189 0008 8BB1      		in r24,43-32
+ 190 000a 8F70      		andi r24,lo8(15)
+ 191 000c 806A      		ori r24,lo8(-96)
+ 192 000e 8BB9      		out 43-32,r24
+ 193               	/* epilogue start */
+ 194               	.LBE61:
+ 195               	.LBE60:
+ 196               	.LSM18:
+ 197 0010 0895      		ret
+ 198               	.LFE130:
+ 200               		.section	.text.SetupHardware,"ax",@progbits
+ 201               	.global	SetupHardware
+ 203               	SetupHardware:
+ 204               	.LFB129:
+ 205               	.LSM19:
+ 206               	/* prologue: function */
+ 207               	/* frame size = 0 */
+ 208               	.LSM20:
+ 209 0000 84B7      		in r24,84-32
+ 210 0002 877F      		andi r24,lo8(-9)
+ 211 0004 84BF      		out 84-32,r24
+ 212               	.LSM21:
+ 213 0006 38E1      		ldi r19,lo8(24)
+ 214               	/* #APP */
+ 215               	 ;  158 "MouseHost.c" 1
+ 216 0008 0FB6      		in __tmp_reg__, __SREG__
+ 217 000a F894      		cli
+ 218 000c 3093 6000 		sts 96, r19
+ 219 0010 1092 6000 		sts 96, __zero_reg__
+ 220 0014 0FBE      		out __SREG__,__tmp_reg__
+ 221               		
+ 222               	 ;  0 "" 2
+ 223               	/* #NOAPP */
+ 224               	.LBB62:
+ 225               	.LSM22:
+ 226 0016 80E0      		ldi r24,lo8(0)
+ 227 0018 90E0      		ldi r25,hi8(0)
+ 228 001a 20E8      		ldi r18,lo8(-128)
+ 229               	/* #APP */
+ 230               	 ;  161 "MouseHost.c" 1
+ 231 001c 0FB6      		in __tmp_reg__,__SREG__
+ 232 001e F894      		cli
+ 233 0020 2093 6100 		sts 97, r18
+ 234 0024 8093 6100 		sts 97, r24
+ 235 0028 0FBE      		out __SREG__, __tmp_reg__
+ 236               	 ;  0 "" 2
+ 237               	/* #NOAPP */
+ 238               	.LBE62:
+ 239               	.LBB63:
+ 240               	.LBB64:
+ 241               	.LBB65:
+ 242               	.LBB66:
+ 243               	.LSM23:
+ 244 002a 83E3      		ldi r24,lo8(51)
+ 245 002c 90E0      		ldi r25,hi8(51)
+ 246 002e 9093 CD00 		sts (204)+1,r25
+ 247 0032 8093 CC00 		sts 204,r24
+ 248               	.LSM24:
+ 249 0036 86E0      		ldi r24,lo8(6)
+ 250 0038 8093 CA00 		sts 202,r24
+ 251               	.LSM25:
+ 252 003c 1092 C800 		sts 200,__zero_reg__
+ 253               	.LSM26:
+ 254 0040 3093 C900 		sts 201,r19
+ 255               	.LSM27:
+ 256 0044 539A      		sbi 42-32,3
+ 257               	.LSM28:
+ 258 0046 5A9A      		sbi 43-32,2
+ 259               	.LBE66:
+ 260               	.LBE65:
+ 261               	.LSM29:
+ 262 0048 80E0      		ldi r24,lo8(USARTStream)
+ 263 004a 90E0      		ldi r25,hi8(USARTStream)
+ 264 004c 9093 0000 		sts (__iob+2)+1,r25
+ 265 0050 8093 0000 		sts __iob+2,r24
+ 266               	.LSM30:
+ 267 0054 9093 0000 		sts (__iob)+1,r25
+ 268 0058 8093 0000 		sts __iob,r24
+ 269               	.LBE64:
+ 270               	.LBE63:
+ 271               	.LBB67:
+ 272               	.LBB68:
+ 273               	.LSM31:
+ 274 005c 8AB1      		in r24,42-32
+ 275 005e 806F      		ori r24,lo8(-16)
+ 276 0060 8AB9      		out 42-32,r24
+ 277               	.LSM32:
+ 278 0062 8BB1      		in r24,43-32
+ 279 0064 8F70      		andi r24,lo8(15)
+ 280 0066 8BB9      		out 43-32,r24
+ 281               	.LBE68:
+ 282               	.LBE67:
+ 283               	.LSM33:
+ 284 0068 0E94 0000 		call USB_Init
+ 285               	/* epilogue start */
+ 286               	.LSM34:
+ 287 006c 0895      		ret
+ 288               	.LFE129:
+ 290               		.section	.text.main,"ax",@progbits
+ 291               	.global	main
+ 293               	main:
+ 294               	.LFB128:
+ 295               	.LSM35:
+ 296 0000 9F92      		push r9
+ 297 0002 AF92      		push r10
+ 298 0004 BF92      		push r11
+ 299 0006 CF92      		push r12
+ 300 0008 DF92      		push r13
+ 301 000a EF92      		push r14
+ 302 000c FF92      		push r15
+ 303 000e 0F93      		push r16
+ 304 0010 1F93      		push r17
+ 305 0012 DF93      		push r29
+ 306 0014 CF93      		push r28
+ 307 0016 CDB7      		in r28,__SP_L__
+ 308 0018 DEB7      		in r29,__SP_H__
+ 309 001a C550      		subi r28,lo8(-(-517))
+ 310 001c D240      		sbci r29,hi8(-(-517))
+ 311 001e 0FB6      		in __tmp_reg__,__SREG__
+ 312 0020 F894      		cli
+ 313 0022 DEBF      		out __SP_H__,r29
+ 314 0024 0FBE      		out __SREG__,__tmp_reg__
+ 315 0026 CDBF      		out __SP_L__,r28
+ 316               	/* prologue: function */
+ 317               	/* frame size = 517 */
+ 318               	.LSM36:
+ 319 0028 0E94 0000 		call SetupHardware
+ 320               	.LSM37:
+ 321 002c 80E0      		ldi r24,lo8(__c.4093)
+ 322 002e 90E0      		ldi r25,hi8(__c.4093)
+ 323 0030 0E94 0000 		call puts_P
+ 324               	.LBB69:
+ 325               	.LBB70:
+ 326               	.LSM38:
+ 327 0034 8BB1      		in r24,43-32
+ 328 0036 8F70      		andi r24,lo8(15)
+ 329 0038 8061      		ori r24,lo8(16)
+ 330 003a 8BB9      		out 43-32,r24
+ 331               	.LBE70:
+ 332               	.LBE69:
+ 333               	.LSM39:
+ 334               	/* #APP */
+ 335               	 ;  68 "MouseHost.c" 1
+ 336 003c 7894      		sei
+ 337               	 ;  0 "" 2
+ 338               	/* #NOAPP */
+ 339               	.LBB71:
+ 340               	.LSM40:
+ 341 003e 8E01      		movw r16,r28
+ 342 0040 0A5F      		subi r16,lo8(-(6))
+ 343 0042 1F4F      		sbci r17,hi8(-(6))
+ 344 0044 5E01      		movw r10,r28
+ 345 0046 0894      		sec
+ 346 0048 A11C      		adc r10,__zero_reg__
+ 347 004a B11C      		adc r11,__zero_reg__
+ 348               	.LSM41:
+ 349 004c 2CE0      		ldi r18,lo8(12)
+ 350 004e 922E      		mov r9,r18
+ 351               	.LBB72:
+ 352               	.LSM42:
+ 353 0050 93E0      		ldi r25,lo8(3)
+ 354 0052 C92E      		mov r12,r25
+ 355 0054 D12C      		mov r13,__zero_reg__
+ 356 0056 CC0E      		add r12,r28
+ 357 0058 DD1E      		adc r13,r29
+ 358               	.LSM43:
+ 359 005a 80E0      		ldi r24,lo8(__c.4112)
+ 360 005c E82E      		mov r14,r24
+ 361 005e 80E0      		ldi r24,hi8(__c.4112)
+ 362 0060 F82E      		mov r15,r24
+ 363               	.LVL4:
+ 364               	.L28:
+ 365               	.LBE72:
+ 366               	.LBE71:
+ 367               	.LSM44:
+ 368 0062 8091 0000 		lds r24,USB_HostState
+ 369 0066 8B30      		cpi r24,lo8(11)
+ 370 0068 01F0      		breq .L16
+ 371 006a 8C30      		cpi r24,lo8(12)
+ 372 006c 01F0      		breq .+2
+ 373 006e 00C0      		rjmp .L15
+ 374 0070 00C0      		rjmp .L31
+ 375               	.L16:
+ 376               	.LBB82:
+ 377               	.LBB75:
+ 378               	.LBB76:
+ 379               	.LSM45:
+ 380 0072 8BB1      		in r24,43-32
+ 381 0074 8F70      		andi r24,lo8(15)
+ 382 0076 806A      		ori r24,lo8(-96)
+ 383 0078 8BB9      		out 43-32,r24
+ 384               	.LBE76:
+ 385               	.LBE75:
+ 386               	.LSM46:
+ 387 007a 81E0      		ldi r24,lo8(1)
+ 388 007c B501      		movw r22,r10
+ 389 007e A801      		movw r20,r16
+ 390 0080 20E0      		ldi r18,lo8(512)
+ 391 0082 32E0      		ldi r19,hi8(512)
+ 392 0084 0E94 0000 		call USB_Host_GetDeviceConfigDescriptor
+ 393 0088 8823      		tst r24
+ 394 008a 01F0      		breq .L18
+ 395               	.LSM47:
+ 396 008c 80E0      		ldi r24,lo8(__c.4098)
+ 397 008e 90E0      		ldi r25,hi8(__c.4098)
+ 398 0090 00C0      		rjmp .L30
+ 399               	.L18:
+ 400               	.LSM48:
+ 401 0092 6981      		ldd r22,Y+1
+ 402 0094 7A81      		ldd r23,Y+2
+ 403 0096 80E0      		ldi r24,lo8(Mouse_HID_Interface)
+ 404 0098 90E0      		ldi r25,hi8(Mouse_HID_Interface)
+ 405 009a A801      		movw r20,r16
+ 406 009c 0E94 0000 		call HID_Host_ConfigurePipes
+ 407 00a0 8823      		tst r24
+ 408 00a2 01F0      		breq .L19
+ 409               	.LSM49:
+ 410 00a4 80E0      		ldi r24,lo8(__c.4101)
+ 411 00a6 90E0      		ldi r25,hi8(__c.4101)
+ 412               	.L30:
+ 413 00a8 0E94 0000 		call puts_P
+ 414               	.LBB77:
+ 415               	.LBB78:
+ 416               	.LSM50:
+ 417 00ac 8BB1      		in r24,43-32
+ 418 00ae 8F70      		andi r24,lo8(15)
+ 419 00b0 8069      		ori r24,lo8(-112)
+ 420 00b2 8BB9      		out 43-32,r24
+ 421               	.LBE78:
+ 422               	.LBE77:
+ 423               	.LSM51:
+ 424 00b4 1092 0000 		sts USB_HostState,__zero_reg__
+ 425 00b8 00C0      		rjmp .L15
+ 426               	.L19:
+ 427               	.LSM52:
+ 428 00ba 81E0      		ldi r24,lo8(1)
+ 429 00bc 0E94 0000 		call USB_Host_SetDeviceConfiguration
+ 430 00c0 8823      		tst r24
+ 431 00c2 01F0      		breq .L20
+ 432               	.LSM53:
+ 433 00c4 80E0      		ldi r24,lo8(__c.4103)
+ 434 00c6 90E0      		ldi r25,hi8(__c.4103)
+ 435 00c8 00C0      		rjmp .L30
+ 436               	.L20:
+ 437               	.LSM54:
+ 438 00ca 80E0      		ldi r24,lo8(Mouse_HID_Interface)
+ 439 00cc 90E0      		ldi r25,hi8(Mouse_HID_Interface)
+ 440 00ce 0E94 0000 		call HID_Host_SetBootProtocol
+ 441 00d2 8823      		tst r24
+ 442 00d4 01F0      		breq .L21
+ 443               	.LSM55:
+ 444 00d6 80E0      		ldi r24,lo8(__c.4105)
+ 445 00d8 90E0      		ldi r25,hi8(__c.4105)
+ 446 00da 00C0      		rjmp .L30
+ 447               	.L21:
+ 448               	.LSM56:
+ 449 00dc 80E0      		ldi r24,lo8(__c.4107)
+ 450 00de 90E0      		ldi r25,hi8(__c.4107)
+ 451 00e0 0E94 0000 		call puts_P
+ 452               	.LBB79:
+ 453               	.LBB80:
+ 454               	.LSM57:
+ 455 00e4 8BB1      		in r24,43-32
+ 456 00e6 8F70      		andi r24,lo8(15)
+ 457 00e8 8066      		ori r24,lo8(96)
+ 458 00ea 8BB9      		out 43-32,r24
+ 459               	.LBE80:
+ 460               	.LBE79:
+ 461               	.LSM58:
+ 462 00ec 9092 0000 		sts USB_HostState,r9
+ 463 00f0 00C0      		rjmp .L15
+ 464               	.L31:
+ 465               	.LSM59:
+ 466 00f2 80E0      		ldi r24,lo8(Mouse_HID_Interface)
+ 467 00f4 90E0      		ldi r25,hi8(Mouse_HID_Interface)
+ 468 00f6 0E94 0000 		call HID_Host_IsReportReceived
+ 469 00fa 8823      		tst r24
+ 470 00fc 01F4      		brne .+2
+ 471 00fe 00C0      		rjmp .L15
+ 472               	.LBB81:
+ 473               	.LSM60:
+ 474 0100 80E0      		ldi r24,lo8(Mouse_HID_Interface)
+ 475 0102 90E0      		ldi r25,hi8(Mouse_HID_Interface)
+ 476 0104 B601      		movw r22,r12
+ 477 0106 0E94 0000 		call HID_Host_ReceiveReport
+ 478               	.LSM61:
+ 479 010a 2DB7      		in r18,__SP_L__
+ 480 010c 3EB7      		in r19,__SP_H__
+ 481 010e 2850      		subi r18,lo8(-(-8))
+ 482 0110 3040      		sbci r19,hi8(-(-8))
+ 483 0112 0FB6      		in __tmp_reg__,__SREG__
+ 484 0114 F894      		cli
+ 485 0116 3EBF      		out __SP_H__,r19
+ 486 0118 0FBE      		out __SREG__,__tmp_reg__
+ 487 011a 2DBF      		out __SP_L__,r18
+ 488 011c EDB7      		in r30,__SP_L__
+ 489 011e FEB7      		in r31,__SP_H__
+ 490 0120 3196      		adiw r30,1
+ 491 0122 ADB7      		in r26,__SP_L__
+ 492 0124 BEB7      		in r27,__SP_H__
+ 493 0126 1296      		adiw r26,1+1
+ 494 0128 FC92      		st X,r15
+ 495 012a EE92      		st -X,r14
+ 496 012c 1197      		sbiw r26,1
+ 497 012e 8C81      		ldd r24,Y+4
+ 498 0130 9927      		clr r25
+ 499 0132 87FD      		sbrc r24,7
+ 500 0134 9095      		com r25
+ 501 0136 9383      		std Z+3,r25
+ 502 0138 8283      		std Z+2,r24
+ 503 013a 8D81      		ldd r24,Y+5
+ 504 013c 9927      		clr r25
+ 505 013e 87FD      		sbrc r24,7
+ 506 0140 9095      		com r25
+ 507 0142 9583      		std Z+5,r25
+ 508 0144 8483      		std Z+4,r24
+ 509 0146 8B81      		ldd r24,Y+3
+ 510 0148 8683      		std Z+6,r24
+ 511 014a 1782      		std Z+7,__zero_reg__
+ 512 014c 0E94 0000 		call printf_P
+ 513               	.LSM62:
+ 514 0150 8C81      		ldd r24,Y+4
+ 515 0152 2DB7      		in r18,__SP_L__
+ 516 0154 3EB7      		in r19,__SP_H__
+ 517 0156 285F      		subi r18,lo8(-(8))
+ 518 0158 3F4F      		sbci r19,hi8(-(8))
+ 519 015a 0FB6      		in __tmp_reg__,__SREG__
+ 520 015c F894      		cli
+ 521 015e 3EBF      		out __SP_H__,r19
+ 522 0160 0FBE      		out __SREG__,__tmp_reg__
+ 523 0162 2DBF      		out __SP_L__,r18
+ 524 0164 1816      		cp __zero_reg__,r24
+ 525 0166 04F4      		brge .L22
+ 526 0168 90E1      		ldi r25,lo8(16)
+ 527               	.LVL5:
+ 528 016a 00C0      		rjmp .L23
+ 529               	.LVL6:
+ 530               	.L22:
+ 531               	.LSM63:
+ 532 016c 8823      		tst r24
+ 533 016e 01F0      		breq .L24
+ 534 0170 90E2      		ldi r25,lo8(32)
+ 535               	.LVL7:
+ 536 0172 00C0      		rjmp .L23
+ 537               	.LVL8:
+ 538               	.L24:
+ 539 0174 90E0      		ldi r25,lo8(0)
+ 540               	.LVL9:
+ 541               	.L23:
+ 542               	.LSM64:
+ 543 0176 8D81      		ldd r24,Y+5
+ 544 0178 1816      		cp __zero_reg__,r24
+ 545 017a 04F4      		brge .L25
+ 546               	.LSM65:
+ 547 017c 9068      		ori r25,lo8(-128)
+ 548 017e 00C0      		rjmp .L26
+ 549               	.L25:
+ 550               	.LSM66:
+ 551 0180 8111      		cpse r24,__zero_reg__
+ 552               	.LSM67:
+ 553 0182 9064      		ori r25,lo8(64)
+ 554               	.L26:
+ 555               	.LSM68:
+ 556 0184 8B81      		ldd r24,Y+3
+ 557 0186 8111      		cpse r24,__zero_reg__
+ 558 0188 90EF      		ldi r25,lo8(-16)
+ 559               	.L27:
+ 560               	.LBB73:
+ 561               	.LBB74:
+ 562               	.LSM69:
+ 563 018a 8BB1      		in r24,43-32
+ 564 018c 8F70      		andi r24,lo8(15)
+ 565 018e 982B      		or r25,r24
+ 566 0190 9BB9      		out 43-32,r25
+ 567               	.L15:
+ 568               	.LBE74:
+ 569               	.LBE73:
+ 570               	.LBE81:
+ 571               	.LBE82:
+ 572               	.LSM70:
+ 573 0192 0E94 0000 		call USB_USBTask
+ 574               	.LVL10:
+ 575 0196 00C0      		rjmp .L28
+ 576               	.LFE128:
+ 578               	.global	Mouse_HID_Interface
+ 579               		.data
+ 582               	Mouse_HID_Interface:
+ 583 0000 01        		.byte	1
+ 584 0001 00        		.byte	0
+ 585 0002 02        		.byte	2
+ 586 0003 00        		.byte	0
+ 587 0004 02        		.byte	2
+ 588 0005 0000      		.skip 2,0
+ 589 0007 0000 0000 		.skip 12,0
+ 589      0000 0000 
+ 589      0000 0000 
+ 590               		.section	.progmem.data,"a",@progbits
+ 593               	__c.4162:
+ 594 0000 1B5B 3331 		.ascii	"\033[31mDev Enum Error\r\n"
+ 594      6D44 6576 
+ 594      2045 6E75 
+ 594      6D20 4572 
+ 594      726F 720D 
+ 595 0015 202D 2D20 		.string	" -- Error Code %d\r\n -- Sub Error Code %d\r\n -- In State %d\r\n\033[37m"
+ 595      4572 726F 
+ 595      7220 436F 
+ 595      6465 2025 
+ 595      640D 0A20 
+ 598               	__c.4154:
+ 599 0056 1B5B 3331 		.string	"\033[31mHost Mode Error\r\n -- Error Code %d\r\n\033[37m"
+ 599      6D48 6F73 
+ 599      7420 4D6F 
+ 599      6465 2045 
+ 599      7272 6F72 
+ 602               	__c.4146:
+ 603 0085 0D0A 4465 		.string	"\r\nDevice Unattached.\r\n"
+ 603      7669 6365 
+ 603      2055 6E61 
+ 603      7474 6163 
+ 603      6865 642E 
+ 606               	__c.4141:
+ 607 009c 4465 7669 		.string	"Device Attached.\r\n"
+ 607      6365 2041 
+ 607      7474 6163 
+ 607      6865 642E 
+ 607      0D0A 00
+ 610               	__c.4112:
+ 611 00af 6458 3A25 		.string	"dX:%2d dY:%2d Button:%d\r\n"
+ 611      3264 2064 
+ 611      593A 2532 
+ 611      6420 4275 
+ 611      7474 6F6E 
+ 614               	__c.4107:
+ 615 00c9 4D6F 7573 		.string	"Mouse Enumerated.\r\n"
+ 615      6520 456E 
+ 615      756D 6572 
+ 615      6174 6564 
+ 615      2E0D 0A00 
+ 618               	__c.4105:
+ 619 00dd 436F 756C 		.string	"Could not Set Boot Protocol Mode.\r\n"
+ 619      6420 6E6F 
+ 619      7420 5365 
+ 619      7420 426F 
+ 619      6F74 2050 
+ 622               	__c.4103:
+ 623 0101 4572 726F 		.string	"Error Setting Device Configuration.\r\n"
+ 623      7220 5365 
+ 623      7474 696E 
+ 623      6720 4465 
+ 623      7669 6365 
+ 626               	__c.4101:
+ 627 0127 4174 7461 		.string	"Attached Device Not a Valid Mouse.\r\n"
+ 627      6368 6564 
+ 627      2044 6576 
+ 627      6963 6520 
+ 627      4E6F 7420 
+ 630               	__c.4098:
+ 631 014c 4572 726F 		.string	"Error Retrieving Configuration Descriptor.\r\n"
+ 631      7220 5265 
+ 631      7472 6965 
+ 631      7669 6E67 
+ 631      2043 6F6E 
+ 634               	__c.4093:
+ 635 0179 1B5B 3336 		.string	"\033[36mMouse Host Demo running.\r\n\033[37m"
+ 635      6D4D 6F75 
+ 635      7365 2048 
+ 635      6F73 7420 
+ 635      4465 6D6F 
+ 708               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 MouseHost.c
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccYdxUSV.s:2      *ABS*:0000003f __SREG__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccYdxUSV.s:3      *ABS*:0000003e __SP_H__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccYdxUSV.s:4      *ABS*:0000003d __SP_L__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccYdxUSV.s:5      *ABS*:00000034 __CCP__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccYdxUSV.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccYdxUSV.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccYdxUSV.s:19     .text.EVENT_USB_Host_DeviceEnumerationComplete:00000000 EVENT_USB_Host_DeviceEnumerationComplete
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccYdxUSV.s:41     .text.EVENT_USB_Host_DeviceEnumerationFailed:00000000 EVENT_USB_Host_DeviceEnumerationFailed
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccYdxUSV.s:593    .progmem.data:00000000 __c.4162
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccYdxUSV.s:103    .text.EVENT_USB_Host_HostError:00000000 EVENT_USB_Host_HostError
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccYdxUSV.s:598    .progmem.data:00000056 __c.4154
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccYdxUSV.s:151    .text.EVENT_USB_Host_DeviceUnattached:00000000 EVENT_USB_Host_DeviceUnattached
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccYdxUSV.s:602    .progmem.data:00000085 __c.4146
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccYdxUSV.s:177    .text.EVENT_USB_Host_DeviceAttached:00000000 EVENT_USB_Host_DeviceAttached
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccYdxUSV.s:606    .progmem.data:0000009c __c.4141
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccYdxUSV.s:203    .text.SetupHardware:00000000 SetupHardware
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccYdxUSV.s:293    .text.main:00000000 main
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccYdxUSV.s:634    .progmem.data:00000179 __c.4093
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccYdxUSV.s:610    .progmem.data:000000af __c.4112
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccYdxUSV.s:630    .progmem.data:0000014c __c.4098
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccYdxUSV.s:582    .data:00000000 Mouse_HID_Interface
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccYdxUSV.s:626    .progmem.data:00000127 __c.4101
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccYdxUSV.s:622    .progmem.data:00000101 __c.4103
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccYdxUSV.s:618    .progmem.data:000000dd __c.4105
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccYdxUSV.s:614    .progmem.data:000000c9 __c.4107
+
+UNDEFINED SYMBOLS
+USB_HostState
+printf_P
+USB_ShutDown
+puts_P
+USARTStream
+__iob
+USB_Init
+USB_Host_GetDeviceConfigDescriptor
+HID_Host_ConfigurePipes
+USB_Host_SetDeviceConfiguration
+HID_Host_SetBootProtocol
+HID_Host_IsReportReceived
+HID_Host_ReceiveReport
+USB_USBTask
+__do_copy_data

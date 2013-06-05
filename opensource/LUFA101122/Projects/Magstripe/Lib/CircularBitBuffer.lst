@@ -1,0 +1,232 @@
+   1               		.file	"CircularBitBuffer.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.BitBuffer_Init,"ax",@progbits
+  17               	.global	BitBuffer_Init
+  19               	BitBuffer_Init:
+  20               	.LFB6:
+  21               	.LSM0:
+  22               	.LVL0:
+  23               	/* prologue: function */
+  24               	/* frame size = 0 */
+  25 0000 FC01      		movw r30,r24
+  26               	.LSM1:
+  27 0002 E050      		subi r30,lo8(-(1024))
+  28 0004 FC4F      		sbci r31,hi8(-(1024))
+  29               	.LVL1:
+  30 0006 1182      		std Z+1,__zero_reg__
+  31 0008 1082      		st Z,__zero_reg__
+  32 000a E050      		subi r30,lo8(-(-1024))
+  33 000c F440      		sbci r31,hi8(-(-1024))
+  34               	.LSM2:
+  35 000e DF01      		movw r26,r30
+  36 0010 AE5F      		subi r26,lo8(-(1026))
+  37 0012 BB4F      		sbci r27,hi8(-(1026))
+  38 0014 EC93      		st X,r30
+  39 0016 1196      		adiw r26,1
+  40 0018 FC93      		st X,r31
+  41               	.LVL2:
+  42               	.LSM3:
+  43 001a EC5F      		subi r30,lo8(-(1028))
+  44 001c FB4F      		sbci r31,hi8(-(1028))
+  45 001e 81E0      		ldi r24,lo8(1)
+  46 0020 8083      		st Z,r24
+  47 0022 E450      		subi r30,lo8(-(-1028))
+  48 0024 F440      		sbci r31,hi8(-(-1028))
+  49               	.LSM4:
+  50 0026 DF01      		movw r26,r30
+  51 0028 AB5F      		subi r26,lo8(-(1029))
+  52 002a BB4F      		sbci r27,hi8(-(1029))
+  53 002c EC93      		st X,r30
+  54 002e 1196      		adiw r26,1
+  55 0030 FC93      		st X,r31
+  56               	.LSM5:
+  57 0032 E95F      		subi r30,lo8(-(1031))
+  58 0034 FB4F      		sbci r31,hi8(-(1031))
+  59 0036 8083      		st Z,r24
+  60               	/* epilogue start */
+  61               	.LSM6:
+  62 0038 0895      		ret
+  63               	.LFE6:
+  65               		.section	.text.BitBuffer_StoreNextBit,"ax",@progbits
+  66               	.global	BitBuffer_StoreNextBit
+  68               	BitBuffer_StoreNextBit:
+  69               	.LFB7:
+  70               	.LSM7:
+  71               	.LVL3:
+  72               	/* prologue: function */
+  73               	/* frame size = 0 */
+  74 0000 DC01      		movw r26,r24
+  75               	.LSM8:
+  76 0002 6623      		tst r22
+  77 0004 01F0      		breq .L4
+  78               	.LVL4:
+  79               	.LSM9:
+  80 0006 AE5F      		subi r26,lo8(-(1026))
+  81 0008 BB4F      		sbci r27,hi8(-(1026))
+  82 000a ED91      		ld r30,X+
+  83 000c FD91      		ld r31,X+
+  84 000e 8081      		ld r24,Z
+  85 0010 9C91      		ld r25,X
+  86 0012 A450      		subi r26,lo8(-(-1028))
+  87 0014 B440      		sbci r27,hi8(-(-1028))
+  88 0016 892B      		or r24,r25
+  89 0018 8083      		st Z,r24
+  90               	.LVL5:
+  91               	.L4:
+  92               	.LSM10:
+  93 001a FD01      		movw r30,r26
+  94 001c E050      		subi r30,lo8(-(1024))
+  95 001e FC4F      		sbci r31,hi8(-(1024))
+  96 0020 8081      		ld r24,Z
+  97 0022 9181      		ldd r25,Z+1
+  98 0024 0196      		adiw r24,1
+  99 0026 9183      		std Z+1,r25
+ 100 0028 8083      		st Z,r24
+ 101               	.LSM11:
+ 102 002a FD01      		movw r30,r26
+ 103 002c EC5F      		subi r30,lo8(-(1028))
+ 104 002e FB4F      		sbci r31,hi8(-(1028))
+ 105 0030 8081      		ld r24,Z
+ 106 0032 8038      		cpi r24,lo8(-128)
+ 107 0034 01F4      		brne .L5
+ 108               	.LSM12:
+ 109 0036 FD01      		movw r30,r26
+ 110 0038 EE5F      		subi r30,lo8(-(1026))
+ 111 003a FB4F      		sbci r31,hi8(-(1026))
+ 112 003c 2081      		ld r18,Z
+ 113 003e 3181      		ldd r19,Z+1
+ 114 0040 CD01      		movw r24,r26
+ 115 0042 8150      		subi r24,lo8(-(1023))
+ 116 0044 9C4F      		sbci r25,hi8(-(1023))
+ 117 0046 2817      		cp r18,r24
+ 118 0048 3907      		cpc r19,r25
+ 119 004a 01F0      		breq .L6
+ 120               	.LSM13:
+ 121 004c 2F5F      		subi r18,lo8(-(1))
+ 122 004e 3F4F      		sbci r19,hi8(-(1))
+ 123 0050 3183      		std Z+1,r19
+ 124 0052 2083      		st Z,r18
+ 125 0054 00C0      		rjmp .L7
+ 126               	.L6:
+ 127               	.LSM14:
+ 128 0056 B183      		std Z+1,r27
+ 129 0058 A083      		st Z,r26
+ 130               	.L7:
+ 131               	.LSM15:
+ 132 005a AC5F      		subi r26,lo8(-(1028))
+ 133 005c BB4F      		sbci r27,hi8(-(1028))
+ 134 005e 81E0      		ldi r24,lo8(1)
+ 135 0060 8C93      		st X,r24
+ 136 0062 0895      		ret
+ 137               	.L5:
+ 138               	.LSM16:
+ 139 0064 880F      		lsl r24
+ 140 0066 8083      		st Z,r24
+ 141 0068 0895      		ret
+ 142               	.LFE7:
+ 144               		.section	.text.BitBuffer_GetNextBit,"ax",@progbits
+ 145               	.global	BitBuffer_GetNextBit
+ 147               	BitBuffer_GetNextBit:
+ 148               	.LFB8:
+ 149               	.LSM17:
+ 150               	.LVL6:
+ 151 0000 CF93      		push r28
+ 152 0002 DF93      		push r29
+ 153               	/* prologue: function */
+ 154               	/* frame size = 0 */
+ 155 0004 DC01      		movw r26,r24
+ 156               	.LSM18:
+ 157 0006 AC01      		movw r20,r24
+ 158 0008 4B5F      		subi r20,lo8(-(1029))
+ 159 000a 5B4F      		sbci r21,hi8(-(1029))
+ 160 000c EA01      		movw r28,r20
+ 161 000e E881      		ld r30,Y
+ 162 0010 F981      		ldd r31,Y+1
+ 163 0012 7081      		ld r23,Z
+ 164 0014 EC01      		movw r28,r24
+ 165 0016 C95F      		subi r28,lo8(-(1031))
+ 166 0018 DB4F      		sbci r29,hi8(-(1031))
+ 167 001a 6881      		ld r22,Y
+ 168               	.LSM19:
+ 169 001c 862F      		mov r24,r22
+ 170               	.LVL7:
+ 171 001e 8095      		com r24
+ 172 0020 8723      		and r24,r23
+ 173 0022 8083      		st Z,r24
+ 174               	.LSM20:
+ 175 0024 FD01      		movw r30,r26
+ 176 0026 E050      		subi r30,lo8(-(1024))
+ 177 0028 FC4F      		sbci r31,hi8(-(1024))
+ 178 002a 8081      		ld r24,Z
+ 179 002c 9181      		ldd r25,Z+1
+ 180 002e 0197      		sbiw r24,1
+ 181 0030 9183      		std Z+1,r25
+ 182 0032 8083      		st Z,r24
+ 183               	.LSM21:
+ 184 0034 8881      		ld r24,Y
+ 185 0036 8038      		cpi r24,lo8(-128)
+ 186 0038 01F4      		brne .L11
+ 187               	.LSM22:
+ 188 003a FA01      		movw r30,r20
+ 189 003c 2081      		ld r18,Z
+ 190 003e 3181      		ldd r19,Z+1
+ 191 0040 CD01      		movw r24,r26
+ 192 0042 8150      		subi r24,lo8(-(1023))
+ 193 0044 9C4F      		sbci r25,hi8(-(1023))
+ 194 0046 2817      		cp r18,r24
+ 195 0048 3907      		cpc r19,r25
+ 196 004a 01F0      		breq .L12
+ 197               	.LSM23:
+ 198 004c 2F5F      		subi r18,lo8(-(1))
+ 199 004e 3F4F      		sbci r19,hi8(-(1))
+ 200 0050 3183      		std Z+1,r19
+ 201 0052 2083      		st Z,r18
+ 202 0054 00C0      		rjmp .L13
+ 203               	.L12:
+ 204               	.LSM24:
+ 205 0056 EA01      		movw r28,r20
+ 206 0058 B983      		std Y+1,r27
+ 207 005a A883      		st Y,r26
+ 208               	.L13:
+ 209               	.LSM25:
+ 210 005c A95F      		subi r26,lo8(-(1031))
+ 211 005e BB4F      		sbci r27,hi8(-(1031))
+ 212 0060 81E0      		ldi r24,lo8(1)
+ 213 0062 8C93      		st X,r24
+ 214 0064 00C0      		rjmp .L14
+ 215               	.L11:
+ 216               	.LSM26:
+ 217 0066 880F      		lsl r24
+ 218 0068 8883      		st Y,r24
+ 219               	.L14:
+ 220 006a 872F      		mov r24,r23
+ 221 006c 8623      		and r24,r22
+ 222 006e 01F0      		breq .L15
+ 223 0070 81E0      		ldi r24,lo8(1)
+ 224               	.L15:
+ 225               	/* epilogue start */
+ 226               	.LSM27:
+ 227 0072 DF91      		pop r29
+ 228 0074 CF91      		pop r28
+ 229 0076 0895      		ret
+ 230               	.LFE8:
+ 272               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 CircularBitBuffer.c
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc3caiJv.s:2      *ABS*:0000003f __SREG__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc3caiJv.s:3      *ABS*:0000003e __SP_H__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc3caiJv.s:4      *ABS*:0000003d __SP_L__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc3caiJv.s:5      *ABS*:00000034 __CCP__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc3caiJv.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc3caiJv.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc3caiJv.s:19     .text.BitBuffer_Init:00000000 BitBuffer_Init
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc3caiJv.s:68     .text.BitBuffer_StoreNextBit:00000000 BitBuffer_StoreNextBit
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc3caiJv.s:147    .text.BitBuffer_GetNextBit:00000000 BitBuffer_GetNextBit
+
+NO UNDEFINED SYMBOLS

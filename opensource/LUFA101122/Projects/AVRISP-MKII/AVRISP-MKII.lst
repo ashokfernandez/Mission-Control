@@ -1,0 +1,264 @@
+   1               		.file	"AVRISP-MKII.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.EVENT_USB_Device_Connect,"ax",@progbits
+  17               	.global	EVENT_USB_Device_Connect
+  19               	EVENT_USB_Device_Connect:
+  20               	.LFB109:
+  21               	.LSM0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LBB29:
+  25               	.LBB30:
+  26               	.LSM1:
+  27 0000 85B1      		in r24,37-32
+  28 0002 8F71      		andi r24,lo8(31)
+  29 0004 806C      		ori r24,lo8(-64)
+  30 0006 85B9      		out 37-32,r24
+  31               	/* epilogue start */
+  32               	.LBE30:
+  33               	.LBE29:
+  34               	.LSM2:
+  35 0008 0895      		ret
+  36               	.LFE109:
+  38               		.section	.text.EVENT_USB_Device_Disconnect,"ax",@progbits
+  39               	.global	EVENT_USB_Device_Disconnect
+  41               	EVENT_USB_Device_Disconnect:
+  42               	.LFB110:
+  43               	.LSM3:
+  44               	/* prologue: function */
+  45               	/* frame size = 0 */
+  46               	.LBB31:
+  47               	.LBB32:
+  48               	.LSM4:
+  49 0000 85B1      		in r24,37-32
+  50 0002 8F71      		andi r24,lo8(31)
+  51 0004 8064      		ori r24,lo8(64)
+  52 0006 85B9      		out 37-32,r24
+  53               	/* epilogue start */
+  54               	.LBE32:
+  55               	.LBE31:
+  56               	.LSM5:
+  57 0008 0895      		ret
+  58               	.LFE110:
+  60               		.section	.text.AVRISP_Task,"ax",@progbits
+  61               	.global	AVRISP_Task
+  63               	AVRISP_Task:
+  64               	.LFB112:
+  65               	.LSM6:
+  66               	/* prologue: function */
+  67               	/* frame size = 0 */
+  68               	.LSM7:
+  69 0000 8EB3      		in r24,62-32
+  70 0002 8430      		cpi r24,lo8(4)
+  71 0004 01F4      		brne .L7
+  72               	.LSM8:
+  73 0006 0E94 0000 		call V2Params_UpdateParamValues
+  74               	.LBB33:
+  75               	.LBB34:
+  76               	.LSM9:
+  77 000a 82E0      		ldi r24,lo8(2)
+  78 000c 8093 E900 		sts 233,r24
+  79               	.LBE34:
+  80               	.LBE33:
+  81               	.LBB35:
+  82               	.LBB36:
+  83               	.LSM10:
+  84 0010 8091 E800 		lds r24,232
+  85               	.LBE36:
+  86               	.LBE35:
+  87               	.LSM11:
+  88 0014 82FF      		sbrs r24,2
+  89 0016 00C0      		rjmp .L7
+  90               	.LBB37:
+  91               	.LBB38:
+  92               	.LSM12:
+  93 0018 85B1      		in r24,37-32
+  94 001a 8F71      		andi r24,lo8(31)
+  95 001c 806C      		ori r24,lo8(-64)
+  96 001e 85B9      		out 37-32,r24
+  97               	.LBE38:
+  98               	.LBE37:
+  99               	.LSM13:
+ 100 0020 0E94 0000 		call V2Protocol_ProcessCommand
+ 101               	.LBB39:
+ 102               	.LBB40:
+ 103               	.LSM14:
+ 104 0024 85B1      		in r24,37-32
+ 105 0026 8F71      		andi r24,lo8(31)
+ 106 0028 8068      		ori r24,lo8(-128)
+ 107 002a 85B9      		out 37-32,r24
+ 108               	.L7:
+ 109 002c 0895      		ret
+ 110               	.LBE40:
+ 111               	.LBE39:
+ 112               	.LFE112:
+ 114               		.section	.text.EVENT_USB_Device_ConfigurationChanged,"ax",@progbits
+ 115               	.global	EVENT_USB_Device_ConfigurationChanged
+ 117               	EVENT_USB_Device_ConfigurationChanged:
+ 118               	.LFB111:
+ 119               	.LSM15:
+ 120               	/* prologue: function */
+ 121               	/* frame size = 0 */
+ 122               	.LBB41:
+ 123               	.LSM16:
+ 124 0000 82E0      		ldi r24,lo8(2)
+ 125 0002 60E8      		ldi r22,lo8(-128)
+ 126 0004 42E3      		ldi r20,lo8(50)
+ 127 0006 0E94 0000 		call Endpoint_ConfigureEndpoint_Prv
+ 128               	.LBE41:
+ 129               	.LSM17:
+ 130 000a 80FD      		sbrc r24,0
+ 131 000c 00C0      		rjmp .L9
+ 132 000e 90E4      		ldi r25,lo8(64)
+ 133 0010 00C0      		rjmp .L10
+ 134               	.L9:
+ 135 0012 90E8      		ldi r25,lo8(-128)
+ 136               	.L10:
+ 137               	.LBB42:
+ 138               	.LBB43:
+ 139               	.LSM18:
+ 140 0014 85B1      		in r24,37-32
+ 141 0016 8F71      		andi r24,lo8(31)
+ 142 0018 982B      		or r25,r24
+ 143 001a 95B9      		out 37-32,r25
+ 144               	/* epilogue start */
+ 145               	.LBE43:
+ 146               	.LBE42:
+ 147               	.LSM19:
+ 148 001c 0895      		ret
+ 149               	.LFE111:
+ 151               		.section	.text.SetupHardware,"ax",@progbits
+ 152               	.global	SetupHardware
+ 154               	SetupHardware:
+ 155               	.LFB108:
+ 156               	.LSM20:
+ 157               	/* prologue: function */
+ 158               	/* frame size = 0 */
+ 159               	.LSM21:
+ 160 0000 84B7      		in r24,84-32
+ 161 0002 877F      		andi r24,lo8(-9)
+ 162 0004 84BF      		out 84-32,r24
+ 163               	.LSM22:
+ 164 0006 88E1      		ldi r24,lo8(24)
+ 165               	/* #APP */
+ 166               	 ;  68 "AVRISP-MKII.c" 1
+ 167 0008 0FB6      		in __tmp_reg__, __SREG__
+ 168 000a F894      		cli
+ 169 000c 8093 6000 		sts 96, r24
+ 170 0010 1092 6000 		sts 96, __zero_reg__
+ 171 0014 0FBE      		out __SREG__,__tmp_reg__
+ 172               		
+ 173               	 ;  0 "" 2
+ 174               	/* #NOAPP */
+ 175               	.LBB44:
+ 176               	.LSM23:
+ 177 0016 80E0      		ldi r24,lo8(0)
+ 178 0018 90E0      		ldi r25,hi8(0)
+ 179 001a 20E8      		ldi r18,lo8(-128)
+ 180               	/* #APP */
+ 181               	 ;  71 "AVRISP-MKII.c" 1
+ 182 001c 0FB6      		in __tmp_reg__,__SREG__
+ 183 001e F894      		cli
+ 184 0020 2093 6100 		sts 97, r18
+ 185 0024 8093 6100 		sts 97, r24
+ 186 0028 0FBE      		out __SREG__, __tmp_reg__
+ 187               	 ;  0 "" 2
+ 188               	/* #NOAPP */
+ 189               	.LBE44:
+ 190               	.LBB45:
+ 191               	.LBB46:
+ 192               	.LSM24:
+ 193 002a 84B1      		in r24,36-32
+ 194 002c 806E      		ori r24,lo8(-32)
+ 195 002e 84B9      		out 36-32,r24
+ 196               	.LSM25:
+ 197 0030 85B1      		in r24,37-32
+ 198 0032 8F71      		andi r24,lo8(31)
+ 199 0034 85B9      		out 37-32,r24
+ 200               	.LBE46:
+ 201               	.LBE45:
+ 202               	.LSM26:
+ 203 0036 0E94 0000 		call USB_Init
+ 204               	/* epilogue start */
+ 205               	.LSM27:
+ 206 003a 0895      		ret
+ 207               	.LFE108:
+ 209               		.section	.text.main,"ax",@progbits
+ 210               	.global	main
+ 212               	main:
+ 213               	.LFB107:
+ 214               	.LSM28:
+ 215               	/* prologue: function */
+ 216               	/* frame size = 0 */
+ 217               	.LSM29:
+ 218 0000 0E94 0000 		call SetupHardware
+ 219               	.LSM30:
+ 220 0004 0E94 0000 		call V2Protocol_Init
+ 221               	.LBB47:
+ 222               	.LBB48:
+ 223               	.LSM31:
+ 224 0008 85B1      		in r24,37-32
+ 225 000a 8F71      		andi r24,lo8(31)
+ 226 000c 8064      		ori r24,lo8(64)
+ 227 000e 85B9      		out 37-32,r24
+ 228               	.LBE48:
+ 229               	.LBE47:
+ 230               	.LSM32:
+ 231               	/* #APP */
+ 232               	 ;  48 "AVRISP-MKII.c" 1
+ 233 0010 7894      		sei
+ 234               	 ;  0 "" 2
+ 235               	/* #NOAPP */
+ 236               	.L17:
+ 237               	.LSM33:
+ 238 0012 4899      		sbic 41-32,0
+ 239 0014 00C0      		rjmp .L15
+ 240 0016 90E2      		ldi r25,lo8(32)
+ 241 0018 00C0      		rjmp .L16
+ 242               	.L15:
+ 243 001a 90E0      		ldi r25,lo8(0)
+ 244               	.L16:
+ 245               	.LBB49:
+ 246               	.LBB50:
+ 247               	.LSM34:
+ 248 001c 85B1      		in r24,37-32
+ 249 001e 8F7D      		andi r24,lo8(-33)
+ 250 0020 982B      		or r25,r24
+ 251 0022 95B9      		out 37-32,r25
+ 252               	.LBE50:
+ 253               	.LBE49:
+ 254               	.LSM35:
+ 255 0024 0E94 0000 		call AVRISP_Task
+ 256               	.LSM36:
+ 257 0028 0E94 0000 		call USB_USBTask
+ 258 002c 00C0      		rjmp .L17
+ 259               	.LFE107:
+ 325               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 AVRISP-MKII.c
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cczvHQ1J.s:2      *ABS*:0000003f __SREG__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cczvHQ1J.s:3      *ABS*:0000003e __SP_H__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cczvHQ1J.s:4      *ABS*:0000003d __SP_L__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cczvHQ1J.s:5      *ABS*:00000034 __CCP__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cczvHQ1J.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cczvHQ1J.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cczvHQ1J.s:19     .text.EVENT_USB_Device_Connect:00000000 EVENT_USB_Device_Connect
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cczvHQ1J.s:41     .text.EVENT_USB_Device_Disconnect:00000000 EVENT_USB_Device_Disconnect
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cczvHQ1J.s:63     .text.AVRISP_Task:00000000 AVRISP_Task
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cczvHQ1J.s:117    .text.EVENT_USB_Device_ConfigurationChanged:00000000 EVENT_USB_Device_ConfigurationChanged
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cczvHQ1J.s:154    .text.SetupHardware:00000000 SetupHardware
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cczvHQ1J.s:212    .text.main:00000000 main
+
+UNDEFINED SYMBOLS
+V2Params_UpdateParamValues
+V2Protocol_ProcessCommand
+Endpoint_ConfigureEndpoint_Prv
+USB_Init
+V2Protocol_Init
+USB_USBTask

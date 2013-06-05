@@ -1,0 +1,384 @@
+/* --- HTML elements -------------------------------------------------------- */
+
+body {
+    /* that's right, a font just for GNOME users! */
+    font-family: "Cantarell", arial, sans-serif;
+    text-align: center;
+    background: #919191 url('../graphics/bodybg.png') repeat-x;
+}
+
+h1 {
+
+    font-family: georgia, "Times New Roman", serif;
+    margin-bottom: 30px;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+h2, h3, h4, h5 {
+    font-weight: bold;
+    font-family: georgia, "Times New Roman", serif;
+    margin: 40px 0 20px 0;
+}
+
+h1 { font-size: 200%; }
+h2 { font-size: 150%; }
+h3 { font-size: 125%; }
+h4 { font-size: 110%; }
+h5 { font-size: 100%; }
+
+blockquote {
+    margin-left: 40px;
+    padding-left: 10px; 
+    border-left: 5px solid #e5e5e5;
+    font-family: georgia, "Times New Roman", serif;
+    font-size: 115%;
+    line-height: 140%;
+    color: #666666;
+}
+
+p {
+    margin: 15px 0;
+    line-height: 135%;
+}
+
+pre {
+    font-family: "Courier New", monospace;
+    padding: 8px;
+    border: 1px solid #999999;
+    overflow: auto;
+}
+
+a {
+    color: #1f5b8c;
+}
+
+strong {
+    font-weight: bold;
+}
+
+em {
+    font-style: oblique;
+}
+
+pre {
+    overflow: auto;
+}
+
+code {
+    font-family: monospace;
+    line-height: 0;
+}
+
+
+/* --- Common Classes ------------------------------------------------------- */
+
+.share-button {
+    display: inline-block;
+    width: 100px;
+    height: 22px;
+    overflow: hidden;
+    vertical-align: middle;
+    float: left;
+    padding-right: 10px;
+}
+
+.share-google {
+    width: 70px;
+}
+
+.share-twitter {
+
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+.left {
+    text-align: left;
+}
+
+.rsslink {
+    padding-left: 20px;
+    background: url('../graphics/rss-small.png') left no-repeat;
+}
+
+.data-table {
+  border: 1px solid black;
+  border-collapse: collapse;
+  width: 100%;
+  overflow: auto;
+}
+
+.data-table td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 4px;
+  vertical-align: top;
+}
+
+
+.data-table th {
+  text-align: left;
+  font-weight: bold;
+  background-color: silver;
+  padding: 4px;
+}
+
+.note {
+  background: #ffffe8 url('../graphics/note.png') 6px 10px no-repeat;
+  border: 1px solid silver;
+  background-color: ;
+  padding: 6px 6px 6px 36px;
+  font-size: 90%;
+}
+
+.note em {
+  text-decoration: underline;
+}
+
+/* --- Block Layout --------------------------------------------------------- */
+
+#head {
+    display: block;
+    height: 118px;
+    overflow: hidden;
+    background: #5686ae url('../graphics/headbg.png') repeat-x;
+    color: white;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .75);
+}
+#head .col1 {
+    width: 300px;
+}
+#head .col2 {
+    width: 600px;
+    text-align: right;
+    padding-top: 20px;
+}
+#head .content {
+    width: 980px;
+    margin: 20px auto 0 auto;
+    text-align: left;
+}
+#head .logo {
+    font-size: 40px;
+    font-family: georgia, 'times new roman', serif;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .75);
+    color: white;
+}
+
+#main { /* ie.css */
+    position: relative;
+    z-index: 99;
+    width: 1000px;
+    margin: -40px auto 0 auto;
+    background-color: white;
+    text-align: left;
+    padding: 20px;
+    /* rounded */
+    -webkit-border-top-left-radius: 10px;
+    -webkit-border-top-right-radius: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+    -webkit-border-bottom-right-radius: 10px;
+    -moz-border-radius-topleft: 10px;
+    -moz-border-radius-topright: 10px;
+    -moz-border-radius-bottomleft: 10px;
+    -moz-border-radius-bottomright: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    /* shadow */
+    box-shadow: 0 0 8px rgba(0,0,0, 0.5);
+    -moz-box-shadow: 0 0 8px rgba(0,0,0, 0.5);
+    -webkit-box-shadow: 0 0 8px rgba(0,0,0,0.5);
+}
+
+#main .col1 {
+    width: 700px;
+}
+
+#main .col2 {
+    width: 250px;
+}
+
+#foot {
+    text-align: center;
+}
+
+/* --- Columns -------------------------------------------------------------- */
+
+.floatwrap:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+  font-size: 0;
+  line-height: 0;
+}
+
+.col1 {
+  display: block;
+  vertical-align: top;
+  float: left;
+  overflow: hidden; /* fixes IE6 */
+}
+
+.col2 {
+  display: block;
+  vertical-align: top;
+  float: right; 
+}
+
+/* --- Side Nav ------------------------------------------------------------- */
+
+#sidenav {
+    background-color: #deefff;
+    border-radius: 10px;
+}
+
+.sideblock {
+    display: block;
+    padding: 10px;
+    margin: 10px 0px;
+}
+
+.sideblock .social {
+    text-align: center;
+}
+
+.sideblock h3 {
+    margin: 10px -10px;
+    padding: 8px;
+    font-family: "Cantarell", arial, sans-serif;
+    font-size: 100%;
+    background: #5686AE url('../graphics/headbg.png') repeat-x;
+    border-top: 1px solid #4d4d4d;
+    border-bottom: 1px solid #4d4d4d;
+    color: white;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .75);
+}
+
+.sideblock ul {
+    font-size: 90%;
+}
+
+.sideblock li {
+    margin-bottom: 16px;
+}
+
+.sitelinks li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+/* --- List View ------------------------------------------------------------ */
+
+.post-meta {
+    color: #4d4d4d;
+    font-family: georgia, "Times New Roman", serif;
+}
+
+.post-list h2 {
+    font-weight: normal;
+    margin-bottom: 0;
+}
+
+.post-list .post {
+    border-bottom: 2px dotted #e5e5e5;
+    margin-bottom: 40px;
+    padding-bottom: 10px;
+}
+
+.post-list .post-meta {
+    margin: 2px 0;
+}
+
+.pagination {
+    text-align: center;
+    line-height: 150%;
+}
+
+/* --- Detail View ---------------------------------------------------------- */
+
+.post-detail h1 {
+    margin-top: 20px; /* make room for share buttons */
+}
+
+.post-detail .post-meta {
+    text-align: right;
+}
+
+/* --- Post ----------------------------------------------------------------- */
+
+.post {
+    color: #252525;
+}
+
+.post ul, .post ol {
+    margin-left: 30px;
+}
+
+.post ul {
+    list-style: disc outside;
+}
+
+.post ol {
+    list-style: decimal outside;
+}
+
+.post li {
+    margin: 10px 0;
+}
+
+/* --- Comments ------------------------------------------------------------- */
+
+#disqus_thread {
+  margin-top: 60px;
+}
+
+#comments {
+    margin-top: 60px;
+    background-color: #919191;
+    border: 1px solid #4d4d4d;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#comments h3 {
+    margin-top: 0px;
+    color: white;
+}
+
+.comment {
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: auto;
+}
+
+.comment h4 {
+    margin: 0 0 5px 0;
+}
+.comment p.date {
+    margin-top: -25px;
+    color: #4d4d4d;
+    font-family: georgia, "Times New Roman", serif;
+    font-style: oblique;
+    text-align: right;
+}
+.comment p {
+    margin: 10px 0;
+}
+
+
+

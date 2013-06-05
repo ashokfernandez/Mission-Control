@@ -1,0 +1,780 @@
+   1               		.file	"MissileLauncher.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.EVENT_USB_Host_DeviceAttached,"ax",@progbits
+  17               	.global	EVENT_USB_Host_DeviceAttached
+  19               	EVENT_USB_Host_DeviceAttached:
+  20               	.LFB130:
+  21               	.LSM0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LBB59:
+  25               	.LBB60:
+  26               	.LSM1:
+  27 0000 8BB1      		in r24,43-32
+  28 0002 8F70      		andi r24,lo8(15)
+  29 0004 806A      		ori r24,lo8(-96)
+  30 0006 8BB9      		out 43-32,r24
+  31               	/* epilogue start */
+  32               	.LBE60:
+  33               	.LBE59:
+  34               	.LSM2:
+  35 0008 0895      		ret
+  36               	.LFE130:
+  38               		.section	.text.EVENT_USB_Host_DeviceUnattached,"ax",@progbits
+  39               	.global	EVENT_USB_Host_DeviceUnattached
+  41               	EVENT_USB_Host_DeviceUnattached:
+  42               	.LFB131:
+  43               	.LSM3:
+  44               	/* prologue: function */
+  45               	/* frame size = 0 */
+  46               	.LBB61:
+  47               	.LBB62:
+  48               	.LSM4:
+  49 0000 8BB1      		in r24,43-32
+  50 0002 8F70      		andi r24,lo8(15)
+  51 0004 8061      		ori r24,lo8(16)
+  52 0006 8BB9      		out 43-32,r24
+  53               	/* epilogue start */
+  54               	.LBE62:
+  55               	.LBE61:
+  56               	.LSM5:
+  57 0008 0895      		ret
+  58               	.LFE131:
+  60               		.section	.text.EVENT_USB_Host_DeviceEnumerationComplete,"ax",@progbits
+  61               	.global	EVENT_USB_Host_DeviceEnumerationComplete
+  63               	EVENT_USB_Host_DeviceEnumerationComplete:
+  64               	.LFB132:
+  65               	.LSM6:
+  66               	/* prologue: function */
+  67               	/* frame size = 0 */
+  68               	.LBB63:
+  69               	.LBB64:
+  70               	.LSM7:
+  71 0000 8BB1      		in r24,43-32
+  72 0002 8F70      		andi r24,lo8(15)
+  73 0004 8066      		ori r24,lo8(96)
+  74 0006 8BB9      		out 43-32,r24
+  75               	/* epilogue start */
+  76               	.LBE64:
+  77               	.LBE63:
+  78               	.LSM8:
+  79 0008 0895      		ret
+  80               	.LFE132:
+  82               		.section	.text.EVENT_USB_Host_DeviceEnumerationFailed,"ax",@progbits
+  83               	.global	EVENT_USB_Host_DeviceEnumerationFailed
+  85               	EVENT_USB_Host_DeviceEnumerationFailed:
+  86               	.LFB134:
+  87               	.LSM9:
+  88               	.LVL0:
+  89               	/* prologue: function */
+  90               	/* frame size = 0 */
+  91               	.LBB65:
+  92               	.LBB66:
+  93               	.LSM10:
+  94 0000 8BB1      		in r24,43-32
+  95               	.LVL1:
+  96 0002 8F70      		andi r24,lo8(15)
+  97 0004 8069      		ori r24,lo8(-112)
+  98 0006 8BB9      		out 43-32,r24
+  99               	/* epilogue start */
+ 100               	.LBE66:
+ 101               	.LBE65:
+ 102               	.LSM11:
+ 103 0008 0895      		ret
+ 104               	.LFE134:
+ 106               		.section	.text.DiscardNextReport,"ax",@progbits
+ 107               	.global	DiscardNextReport
+ 109               	DiscardNextReport:
+ 110               	.LFB135:
+ 111               	.LSM12:
+ 112               	/* prologue: function */
+ 113               	/* frame size = 0 */
+ 114               	.LBB67:
+ 115               	.LBB68:
+ 116               	.LSM13:
+ 117 0000 81E0      		ldi r24,lo8(1)
+ 118 0002 8093 A700 		sts 167,r24
+ 119               	.LBE68:
+ 120               	.LBE67:
+ 121               	.LBB69:
+ 122               	.LBB70:
+ 123               	.LSM14:
+ 124 0006 8091 A900 		lds r24,169
+ 125 000a 8F7B      		andi r24,lo8(-65)
+ 126 000c 8093 A900 		sts 169,r24
+ 127               	.LBE70:
+ 128               	.LBE69:
+ 129               	.LBB71:
+ 130               	.LBB72:
+ 131               	.LSM15:
+ 132 0010 8091 A600 		lds r24,166
+ 133               	.LBE72:
+ 134               	.LBE71:
+ 135               	.LSM16:
+ 136 0014 80FF      		sbrs r24,0
+ 137 0016 00C0      		rjmp .L13
+ 138               	.L10:
+ 139               	.LBB73:
+ 140               	.LBB74:
+ 141               	.LSM17:
+ 142 0018 8091 A600 		lds r24,166
+ 143 001c 8E77      		andi r24,lo8(126)
+ 144 001e 8093 A600 		sts 166,r24
+ 145               	.L13:
+ 146               	.LBE74:
+ 147               	.LBE73:
+ 148               	.LBB75:
+ 149               	.LBB76:
+ 150               	.LSM18:
+ 151 0022 8091 A900 		lds r24,169
+ 152 0026 8064      		ori r24,lo8(64)
+ 153 0028 8093 A900 		sts 169,r24
+ 154 002c 0895      		ret
+ 155               	.LBE76:
+ 156               	.LBE75:
+ 157               	.LFE135:
+ 159               		.section	.text.HID_Host_Task,"ax",@progbits
+ 160               	.global	HID_Host_Task
+ 162               	HID_Host_Task:
+ 163               	.LFB137:
+ 164               	.LSM19:
+ 165               	/* prologue: function */
+ 166               	/* frame size = 0 */
+ 167               	.LSM20:
+ 168 0000 8091 0000 		lds r24,USB_HostState
+ 169 0004 8B30      		cpi r24,lo8(11)
+ 170 0006 01F0      		breq .L16
+ 171 0008 8C30      		cpi r24,lo8(12)
+ 172 000a 01F4      		brne .L20
+ 173 000c 00C0      		rjmp .L22
+ 174               	.L16:
+ 175               	.LSM21:
+ 176 000e 0E94 0000 		call ProcessConfigurationDescriptor
+ 177 0012 8823      		tst r24
+ 178 0014 01F4      		brne .L21
+ 179               	.L18:
+ 180               	.LSM22:
+ 181 0016 81E0      		ldi r24,lo8(1)
+ 182 0018 0E94 0000 		call USB_Host_SetDeviceConfiguration
+ 183 001c 8823      		tst r24
+ 184 001e 01F0      		breq .L19
+ 185               	.L21:
+ 186               	.LBB77:
+ 187               	.LBB78:
+ 188               	.LSM23:
+ 189 0020 8BB1      		in r24,43-32
+ 190 0022 8F70      		andi r24,lo8(15)
+ 191 0024 8069      		ori r24,lo8(-112)
+ 192 0026 8BB9      		out 43-32,r24
+ 193               	.LBE78:
+ 194               	.LBE77:
+ 195               	.LSM24:
+ 196 0028 1092 0000 		sts USB_HostState,__zero_reg__
+ 197 002c 0895      		ret
+ 198               	.L19:
+ 199               	.LSM25:
+ 200 002e 8CE0      		ldi r24,lo8(12)
+ 201 0030 8093 0000 		sts USB_HostState,r24
+ 202 0034 0895      		ret
+ 203               	.L22:
+ 204               	.LSM26:
+ 205 0036 0E94 0000 		call DiscardNextReport
+ 206               	.L20:
+ 207 003a 0895      		ret
+ 208               	.LFE137:
+ 210               		.section	.text.WriteNextReport,"ax",@progbits
+ 211               	.global	WriteNextReport
+ 213               	WriteNextReport:
+ 214               	.LFB136:
+ 215               	.LSM27:
+ 216               	.LVL2:
+ 217               	/* prologue: function */
+ 218               	/* frame size = 0 */
+ 219 0000 9C01      		movw r18,r24
+ 220               	.LBB79:
+ 221               	.LBB80:
+ 222               	.LSM28:
+ 223 0002 82E0      		ldi r24,lo8(2)
+ 224               	.LVL3:
+ 225 0004 8093 A700 		sts 167,r24
+ 226               	.LBE80:
+ 227               	.LBE79:
+ 228               	.LBB81:
+ 229               	.LBB82:
+ 230               	.LSM29:
+ 231 0008 8091 AC00 		lds r24,172
+ 232               	.LBE82:
+ 233               	.LBE81:
+ 234               	.LSM30:
+ 235 000c 87FF      		sbrs r24,7
+ 236 000e 00C0      		rjmp .L24
+ 237               	.LBB83:
+ 238               	.LBB84:
+ 239               	.LSM31:
+ 240 0010 8091 A900 		lds r24,169
+ 241 0014 8F7B      		andi r24,lo8(-65)
+ 242 0016 8093 A900 		sts 169,r24
+ 243               	.LBE84:
+ 244               	.LBE83:
+ 245               	.LBB85:
+ 246               	.LBB86:
+ 247               	.LSM32:
+ 248 001a 8091 A600 		lds r24,166
+ 249               	.LBE86:
+ 250               	.LBE85:
+ 251               	.LSM33:
+ 252 001e 82FF      		sbrs r24,2
+ 253 0020 00C0      		rjmp .L28
+ 254               	.L25:
+ 255               	.LSM34:
+ 256 0022 C901      		movw r24,r18
+ 257 0024 0E94 0000 		call Pipe_Write_Stream_LE
+ 258               	.LVL4:
+ 259               	.LBB87:
+ 260               	.LBB88:
+ 261               	.LSM35:
+ 262 0028 8091 A600 		lds r24,166
+ 263 002c 8B77      		andi r24,lo8(123)
+ 264 002e 8093 A600 		sts 166,r24
+ 265               	.LVL5:
+ 266               	.L28:
+ 267               	.LBE88:
+ 268               	.LBE87:
+ 269               	.LBB89:
+ 270               	.LBB90:
+ 271               	.LSM36:
+ 272 0032 8091 A900 		lds r24,169
+ 273 0036 8064      		ori r24,lo8(64)
+ 274 0038 8093 A900 		sts 169,r24
+ 275 003c 0895      		ret
+ 276               	.L24:
+ 277               	.LBE90:
+ 278               	.LBE89:
+ 279               	.LSM37:
+ 280 003e 81E2      		ldi r24,lo8(33)
+ 281 0040 8093 0000 		sts USB_ControlRequest,r24
+ 282 0044 89E0      		ldi r24,lo8(9)
+ 283 0046 8093 0000 		sts USB_ControlRequest+1,r24
+ 284 004a 82E0      		ldi r24,lo8(2)
+ 285 004c 90E0      		ldi r25,hi8(2)
+ 286 004e 9093 0000 		sts (USB_ControlRequest+2)+1,r25
+ 287 0052 8093 0000 		sts USB_ControlRequest+2,r24
+ 288 0056 81E0      		ldi r24,lo8(1)
+ 289 0058 90E0      		ldi r25,hi8(1)
+ 290 005a 9093 0000 		sts (USB_ControlRequest+4)+1,r25
+ 291 005e 8093 0000 		sts USB_ControlRequest+4,r24
+ 292 0062 7093 0000 		sts (USB_ControlRequest+6)+1,r23
+ 293 0066 6093 0000 		sts USB_ControlRequest+6,r22
+ 294               	.LBB91:
+ 295               	.LBB92:
+ 296               	.LSM38:
+ 297 006a 1092 A700 		sts 167,__zero_reg__
+ 298               	.LBE92:
+ 299               	.LBE91:
+ 300               	.LSM39:
+ 301 006e C901      		movw r24,r18
+ 302 0070 0E94 0000 		call USB_Host_SendControlRequest
+ 303               	.LVL6:
+ 304 0074 0895      		ret
+ 305               	.LFE136:
+ 307               		.section	.text.EVENT_USB_Host_HostError,"ax",@progbits
+ 308               	.global	EVENT_USB_Host_HostError
+ 310               	EVENT_USB_Host_HostError:
+ 311               	.LFB133:
+ 312               	.LSM40:
+ 313               	.LVL7:
+ 314               	/* prologue: function */
+ 315               	/* frame size = 0 */
+ 316               	.LSM41:
+ 317 0000 0E94 0000 		call USB_ShutDown
+ 318               	.LVL8:
+ 319               	.LBB93:
+ 320               	.LBB94:
+ 321               	.LSM42:
+ 322 0004 8BB1      		in r24,43-32
+ 323 0006 8F70      		andi r24,lo8(15)
+ 324 0008 8069      		ori r24,lo8(-112)
+ 325 000a 8BB9      		out 43-32,r24
+ 326               	.L30:
+ 327 000c 00C0      		rjmp .L30
+ 328               	.LBE94:
+ 329               	.LBE93:
+ 330               	.LFE133:
+ 332               		.section	.text.Send_Command_Report,"ax",@progbits
+ 333               	.global	Send_Command_Report
+ 335               	Send_Command_Report:
+ 336               	.LFB128:
+ 337               	.LSM43:
+ 338               	.LVL9:
+ 339               	/* prologue: function */
+ 340               	/* frame size = 0 */
+ 341               	.LSM44:
+ 342 0000 A0E0      		ldi r26,lo8(CmdBuffer)
+ 343 0002 B0E0      		ldi r27,hi8(CmdBuffer)
+ 344 0004 FC01      		movw r30,r24
+ 345 0006 88E0      		ldi r24,lo8(8)
+ 346               	.LVL10:
+ 347               	.L33:
+ 348 0008 0190      		ld r0,Z+
+ 349 000a 0D92      		st X+,r0
+ 350 000c 8150      		subi r24,lo8(-(-1))
+ 351 000e 01F4      		brne .L33
+ 352               	.LSM45:
+ 353 0010 80E0      		ldi r24,lo8(CmdBuffer)
+ 354 0012 90E0      		ldi r25,hi8(CmdBuffer)
+ 355 0014 0E94 0000 		call WriteNextReport
+ 356               	.LVL11:
+ 357               	/* epilogue start */
+ 358               	.LSM46:
+ 359 0018 0895      		ret
+ 360               	.LFE128:
+ 362               		.section	.text.Send_Command,"ax",@progbits
+ 363               	.global	Send_Command
+ 365               	Send_Command:
+ 366               	.LFB129:
+ 367               	.LSM47:
+ 368               	.LVL12:
+ 369 0000 CF93      		push r28
+ 370 0002 DF93      		push r29
+ 371               	/* prologue: function */
+ 372               	/* frame size = 0 */
+ 373 0004 EC01      		movw r28,r24
+ 374               	.LSM48:
+ 375 0006 8091 0000 		lds r24,CmdState
+ 376 000a 9091 0000 		lds r25,(CmdState)+1
+ 377               	.LVL13:
+ 378 000e 20E0      		ldi r18,hi8(CMD_STOP)
+ 379 0010 8030      		cpi r24,lo8(CMD_STOP)
+ 380 0012 9207      		cpc r25,r18
+ 381 0014 01F4      		brne .L37
+ 382 0016 C817      		cp r28,r24
+ 383 0018 D907      		cpc r29,r25
+ 384 001a 01F4      		brne .L38
+ 385 001c 00C0      		rjmp .L39
+ 386               	.L37:
+ 387 001e 80E0      		ldi r24,hi8(CMD_STOP)
+ 388 0020 C030      		cpi r28,lo8(CMD_STOP)
+ 389 0022 D807      		cpc r29,r24
+ 390 0024 01F4      		brne .L39
+ 391               	.L38:
+ 392               	.LBB95:
+ 393               	.LBB96:
+ 394               	.LSM49:
+ 395 0026 8BB1      		in r24,43-32
+ 396 0028 90E4      		ldi r25,lo8(64)
+ 397 002a 8927      		eor r24,r25
+ 398 002c 8BB9      		out 43-32,r24
+ 399               	.LBE96:
+ 400               	.LBE95:
+ 401               	.LSM50:
+ 402 002e 80E0      		ldi r24,lo8(CMD_INITA)
+ 403 0030 90E0      		ldi r25,hi8(CMD_INITA)
+ 404 0032 68E0      		ldi r22,lo8(8)
+ 405 0034 70E0      		ldi r23,hi8(8)
+ 406 0036 0E94 0000 		call Send_Command_Report
+ 407               	.LSM51:
+ 408 003a 80E0      		ldi r24,lo8(CMD_INITB)
+ 409 003c 90E0      		ldi r25,hi8(CMD_INITB)
+ 410 003e 68E0      		ldi r22,lo8(8)
+ 411 0040 70E0      		ldi r23,hi8(8)
+ 412 0042 0E94 0000 		call Send_Command_Report
+ 413               	.LSM52:
+ 414 0046 CE01      		movw r24,r28
+ 415 0048 60E4      		ldi r22,lo8(64)
+ 416 004a 70E0      		ldi r23,hi8(64)
+ 417 004c 0E94 0000 		call Send_Command_Report
+ 418               	.L39:
+ 419               	.LSM53:
+ 420 0050 D093 0000 		sts (CmdState)+1,r29
+ 421 0054 C093 0000 		sts CmdState,r28
+ 422               	/* epilogue start */
+ 423               	.LSM54:
+ 424 0058 DF91      		pop r29
+ 425 005a CF91      		pop r28
+ 426               	.LVL14:
+ 427 005c 0895      		ret
+ 428               	.LFE129:
+ 430               		.section	.text.Read_Joystick_Status,"ax",@progbits
+ 431               	.global	Read_Joystick_Status
+ 433               	Read_Joystick_Status:
+ 434               	.LFB127:
+ 435               	.LSM55:
+ 436               	/* prologue: function */
+ 437               	/* frame size = 0 */
+ 438               	.LBB97:
+ 439               	.LBB98:
+ 440               	.LSM56:
+ 441 0000 23B1      		in r18,35-32
+ 442 0002 8CB1      		in r24,44-32
+ 443               	.LBE98:
+ 444               	.LBE97:
+ 445               	.LSM57:
+ 446 0004 6299      		sbic 44-32,2
+ 447 0006 00C0      		rjmp .L42
+ 448               	.LSM58:
+ 449 0008 80E0      		ldi r24,lo8(CMD_FIRE)
+ 450 000a 90E0      		ldi r25,hi8(CMD_FIRE)
+ 451 000c 00C0      		rjmp .L49
+ 452               	.L42:
+ 453               	.LBB100:
+ 454               	.LBB99:
+ 455               	.LSM59:
+ 456 000e 8095      		com r24
+ 457 0010 90E0      		ldi r25,lo8(0)
+ 458 0012 8073      		andi r24,lo8(48)
+ 459 0014 9070      		andi r25,hi8(48)
+ 460 0016 9595      		asr r25
+ 461 0018 8795      		ror r24
+ 462 001a 922F      		mov r25,r18
+ 463 001c 9095      		com r25
+ 464 001e 907E      		andi r25,lo8(-32)
+ 465 0020 982B      		or r25,r24
+ 466               	.LBE99:
+ 467               	.LBE100:
+ 468               	.LSM60:
+ 469 0022 97FF      		sbrs r25,7
+ 470 0024 00C0      		rjmp .L44
+ 471               	.LSM61:
+ 472 0026 80E0      		ldi r24,lo8(CMD_UP)
+ 473 0028 90E0      		ldi r25,hi8(CMD_UP)
+ 474 002a 00C0      		rjmp .L49
+ 475               	.L44:
+ 476               	.LSM62:
+ 477 002c 94FF      		sbrs r25,4
+ 478 002e 00C0      		rjmp .L45
+ 479               	.LSM63:
+ 480 0030 80E0      		ldi r24,lo8(CMD_DOWN)
+ 481 0032 90E0      		ldi r25,hi8(CMD_DOWN)
+ 482 0034 00C0      		rjmp .L49
+ 483               	.L45:
+ 484               	.LSM64:
+ 485 0036 96FF      		sbrs r25,6
+ 486 0038 00C0      		rjmp .L46
+ 487               	.LSM65:
+ 488 003a 80E0      		ldi r24,lo8(CMD_LEFT)
+ 489 003c 90E0      		ldi r25,hi8(CMD_LEFT)
+ 490 003e 00C0      		rjmp .L49
+ 491               	.L46:
+ 492               	.LSM66:
+ 493 0040 93FF      		sbrs r25,3
+ 494 0042 00C0      		rjmp .L47
+ 495               	.LSM67:
+ 496 0044 80E0      		ldi r24,lo8(CMD_RIGHT)
+ 497 0046 90E0      		ldi r25,hi8(CMD_RIGHT)
+ 498               	.L49:
+ 499 0048 0E94 0000 		call Send_Command
+ 500 004c 0895      		ret
+ 501               	.L47:
+ 502               	.LSM68:
+ 503 004e 8091 0000 		lds r24,CmdState
+ 504 0052 9091 0000 		lds r25,(CmdState)+1
+ 505 0056 8050      		subi r24,lo8(CMD_STOP)
+ 506 0058 9040      		sbci r25,hi8(CMD_STOP)
+ 507 005a 01F0      		breq .L48
+ 508               	.LSM69:
+ 509 005c 80E0      		ldi r24,lo8(CMD_STOP)
+ 510 005e 90E0      		ldi r25,hi8(CMD_STOP)
+ 511 0060 0E94 0000 		call Send_Command
+ 512               	.L48:
+ 513 0064 0895      		ret
+ 514               	.LFE127:
+ 516               		.section	.text.SetupHardware,"ax",@progbits
+ 517               	.global	SetupHardware
+ 519               	SetupHardware:
+ 520               	.LFB126:
+ 521               	.LSM70:
+ 522               	/* prologue: function */
+ 523               	/* frame size = 0 */
+ 524               	.LSM71:
+ 525 0000 84B7      		in r24,84-32
+ 526 0002 877F      		andi r24,lo8(-9)
+ 527 0004 84BF      		out 84-32,r24
+ 528               	.LSM72:
+ 529 0006 88E1      		ldi r24,lo8(24)
+ 530               	/* #APP */
+ 531               	 ;  117 "MissileLauncher.c" 1
+ 532 0008 0FB6      		in __tmp_reg__, __SREG__
+ 533 000a F894      		cli
+ 534 000c 8093 6000 		sts 96, r24
+ 535 0010 1092 6000 		sts 96, __zero_reg__
+ 536 0014 0FBE      		out __SREG__,__tmp_reg__
+ 537               		
+ 538               	 ;  0 "" 2
+ 539               	/* #NOAPP */
+ 540               	.LBB101:
+ 541               	.LSM73:
+ 542 0016 80E0      		ldi r24,lo8(0)
+ 543 0018 90E0      		ldi r25,hi8(0)
+ 544 001a 20E8      		ldi r18,lo8(-128)
+ 545               	/* #APP */
+ 546               	 ;  120 "MissileLauncher.c" 1
+ 547 001c 0FB6      		in __tmp_reg__,__SREG__
+ 548 001e F894      		cli
+ 549 0020 2093 6100 		sts 97, r18
+ 550 0024 8093 6100 		sts 97, r24
+ 551 0028 0FBE      		out __SREG__, __tmp_reg__
+ 552               	 ;  0 "" 2
+ 553               	/* #NOAPP */
+ 554               	.LBE101:
+ 555               	.LBB102:
+ 556               	.LBB103:
+ 557               	.LSM74:
+ 558 002a 8AB1      		in r24,42-32
+ 559 002c 806F      		ori r24,lo8(-16)
+ 560 002e 8AB9      		out 42-32,r24
+ 561               	.LSM75:
+ 562 0030 8BB1      		in r24,43-32
+ 563 0032 8F70      		andi r24,lo8(15)
+ 564 0034 8BB9      		out 43-32,r24
+ 565               	.LBE103:
+ 566               	.LBE102:
+ 567               	.LSM76:
+ 568 0036 0E94 0000 		call USB_Init
+ 569               	.LBB104:
+ 570               	.LBB105:
+ 571               	.LSM77:
+ 572 003a 84B1      		in r24,36-32
+ 573 003c 8F71      		andi r24,lo8(31)
+ 574 003e 84B9      		out 36-32,r24
+ 575               	.LSM78:
+ 576 0040 8DB1      		in r24,45-32
+ 577 0042 8F7C      		andi r24,lo8(-49)
+ 578 0044 8DB9      		out 45-32,r24
+ 579               	.LSM79:
+ 580 0046 85B1      		in r24,37-32
+ 581 0048 806E      		ori r24,lo8(-32)
+ 582 004a 85B9      		out 37-32,r24
+ 583               	.LSM80:
+ 584 004c 8EB1      		in r24,46-32
+ 585 004e 8063      		ori r24,lo8(48)
+ 586 0050 8EB9      		out 46-32,r24
+ 587               	.LBE105:
+ 588               	.LBE104:
+ 589               	.LBB106:
+ 590               	.LBB107:
+ 591               	.LSM81:
+ 592 0052 6A98      		cbi 45-32,2
+ 593               	.LSM82:
+ 594 0054 729A      		sbi 46-32,2
+ 595               	/* epilogue start */
+ 596               	.LBE107:
+ 597               	.LBE106:
+ 598               	.LSM83:
+ 599 0056 0895      		ret
+ 600               	.LFE126:
+ 602               		.section	.text.main,"ax",@progbits
+ 603               	.global	main
+ 605               	main:
+ 606               	.LFB125:
+ 607               	.LSM84:
+ 608               	/* prologue: function */
+ 609               	/* frame size = 0 */
+ 610               	.LSM85:
+ 611 0000 0E94 0000 		call SetupHardware
+ 612               	.LSM86:
+ 613 0004 80E0      		ldi r24,lo8(CMD_STOP)
+ 614 0006 90E0      		ldi r25,hi8(CMD_STOP)
+ 615 0008 9093 0000 		sts (CmdState)+1,r25
+ 616 000c 8093 0000 		sts CmdState,r24
+ 617               	.LBB108:
+ 618               	.LBB109:
+ 619               	.LSM87:
+ 620 0010 8BB1      		in r24,43-32
+ 621 0012 8F70      		andi r24,lo8(15)
+ 622 0014 8061      		ori r24,lo8(16)
+ 623 0016 8BB9      		out 43-32,r24
+ 624               	.LBE109:
+ 625               	.LBE108:
+ 626               	.LSM88:
+ 627               	/* #APP */
+ 628               	 ;  101 "MissileLauncher.c" 1
+ 629 0018 7894      		sei
+ 630               	 ;  0 "" 2
+ 631               	/* #NOAPP */
+ 632               	.L53:
+ 633               	.LSM89:
+ 634 001a 0E94 0000 		call Read_Joystick_Status
+ 635               	.LSM90:
+ 636 001e 0E94 0000 		call HID_Host_Task
+ 637               	.LSM91:
+ 638 0022 0E94 0000 		call USB_USBTask
+ 639 0026 00C0      		rjmp .L53
+ 640               	.LFE125:
+ 642               	.global	CMD_INITA
+ 643               		.data
+ 646               	CMD_INITA:
+ 647 0000 55        		.byte	85
+ 648 0001 53        		.byte	83
+ 649 0002 42        		.byte	66
+ 650 0003 43        		.byte	67
+ 651 0004 00        		.byte	0
+ 652 0005 00        		.byte	0
+ 653 0006 04        		.byte	4
+ 654 0007 00        		.byte	0
+ 655               	.global	CMD_INITB
+ 658               	CMD_INITB:
+ 659 0008 55        		.byte	85
+ 660 0009 53        		.byte	83
+ 661 000a 42        		.byte	66
+ 662 000b 43        		.byte	67
+ 663 000c 00        		.byte	0
+ 664 000d 40        		.byte	64
+ 665 000e 02        		.byte	2
+ 666 000f 00        		.byte	0
+ 667               	.global	CMD_STOP
+ 670               	CMD_STOP:
+ 671 0010 00        		.byte	0
+ 672 0011 00        		.byte	0
+ 673 0012 00        		.byte	0
+ 674 0013 00        		.byte	0
+ 675 0014 00        		.byte	0
+ 676 0015 00        		.byte	0
+ 677 0016 08        		.byte	8
+ 678 0017 08        		.byte	8
+ 679               	.global	CMD_LEFT
+ 682               	CMD_LEFT:
+ 683 0018 00        		.byte	0
+ 684 0019 01        		.byte	1
+ 685 001a 00        		.byte	0
+ 686 001b 00        		.byte	0
+ 687 001c 00        		.byte	0
+ 688 001d 00        		.byte	0
+ 689 001e 08        		.byte	8
+ 690 001f 08        		.byte	8
+ 691               	.global	CMD_RIGHT
+ 694               	CMD_RIGHT:
+ 695 0020 00        		.byte	0
+ 696 0021 00        		.byte	0
+ 697 0022 01        		.byte	1
+ 698 0023 00        		.byte	0
+ 699 0024 00        		.byte	0
+ 700 0025 00        		.byte	0
+ 701 0026 08        		.byte	8
+ 702 0027 08        		.byte	8
+ 703               	.global	CMD_UP
+ 706               	CMD_UP:
+ 707 0028 00        		.byte	0
+ 708 0029 00        		.byte	0
+ 709 002a 00        		.byte	0
+ 710 002b 01        		.byte	1
+ 711 002c 00        		.byte	0
+ 712 002d 00        		.byte	0
+ 713 002e 08        		.byte	8
+ 714 002f 08        		.byte	8
+ 715               	.global	CMD_DOWN
+ 718               	CMD_DOWN:
+ 719 0030 00        		.byte	0
+ 720 0031 00        		.byte	0
+ 721 0032 00        		.byte	0
+ 722 0033 00        		.byte	0
+ 723 0034 01        		.byte	1
+ 724 0035 00        		.byte	0
+ 725 0036 08        		.byte	8
+ 726 0037 08        		.byte	8
+ 727               	.global	CMD_LEFTUP
+ 730               	CMD_LEFTUP:
+ 731 0038 00        		.byte	0
+ 732 0039 01        		.byte	1
+ 733 003a 00        		.byte	0
+ 734 003b 01        		.byte	1
+ 735 003c 00        		.byte	0
+ 736 003d 00        		.byte	0
+ 737 003e 08        		.byte	8
+ 738 003f 08        		.byte	8
+ 739               	.global	CMD_RIGHTUP
+ 742               	CMD_RIGHTUP:
+ 743 0040 00        		.byte	0
+ 744 0041 00        		.byte	0
+ 745 0042 01        		.byte	1
+ 746 0043 01        		.byte	1
+ 747 0044 00        		.byte	0
+ 748 0045 00        		.byte	0
+ 749 0046 08        		.byte	8
+ 750 0047 08        		.byte	8
+ 751               	.global	CMD_LEFTDOWN
+ 754               	CMD_LEFTDOWN:
+ 755 0048 00        		.byte	0
+ 756 0049 01        		.byte	1
+ 757 004a 00        		.byte	0
+ 758 004b 00        		.byte	0
+ 759 004c 01        		.byte	1
+ 760 004d 00        		.byte	0
+ 761 004e 08        		.byte	8
+ 762 004f 08        		.byte	8
+ 763               	.global	CMD_RIGHTDOWN
+ 766               	CMD_RIGHTDOWN:
+ 767 0050 00        		.byte	0
+ 768 0051 00        		.byte	0
+ 769 0052 01        		.byte	1
+ 770 0053 00        		.byte	0
+ 771 0054 01        		.byte	1
+ 772 0055 00        		.byte	0
+ 773 0056 08        		.byte	8
+ 774 0057 08        		.byte	8
+ 775               	.global	CMD_FIRE
+ 778               	CMD_FIRE:
+ 779 0058 00        		.byte	0
+ 780 0059 00        		.byte	0
+ 781 005a 00        		.byte	0
+ 782 005b 00        		.byte	0
+ 783 005c 00        		.byte	0
+ 784 005d 01        		.byte	1
+ 785 005e 08        		.byte	8
+ 786 005f 08        		.byte	8
+ 787               		.comm CmdState,2,1
+ 788               		.comm CmdBuffer,64,1
+ 909               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 MissileLauncher.c
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:2      *ABS*:0000003f __SREG__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:3      *ABS*:0000003e __SP_H__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:4      *ABS*:0000003d __SP_L__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:5      *ABS*:00000034 __CCP__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:19     .text.EVENT_USB_Host_DeviceAttached:00000000 EVENT_USB_Host_DeviceAttached
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:41     .text.EVENT_USB_Host_DeviceUnattached:00000000 EVENT_USB_Host_DeviceUnattached
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:63     .text.EVENT_USB_Host_DeviceEnumerationComplete:00000000 EVENT_USB_Host_DeviceEnumerationComplete
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:85     .text.EVENT_USB_Host_DeviceEnumerationFailed:00000000 EVENT_USB_Host_DeviceEnumerationFailed
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:109    .text.DiscardNextReport:00000000 DiscardNextReport
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:162    .text.HID_Host_Task:00000000 HID_Host_Task
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:213    .text.WriteNextReport:00000000 WriteNextReport
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:310    .text.EVENT_USB_Host_HostError:00000000 EVENT_USB_Host_HostError
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:335    .text.Send_Command_Report:00000000 Send_Command_Report
+                            *COM*:00000040 CmdBuffer
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:365    .text.Send_Command:00000000 Send_Command
+                            *COM*:00000002 CmdState
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:670    .data:00000010 CMD_STOP
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:646    .data:00000000 CMD_INITA
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:658    .data:00000008 CMD_INITB
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:433    .text.Read_Joystick_Status:00000000 Read_Joystick_Status
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:778    .data:00000058 CMD_FIRE
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:706    .data:00000028 CMD_UP
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:718    .data:00000030 CMD_DOWN
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:682    .data:00000018 CMD_LEFT
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:694    .data:00000020 CMD_RIGHT
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:519    .text.SetupHardware:00000000 SetupHardware
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:605    .text.main:00000000 main
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:730    .data:00000038 CMD_LEFTUP
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:742    .data:00000040 CMD_RIGHTUP
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:754    .data:00000048 CMD_LEFTDOWN
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccm5r0lj.s:766    .data:00000050 CMD_RIGHTDOWN
+
+UNDEFINED SYMBOLS
+USB_HostState
+ProcessConfigurationDescriptor
+USB_Host_SetDeviceConfiguration
+Pipe_Write_Stream_LE
+USB_ControlRequest
+USB_Host_SendControlRequest
+USB_ShutDown
+USB_Init
+USB_USBTask
+__do_copy_data
+__do_clear_bss

@@ -1,0 +1,421 @@
+   1               		.file	"TELNETServerApp.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.TELNETServerApp_Callback,"ax",@progbits
+  17               	.global	TELNETServerApp_Callback
+  19               	TELNETServerApp_Callback:
+  20               	.LFB9:
+  21               	.LSM0:
+  22 0000 8F92      		push r8
+  23 0002 9F92      		push r9
+  24 0004 BF92      		push r11
+  25 0006 CF92      		push r12
+  26 0008 DF92      		push r13
+  27 000a EF92      		push r14
+  28 000c FF92      		push r15
+  29 000e 0F93      		push r16
+  30 0010 1F93      		push r17
+  31 0012 CF93      		push r28
+  32 0014 DF93      		push r29
+  33               	/* prologue: function */
+  34               	/* frame size = 0 */
+  35               	.LSM1:
+  36 0016 E090 0000 		lds r14,uip_conn
+  37 001a F090 0000 		lds r15,(uip_conn)+1
+  38               	.LSM2:
+  39 001e 4091 0000 		lds r20,uip_appdata
+  40 0022 1091 0000 		lds r17,uip_appdata+1
+  41               	.LSM3:
+  42 0026 8091 0000 		lds r24,uip_flags
+  43 002a 86FF      		sbrs r24,6
+  44 002c 00C0      		rjmp .L2
+  45               	.LSM4:
+  46 002e D701      		movw r26,r14
+  47 0030 5C96      		adiw r26,28
+  48 0032 1C92      		st X,__zero_reg__
+  49               	.L2:
+  50               	.LSM5:
+  51 0034 8091 0000 		lds r24,uip_flags
+  52 0038 80FF      		sbrs r24,0
+  53 003a 00C0      		rjmp .L3
+  54               	.LSM6:
+  55 003c F701      		movw r30,r14
+  56 003e 858D      		ldd r24,Z+29
+  57 0040 848F      		std Z+28,r24
+  58               	.L3:
+  59               	.LSM7:
+  60 0042 8091 0000 		lds r24,uip_flags
+  61 0046 282F      		mov r18,r24
+  62 0048 30E0      		ldi r19,lo8(0)
+  63 004a 82FD      		sbrc r24,2
+  64 004c 00C0      		rjmp .L4
+  65 004e C901      		movw r24,r18
+  66 0050 8370      		andi r24,lo8(3)
+  67 0052 9070      		andi r25,hi8(3)
+  68 0054 892B      		or r24,r25
+  69 0056 01F4      		brne .L4
+  70 0058 2874      		andi r18,lo8(72)
+  71 005a 3070      		andi r19,hi8(72)
+  72 005c 232B      		or r18,r19
+  73 005e 01F4      		brne .+2
+  74 0060 00C0      		rjmp .L15
+  75               	.L4:
+  76               	.LSM8:
+  77 0062 C42F      		mov r28,r20
+  78               	.LVL0:
+  79 0064 D12F      		mov r29,r17
+  80               	.LVL1:
+  81               	.LSM9:
+  82 0066 D701      		movw r26,r14
+  83 0068 5C96      		adiw r26,28
+  84 006a 8C91      		ld r24,X
+  85 006c 8130      		cpi r24,lo8(1)
+  86 006e 01F0      		breq .L7
+  87 0070 8130      		cpi r24,lo8(1)
+  88 0072 00F0      		brlo .L6
+  89 0074 8230      		cpi r24,lo8(2)
+  90 0076 01F0      		breq .L8
+  91 0078 8330      		cpi r24,lo8(3)
+  92 007a 01F0      		breq .+2
+  93 007c 00C0      		rjmp .L15
+  94 007e 00C0      		rjmp .L20
+  95               	.L6:
+  96               	.LSM10:
+  97 0080 CE01      		movw r24,r28
+  98 0082 60E0      		ldi r22,lo8(WelcomeHeader)
+  99 0084 70E0      		ldi r23,hi8(WelcomeHeader)
+ 100 0086 0E94 0000 		call strcpy_P
+ 101               	.LSM11:
+ 102 008a EC2F      		mov r30,r28
+ 103 008c F12F      		mov r31,r17
+ 104               	.LVL2:
+ 105 008e DF01      		movw r26,r30
+ 106 0090 0D90      		ld __tmp_reg__,X+
+ 107 0092 0020      		tst __tmp_reg__
+ 108 0094 01F4      		brne .-6
+ 109 0096 1197      		sbiw r26,1
+ 110 0098 AE1B      		sub r26,r30
+ 111 009a BF0B      		sbc r27,r31
+ 112 009c CE01      		movw r24,r28
+ 113 009e BD01      		movw r22,r26
+ 114 00a0 0E94 0000 		call uip_send
+ 115               	.LVL3:
+ 116               	.LSM12:
+ 117 00a4 81E0      		ldi r24,lo8(1)
+ 118 00a6 F701      		movw r30,r14
+ 119 00a8 858F      		std Z+29,r24
+ 120 00aa 00C0      		rjmp .L15
+ 121               	.LVL4:
+ 122               	.L7:
+ 123               	.LSM13:
+ 124 00ac CE01      		movw r24,r28
+ 125 00ae 60E0      		ldi r22,lo8(TELNETMenu)
+ 126 00b0 70E0      		ldi r23,hi8(TELNETMenu)
+ 127 00b2 0E94 0000 		call strcpy_P
+ 128               	.LSM14:
+ 129 00b6 EC2F      		mov r30,r28
+ 130 00b8 F12F      		mov r31,r17
+ 131               	.LVL5:
+ 132 00ba DF01      		movw r26,r30
+ 133 00bc 0D90      		ld __tmp_reg__,X+
+ 134 00be 0020      		tst __tmp_reg__
+ 135 00c0 01F4      		brne .-6
+ 136 00c2 1197      		sbiw r26,1
+ 137 00c4 AE1B      		sub r26,r30
+ 138 00c6 BF0B      		sbc r27,r31
+ 139 00c8 CE01      		movw r24,r28
+ 140 00ca BD01      		movw r22,r26
+ 141 00cc 0E94 0000 		call uip_send
+ 142               	.LVL6:
+ 143               	.LSM15:
+ 144 00d0 82E0      		ldi r24,lo8(2)
+ 145 00d2 00C0      		rjmp .L19
+ 146               	.LVL7:
+ 147               	.L8:
+ 148               	.LSM16:
+ 149 00d4 8091 0000 		lds r24,uip_len
+ 150 00d8 9091 0000 		lds r25,(uip_len)+1
+ 151 00dc 892B      		or r24,r25
+ 152 00de 01F4      		brne .+2
+ 153 00e0 00C0      		rjmp .L15
+ 154               	.LSM17:
+ 155 00e2 8881      		ld r24,Y
+ 156 00e4 F701      		movw r30,r14
+ 157 00e6 868F      		std Z+30,r24
+ 158               	.LSM18:
+ 159 00e8 83E0      		ldi r24,lo8(3)
+ 160 00ea 848F      		std Z+28,r24
+ 161 00ec 00C0      		rjmp .L15
+ 162               	.L20:
+ 163               	.LSM19:
+ 164 00ee D701      		movw r26,r14
+ 165 00f0 5E96      		adiw r26,30
+ 166 00f2 8C91      		ld r24,X
+ 167 00f4 8336      		cpi r24,lo8(99)
+ 168 00f6 01F0      		breq .+2
+ 169 00f8 00C0      		rjmp .L17
+ 170               	.LBB8:
+ 171               	.LBB9:
+ 172               	.LSM20:
+ 173 00fa C090 0000 		lds r12,uip_appdata
+ 174 00fe D090 0000 		lds r13,(uip_appdata)+1
+ 175               	.LVL8:
+ 176               	.LSM21:
+ 177 0102 C601      		movw r24,r12
+ 178 0104 60E0      		ldi r22,lo8(CurrentConnectionsHeader)
+ 179 0106 70E0      		ldi r23,hi8(CurrentConnectionsHeader)
+ 180 0108 0E94 0000 		call strcpy_P
+ 181               	.LBE9:
+ 182               	.LSM22:
+ 183 010c D601      		movw r26,r12
+ 184 010e 0D90      		ld __tmp_reg__,X+
+ 185 0110 0020      		tst __tmp_reg__
+ 186 0112 01F4      		brne .-6
+ 187 0114 8D01      		movw r16,r26
+ 188               	.LVL9:
+ 189 0116 0150      		subi r16,lo8(-(-1))
+ 190 0118 1040      		sbci r17,hi8(-(-1))
+ 191 011a 0C19      		sub r16,r12
+ 192 011c 1D09      		sbc r17,r13
+ 193 011e C0E0      		ldi r28,lo8(uip_conns)
+ 194 0120 D0E0      		ldi r29,hi8(uip_conns)
+ 195               	.LVL10:
+ 196 0122 BB24      		clr r11
+ 197               	.LVL11:
+ 198               	.LSM23:
+ 199 0124 80E0      		ldi r24,lo8(__c.1965)
+ 200 0126 882E      		mov r8,r24
+ 201 0128 80E0      		ldi r24,hi8(__c.1965)
+ 202 012a 982E      		mov r9,r24
+ 203               	.L13:
+ 204               	.LBB14:
+ 205               	.LBB10:
+ 206               	.LBB11:
+ 207               	.LSM24:
+ 208 012c 898D      		ldd r24,Y+25
+ 209 012e 8823      		tst r24
+ 210 0130 01F0      		breq .L12
+ 211               	.LSM25:
+ 212 0132 B394      		inc r11
+ 213               	.LBE11:
+ 214               	.LBE10:
+ 215               	.LBE14:
+ 216 0134 EDB7      		in r30,__SP_L__
+ 217 0136 FEB7      		in r31,__SP_H__
+ 218 0138 7297      		sbiw r30,18
+ 219 013a 0FB6      		in __tmp_reg__,__SREG__
+ 220 013c F894      		cli
+ 221 013e FEBF      		out __SP_H__,r31
+ 222 0140 0FBE      		out __SREG__,__tmp_reg__
+ 223 0142 EDBF      		out __SP_L__,r30
+ 224 0144 3196      		adiw r30,1
+ 225 0146 C601      		movw r24,r12
+ 226 0148 800F      		add r24,r16
+ 227 014a 911F      		adc r25,r17
+ 228 014c ADB7      		in r26,__SP_L__
+ 229 014e BEB7      		in r27,__SP_H__
+ 230 0150 1296      		adiw r26,1+1
+ 231 0152 9C93      		st X,r25
+ 232 0154 8E93      		st -X,r24
+ 233 0156 1197      		sbiw r26,1
+ 234 0158 9382      		std Z+3,r9
+ 235 015a 8282      		std Z+2,r8
+ 236 015c B482      		std Z+4,r11
+ 237 015e 1582      		std Z+5,__zero_reg__
+ 238 0160 8881      		ld r24,Y
+ 239 0162 8683      		std Z+6,r24
+ 240 0164 1782      		std Z+7,__zero_reg__
+ 241 0166 8981      		ldd r24,Y+1
+ 242 0168 8087      		std Z+8,r24
+ 243 016a 1186      		std Z+9,__zero_reg__
+ 244 016c 8A81      		ldd r24,Y+2
+ 245 016e 8287      		std Z+10,r24
+ 246 0170 1386      		std Z+11,__zero_reg__
+ 247 0172 8B81      		ldd r24,Y+3
+ 248 0174 8487      		std Z+12,r24
+ 249 0176 1586      		std Z+13,__zero_reg__
+ 250 0178 9C81      		ldd r25,Y+4
+ 251 017a 8D81      		ldd r24,Y+5
+ 252 017c 8687      		std Z+14,r24
+ 253 017e 9787      		std Z+15,r25
+ 254 0180 9E81      		ldd r25,Y+6
+ 255 0182 8F81      		ldd r24,Y+7
+ 256 0184 808B      		std Z+16,r24
+ 257 0186 918B      		std Z+17,r25
+ 258 0188 0E94 0000 		call sprintf_P
+ 259               	.LBB15:
+ 260               	.LBB13:
+ 261               	.LBB12:
+ 262 018c 080F      		add r16,r24
+ 263 018e 191F      		adc r17,r25
+ 264 0190 EDB7      		in r30,__SP_L__
+ 265 0192 FEB7      		in r31,__SP_H__
+ 266 0194 7296      		adiw r30,18
+ 267 0196 0FB6      		in __tmp_reg__,__SREG__
+ 268 0198 F894      		cli
+ 269 019a FEBF      		out __SP_H__,r31
+ 270 019c 0FBE      		out __SREG__,__tmp_reg__
+ 271 019e EDBF      		out __SP_L__,r30
+ 272               	.L12:
+ 273 01a0 CF58      		subi r28,lo8(-(113))
+ 274 01a2 DF4F      		sbci r29,hi8(-(113))
+ 275               	.LBE12:
+ 276               	.LSM26:
+ 277 01a4 F0E0      		ldi r31,hi8(uip_conns+339)
+ 278 01a6 C030      		cpi r28,lo8(uip_conns+339)
+ 279 01a8 DF07      		cpc r29,r31
+ 280 01aa 01F0      		breq .+2
+ 281 01ac 00C0      		rjmp .L13
+ 282               	.LBE13:
+ 283               	.LSM27:
+ 284 01ae C601      		movw r24,r12
+ 285 01b0 B801      		movw r22,r16
+ 286 01b2 00C0      		rjmp .L18
+ 287               	.LVL12:
+ 288               	.L17:
+ 289               	.LBE15:
+ 290               	.LBE8:
+ 291               	.LSM28:
+ 292 01b4 CE01      		movw r24,r28
+ 293 01b6 60E0      		ldi r22,lo8(__c.1930)
+ 294 01b8 70E0      		ldi r23,hi8(__c.1930)
+ 295 01ba 0E94 0000 		call strcpy_P
+ 296               	.LSM29:
+ 297 01be AC2F      		mov r26,r28
+ 298 01c0 B12F      		mov r27,r17
+ 299               	.LVL13:
+ 300 01c2 FD01      		movw r30,r26
+ 301 01c4 0190      		ld __tmp_reg__,Z+
+ 302 01c6 0020      		tst __tmp_reg__
+ 303 01c8 01F4      		brne .-6
+ 304 01ca 3197      		sbiw r30,1
+ 305 01cc EA1B      		sub r30,r26
+ 306 01ce FB0B      		sbc r31,r27
+ 307 01d0 CE01      		movw r24,r28
+ 308 01d2 BF01      		movw r22,r30
+ 309               	.LVL14:
+ 310               	.L18:
+ 311 01d4 0E94 0000 		call uip_send
+ 312               	.LVL15:
+ 313               	.LSM30:
+ 314 01d8 81E0      		ldi r24,lo8(1)
+ 315               	.L19:
+ 316 01da D701      		movw r26,r14
+ 317 01dc 5D96      		adiw r26,29
+ 318 01de 8C93      		st X,r24
+ 319               	.L15:
+ 320               	/* epilogue start */
+ 321               	.LSM31:
+ 322 01e0 DF91      		pop r29
+ 323               	.LVL16:
+ 324 01e2 CF91      		pop r28
+ 325               	.LVL17:
+ 326 01e4 1F91      		pop r17
+ 327 01e6 0F91      		pop r16
+ 328               	.LVL18:
+ 329 01e8 FF90      		pop r15
+ 330 01ea EF90      		pop r14
+ 331 01ec DF90      		pop r13
+ 332 01ee CF90      		pop r12
+ 333               	.LVL19:
+ 334 01f0 BF90      		pop r11
+ 335               	.LVL20:
+ 336 01f2 9F90      		pop r9
+ 337 01f4 8F90      		pop r8
+ 338 01f6 0895      		ret
+ 339               	.LFE9:
+ 341               		.section	.text.TELNETServerApp_Init,"ax",@progbits
+ 342               	.global	TELNETServerApp_Init
+ 344               	TELNETServerApp_Init:
+ 345               	.LFB8:
+ 346               	.LSM32:
+ 347               	/* prologue: function */
+ 348               	/* frame size = 0 */
+ 349               	.LSM33:
+ 350 0000 80E0      		ldi r24,lo8(5888)
+ 351 0002 97E1      		ldi r25,hi8(5888)
+ 352 0004 0E94 0000 		call uip_listen
+ 353               	/* epilogue start */
+ 354               	.LSM34:
+ 355 0008 0895      		ret
+ 356               	.LFE8:
+ 358               	.global	WelcomeHeader
+ 359               		.section	.progmem.data,"a",@progbits
+ 362               	WelcomeHeader:
+ 363 0000 2A2A 2A2A 		.ascii	"********************************************\r\n*       LUFA"
+ 363      2A2A 2A2A 
+ 363      2A2A 2A2A 
+ 363      2A2A 2A2A 
+ 363      2A2A 2A2A 
+ 364 003a 2075 4950 		.ascii	" uIP Webserver ("
+ 364      2057 6562 
+ 364      7365 7276 
+ 364      6572 2028 
+ 365 004a 5445 4C4E 		.string	"TELNET)        *\r\n********************************************\r\n"
+ 365      4554 2920 
+ 365      2020 2020 
+ 365      2020 202A 
+ 365      0D0A 2A2A 
+ 366               	.global	TELNETMenu
+ 369               	TELNETMenu:
+ 370 008b 0D0A 2020 		.ascii	"\r\n  == Available Commands: ==\r\n     "
+ 370      3D3D 2041 
+ 370      7661 696C 
+ 370      6162 6C65 
+ 370      2043 6F6D 
+ 371 00af 6329 204C 		.string	"c) List Active TCP Connections\r\n  =========================\r\n\r\n>"
+ 371      6973 7420 
+ 371      4163 7469 
+ 371      7665 2054 
+ 371      4350 2043 
+ 372               	.global	CurrentConnectionsHeader
+ 375               	CurrentConnectionsHeader:
+ 376 00f0 0D0A 2A20 		.string	"\r\n* Current TCP Connections: *\r\n"
+ 376      4375 7272 
+ 376      656E 7420 
+ 376      5443 5020 
+ 376      436F 6E6E 
+ 379               	__c.1930:
+ 380 0111 496E 7661 		.string	"Invalid Command.\r\n"
+ 380      6C69 6420 
+ 380      436F 6D6D 
+ 380      616E 642E 
+ 380      0D0A 00
+ 383               	__c.1965:
+ 384 0124 2575 2920 		.string	"%u) %02d.%02d.%02d.%02d (Local %u, Remote %u)\r\n"
+ 384      2530 3264 
+ 384      2E25 3032 
+ 384      642E 2530 
+ 384      3264 2E25 
+ 417               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 TELNETServerApp.c
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccFGGgc9.s:2      *ABS*:0000003f __SREG__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccFGGgc9.s:3      *ABS*:0000003e __SP_H__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccFGGgc9.s:4      *ABS*:0000003d __SP_L__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccFGGgc9.s:5      *ABS*:00000034 __CCP__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccFGGgc9.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccFGGgc9.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccFGGgc9.s:19     .text.TELNETServerApp_Callback:00000000 TELNETServerApp_Callback
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccFGGgc9.s:362    .progmem.data:00000000 WelcomeHeader
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccFGGgc9.s:369    .progmem.data:0000008b TELNETMenu
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccFGGgc9.s:375    .progmem.data:000000f0 CurrentConnectionsHeader
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccFGGgc9.s:383    .progmem.data:00000124 __c.1965
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccFGGgc9.s:379    .progmem.data:00000111 __c.1930
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccFGGgc9.s:344    .text.TELNETServerApp_Init:00000000 TELNETServerApp_Init
+
+UNDEFINED SYMBOLS
+uip_conn
+uip_appdata
+uip_flags
+strcpy_P
+uip_send
+uip_len
+uip_conns
+sprintf_P
+uip_listen

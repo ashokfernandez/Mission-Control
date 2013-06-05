@@ -1,0 +1,155 @@
+   1               		.file	"adc.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	adc_ready
+  18               	adc_ready:
+  19               	.LFB2:
+  20               	.LM1:
+  21               	/* prologue: function */
+  22               	/* frame size = 0 */
+  23               	.LM2:
+  24 0000 86B1      		in r24,38-32
+  25 0002 8295      		swap r24
+  26 0004 8695      		lsr r24
+  27 0006 8695      		lsr r24
+  28 0008 8370      		andi r24,lo8(3)
+  29 000a 8095      		com r24
+  30               	.LM3:
+  31 000c 8170      		andi r24,lo8(1)
+  32               	/* epilogue start */
+  33 000e 0895      		ret
+  34               	.LFE2:
+  36               	.global	adc_init
+  38               	adc_init:
+  39               	.LFB3:
+  40               	.LM4:
+  41               	.LVL0:
+  42               	/* prologue: function */
+  43               	/* frame size = 0 */
+  44               	.LM5:
+  45 0010 86B9      		out 38-32,r24
+  46               	.LM6:
+  47 0012 97B9      		out 39-32,r25
+  48               	.LVL1:
+  49               	.LM7:
+  50 0014 97B1      		in r25,39-32
+  51               	.LVL2:
+  52 0016 9072      		andi r25,lo8(32)
+  53 0018 8091 0000 		lds r24,adc_isEightBit
+  54               	.LVL3:
+  55 001c 892B      		or r24,r25
+  56 001e 8093 0000 		sts adc_isEightBit,r24
+  57               	.LBB8:
+  58               	.LBB9:
+  59               	.LM8:
+  60 0022 379A      		sbi 38-32,7
+  61               	/* epilogue start */
+  62               	.LBE9:
+  63               	.LBE8:
+  64               	.LM9:
+  65 0024 0895      		ret
+  66               	.LFE3:
+  68               	.global	adc_on
+  70               	adc_on:
+  71               	.LFB4:
+  72               	.LM10:
+  73               	/* prologue: function */
+  74               	/* frame size = 0 */
+  75               	.LM11:
+  76 0026 379A      		sbi 38-32,7
+  77               	/* epilogue start */
+  78               	.LM12:
+  79 0028 0895      		ret
+  80               	.LFE4:
+  82               	.global	adc_off
+  84               	adc_off:
+  85               	.LFB5:
+  86               	.LM13:
+  87               	/* prologue: function */
+  88               	/* frame size = 0 */
+  89               	.LM14:
+  90 002a 3798      		cbi 38-32,7
+  91               	/* epilogue start */
+  92               	.LM15:
+  93 002c 0895      		ret
+  94               	.LFE5:
+  96               	.global	adc_startConversion
+  98               	adc_startConversion:
+  99               	.LFB6:
+ 100               	.LM16:
+ 101               	.LVL4:
+ 102               	/* prologue: function */
+ 103               	/* frame size = 0 */
+ 104               	.LM17:
+ 105 002e 97B1      		in r25,39-32
+ 106 0030 8F70      		andi r24,lo8(15)
+ 107               	.LVL5:
+ 108 0032 907F      		andi r25,lo8(-16)
+ 109 0034 892B      		or r24,r25
+ 110 0036 87B9      		out 39-32,r24
+ 111               	.LM18:
+ 112 0038 369B      		sbis 38-32,6
+ 113               	.LM19:
+ 114 003a 369A      		sbi 38-32,6
+ 115               	.L11:
+ 116 003c 0895      		ret
+ 117               	.LFE6:
+ 119               	.global	adc_read
+ 121               	adc_read:
+ 122               	.LFB7:
+ 123               	.LM20:
+ 124               	/* prologue: function */
+ 125               	/* frame size = 0 */
+ 126               	.L13:
+ 127               	.LM21:
+ 128 003e 3699      		sbic 38-32,6
+ 129 0040 00C0      		rjmp .L13
+ 130               	.LM22:
+ 131 0042 8091 0000 		lds r24,adc_isEightBit
+ 132 0046 8823      		tst r24
+ 133 0048 01F0      		breq .L14
+ 134               	.LM23:
+ 135 004a 85B1      		in r24,37-32
+ 136 004c 282F      		mov r18,r24
+ 137               	.LVL6:
+ 138 004e 30E0      		ldi r19,lo8(0)
+ 139               	.LVL7:
+ 140 0050 00C0      		rjmp .L15
+ 141               	.LVL8:
+ 142               	.L14:
+ 143               	.LM24:
+ 144 0052 24B1      		in r18,36-32
+ 145 0054 35B1      		in r19,(36)+1-32
+ 146               	.LVL9:
+ 147               	.L15:
+ 148               	.LM25:
+ 149 0056 C901      		movw r24,r18
+ 150               	.LVL10:
+ 151               	/* epilogue start */
+ 152 0058 0895      		ret
+ 153               	.LFE7:
+ 155               		.lcomm adc_isEightBit,1
+ 220               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 adc.c
+     /tmp/ccJRUxDT.s:2      *ABS*:0000003f __SREG__
+     /tmp/ccJRUxDT.s:3      *ABS*:0000003e __SP_H__
+     /tmp/ccJRUxDT.s:4      *ABS*:0000003d __SP_L__
+     /tmp/ccJRUxDT.s:5      *ABS*:00000034 __CCP__
+     /tmp/ccJRUxDT.s:6      *ABS*:00000000 __tmp_reg__
+     /tmp/ccJRUxDT.s:7      *ABS*:00000001 __zero_reg__
+     /tmp/ccJRUxDT.s:18     .text:00000000 adc_ready
+     /tmp/ccJRUxDT.s:38     .text:00000010 adc_init
+                             .bss:00000000 adc_isEightBit
+     /tmp/ccJRUxDT.s:70     .text:00000026 adc_on
+     /tmp/ccJRUxDT.s:84     .text:0000002a adc_off
+     /tmp/ccJRUxDT.s:98     .text:0000002e adc_startConversion
+     /tmp/ccJRUxDT.s:121    .text:0000003e adc_read
+
+UNDEFINED SYMBOLS
+__do_clear_bss

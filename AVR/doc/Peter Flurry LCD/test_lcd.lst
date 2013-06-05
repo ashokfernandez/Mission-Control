@@ -1,0 +1,101 @@
+   1               		.file	"test_lcd.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	wait_until_key_pressed
+  18               	wait_until_key_pressed:
+  19               	.LFB6:
+  20               	.LM1:
+  21               	/* prologue: function */
+  22               	/* frame size = 0 */
+  23               	.LM2:
+  24 0000 8FEF      		ldi r24,lo8(-1)
+  25 0002 9FEF      		ldi r25,hi8(-1)
+  26               	.LVL0:
+  27               	.LBB12:
+  28               	.LBB13:
+  29               	.LBB14:
+  30               	.LBB15:
+  31               	.LM3:
+  32 0004 29E1      		ldi r18,lo8(25)
+  33 0006 30E0      		ldi r19,hi8(25)
+  34               	.L2:
+  35 0008 F901      		movw r30,r18
+  36               	.LVL1:
+  37               	/* #APP */
+  38               	 ;  105 "/usr/lib/gcc/avr/4.3.5/../../../avr/include/util/delay_basic.h" 1
+  39 000a 3197      		1: sbiw r30,1
+  40 000c 01F4      		brne 1b
+  41               	 ;  0 "" 2
+  42               	/* #NOAPP */
+  43               	.LBE15:
+  44               	.LBE14:
+  45               	.LM4:
+  46 000e 0197      		sbiw r24,1
+  47               	.LM5:
+  48 0010 01F4      		brne .L2
+  49               	/* epilogue start */
+  50               	.LBE13:
+  51               	.LBE12:
+  52               	.LM6:
+  53 0012 0895      		ret
+  54               	.LFE6:
+  56               		.data
+  57               	.LC0:
+  58 0000 4C43 4420 		.string	"LCD Test Line 1\n"
+  58      5465 7374 
+  58      204C 696E 
+  58      6520 310A 
+  58      00
+  59               	.LC1:
+  60 0011 4C69 6E65 		.string	"Line 2"
+  60      2032 00
+  61               		.text
+  62               	.global	main
+  64               	main:
+  65               	.LFB7:
+  66               	.LM7:
+  67               	/* prologue: function */
+  68               	/* frame size = 0 */
+  69               	.LM8:
+  70 0014 80E8      		ldi r24,lo8(-128)
+  71 0016 84B9      		out 36-32,r24
+  72               	.LM9:
+  73 0018 2F98      		cbi 37-32,7
+  74               	.LM10:
+  75 001a 8CE0      		ldi r24,lo8(12)
+  76 001c 0E94 0000 		call lcd_init
+  77               	.LM11:
+  78 0020 0E94 0000 		call lcd_clrscr
+  79               	.LM12:
+  80 0024 80E0      		ldi r24,lo8(.LC0)
+  81 0026 90E0      		ldi r25,hi8(.LC0)
+  82 0028 0E94 0000 		call lcd_puts
+  83               	.LM13:
+  84 002c 80E0      		ldi r24,lo8(.LC1)
+  85 002e 90E0      		ldi r25,hi8(.LC1)
+  86 0030 0E94 0000 		call lcd_puts
+  87               	.L6:
+  88 0034 00C0      		rjmp .L6
+  89               	.LFE7:
+ 123               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 test_lcd.c
+     /tmp/ccXmcraK.s:2      *ABS*:0000003f __SREG__
+     /tmp/ccXmcraK.s:3      *ABS*:0000003e __SP_H__
+     /tmp/ccXmcraK.s:4      *ABS*:0000003d __SP_L__
+     /tmp/ccXmcraK.s:5      *ABS*:00000034 __CCP__
+     /tmp/ccXmcraK.s:6      *ABS*:00000000 __tmp_reg__
+     /tmp/ccXmcraK.s:7      *ABS*:00000001 __zero_reg__
+     /tmp/ccXmcraK.s:18     .text:00000000 wait_until_key_pressed
+     /tmp/ccXmcraK.s:64     .text:00000014 main
+
+UNDEFINED SYMBOLS
+lcd_init
+lcd_clrscr
+lcd_puts
+__do_copy_data

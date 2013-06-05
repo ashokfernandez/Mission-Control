@@ -1,0 +1,523 @@
+   1               		.file	"StillImageCommands.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.SImage_IsEventReceived,"ax",@progbits
+  17               	.global	SImage_IsEventReceived
+  19               	SImage_IsEventReceived:
+  20               	.LFB133:
+  21               	.LSM0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LBB73:
+  25               	.LBB74:
+  26               	.LSM1:
+  27 0000 83E0      		ldi r24,lo8(3)
+  28 0002 8093 A700 		sts 167,r24
+  29               	.LBE74:
+  30               	.LBE73:
+  31               	.LBB75:
+  32               	.LBB76:
+  33               	.LSM2:
+  34 0006 8091 A900 		lds r24,169
+  35 000a 8F7B      		andi r24,lo8(-65)
+  36 000c 8093 A900 		sts 169,r24
+  37               	.LBE76:
+  38               	.LBE75:
+  39               	.LBB77:
+  40               	.LBB78:
+  41               	.LSM3:
+  42 0010 2091 F600 		lds r18,246
+  43 0014 3091 F700 		lds r19,(246)+1
+  44               	.LBE78:
+  45               	.LBE77:
+  46               	.LBB79:
+  47               	.LBB80:
+  48               	.LSM4:
+  49 0018 8091 A900 		lds r24,169
+  50 001c 8064      		ori r24,lo8(64)
+  51 001e 8093 A900 		sts 169,r24
+  52               	.LSM5:
+  53 0022 80E0      		ldi r24,lo8(0)
+  54 0024 232B      		or r18,r19
+  55 0026 01F0      		breq .L2
+  56 0028 81E0      		ldi r24,lo8(1)
+  57               	.L2:
+  58               	.LBE80:
+  59               	.LBE79:
+  60               	.LSM6:
+  61 002a 0895      		ret
+  62               	.LFE133:
+  64               		.section	.text.SImage_ReadData,"ax",@progbits
+  65               	.global	SImage_ReadData
+  67               	SImage_ReadData:
+  68               	.LFB132:
+  69               	.LSM7:
+  70               	.LVL0:
+  71 0000 0F93      		push r16
+  72 0002 1F93      		push r17
+  73               	/* prologue: function */
+  74               	/* frame size = 0 */
+  75               	.LBB81:
+  76               	.LBB82:
+  77               	.LSM8:
+  78 0004 21E0      		ldi r18,lo8(1)
+  79 0006 2093 A700 		sts 167,r18
+  80               	.LBE82:
+  81               	.LBE81:
+  82               	.LBB83:
+  83               	.LBB84:
+  84               	.LSM9:
+  85 000a 09EA      		ldi r16,lo8(169)
+  86 000c 10E0      		ldi r17,hi8(169)
+  87 000e F801      		movw r30,r16
+  88 0010 2081      		ld r18,Z
+  89 0012 2F7B      		andi r18,lo8(-65)
+  90 0014 2083      		st Z,r18
+  91               	.LBE84:
+  92               	.LBE83:
+  93               	.LSM10:
+  94 0016 0E94 0000 		call Pipe_Read_Stream_LE
+  95               	.LVL1:
+  96               	.LBB85:
+  97               	.LBB86:
+  98               	.LSM11:
+  99 001a F801      		movw r30,r16
+ 100 001c 9081      		ld r25,Z
+ 101 001e 9064      		ori r25,lo8(64)
+ 102 0020 9083      		st Z,r25
+ 103               	/* epilogue start */
+ 104               	.LBE86:
+ 105               	.LBE85:
+ 106               	.LSM12:
+ 107 0022 1F91      		pop r17
+ 108 0024 0F91      		pop r16
+ 109 0026 0895      		ret
+ 110               	.LFE132:
+ 112               		.section	.text.SImage_ReceiveEventHeader,"ax",@progbits
+ 113               	.global	SImage_ReceiveEventHeader
+ 115               	SImage_ReceiveEventHeader:
+ 116               	.LFB129:
+ 117               	.LSM13:
+ 118 0000 0F93      		push r16
+ 119 0002 1F93      		push r17
+ 120               	/* prologue: function */
+ 121               	/* frame size = 0 */
+ 122               	.LBB87:
+ 123               	.LBB88:
+ 124               	.LSM14:
+ 125 0004 83E0      		ldi r24,lo8(3)
+ 126 0006 8093 A700 		sts 167,r24
+ 127               	.LBE88:
+ 128               	.LBE87:
+ 129               	.LBB89:
+ 130               	.LBB90:
+ 131               	.LSM15:
+ 132 000a 09EA      		ldi r16,lo8(169)
+ 133 000c 10E0      		ldi r17,hi8(169)
+ 134 000e F801      		movw r30,r16
+ 135 0010 8081      		ld r24,Z
+ 136 0012 8F7B      		andi r24,lo8(-65)
+ 137 0014 8083      		st Z,r24
+ 138               	.LBE90:
+ 139               	.LBE89:
+ 140               	.LSM16:
+ 141 0016 80E0      		ldi r24,lo8(PIMA_EventBlock)
+ 142 0018 90E0      		ldi r25,hi8(PIMA_EventBlock)
+ 143 001a 68E1      		ldi r22,lo8(24)
+ 144 001c 70E0      		ldi r23,hi8(24)
+ 145 001e 0E94 0000 		call Pipe_Read_Stream_LE
+ 146               	.LBB91:
+ 147               	.LBB92:
+ 148               	.LSM17:
+ 149 0022 E6EA      		ldi r30,lo8(166)
+ 150 0024 F0E0      		ldi r31,hi8(166)
+ 151 0026 9081      		ld r25,Z
+ 152 0028 9E77      		andi r25,lo8(126)
+ 153 002a 9083      		st Z,r25
+ 154               	.LBE92:
+ 155               	.LBE91:
+ 156               	.LBB93:
+ 157               	.LBB94:
+ 158               	.LSM18:
+ 159 002c F801      		movw r30,r16
+ 160 002e 9081      		ld r25,Z
+ 161 0030 9064      		ori r25,lo8(64)
+ 162 0032 9083      		st Z,r25
+ 163               	/* epilogue start */
+ 164               	.LBE94:
+ 165               	.LBE93:
+ 166               	.LSM19:
+ 167 0034 1F91      		pop r17
+ 168 0036 0F91      		pop r16
+ 169 0038 0895      		ret
+ 170               	.LFE129:
+ 172               		.section	.text.SImage_SendData,"ax",@progbits
+ 173               	.global	SImage_SendData
+ 175               	SImage_SendData:
+ 176               	.LFB131:
+ 177               	.LSM20:
+ 178               	.LVL2:
+ 179 0000 0F93      		push r16
+ 180 0002 1F93      		push r17
+ 181               	/* prologue: function */
+ 182               	/* frame size = 0 */
+ 183               	.LBB95:
+ 184               	.LBB96:
+ 185               	.LSM21:
+ 186 0004 22E0      		ldi r18,lo8(2)
+ 187 0006 2093 A700 		sts 167,r18
+ 188               	.LBE96:
+ 189               	.LBE95:
+ 190               	.LBB97:
+ 191               	.LBB98:
+ 192               	.LSM22:
+ 193 000a 09EA      		ldi r16,lo8(169)
+ 194 000c 10E0      		ldi r17,hi8(169)
+ 195 000e F801      		movw r30,r16
+ 196 0010 2081      		ld r18,Z
+ 197 0012 2F7B      		andi r18,lo8(-65)
+ 198 0014 2083      		st Z,r18
+ 199               	.LBE98:
+ 200               	.LBE97:
+ 201               	.LSM23:
+ 202 0016 0E94 0000 		call Pipe_Write_Stream_LE
+ 203               	.LVL3:
+ 204               	.LBB99:
+ 205               	.LBB100:
+ 206               	.LSM24:
+ 207 001a E6EA      		ldi r30,lo8(166)
+ 208 001c F0E0      		ldi r31,hi8(166)
+ 209 001e 9081      		ld r25,Z
+ 210 0020 9B77      		andi r25,lo8(123)
+ 211 0022 9083      		st Z,r25
+ 212               	.LBE100:
+ 213               	.LBE99:
+ 214               	.LBB101:
+ 215               	.LBB102:
+ 216               	.LSM25:
+ 217 0024 F801      		movw r30,r16
+ 218 0026 9081      		ld r25,Z
+ 219 0028 9064      		ori r25,lo8(64)
+ 220 002a 9083      		st Z,r25
+ 221               	/* epilogue start */
+ 222               	.LBE102:
+ 223               	.LBE101:
+ 224               	.LSM26:
+ 225 002c 1F91      		pop r17
+ 226 002e 0F91      		pop r16
+ 227 0030 0895      		ret
+ 228               	.LFE131:
+ 230               		.section	.text.SImage_SendBlockHeader,"ax",@progbits
+ 231               	.global	SImage_SendBlockHeader
+ 233               	SImage_SendBlockHeader:
+ 234               	.LFB128:
+ 235               	.LSM27:
+ 236               	/* prologue: function */
+ 237               	/* frame size = 0 */
+ 238               	.LBB103:
+ 239               	.LBB104:
+ 240               	.LSM28:
+ 241 0000 82E0      		ldi r24,lo8(2)
+ 242 0002 8093 A700 		sts 167,r24
+ 243               	.LBE104:
+ 244               	.LBE103:
+ 245               	.LBB105:
+ 246               	.LBB106:
+ 247               	.LSM29:
+ 248 0006 8091 A900 		lds r24,169
+ 249 000a 8F7B      		andi r24,lo8(-65)
+ 250 000c 8093 A900 		sts 169,r24
+ 251               	.LBE106:
+ 252               	.LBE105:
+ 253               	.LSM30:
+ 254 0010 80E0      		ldi r24,lo8(PIMA_SendBlock)
+ 255 0012 90E0      		ldi r25,hi8(PIMA_SendBlock)
+ 256 0014 6CE0      		ldi r22,lo8(12)
+ 257 0016 70E0      		ldi r23,hi8(12)
+ 258 0018 0E94 0000 		call Pipe_Write_Stream_LE
+ 259               	.LSM31:
+ 260 001c 8091 0000 		lds r24,PIMA_SendBlock+4
+ 261 0020 9091 0000 		lds r25,(PIMA_SendBlock+4)+1
+ 262 0024 0197      		sbiw r24,1
+ 263 0026 01F4      		brne .L11
+ 264               	.LBB107:
+ 265               	.LSM32:
+ 266 0028 6091 0000 		lds r22,PIMA_SendBlock
+ 267               	.LVL4:
+ 268 002c 6C50      		subi r22,lo8(-(-12))
+ 269               	.LSM33:
+ 270 002e 01F0      		breq .L12
+ 271               	.LSM34:
+ 272 0030 80E0      		ldi r24,lo8(PIMA_SendBlock+12)
+ 273 0032 90E0      		ldi r25,hi8(PIMA_SendBlock+12)
+ 274 0034 70E0      		ldi r23,lo8(0)
+ 275 0036 0E94 0000 		call Pipe_Write_Stream_LE
+ 276               	.LVL5:
+ 277               	.L12:
+ 278               	.LBB108:
+ 279               	.LBB109:
+ 280               	.LSM35:
+ 281 003a 8091 A600 		lds r24,166
+ 282 003e 8B77      		andi r24,lo8(123)
+ 283 0040 8093 A600 		sts 166,r24
+ 284               	.L11:
+ 285               	.LBE109:
+ 286               	.LBE108:
+ 287               	.LBE107:
+ 288               	.LBB110:
+ 289               	.LBB111:
+ 290               	.LSM36:
+ 291 0044 8091 A900 		lds r24,169
+ 292 0048 8064      		ori r24,lo8(64)
+ 293 004a 8093 A900 		sts 169,r24
+ 294               	/* epilogue start */
+ 295               	.LBE111:
+ 296               	.LBE110:
+ 297               	.LSM37:
+ 298 004e 0895      		ret
+ 299               	.LFE128:
+ 301               		.section	.text.SImage_ReceiveBlockHeader,"ax",@progbits
+ 302               	.global	SImage_ReceiveBlockHeader
+ 304               	SImage_ReceiveBlockHeader:
+ 305               	.LFB130:
+ 306               	.LSM38:
+ 307               	/* prologue: function */
+ 308               	/* frame size = 0 */
+ 309               	.LBB112:
+ 310               	.LBB113:
+ 311               	.LSM39:
+ 312 0000 4091 A200 		lds r20,162
+ 313 0004 5091 A300 		lds r21,(162)+1
+ 314               	.LVL6:
+ 315               	.LBE113:
+ 316               	.LBE112:
+ 317               	.LBB114:
+ 318               	.LBB115:
+ 319               	.LSM40:
+ 320 0008 81E0      		ldi r24,lo8(1)
+ 321 000a 8093 A700 		sts 167,r24
+ 322               	.LBE115:
+ 323               	.LBE114:
+ 324               	.LBB116:
+ 325               	.LBB117:
+ 326               	.LSM41:
+ 327 000e 8091 A900 		lds r24,169
+ 328 0012 8F7B      		andi r24,lo8(-65)
+ 329 0014 8093 A900 		sts 169,r24
+ 330 0018 20E1      		ldi r18,lo8(10000)
+ 331 001a 37E2      		ldi r19,hi8(10000)
+ 332               	.LVL7:
+ 333               	.LBE117:
+ 334               	.LBE116:
+ 335               	.LBB118:
+ 336               	.LBB119:
+ 337               	.LBB120:
+ 338               	.LSM42:
+ 339 001c 72E0      		ldi r23,lo8(2)
+ 340               	.LBE120:
+ 341               	.LBE119:
+ 342               	.LBB122:
+ 343               	.LBB123:
+ 344 001e 61E0      		ldi r22,lo8(1)
+ 345 0020 00C0      		rjmp .L15
+ 346               	.L21:
+ 347               	.LBE123:
+ 348               	.LBE122:
+ 349               	.LBB125:
+ 350               	.LBB126:
+ 351               	.LSM43:
+ 352 0022 8091 A200 		lds r24,162
+ 353 0026 9091 A300 		lds r25,(162)+1
+ 354               	.LVL8:
+ 355               	.LBE126:
+ 356               	.LBE125:
+ 357               	.LSM44:
+ 358 002a 8417      		cp r24,r20
+ 359 002c 9507      		cpc r25,r21
+ 360 002e 01F0      		breq .L16
+ 361               	.LSM45:
+ 362 0030 2150      		subi r18,lo8(-(-1))
+ 363 0032 3040      		sbci r19,hi8(-(-1))
+ 364               	.LSM46:
+ 365 0034 01F4      		brne .L17
+ 366 0036 83E0      		ldi r24,lo8(3)
+ 367               	.LVL9:
+ 368 0038 0895      		ret
+ 369               	.LVL10:
+ 370               	.L17:
+ 371 003a AC01      		movw r20,r24
+ 372               	.L16:
+ 373               	.LBB127:
+ 374               	.LBB128:
+ 375               	.LSM47:
+ 376 003c 8091 A900 		lds r24,169
+ 377               	.LVL11:
+ 378 0040 8064      		ori r24,lo8(64)
+ 379 0042 8093 A900 		sts 169,r24
+ 380               	.LBE128:
+ 381               	.LBE127:
+ 382               	.LBB129:
+ 383               	.LBB121:
+ 384               	.LSM48:
+ 385 0046 7093 A700 		sts 167,r23
+ 386               	.LBE121:
+ 387               	.LBE129:
+ 388               	.LBB130:
+ 389               	.LBB131:
+ 390               	.LSM49:
+ 391 004a 8091 A900 		lds r24,169
+ 392 004e 8F7B      		andi r24,lo8(-65)
+ 393 0050 8093 A900 		sts 169,r24
+ 394               	.LBE131:
+ 395               	.LBE130:
+ 396               	.LBB132:
+ 397               	.LBB133:
+ 398               	.LSM50:
+ 399 0054 8091 A600 		lds r24,166
+ 400               	.LBE133:
+ 401               	.LBE132:
+ 402               	.LSM51:
+ 403 0058 81FF      		sbrs r24,1
+ 404 005a 00C0      		rjmp .L19
+ 405               	.LSM52:
+ 406 005c 82E0      		ldi r24,lo8(2)
+ 407 005e 00C0      		rjmp .L26
+ 408               	.L19:
+ 409               	.LBB134:
+ 410               	.LBB135:
+ 411               	.LSM53:
+ 412 0060 8091 A900 		lds r24,169
+ 413 0064 8064      		ori r24,lo8(64)
+ 414 0066 8093 A900 		sts 169,r24
+ 415               	.LBE135:
+ 416               	.LBE134:
+ 417               	.LBB136:
+ 418               	.LBB124:
+ 419               	.LSM54:
+ 420 006a 6093 A700 		sts 167,r22
+ 421               	.LBE124:
+ 422               	.LBE136:
+ 423               	.LBB137:
+ 424               	.LBB138:
+ 425               	.LSM55:
+ 426 006e 8091 A900 		lds r24,169
+ 427 0072 8F7B      		andi r24,lo8(-65)
+ 428 0074 8093 A900 		sts 169,r24
+ 429               	.LBE138:
+ 430               	.LBE137:
+ 431               	.LBB139:
+ 432               	.LBB140:
+ 433               	.LSM56:
+ 434 0078 8091 A600 		lds r24,166
+ 435               	.LBE140:
+ 436               	.LBE139:
+ 437               	.LSM57:
+ 438 007c 81FF      		sbrs r24,1
+ 439 007e 00C0      		rjmp .L20
+ 440               	.LSM58:
+ 441 0080 81E0      		ldi r24,lo8(1)
+ 442               	.L26:
+ 443 0082 0E94 0000 		call USB_Host_ClearPipeStall
+ 444               	.LVL12:
+ 445 0086 81E0      		ldi r24,lo8(1)
+ 446 0088 0895      		ret
+ 447               	.LVL13:
+ 448               	.L20:
+ 449               	.LSM59:
+ 450 008a 8091 0000 		lds r24,USB_HostState
+ 451 008e 8230      		cpi r24,lo8(2)
+ 452 0090 01F0      		breq .L18
+ 453               	.L15:
+ 454               	.LBE118:
+ 455               	.LBB141:
+ 456               	.LBB142:
+ 457               	.LSM60:
+ 458 0092 8091 A600 		lds r24,166
+ 459               	.LBE142:
+ 460               	.LBE141:
+ 461               	.LSM61:
+ 462 0096 80FF      		sbrs r24,0
+ 463 0098 00C0      		rjmp .L21
+ 464               	.LSM62:
+ 465 009a 80E0      		ldi r24,lo8(PIMA_ReceivedBlock)
+ 466 009c 90E0      		ldi r25,hi8(PIMA_ReceivedBlock)
+ 467 009e 6CE0      		ldi r22,lo8(12)
+ 468 00a0 70E0      		ldi r23,hi8(12)
+ 469 00a2 0E94 0000 		call Pipe_Read_Stream_LE
+ 470               	.LVL14:
+ 471               	.LSM63:
+ 472 00a6 8091 0000 		lds r24,PIMA_ReceivedBlock+4
+ 473 00aa 9091 0000 		lds r25,(PIMA_ReceivedBlock+4)+1
+ 474 00ae 0397      		sbiw r24,3
+ 475 00b0 01F4      		brne .L22
+ 476               	.LBB143:
+ 477               	.LSM64:
+ 478 00b2 6091 0000 		lds r22,PIMA_ReceivedBlock
+ 479               	.LVL15:
+ 480 00b6 6C50      		subi r22,lo8(-(-12))
+ 481               	.LSM65:
+ 482 00b8 01F0      		breq .L23
+ 483               	.LSM66:
+ 484 00ba 80E0      		ldi r24,lo8(PIMA_ReceivedBlock+12)
+ 485 00bc 90E0      		ldi r25,hi8(PIMA_ReceivedBlock+12)
+ 486 00be 70E0      		ldi r23,lo8(0)
+ 487 00c0 0E94 0000 		call Pipe_Read_Stream_LE
+ 488               	.LVL16:
+ 489               	.L23:
+ 490               	.LBB144:
+ 491               	.LBB145:
+ 492               	.LSM67:
+ 493 00c4 8091 A600 		lds r24,166
+ 494 00c8 8E77      		andi r24,lo8(126)
+ 495 00ca 8093 A600 		sts 166,r24
+ 496               	.L22:
+ 497               	.LBE145:
+ 498               	.LBE144:
+ 499               	.LBE143:
+ 500               	.LBB146:
+ 501               	.LBB147:
+ 502               	.LSM68:
+ 503 00ce 8091 A900 		lds r24,169
+ 504 00d2 8064      		ori r24,lo8(64)
+ 505 00d4 8093 A900 		sts 169,r24
+ 506 00d8 80E0      		ldi r24,lo8(0)
+ 507               	.LVL17:
+ 508               	.L18:
+ 509               	.LBE147:
+ 510               	.LBE146:
+ 511               	.LSM69:
+ 512 00da 0895      		ret
+ 513               	.LFE130:
+ 515               		.comm PIMA_SendBlock,24,1
+ 516               		.comm PIMA_ReceivedBlock,24,1
+ 517               		.comm PIMA_EventBlock,24,1
+ 582               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 StillImageCommands.c
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccw1xRav.s:2      *ABS*:0000003f __SREG__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccw1xRav.s:3      *ABS*:0000003e __SP_H__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccw1xRav.s:4      *ABS*:0000003d __SP_L__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccw1xRav.s:5      *ABS*:00000034 __CCP__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccw1xRav.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccw1xRav.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccw1xRav.s:19     .text.SImage_IsEventReceived:00000000 SImage_IsEventReceived
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccw1xRav.s:67     .text.SImage_ReadData:00000000 SImage_ReadData
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccw1xRav.s:115    .text.SImage_ReceiveEventHeader:00000000 SImage_ReceiveEventHeader
+                            *COM*:00000018 PIMA_EventBlock
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccw1xRav.s:175    .text.SImage_SendData:00000000 SImage_SendData
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccw1xRav.s:233    .text.SImage_SendBlockHeader:00000000 SImage_SendBlockHeader
+                            *COM*:00000018 PIMA_SendBlock
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccw1xRav.s:304    .text.SImage_ReceiveBlockHeader:00000000 SImage_ReceiveBlockHeader
+                            *COM*:00000018 PIMA_ReceivedBlock
+
+UNDEFINED SYMBOLS
+Pipe_Read_Stream_LE
+Pipe_Write_Stream_LE
+USB_Host_ClearPipeStall
+USB_HostState
+__do_clear_bss

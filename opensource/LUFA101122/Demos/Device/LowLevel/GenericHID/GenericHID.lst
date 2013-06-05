@@ -1,0 +1,520 @@
+   1               		.file	"GenericHID.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.EVENT_USB_Device_Connect,"ax",@progbits
+  17               	.global	EVENT_USB_Device_Connect
+  19               	EVENT_USB_Device_Connect:
+  20               	.LFB95:
+  21               	.LSM0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LBB49:
+  25               	.LBB50:
+  26               	.LSM1:
+  27 0000 8BB1      		in r24,43-32
+  28 0002 8F70      		andi r24,lo8(15)
+  29 0004 806A      		ori r24,lo8(-96)
+  30 0006 8BB9      		out 43-32,r24
+  31               	/* epilogue start */
+  32               	.LBE50:
+  33               	.LBE49:
+  34               	.LSM2:
+  35 0008 0895      		ret
+  36               	.LFE95:
+  38               		.section	.text.EVENT_USB_Device_Disconnect,"ax",@progbits
+  39               	.global	EVENT_USB_Device_Disconnect
+  41               	EVENT_USB_Device_Disconnect:
+  42               	.LFB96:
+  43               	.LSM3:
+  44               	/* prologue: function */
+  45               	/* frame size = 0 */
+  46               	.LBB51:
+  47               	.LBB52:
+  48               	.LSM4:
+  49 0000 8BB1      		in r24,43-32
+  50 0002 8F70      		andi r24,lo8(15)
+  51 0004 8061      		ori r24,lo8(16)
+  52 0006 8BB9      		out 43-32,r24
+  53               	/* epilogue start */
+  54               	.LBE52:
+  55               	.LBE51:
+  56               	.LSM5:
+  57 0008 0895      		ret
+  58               	.LFE96:
+  60               		.section	.text.ProcessGenericHIDReport,"ax",@progbits
+  61               	.global	ProcessGenericHIDReport
+  63               	ProcessGenericHIDReport:
+  64               	.LFB99:
+  65               	.LSM6:
+  66               	.LVL0:
+  67               	/* prologue: function */
+  68               	/* frame size = 0 */
+  69 0000 AC01      		movw r20,r24
+  70               	.LSM7:
+  71 0002 20E0      		ldi r18,lo8(0)
+  72 0004 30E0      		ldi r19,hi8(0)
+  73               	.LVL1:
+  74               	.L6:
+  75               	.LBB53:
+  76               	.LSM8:
+  77 0006 F901      		movw r30,r18
+  78 0008 E050      		subi r30,lo8(-(LastReceived))
+  79 000a F040      		sbci r31,hi8(-(LastReceived))
+  80 000c DA01      		movw r26,r20
+  81 000e A20F      		add r26,r18
+  82 0010 B31F      		adc r27,r19
+  83 0012 8C91      		ld r24,X
+  84 0014 8083      		st Z,r24
+  85 0016 2F5F      		subi r18,lo8(-(1))
+  86 0018 3F4F      		sbci r19,hi8(-(1))
+  87               	.LSM9:
+  88 001a 2830      		cpi r18,8
+  89 001c 3105      		cpc r19,__zero_reg__
+  90 001e 01F4      		brne .L6
+  91               	/* epilogue start */
+  92               	.LBE53:
+  93               	.LSM10:
+  94 0020 0895      		ret
+  95               	.LFE99:
+  97               		.section	.text.CreateGenericHIDReport,"ax",@progbits
+  98               	.global	CreateGenericHIDReport
+ 100               	CreateGenericHIDReport:
+ 101               	.LFB100:
+ 102               	.LSM11:
+ 103               	.LVL2:
+ 104               	/* prologue: function */
+ 105               	/* frame size = 0 */
+ 106 0000 AC01      		movw r20,r24
+ 107               	.LSM12:
+ 108 0002 20E0      		ldi r18,lo8(0)
+ 109 0004 30E0      		ldi r19,hi8(0)
+ 110               	.LVL3:
+ 111               	.L10:
+ 112               	.LBB54:
+ 113               	.LSM13:
+ 114 0006 FA01      		movw r30,r20
+ 115 0008 E20F      		add r30,r18
+ 116 000a F31F      		adc r31,r19
+ 117 000c D901      		movw r26,r18
+ 118 000e A050      		subi r26,lo8(-(LastReceived))
+ 119 0010 B040      		sbci r27,hi8(-(LastReceived))
+ 120 0012 8C91      		ld r24,X
+ 121 0014 8083      		st Z,r24
+ 122 0016 2F5F      		subi r18,lo8(-(1))
+ 123 0018 3F4F      		sbci r19,hi8(-(1))
+ 124               	.LSM14:
+ 125 001a 2830      		cpi r18,8
+ 126 001c 3105      		cpc r19,__zero_reg__
+ 127 001e 01F4      		brne .L10
+ 128               	/* epilogue start */
+ 129               	.LBE54:
+ 130               	.LSM15:
+ 131 0020 0895      		ret
+ 132               	.LFE100:
+ 134               		.section	.text.HID_Task,"ax",@progbits
+ 135               	.global	HID_Task
+ 137               	HID_Task:
+ 138               	.LFB101:
+ 139               	.LSM16:
+ 140 0000 0F93      		push r16
+ 141 0002 1F93      		push r17
+ 142 0004 DF93      		push r29
+ 143 0006 CF93      		push r28
+ 144 0008 CDB7      		in r28,__SP_L__
+ 145 000a DEB7      		in r29,__SP_H__
+ 146 000c 2897      		sbiw r28,8
+ 147 000e 0FB6      		in __tmp_reg__,__SREG__
+ 148 0010 F894      		cli
+ 149 0012 DEBF      		out __SP_H__,r29
+ 150 0014 0FBE      		out __SREG__,__tmp_reg__
+ 151 0016 CDBF      		out __SP_L__,r28
+ 152               	/* prologue: function */
+ 153               	/* frame size = 8 */
+ 154               	.LSM17:
+ 155 0018 8091 0000 		lds r24,USB_DeviceState
+ 156 001c 8430      		cpi r24,lo8(4)
+ 157 001e 01F4      		brne .L17
+ 158               	.LBB55:
+ 159               	.LBB56:
+ 160               	.LSM18:
+ 161 0020 82E0      		ldi r24,lo8(2)
+ 162 0022 8093 E900 		sts 233,r24
+ 163               	.LBE56:
+ 164               	.LBE55:
+ 165               	.LBB57:
+ 166               	.LBB58:
+ 167               	.LSM19:
+ 168 0026 8091 E800 		lds r24,232
+ 169               	.LBE58:
+ 170               	.LBE57:
+ 171               	.LSM20:
+ 172 002a 82FF      		sbrs r24,2
+ 173 002c 00C0      		rjmp .L15
+ 174               	.LBB59:
+ 175               	.LBB60:
+ 176               	.LSM21:
+ 177 002e 8091 E800 		lds r24,232
+ 178               	.LBE60:
+ 179               	.LBE59:
+ 180               	.LSM22:
+ 181 0032 85FF      		sbrs r24,5
+ 182 0034 00C0      		rjmp .L16
+ 183               	.LBB61:
+ 184               	.LSM23:
+ 185 0036 8E01      		movw r16,r28
+ 186 0038 0F5F      		subi r16,lo8(-(1))
+ 187 003a 1F4F      		sbci r17,hi8(-(1))
+ 188 003c C801      		movw r24,r16
+ 189 003e 68E0      		ldi r22,lo8(8)
+ 190 0040 70E0      		ldi r23,hi8(8)
+ 191 0042 0E94 0000 		call Endpoint_Read_Stream_LE
+ 192               	.LSM24:
+ 193 0046 C801      		movw r24,r16
+ 194 0048 0E94 0000 		call ProcessGenericHIDReport
+ 195               	.L16:
+ 196               	.LBE61:
+ 197               	.LBB62:
+ 198               	.LBB63:
+ 199               	.LSM25:
+ 200 004c 8091 E800 		lds r24,232
+ 201 0050 8B77      		andi r24,lo8(123)
+ 202 0052 8093 E800 		sts 232,r24
+ 203               	.L15:
+ 204               	.LBE63:
+ 205               	.LBE62:
+ 206               	.LBB64:
+ 207               	.LBB65:
+ 208               	.LSM26:
+ 209 0056 81E0      		ldi r24,lo8(1)
+ 210 0058 8093 E900 		sts 233,r24
+ 211               	.LBE65:
+ 212               	.LBE64:
+ 213               	.LBB66:
+ 214               	.LBB67:
+ 215               	.LSM27:
+ 216 005c 8091 E800 		lds r24,232
+ 217               	.LBE67:
+ 218               	.LBE66:
+ 219               	.LSM28:
+ 220 0060 80FF      		sbrs r24,0
+ 221 0062 00C0      		rjmp .L17
+ 222               	.LBB68:
+ 223               	.LSM29:
+ 224 0064 8E01      		movw r16,r28
+ 225 0066 0F5F      		subi r16,lo8(-(1))
+ 226 0068 1F4F      		sbci r17,hi8(-(1))
+ 227 006a C801      		movw r24,r16
+ 228 006c 0E94 0000 		call CreateGenericHIDReport
+ 229               	.LSM30:
+ 230 0070 C801      		movw r24,r16
+ 231 0072 68E0      		ldi r22,lo8(8)
+ 232 0074 70E0      		ldi r23,hi8(8)
+ 233 0076 0E94 0000 		call Endpoint_Write_Stream_LE
+ 234               	.LBB69:
+ 235               	.LBB70:
+ 236               	.LSM31:
+ 237 007a 8091 E800 		lds r24,232
+ 238 007e 8E77      		andi r24,lo8(126)
+ 239 0080 8093 E800 		sts 232,r24
+ 240               	.L17:
+ 241               	/* epilogue start */
+ 242               	.LBE70:
+ 243               	.LBE69:
+ 244               	.LBE68:
+ 245               	.LSM32:
+ 246 0084 2896      		adiw r28,8
+ 247 0086 0FB6      		in __tmp_reg__,__SREG__
+ 248 0088 F894      		cli
+ 249 008a DEBF      		out __SP_H__,r29
+ 250 008c 0FBE      		out __SREG__,__tmp_reg__
+ 251 008e CDBF      		out __SP_L__,r28
+ 252 0090 CF91      		pop r28
+ 253 0092 DF91      		pop r29
+ 254 0094 1F91      		pop r17
+ 255 0096 0F91      		pop r16
+ 256 0098 0895      		ret
+ 257               	.LFE101:
+ 259               		.section	.text.EVENT_USB_Device_ControlRequest,"ax",@progbits
+ 260               	.global	EVENT_USB_Device_ControlRequest
+ 262               	EVENT_USB_Device_ControlRequest:
+ 263               	.LFB98:
+ 264               	.LSM33:
+ 265 0000 0F93      		push r16
+ 266 0002 1F93      		push r17
+ 267 0004 DF93      		push r29
+ 268 0006 CF93      		push r28
+ 269 0008 CDB7      		in r28,__SP_L__
+ 270 000a DEB7      		in r29,__SP_H__
+ 271 000c 2897      		sbiw r28,8
+ 272 000e 0FB6      		in __tmp_reg__,__SREG__
+ 273 0010 F894      		cli
+ 274 0012 DEBF      		out __SP_H__,r29
+ 275 0014 0FBE      		out __SREG__,__tmp_reg__
+ 276 0016 CDBF      		out __SP_L__,r28
+ 277               	/* prologue: function */
+ 278               	/* frame size = 8 */
+ 279               	.LSM34:
+ 280 0018 8091 0000 		lds r24,USB_ControlRequest+1
+ 281 001c 8130      		cpi r24,lo8(1)
+ 282 001e 01F0      		breq .L20
+ 283 0020 8930      		cpi r24,lo8(9)
+ 284 0022 01F4      		brne .L22
+ 285 0024 00C0      		rjmp .L23
+ 286               	.L20:
+ 287               	.LSM35:
+ 288 0026 8091 0000 		lds r24,USB_ControlRequest
+ 289 002a 813A      		cpi r24,lo8(-95)
+ 290 002c 01F4      		brne .L22
+ 291               	.LBB71:
+ 292               	.LSM36:
+ 293 002e 8E01      		movw r16,r28
+ 294 0030 0F5F      		subi r16,lo8(-(1))
+ 295 0032 1F4F      		sbci r17,hi8(-(1))
+ 296 0034 C801      		movw r24,r16
+ 297 0036 0E94 0000 		call CreateGenericHIDReport
+ 298               	.LBB72:
+ 299               	.LBB73:
+ 300               	.LSM37:
+ 301 003a 8091 E800 		lds r24,232
+ 302 003e 877F      		andi r24,lo8(-9)
+ 303 0040 8093 E800 		sts 232,r24
+ 304               	.LBE73:
+ 305               	.LBE72:
+ 306               	.LSM38:
+ 307 0044 C801      		movw r24,r16
+ 308 0046 68E0      		ldi r22,lo8(8)
+ 309 0048 70E0      		ldi r23,hi8(8)
+ 310 004a 0E94 0000 		call Endpoint_Write_Control_Stream_LE
+ 311               	.LBB74:
+ 312               	.LBB75:
+ 313               	.LSM39:
+ 314 004e 8091 E800 		lds r24,232
+ 315 0052 8B77      		andi r24,lo8(123)
+ 316 0054 8093 E800 		sts 232,r24
+ 317 0058 00C0      		rjmp .L22
+ 318               	.L23:
+ 319               	.LBE75:
+ 320               	.LBE74:
+ 321               	.LBE71:
+ 322               	.LSM40:
+ 323 005a 8091 0000 		lds r24,USB_ControlRequest
+ 324 005e 8132      		cpi r24,lo8(33)
+ 325 0060 01F4      		brne .L22
+ 326               	.LBB76:
+ 327               	.LBB77:
+ 328               	.LBB78:
+ 329               	.LSM41:
+ 330 0062 8091 E800 		lds r24,232
+ 331 0066 877F      		andi r24,lo8(-9)
+ 332 0068 8093 E800 		sts 232,r24
+ 333               	.LBE78:
+ 334               	.LBE77:
+ 335               	.LSM42:
+ 336 006c 8E01      		movw r16,r28
+ 337 006e 0F5F      		subi r16,lo8(-(1))
+ 338 0070 1F4F      		sbci r17,hi8(-(1))
+ 339 0072 C801      		movw r24,r16
+ 340 0074 68E0      		ldi r22,lo8(8)
+ 341 0076 70E0      		ldi r23,hi8(8)
+ 342 0078 0E94 0000 		call Endpoint_Read_Control_Stream_LE
+ 343               	.LBB79:
+ 344               	.LBB80:
+ 345               	.LSM43:
+ 346 007c 8091 E800 		lds r24,232
+ 347 0080 8B77      		andi r24,lo8(123)
+ 348 0082 8093 E800 		sts 232,r24
+ 349               	.LBE80:
+ 350               	.LBE79:
+ 351               	.LSM44:
+ 352 0086 C801      		movw r24,r16
+ 353 0088 0E94 0000 		call ProcessGenericHIDReport
+ 354               	.L22:
+ 355               	/* epilogue start */
+ 356               	.LBE76:
+ 357               	.LSM45:
+ 358 008c 2896      		adiw r28,8
+ 359 008e 0FB6      		in __tmp_reg__,__SREG__
+ 360 0090 F894      		cli
+ 361 0092 DEBF      		out __SP_H__,r29
+ 362 0094 0FBE      		out __SREG__,__tmp_reg__
+ 363 0096 CDBF      		out __SP_L__,r28
+ 364 0098 CF91      		pop r28
+ 365 009a DF91      		pop r29
+ 366 009c 1F91      		pop r17
+ 367 009e 0F91      		pop r16
+ 368 00a0 0895      		ret
+ 369               	.LFE98:
+ 371               		.section	.text.EVENT_USB_Device_ConfigurationChanged,"ax",@progbits
+ 372               	.global	EVENT_USB_Device_ConfigurationChanged
+ 374               	EVENT_USB_Device_ConfigurationChanged:
+ 375               	.LFB97:
+ 376               	.LSM46:
+ 377 0000 0F93      		push r16
+ 378 0002 1F93      		push r17
+ 379               	/* prologue: function */
+ 380               	/* frame size = 0 */
+ 381               	.LBB81:
+ 382               	.LSM47:
+ 383 0004 81E0      		ldi r24,lo8(1)
+ 384 0006 61EC      		ldi r22,lo8(-63)
+ 385 0008 42E0      		ldi r20,lo8(2)
+ 386 000a 0E94 0000 		call Endpoint_ConfigureEndpoint_Prv
+ 387 000e 082F      		mov r16,r24
+ 388               	.LBE81:
+ 389               	.LBB82:
+ 390 0010 82E0      		ldi r24,lo8(2)
+ 391 0012 60EC      		ldi r22,lo8(-64)
+ 392 0014 42E0      		ldi r20,lo8(2)
+ 393 0016 0E94 0000 		call Endpoint_ConfigureEndpoint_Prv
+ 394               	.LBE82:
+ 395               	.LSM48:
+ 396 001a 10E0      		ldi r17,lo8(0)
+ 397 001c 90E0      		ldi r25,lo8(0)
+ 398 001e 0823      		and r16,r24
+ 399 0020 1923      		and r17,r25
+ 400 0022 00FF      		sbrs r16,0
+ 401 0024 00C0      		rjmp .L25
+ 402 0026 90E6      		ldi r25,lo8(96)
+ 403 0028 00C0      		rjmp .L26
+ 404               	.L25:
+ 405 002a 90E9      		ldi r25,lo8(-112)
+ 406               	.L26:
+ 407               	.LBB83:
+ 408               	.LBB84:
+ 409               	.LSM49:
+ 410 002c 8BB1      		in r24,43-32
+ 411 002e 8F70      		andi r24,lo8(15)
+ 412 0030 982B      		or r25,r24
+ 413 0032 9BB9      		out 43-32,r25
+ 414               	/* epilogue start */
+ 415               	.LBE84:
+ 416               	.LBE83:
+ 417               	.LSM50:
+ 418 0034 1F91      		pop r17
+ 419 0036 0F91      		pop r16
+ 420 0038 0895      		ret
+ 421               	.LFE97:
+ 423               		.section	.text.SetupHardware,"ax",@progbits
+ 424               	.global	SetupHardware
+ 426               	SetupHardware:
+ 427               	.LFB94:
+ 428               	.LSM51:
+ 429               	/* prologue: function */
+ 430               	/* frame size = 0 */
+ 431               	.LSM52:
+ 432 0000 84B7      		in r24,84-32
+ 433 0002 877F      		andi r24,lo8(-9)
+ 434 0004 84BF      		out 84-32,r24
+ 435               	.LSM53:
+ 436 0006 88E1      		ldi r24,lo8(24)
+ 437               	/* #APP */
+ 438               	 ;  65 "GenericHID.c" 1
+ 439 0008 0FB6      		in __tmp_reg__, __SREG__
+ 440 000a F894      		cli
+ 441 000c 8093 6000 		sts 96, r24
+ 442 0010 1092 6000 		sts 96, __zero_reg__
+ 443 0014 0FBE      		out __SREG__,__tmp_reg__
+ 444               		
+ 445               	 ;  0 "" 2
+ 446               	/* #NOAPP */
+ 447               	.LBB85:
+ 448               	.LSM54:
+ 449 0016 80E0      		ldi r24,lo8(0)
+ 450 0018 90E0      		ldi r25,hi8(0)
+ 451 001a 20E8      		ldi r18,lo8(-128)
+ 452               	/* #APP */
+ 453               	 ;  68 "GenericHID.c" 1
+ 454 001c 0FB6      		in __tmp_reg__,__SREG__
+ 455 001e F894      		cli
+ 456 0020 2093 6100 		sts 97, r18
+ 457 0024 8093 6100 		sts 97, r24
+ 458 0028 0FBE      		out __SREG__, __tmp_reg__
+ 459               	 ;  0 "" 2
+ 460               	/* #NOAPP */
+ 461               	.LBE85:
+ 462               	.LBB86:
+ 463               	.LBB87:
+ 464               	.LSM55:
+ 465 002a 8AB1      		in r24,42-32
+ 466 002c 806F      		ori r24,lo8(-16)
+ 467 002e 8AB9      		out 42-32,r24
+ 468               	.LSM56:
+ 469 0030 8BB1      		in r24,43-32
+ 470 0032 8F70      		andi r24,lo8(15)
+ 471 0034 8BB9      		out 43-32,r24
+ 472               	.LBE87:
+ 473               	.LBE86:
+ 474               	.LSM57:
+ 475 0036 0E94 0000 		call USB_Init
+ 476               	/* epilogue start */
+ 477               	.LSM58:
+ 478 003a 0895      		ret
+ 479               	.LFE94:
+ 481               		.section	.text.main,"ax",@progbits
+ 482               	.global	main
+ 484               	main:
+ 485               	.LFB93:
+ 486               	.LSM59:
+ 487               	/* prologue: function */
+ 488               	/* frame size = 0 */
+ 489               	.LSM60:
+ 490 0000 0E94 0000 		call SetupHardware
+ 491               	.LBB88:
+ 492               	.LBB89:
+ 493               	.LSM61:
+ 494 0004 8BB1      		in r24,43-32
+ 495 0006 8F70      		andi r24,lo8(15)
+ 496 0008 8061      		ori r24,lo8(16)
+ 497 000a 8BB9      		out 43-32,r24
+ 498               	.LBE89:
+ 499               	.LBE88:
+ 500               	.LSM62:
+ 501               	/* #APP */
+ 502               	 ;  51 "GenericHID.c" 1
+ 503 000c 7894      		sei
+ 504               	 ;  0 "" 2
+ 505               	/* #NOAPP */
+ 506               	.L31:
+ 507               	.LSM63:
+ 508 000e 0E94 0000 		call HID_Task
+ 509               	.LSM64:
+ 510 0012 0E94 0000 		call USB_USBTask
+ 511 0016 00C0      		rjmp .L31
+ 512               	.LFE93:
+ 514               		.lcomm LastReceived,8
+ 603               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 GenericHID.c
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cctgvhT9.s:2      *ABS*:0000003f __SREG__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cctgvhT9.s:3      *ABS*:0000003e __SP_H__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cctgvhT9.s:4      *ABS*:0000003d __SP_L__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cctgvhT9.s:5      *ABS*:00000034 __CCP__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cctgvhT9.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cctgvhT9.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cctgvhT9.s:19     .text.EVENT_USB_Device_Connect:00000000 EVENT_USB_Device_Connect
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cctgvhT9.s:41     .text.EVENT_USB_Device_Disconnect:00000000 EVENT_USB_Device_Disconnect
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cctgvhT9.s:63     .text.ProcessGenericHIDReport:00000000 ProcessGenericHIDReport
+                             .bss:00000000 LastReceived
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cctgvhT9.s:100    .text.CreateGenericHIDReport:00000000 CreateGenericHIDReport
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cctgvhT9.s:137    .text.HID_Task:00000000 HID_Task
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cctgvhT9.s:262    .text.EVENT_USB_Device_ControlRequest:00000000 EVENT_USB_Device_ControlRequest
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cctgvhT9.s:374    .text.EVENT_USB_Device_ConfigurationChanged:00000000 EVENT_USB_Device_ConfigurationChanged
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cctgvhT9.s:426    .text.SetupHardware:00000000 SetupHardware
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cctgvhT9.s:484    .text.main:00000000 main
+
+UNDEFINED SYMBOLS
+USB_DeviceState
+Endpoint_Read_Stream_LE
+Endpoint_Write_Stream_LE
+USB_ControlRequest
+Endpoint_Write_Control_Stream_LE
+Endpoint_Read_Control_Stream_LE
+Endpoint_ConfigureEndpoint_Prv
+USB_Init
+USB_USBTask
+__do_clear_bss

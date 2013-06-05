@@ -1,0 +1,130 @@
+   1               		.file	"lcdText.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	lcdText_set_line
+  18               	lcdText_set_line:
+  19               	.LFB3:
+  20               	.LM1:
+  21               	.LVL0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24 0000 682F      		mov r22,r24
+  25               	.LM2:
+  26 0002 8330      		cpi r24,lo8(3)
+  27 0004 00F0      		brlo .L2
+  28               	.LM3:
+  29 0006 00D0      		rcall lcd_home
+  30               	.LVL1:
+  31 0008 0895      		ret
+  32               	.LVL2:
+  33               	.L2:
+  34               	.LM4:
+  35 000a 6150      		subi r22,lo8(-(-1))
+  36               	.LVL3:
+  37 000c 80E0      		ldi r24,lo8(0)
+  38 000e 00D0      		rcall lcd_gotoxy
+  39               	.LVL4:
+  40 0010 0895      		ret
+  41               	.LFE3:
+  43               	.global	lcdText_puts
+  45               	lcdText_puts:
+  46               	.LFB4:
+  47               	.LM5:
+  48               	.LVL5:
+  49 0012 0F93      		push r16
+  50 0014 1F93      		push r17
+  51               	/* prologue: function */
+  52               	/* frame size = 0 */
+  53 0016 8B01      		movw r16,r22
+  54               	.LM6:
+  55 0018 00D0      		rcall lcdText_set_line
+  56               	.LVL6:
+  57               	.LM7:
+  58 001a C801      		movw r24,r16
+  59 001c 00D0      		rcall lcd_puts
+  60               	/* epilogue start */
+  61               	.LM8:
+  62 001e 1F91      		pop r17
+  63 0020 0F91      		pop r16
+  64               	.LVL7:
+  65 0022 0895      		ret
+  66               	.LFE4:
+  68               	.global	lcdText_printf
+  70               	lcdText_printf:
+  71               	.LFB5:
+  72               	.LM9:
+  73               	.LVL8:
+  74 0024 0F93      		push r16
+  75 0026 1F93      		push r17
+  76 0028 DF93      		push r29
+  77 002a CF93      		push r28
+  78 002c CDB7      		in r28,__SP_L__
+  79 002e DEB7      		in r29,__SP_H__
+  80 0030 6197      		sbiw r28,17
+  81 0032 0FB6      		in __tmp_reg__,__SREG__
+  82 0034 F894      		cli
+  83 0036 DEBF      		out __SP_H__,r29
+  84 0038 0FBE      		out __SREG__,__tmp_reg__
+  85 003a CDBF      		out __SP_L__,r28
+  86               	/* prologue: function */
+  87               	/* frame size = 17 */
+  88               	.LM10:
+  89 003c 8E01      		movw r16,r28
+  90 003e 0F5F      		subi r16,lo8(-(1))
+  91 0040 1F4F      		sbci r17,hi8(-(1))
+  92 0042 81E1      		ldi r24,lo8(17)
+  93 0044 F801      		movw r30,r16
+  94 0046 1192      		st Z+,__zero_reg__
+  95 0048 8A95      	        dec r24
+  96 004a 01F4      		brne .-6
+  97               	.LM11:
+  98 004c 9E01      		movw r18,r28
+  99 004e 255E      		subi r18,lo8(-(27))
+ 100 0050 3F4F      		sbci r19,hi8(-(27))
+ 101               	.LM12:
+ 102 0052 C801      		movw r24,r16
+ 103 0054 698D      		ldd r22,Y+25
+ 104 0056 7A8D      		ldd r23,Y+26
+ 105 0058 A901      		movw r20,r18
+ 106 005a 00D0      		rcall vsprintf
+ 107               	.LM13:
+ 108 005c 888D      		ldd r24,Y+24
+ 109 005e B801      		movw r22,r16
+ 110 0060 00D0      		rcall lcdText_puts
+ 111               	/* epilogue start */
+ 112               	.LM14:
+ 113 0062 6196      		adiw r28,17
+ 114 0064 0FB6      		in __tmp_reg__,__SREG__
+ 115 0066 F894      		cli
+ 116 0068 DEBF      		out __SP_H__,r29
+ 117 006a 0FBE      		out __SREG__,__tmp_reg__
+ 118 006c CDBF      		out __SP_L__,r28
+ 119 006e CF91      		pop r28
+ 120 0070 DF91      		pop r29
+ 121 0072 1F91      		pop r17
+ 122 0074 0F91      		pop r16
+ 123 0076 0895      		ret
+ 124               	.LFE5:
+ 166               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 lcdText.c
+     /tmp/ccDxtWXQ.s:2      *ABS*:0000003f __SREG__
+     /tmp/ccDxtWXQ.s:3      *ABS*:0000003e __SP_H__
+     /tmp/ccDxtWXQ.s:4      *ABS*:0000003d __SP_L__
+     /tmp/ccDxtWXQ.s:5      *ABS*:00000034 __CCP__
+     /tmp/ccDxtWXQ.s:6      *ABS*:00000000 __tmp_reg__
+     /tmp/ccDxtWXQ.s:7      *ABS*:00000001 __zero_reg__
+     /tmp/ccDxtWXQ.s:18     .text:00000000 lcdText_set_line
+     /tmp/ccDxtWXQ.s:45     .text:00000012 lcdText_puts
+     /tmp/ccDxtWXQ.s:70     .text:00000024 lcdText_printf
+
+UNDEFINED SYMBOLS
+lcd_home
+lcd_gotoxy
+lcd_puts
+vsprintf

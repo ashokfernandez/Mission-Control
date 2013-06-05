@@ -1,0 +1,759 @@
+   1               		.file	"Benito.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.EVENT_USB_Device_Connect,"ax",@progbits
+  17               	.global	EVENT_USB_Device_Connect
+  19               	EVENT_USB_Device_Connect:
+  20               	.LFB101:
+  21               	.LSM0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LSM1:
+  25 0000 84E6      		ldi r24,lo8(100)
+  26 0002 8093 0000 		sts PulseMSRemaining+3,r24
+  27               	.LBB74:
+  28               	.LBB75:
+  29               	.LSM2:
+  30 0006 88B1      		in r24,40-32
+  31 0008 806C      		ori r24,lo8(-64)
+  32 000a 8F77      		andi r24,lo8(127)
+  33 000c 88B9      		out 40-32,r24
+  34               	/* epilogue start */
+  35               	.LBE75:
+  36               	.LBE74:
+  37               	.LSM3:
+  38 000e 0895      		ret
+  39               	.LFE101:
+  41               		.section	.text.EVENT_USB_Device_Disconnect,"ax",@progbits
+  42               	.global	EVENT_USB_Device_Disconnect
+  44               	EVENT_USB_Device_Disconnect:
+  45               	.LFB102:
+  46               	.LSM4:
+  47               	/* prologue: function */
+  48               	/* frame size = 0 */
+  49               	.LSM5:
+  50 0000 1092 0000 		sts PulseMSRemaining+3,__zero_reg__
+  51               	.LBB76:
+  52               	.LBB77:
+  53               	.LSM6:
+  54 0004 88B1      		in r24,40-32
+  55 0006 806C      		ori r24,lo8(-64)
+  56 0008 88B9      		out 40-32,r24
+  57               	/* epilogue start */
+  58               	.LBE77:
+  59               	.LBE76:
+  60               	.LSM7:
+  61 000a 0895      		ret
+  62               	.LFE102:
+  64               		.section	.text.EVENT_CDC_Device_LineEncodingChanged,"ax",@progbits
+  65               	.global	EVENT_CDC_Device_LineEncodingChanged
+  67               	EVENT_CDC_Device_LineEncodingChanged:
+  68               	.LFB105:
+  69               	.LSM8:
+  70               	.LVL0:
+  71 0000 1F93      		push r17
+  72               	/* prologue: function */
+  73               	/* frame size = 0 */
+  74 0002 FC01      		movw r30,r24
+  75               	.LSM9:
+  76 0004 8489      		ldd r24,Z+20
+  77               	.LVL1:
+  78 0006 8130      		cpi r24,lo8(1)
+  79 0008 01F0      		breq .L7
+  80 000a 8230      		cpi r24,lo8(2)
+  81 000c 01F4      		brne .L16
+  82 000e 00C0      		rjmp .L17
+  83               	.L7:
+  84 0010 10E3      		ldi r17,lo8(48)
+  85               	.LVL2:
+  86 0012 00C0      		rjmp .L9
+  87               	.LVL3:
+  88               	.L16:
+  89 0014 10E0      		ldi r17,lo8(0)
+  90               	.LVL4:
+  91 0016 00C0      		rjmp .L9
+  92               	.LVL5:
+  93               	.L17:
+  94 0018 10E2      		ldi r17,lo8(32)
+  95               	.LVL6:
+  96               	.L9:
+  97               	.LSM10:
+  98 001a 8389      		ldd r24,Z+19
+  99 001c 8230      		cpi r24,lo8(2)
+ 100 001e 01F4      		brne .L10
+ 101               	.LSM11:
+ 102 0020 1860      		ori r17,lo8(8)
+ 103               	.L10:
+ 104               	.LSM12:
+ 105 0022 8589      		ldd r24,Z+21
+ 106 0024 8730      		cpi r24,lo8(7)
+ 107 0026 01F0      		breq .L13
+ 108 0028 8830      		cpi r24,lo8(8)
+ 109 002a 01F0      		breq .L14
+ 110 002c 8630      		cpi r24,lo8(6)
+ 111 002e 01F4      		brne .L11
+ 112               	.LSM13:
+ 113 0030 1260      		ori r17,lo8(2)
+ 114 0032 00C0      		rjmp .L11
+ 115               	.L13:
+ 116               	.LSM14:
+ 117 0034 1460      		ori r17,lo8(4)
+ 118 0036 00C0      		rjmp .L11
+ 119               	.L14:
+ 120               	.LSM15:
+ 121 0038 1660      		ori r17,lo8(6)
+ 122               	.L11:
+ 123               	.LSM16:
+ 124 003a 1092 C900 		sts 201,__zero_reg__
+ 125               	.LSM17:
+ 126 003e 1092 C800 		sts 200,__zero_reg__
+ 127               	.LSM18:
+ 128 0042 1092 CA00 		sts 202,__zero_reg__
+ 129               	.LSM19:
+ 130 0046 2785      		ldd r18,Z+15
+ 131 0048 3089      		ldd r19,Z+16
+ 132 004a 4189      		ldd r20,Z+17
+ 133 004c 5289      		ldd r21,Z+18
+ 134 004e CA01      		movw r24,r20
+ 135 0050 B901      		movw r22,r18
+ 136 0052 9695      		lsr r25
+ 137 0054 8795      		ror r24
+ 138 0056 7795      		ror r23
+ 139 0058 6795      		ror r22
+ 140               	.LVL7:
+ 141 005a 605C      		subi r22,lo8(-(1000000))
+ 142 005c 7D4B      		sbci r23,hi8(-(1000000))
+ 143 005e 804F      		sbci r24,hlo8(-(1000000))
+ 144 0060 9F4F      		sbci r25,hhi8(-(1000000))
+ 145 0062 0E94 0000 		call __udivmodsi4
+ 146 0066 2150      		subi r18,lo8(-(-1))
+ 147 0068 3040      		sbci r19,hi8(-(-1))
+ 148 006a 3093 CD00 		sts (204)+1,r19
+ 149 006e 2093 CC00 		sts 204,r18
+ 150               	.LSM20:
+ 151 0072 1093 CA00 		sts 202,r17
+ 152               	.LSM21:
+ 153 0076 82E0      		ldi r24,lo8(2)
+ 154 0078 8093 C800 		sts 200,r24
+ 155               	.LSM22:
+ 156 007c 88E9      		ldi r24,lo8(-104)
+ 157 007e 8093 C900 		sts 201,r24
+ 158               	/* epilogue start */
+ 159               	.LSM23:
+ 160 0082 1F91      		pop r17
+ 161               	.LVL8:
+ 162 0084 0895      		ret
+ 163               	.LFE105:
+ 165               		.section	.text.__vector_23,"ax",@progbits
+ 166               	.global	__vector_23
+ 168               	__vector_23:
+ 169               	.LFB106:
+ 170               	.LSM24:
+ 171 0000 1F92      		push __zero_reg__
+ 172 0002 0F92      		push r0
+ 173 0004 0FB6      		in r0,__SREG__
+ 174 0006 0F92      		push r0
+ 175 0008 1124      		clr __zero_reg__
+ 176 000a 2F93      		push r18
+ 177 000c 8F93      		push r24
+ 178 000e 9F93      		push r25
+ 179 0010 EF93      		push r30
+ 180 0012 FF93      		push r31
+ 181               	/* prologue: Signal */
+ 182               	/* frame size = 0 */
+ 183               	.LSM25:
+ 184 0014 9091 CE00 		lds r25,206
+ 185               	.LVL9:
+ 186               	.LSM26:
+ 187 0018 8091 0000 		lds r24,USB_DeviceState
+ 188 001c 8430      		cpi r24,lo8(4)
+ 189 001e 01F4      		brne .L21
+ 190               	.LBB78:
+ 191               	.LBB79:
+ 192               	.LSM27:
+ 193 0020 E091 0000 		lds r30,Tx_Buffer+128
+ 194 0024 F091 0000 		lds r31,(Tx_Buffer+128)+1
+ 195 0028 9083      		st Z,r25
+ 196               	.LSM28:
+ 197 002a E091 0000 		lds r30,Tx_Buffer+128
+ 198 002e F091 0000 		lds r31,(Tx_Buffer+128)+1
+ 199 0032 CF01      		movw r24,r30
+ 200 0034 0196      		adiw r24,1
+ 201 0036 9093 0000 		sts (Tx_Buffer+128)+1,r25
+ 202 003a 8093 0000 		sts Tx_Buffer+128,r24
+ 203 003e 8050      		subi r24,lo8(Tx_Buffer+128)
+ 204 0040 9040      		sbci r25,hi8(Tx_Buffer+128)
+ 205 0042 01F4      		brne .L20
+ 206               	.LSM29:
+ 207 0044 80E0      		ldi r24,lo8(Tx_Buffer)
+ 208 0046 90E0      		ldi r25,hi8(Tx_Buffer)
+ 209 0048 9283      		std Z+2,r25
+ 210 004a 8183      		std Z+1,r24
+ 211               	.L20:
+ 212               	.LBB80:
+ 213               	.LSM30:
+ 214 004c 9FB7      		in r25,__SREG__
+ 215               	.LVL10:
+ 216               	.LBB81:
+ 217               	.LBB82:
+ 218               	.LSM31:
+ 219               	/* #APP */
+ 220               	 ;  50 "/usr/local/CrossPack-AVR-20100115/lib/gcc/avr/4.3.3/../../../../avr/include/util/atomic.h" 
+ 221 004e F894      		cli
+ 222               	 ;  0 "" 2
+ 223               	/* #NOAPP */
+ 224               	.LBE82:
+ 225               	.LBE81:
+ 226               	.LSM32:
+ 227 0050 8091 0000 		lds r24,Tx_Buffer+132
+ 228 0054 8F5F      		subi r24,lo8(-(1))
+ 229 0056 8093 0000 		sts Tx_Buffer+132,r24
+ 230               	.LBB83:
+ 231               	.LBB84:
+ 232               	.LSM33:
+ 233 005a 9FBF      		out __SREG__,r25
+ 234               	.LSM34:
+ 235               	.LVL11:
+ 236               	.L21:
+ 237               	/* epilogue start */
+ 238               	.LBE84:
+ 239               	.LBE83:
+ 240               	.LBE80:
+ 241               	.LBE79:
+ 242               	.LBE78:
+ 243               	.LSM35:
+ 244 005c FF91      		pop r31
+ 245 005e EF91      		pop r30
+ 246 0060 9F91      		pop r25
+ 247               	.LVL12:
+ 248 0062 8F91      		pop r24
+ 249 0064 2F91      		pop r18
+ 250 0066 0F90      		pop r0
+ 251 0068 0FBE      		out __SREG__,r0
+ 252 006a 0F90      		pop r0
+ 253 006c 1F90      		pop __zero_reg__
+ 254 006e 1895      		reti
+ 255               	.LFE106:
+ 257               		.section	.text.EVENT_CDC_Device_ControLineStateChanged,"ax",@progbits
+ 258               	.global	EVENT_CDC_Device_ControLineStateChanged
+ 260               	EVENT_CDC_Device_ControLineStateChanged:
+ 261               	.LFB107:
+ 262               	.LSM36:
+ 263               	.LVL13:
+ 264               	/* prologue: function */
+ 265               	/* frame size = 0 */
+ 266               	.LSM37:
+ 267 0000 FC01      		movw r30,r24
+ 268 0002 8585      		ldd r24,Z+13
+ 269               	.LVL14:
+ 270 0004 282F      		mov r18,r24
+ 271 0006 30E0      		ldi r19,lo8(0)
+ 272 0008 2170      		andi r18,lo8(1)
+ 273 000a 3070      		andi r19,hi8(1)
+ 274 000c 922F      		mov r25,r18
+ 275               	.LVL15:
+ 276               	.LSM38:
+ 277 000e 8091 0000 		lds r24,PreviousDTRState
+ 278 0012 8823      		tst r24
+ 279 0014 01F4      		brne .L23
+ 280 0016 2223      		tst r18
+ 281 0018 01F0      		breq .L23
+ 282               	.LBB85:
+ 283               	.LBB86:
+ 284               	.LSM39:
+ 285 001a 88B1      		in r24,40-32
+ 286 001c 8F73      		andi r24,lo8(63)
+ 287 001e 88B9      		out 40-32,r24
+ 288               	.LBE86:
+ 289               	.LBE85:
+ 290               	.LSM40:
+ 291 0020 549A      		sbi 42-32,4
+ 292               	.LSM41:
+ 293 0022 8AE0      		ldi r24,lo8(10)
+ 294 0024 8093 0000 		sts PulseMSRemaining,r24
+ 295               	.L23:
+ 296               	.LSM42:
+ 297 0028 9093 0000 		sts PreviousDTRState,r25
+ 298               	/* epilogue start */
+ 299               	.LSM43:
+ 300 002c 0895      		ret
+ 301               	.LFE107:
+ 303               		.section	.text.EVENT_USB_Device_ControlRequest,"ax",@progbits
+ 304               	.global	EVENT_USB_Device_ControlRequest
+ 306               	EVENT_USB_Device_ControlRequest:
+ 307               	.LFB104:
+ 308               	.LSM44:
+ 309               	/* prologue: function */
+ 310               	/* frame size = 0 */
+ 311               	.LSM45:
+ 312 0000 80E0      		ldi r24,lo8(VirtualSerial_CDC_Interface)
+ 313 0002 90E0      		ldi r25,hi8(VirtualSerial_CDC_Interface)
+ 314 0004 0E94 0000 		call CDC_Device_ProcessControlRequest
+ 315               	/* epilogue start */
+ 316               	.LSM46:
+ 317 0008 0895      		ret
+ 318               	.LFE104:
+ 320               		.section	.text.EVENT_USB_Device_ConfigurationChanged,"ax",@progbits
+ 321               	.global	EVENT_USB_Device_ConfigurationChanged
+ 323               	EVENT_USB_Device_ConfigurationChanged:
+ 324               	.LFB103:
+ 325               	.LSM47:
+ 326               	/* prologue: function */
+ 327               	/* frame size = 0 */
+ 328               	.LSM48:
+ 329 0000 80E0      		ldi r24,lo8(VirtualSerial_CDC_Interface)
+ 330 0002 90E0      		ldi r25,hi8(VirtualSerial_CDC_Interface)
+ 331 0004 0E94 0000 		call CDC_Device_ConfigureEndpoints
+ 332               	.LSM49:
+ 333 0008 1092 0000 		sts PulseMSRemaining+3,__zero_reg__
+ 334               	.LSM50:
+ 335 000c 80FD      		sbrc r24,0
+ 336 000e 00C0      		rjmp .L28
+ 337 0010 90EC      		ldi r25,lo8(-64)
+ 338 0012 00C0      		rjmp .L29
+ 339               	.L28:
+ 340 0014 90E0      		ldi r25,lo8(0)
+ 341               	.L29:
+ 342               	.LBB87:
+ 343               	.LBB88:
+ 344               	.LSM51:
+ 345 0016 88B1      		in r24,40-32
+ 346 0018 9095      		com r25
+ 347 001a 806C      		ori r24,lo8(-64)
+ 348 001c 9823      		and r25,r24
+ 349 001e 98B9      		out 40-32,r25
+ 350               	/* epilogue start */
+ 351               	.LBE88:
+ 352               	.LBE87:
+ 353               	.LSM52:
+ 354 0020 0895      		ret
+ 355               	.LFE103:
+ 357               		.section	.text.SetupHardware,"ax",@progbits
+ 358               	.global	SetupHardware
+ 360               	SetupHardware:
+ 361               	.LFB100:
+ 362               	.LSM53:
+ 363               	/* prologue: function */
+ 364               	/* frame size = 0 */
+ 365               	.LSM54:
+ 366 0000 84B7      		in r24,84-32
+ 367 0002 877F      		andi r24,lo8(-9)
+ 368 0004 84BF      		out 84-32,r24
+ 369               	.LSM55:
+ 370 0006 88E1      		ldi r24,lo8(24)
+ 371               	/* #APP */
+ 372               	 ;  160 "Benito.c" 1
+ 373 0008 0FB6      		in __tmp_reg__, __SREG__
+ 374 000a F894      		cli
+ 375 000c 8093 6000 		sts 96, r24
+ 376 0010 1092 6000 		sts 96, __zero_reg__
+ 377 0014 0FBE      		out __SREG__,__tmp_reg__
+ 378               		
+ 379               	 ;  0 "" 2
+ 380               	/* #NOAPP */
+ 381               	.LBB89:
+ 382               	.LBB90:
+ 383               	.LSM56:
+ 384 0016 87B1      		in r24,39-32
+ 385 0018 806C      		ori r24,lo8(-64)
+ 386 001a 87B9      		out 39-32,r24
+ 387               	.LSM57:
+ 388 001c 88B1      		in r24,40-32
+ 389 001e 806C      		ori r24,lo8(-64)
+ 390 0020 88B9      		out 40-32,r24
+ 391               	.LBE90:
+ 392               	.LBE89:
+ 393               	.LSM58:
+ 394 0022 0E94 0000 		call USB_Init
+ 395               	.LSM59:
+ 396 0026 8DE7      		ldi r24,lo8(125)
+ 397 0028 87BD      		out 71-32,r24
+ 398               	.LSM60:
+ 399 002a 82E0      		ldi r24,lo8(2)
+ 400 002c 84BD      		out 68-32,r24
+ 401               	.LSM61:
+ 402 002e 83E0      		ldi r24,lo8(3)
+ 403 0030 85BD      		out 69-32,r24
+ 404               	.LSM62:
+ 405 0032 5C98      		cbi 43-32,4
+ 406               	.LSM63:
+ 407 0034 5498      		cbi 42-32,4
+ 408               	/* epilogue start */
+ 409               	.LSM64:
+ 410 0036 0895      		ret
+ 411               	.LFE100:
+ 413               		.section	.text.main,"ax",@progbits
+ 414               	.global	main
+ 416               	main:
+ 417               	.LFB99:
+ 418               	.LSM65:
+ 419 0000 DF92      		push r13
+ 420 0002 EF92      		push r14
+ 421 0004 FF92      		push r15
+ 422 0006 0F93      		push r16
+ 423 0008 1F93      		push r17
+ 424 000a CF93      		push r28
+ 425 000c DF93      		push r29
+ 426               	/* prologue: function */
+ 427               	/* frame size = 0 */
+ 428               	.LSM66:
+ 429 000e 0E94 0000 		call SetupHardware
+ 430               	.LBB91:
+ 431               	.LBB92:
+ 432               	.LBB93:
+ 433               	.LSM67:
+ 434 0012 2FB7      		in r18,__SREG__
+ 435               	.LBB94:
+ 436               	.LBB95:
+ 437               	.LSM68:
+ 438               	/* #APP */
+ 439               	 ;  50 "/usr/local/CrossPack-AVR-20100115/lib/gcc/avr/4.3.3/../../../../avr/include/util/atomic.h" 
+ 440 0014 F894      		cli
+ 441               	 ;  0 "" 2
+ 442               	/* #NOAPP */
+ 443               	.LBE95:
+ 444               	.LBE94:
+ 445               	.LSM69:
+ 446 0016 80E0      		ldi r24,lo8(Tx_Buffer)
+ 447 0018 90E0      		ldi r25,hi8(Tx_Buffer)
+ 448 001a 9093 0000 		sts (Tx_Buffer+128)+1,r25
+ 449 001e 8093 0000 		sts Tx_Buffer+128,r24
+ 450               	.LSM70:
+ 451 0022 9093 0000 		sts (Tx_Buffer+130)+1,r25
+ 452 0026 8093 0000 		sts Tx_Buffer+130,r24
+ 453               	.LBB96:
+ 454               	.LBB97:
+ 455               	.LSM71:
+ 456 002a 2FBF      		out __SREG__,r18
+ 457               	.LSM72:
+ 458               	.LBE97:
+ 459               	.LBE96:
+ 460               	.LBE93:
+ 461               	.LBE92:
+ 462               	.LBE91:
+ 463               	.LSM73:
+ 464               	/* #APP */
+ 465               	 ;  90 "Benito.c" 1
+ 466 002c 7894      		sei
+ 467               	 ;  0 "" 2
+ 468               	/* #NOAPP */
+ 469               	.LBB98:
+ 470               	.LSM74:
+ 471 002e 0EE1      		ldi r16,lo8(30)
+ 472               	.LBB99:
+ 473               	.LBB103:
+ 474               	.LBB104:
+ 475               	.LSM75:
+ 476 0030 C0E0      		ldi r28,lo8(Tx_Buffer)
+ 477 0032 D0E0      		ldi r29,hi8(Tx_Buffer)
+ 478               	.LBE104:
+ 479               	.LBE103:
+ 480               	.LSM76:
+ 481 0034 B4E1      		ldi r27,lo8(20)
+ 482 0036 DB2E      		mov r13,r27
+ 483               	.LBB100:
+ 484               	.LBB101:
+ 485               	.LSM77:
+ 486 0038 A0EC      		ldi r26,lo8(-64)
+ 487 003a EA2E      		mov r14,r26
+ 488               	.LBE101:
+ 489               	.LBE100:
+ 490               	.LSM78:
+ 491 003c F4E6      		ldi r31,lo8(100)
+ 492 003e FF2E      		mov r15,r31
+ 493               	.LVL16:
+ 494               	.L45:
+ 495               	.LBE99:
+ 496               	.LSM79:
+ 497 0040 80E0      		ldi r24,lo8(VirtualSerial_CDC_Interface)
+ 498 0042 90E0      		ldi r25,hi8(VirtualSerial_CDC_Interface)
+ 499 0044 0E94 0000 		call CDC_Device_ReceiveByte
+ 500 0048 9C01      		movw r18,r24
+ 501               	.LVL17:
+ 502               	.LSM80:
+ 503 004a 97FD      		sbrc r25,7
+ 504 004c 00C0      		rjmp .L34
+ 505               	.LVL18:
+ 506 004e 8091 C800 		lds r24,200
+ 507               	.LVL19:
+ 508 0052 85FF      		sbrs r24,5
+ 509 0054 00C0      		rjmp .L34
+ 510               	.LSM81:
+ 511 0056 2093 CE00 		sts 206,r18
+ 512               	.LBB128:
+ 513               	.LBB129:
+ 514               	.LSM82:
+ 515 005a 4798      		cbi 40-32,7
+ 516               	.LBE129:
+ 517               	.LBE128:
+ 518               	.LSM83:
+ 519 005c 0093 0000 		sts PulseMSRemaining+1,r16
+ 520               	.LVL20:
+ 521               	.L34:
+ 522               	.LSM84:
+ 523 0060 A99B      		sbis 53-32,1
+ 524 0062 00C0      		rjmp .L35
+ 525               	.LBB130:
+ 526               	.LSM85:
+ 527 0064 8091 0000 		lds r24,PulseMSRemaining
+ 528 0068 8823      		tst r24
+ 529 006a 01F0      		breq .L36
+ 530 006c 8091 0000 		lds r24,PulseMSRemaining
+ 531 0070 8150      		subi r24,lo8(-(-1))
+ 532 0072 8093 0000 		sts PulseMSRemaining,r24
+ 533 0076 8091 0000 		lds r24,PulseMSRemaining
+ 534 007a 8823      		tst r24
+ 535 007c 01F4      		brne .L36
+ 536               	.LBB111:
+ 537               	.LBB112:
+ 538               	.LSM86:
+ 539 007e 88B1      		in r24,40-32
+ 540 0080 806C      		ori r24,lo8(-64)
+ 541 0082 88B9      		out 40-32,r24
+ 542               	.LBE112:
+ 543               	.LBE111:
+ 544               	.LSM87:
+ 545 0084 5498      		cbi 42-32,4
+ 546               	.L36:
+ 547               	.LSM88:
+ 548 0086 8091 0000 		lds r24,PulseMSRemaining+3
+ 549 008a 8823      		tst r24
+ 550 008c 01F0      		breq .L37
+ 551 008e 8091 0000 		lds r24,PulseMSRemaining+3
+ 552 0092 8150      		subi r24,lo8(-(-1))
+ 553 0094 8093 0000 		sts PulseMSRemaining+3,r24
+ 554 0098 8091 0000 		lds r24,PulseMSRemaining+3
+ 555 009c 8823      		tst r24
+ 556 009e 01F4      		brne .L37
+ 557               	.LBB113:
+ 558               	.LBB102:
+ 559               	.LSM89:
+ 560 00a0 88B1      		in r24,40-32
+ 561 00a2 8E25      		eor r24,r14
+ 562 00a4 88B9      		out 40-32,r24
+ 563               	.LBE102:
+ 564               	.LBE113:
+ 565               	.LSM90:
+ 566 00a6 F092 0000 		sts PulseMSRemaining+3,r15
+ 567               	.L37:
+ 568               	.LSM91:
+ 569 00aa 8091 0000 		lds r24,PulseMSRemaining+1
+ 570 00ae 8823      		tst r24
+ 571 00b0 01F0      		breq .L38
+ 572 00b2 8091 0000 		lds r24,PulseMSRemaining+1
+ 573 00b6 8150      		subi r24,lo8(-(-1))
+ 574 00b8 8093 0000 		sts PulseMSRemaining+1,r24
+ 575 00bc 8091 0000 		lds r24,PulseMSRemaining+1
+ 576 00c0 8823      		tst r24
+ 577 00c2 01F4      		brne .L38
+ 578               	.LBB114:
+ 579               	.LBB115:
+ 580               	.LSM92:
+ 581 00c4 479A      		sbi 40-32,7
+ 582               	.L38:
+ 583               	.LBE115:
+ 584               	.LBE114:
+ 585               	.LSM93:
+ 586 00c6 8091 0000 		lds r24,PulseMSRemaining+2
+ 587 00ca 8823      		tst r24
+ 588 00cc 01F0      		breq .L39
+ 589 00ce 8091 0000 		lds r24,PulseMSRemaining+2
+ 590 00d2 8150      		subi r24,lo8(-(-1))
+ 591 00d4 8093 0000 		sts PulseMSRemaining+2,r24
+ 592 00d8 8091 0000 		lds r24,PulseMSRemaining+2
+ 593 00dc 8823      		tst r24
+ 594 00de 01F4      		brne .L39
+ 595               	.LBB116:
+ 596               	.LBB117:
+ 597               	.LSM94:
+ 598 00e0 469A      		sbi 40-32,6
+ 599               	.L39:
+ 600               	.LBE117:
+ 601               	.LBE116:
+ 602               	.LBB118:
+ 603               	.LBB119:
+ 604               	.LBB120:
+ 605               	.LSM95:
+ 606 00e2 8FB7      		in r24,__SREG__
+ 607               	.LBB121:
+ 608               	.LBB122:
+ 609               	.LSM96:
+ 610               	/* #APP */
+ 611               	 ;  50 "/usr/local/CrossPack-AVR-20100115/lib/gcc/avr/4.3.3/../../../../avr/include/util/atomic.h" 
+ 612 00e4 F894      		cli
+ 613               	 ;  0 "" 2
+ 614               	/* #NOAPP */
+ 615               	.LBE122:
+ 616               	.LBE121:
+ 617               	.LSM97:
+ 618 00e6 1091 0000 		lds r17,Tx_Buffer+132
+ 619               	.LBB123:
+ 620               	.LBB124:
+ 621               	.LSM98:
+ 622 00ea 8FBF      		out __SREG__,r24
+ 623               	.LSM99:
+ 624               	.LBE124:
+ 625               	.LBE123:
+ 626               	.LBE120:
+ 627               	.LBE119:
+ 628               	.LBE118:
+ 629               	.LSM100:
+ 630 00ec 8091 0000 		lds r24,FlushPeriodRemaining
+ 631 00f0 8150      		subi r24,lo8(-(-1))
+ 632 00f2 8093 0000 		sts FlushPeriodRemaining,r24
+ 633 00f6 8823      		tst r24
+ 634 00f8 01F0      		breq .L40
+ 635 00fa 193C      		cpi r17,lo8(-55)
+ 636 00fc 00F0      		brlo .L41
+ 637               	.L40:
+ 638               	.LSM101:
+ 639 00fe 1123      		tst r17
+ 640 0100 01F0      		breq .L42
+ 641               	.L47:
+ 642               	.LBB125:
+ 643               	.LBB110:
+ 644               	.LSM102:
+ 645 0102 E091 0000 		lds r30,Tx_Buffer+130
+ 646 0106 F091 0000 		lds r31,(Tx_Buffer+130)+1
+ 647 010a 6191      		ld r22,Z+
+ 648               	.LVL21:
+ 649               	.LSM103:
+ 650 010c F093 0000 		sts (Tx_Buffer+130)+1,r31
+ 651 0110 E093 0000 		sts Tx_Buffer+130,r30
+ 652 0114 E050      		subi r30,lo8(Tx_Buffer+128)
+ 653 0116 F040      		sbci r31,hi8(Tx_Buffer+128)
+ 654 0118 01F4      		brne .L43
+ 655               	.LSM104:
+ 656 011a D093 0000 		sts (Tx_Buffer+130)+1,r29
+ 657 011e C093 0000 		sts Tx_Buffer+130,r28
+ 658               	.L43:
+ 659               	.LBB105:
+ 660               	.LSM105:
+ 661 0122 9FB7      		in r25,__SREG__
+ 662               	.LBB106:
+ 663               	.LBB107:
+ 664               	.LSM106:
+ 665               	/* #APP */
+ 666               	 ;  50 "/usr/local/CrossPack-AVR-20100115/lib/gcc/avr/4.3.3/../../../../avr/include/util/atomic.h" 
+ 667 0124 F894      		cli
+ 668               	 ;  0 "" 2
+ 669               	/* #NOAPP */
+ 670               	.LBE107:
+ 671               	.LBE106:
+ 672               	.LSM107:
+ 673 0126 8091 0000 		lds r24,Tx_Buffer+132
+ 674 012a 8150      		subi r24,lo8(-(-1))
+ 675 012c 8093 0000 		sts Tx_Buffer+132,r24
+ 676               	.LBB108:
+ 677               	.LBB109:
+ 678               	.LSM108:
+ 679 0130 9FBF      		out __SREG__,r25
+ 680               	.LSM109:
+ 681               	.LBE109:
+ 682               	.LBE108:
+ 683               	.LBE105:
+ 684               	.LBE110:
+ 685               	.LBE125:
+ 686               	.LSM110:
+ 687 0132 80E0      		ldi r24,lo8(VirtualSerial_CDC_Interface)
+ 688 0134 90E0      		ldi r25,hi8(VirtualSerial_CDC_Interface)
+ 689 0136 0E94 0000 		call CDC_Device_SendByte
+ 690               	.LVL22:
+ 691 013a 1150      		subi r17,lo8(-(-1))
+ 692               	.LSM111:
+ 693 013c 01F4      		brne .L47
+ 694               	.LBB126:
+ 695               	.LBB127:
+ 696               	.LSM112:
+ 697 013e 4698      		cbi 40-32,6
+ 698               	.LBE127:
+ 699               	.LBE126:
+ 700               	.LSM113:
+ 701 0140 0093 0000 		sts PulseMSRemaining+2,r16
+ 702               	.LVL23:
+ 703               	.L42:
+ 704               	.LSM114:
+ 705 0144 D092 0000 		sts FlushPeriodRemaining,r13
+ 706               	.L41:
+ 707               	.LSM115:
+ 708 0148 A99A      		sbi 53-32,1
+ 709               	.LVL24:
+ 710               	.L35:
+ 711               	.LBE130:
+ 712               	.LSM116:
+ 713 014a 80E0      		ldi r24,lo8(VirtualSerial_CDC_Interface)
+ 714 014c 90E0      		ldi r25,hi8(VirtualSerial_CDC_Interface)
+ 715 014e 0E94 0000 		call CDC_Device_USBTask
+ 716               	.LVL25:
+ 717               	.LSM117:
+ 718 0152 0E94 0000 		call USB_USBTask
+ 719 0156 00C0      		rjmp .L45
+ 720               	.LBE98:
+ 721               	.LFE99:
+ 723               	.global	PreviousDTRState
+ 724               	.global	PreviousDTRState
+ 725               		.section .bss
+ 728               	PreviousDTRState:
+ 729 0000 00        		.skip 1,0
+ 730               	.global	FlushPeriodRemaining
+ 731               		.data
+ 734               	FlushPeriodRemaining:
+ 735 0000 14        		.byte	20
+ 736               	.global	VirtualSerial_CDC_Interface
+ 739               	VirtualSerial_CDC_Interface:
+ 740 0001 00        		.byte	0
+ 741 0002 03        		.byte	3
+ 742 0003 1000      		.word	16
+ 743 0005 00        		.byte	0
+ 744 0006 04        		.byte	4
+ 745 0007 1000      		.word	16
+ 746 0009 00        		.byte	0
+ 747 000a 02        		.byte	2
+ 748 000b 0800      		.word	8
+ 749 000d 00        		.byte	0
+ 750 000e 0000 0000 		.skip 9,0
+ 750      0000 0000 
+ 750      00
+ 751               		.comm Tx_Buffer,133,1
+ 752               		.comm PulseMSRemaining,4,1
+ 841               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 Benito.c
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccopZCiw.s:2      *ABS*:0000003f __SREG__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccopZCiw.s:3      *ABS*:0000003e __SP_H__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccopZCiw.s:4      *ABS*:0000003d __SP_L__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccopZCiw.s:5      *ABS*:00000034 __CCP__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccopZCiw.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccopZCiw.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccopZCiw.s:19     .text.EVENT_USB_Device_Connect:00000000 EVENT_USB_Device_Connect
+                            *COM*:00000004 PulseMSRemaining
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccopZCiw.s:44     .text.EVENT_USB_Device_Disconnect:00000000 EVENT_USB_Device_Disconnect
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccopZCiw.s:67     .text.EVENT_CDC_Device_LineEncodingChanged:00000000 EVENT_CDC_Device_LineEncodingChanged
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccopZCiw.s:168    .text.__vector_23:00000000 __vector_23
+                            *COM*:00000085 Tx_Buffer
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccopZCiw.s:260    .text.EVENT_CDC_Device_ControLineStateChanged:00000000 EVENT_CDC_Device_ControLineStateChanged
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccopZCiw.s:728    .bss:00000000 PreviousDTRState
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccopZCiw.s:306    .text.EVENT_USB_Device_ControlRequest:00000000 EVENT_USB_Device_ControlRequest
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccopZCiw.s:739    .data:00000001 VirtualSerial_CDC_Interface
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccopZCiw.s:323    .text.EVENT_USB_Device_ConfigurationChanged:00000000 EVENT_USB_Device_ConfigurationChanged
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccopZCiw.s:360    .text.SetupHardware:00000000 SetupHardware
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccopZCiw.s:416    .text.main:00000000 main
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccopZCiw.s:734    .data:00000000 FlushPeriodRemaining
+
+UNDEFINED SYMBOLS
+__udivmodsi4
+USB_DeviceState
+CDC_Device_ProcessControlRequest
+CDC_Device_ConfigureEndpoints
+USB_Init
+CDC_Device_ReceiveByte
+CDC_Device_SendByte
+CDC_Device_USBTask
+USB_USBTask
+__do_copy_data
+__do_clear_bss

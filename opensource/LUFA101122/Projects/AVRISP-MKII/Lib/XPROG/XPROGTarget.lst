@@ -1,0 +1,367 @@
+   1               		.file	"XPROGTarget.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.XPROGTarget_SetTxMode,"ax",@progbits
+  18               	XPROGTarget_SetTxMode:
+  19               	.LFB121:
+  20               	.LSM0:
+  21               	/* prologue: function */
+  22               	/* frame size = 0 */
+  23               	.L2:
+  24               	.LSM1:
+  25 0000 4D99      		sbic 41-32,5
+  26 0002 00C0      		rjmp .L2
+  27               	.L5:
+  28               	.LSM2:
+  29 0004 4D9B      		sbis 41-32,5
+  30 0006 00C0      		rjmp .L5
+  31               	.LSM3:
+  32 0008 5B9A      		sbi 43-32,3
+  33               	.LSM4:
+  34 000a 539A      		sbi 42-32,3
+  35               	.LSM5:
+  36 000c 8091 C900 		lds r24,201
+  37 0010 8F7E      		andi r24,lo8(-17)
+  38 0012 8093 C900 		sts 201,r24
+  39               	.LSM6:
+  40 0016 8091 C900 		lds r24,201
+  41 001a 8860      		ori r24,lo8(8)
+  42 001c 8093 C900 		sts 201,r24
+  43               	.LSM7:
+  44 0020 81E0      		ldi r24,lo8(1)
+  45 0022 8093 0000 		sts IsSending,r24
+  46               	/* epilogue start */
+  47               	.LSM8:
+  48 0026 0895      		ret
+  49               	.LFE121:
+  51               		.section	.text.XPROGTarget_SendIdle,"ax",@progbits
+  52               	.global	XPROGTarget_SendIdle
+  54               	XPROGTarget_SendIdle:
+  55               	.LFB120:
+  56               	.LSM9:
+  57               	/* prologue: function */
+  58               	/* frame size = 0 */
+  59               	.LSM10:
+  60 0000 8091 0000 		lds r24,IsSending
+  61 0004 8823      		tst r24
+  62 0006 01F4      		brne .L18
+  63               	.L9:
+  64               	.LSM11:
+  65 0008 0E94 0000 		call XPROGTarget_SetTxMode
+  66               	.L18:
+  67 000c 80E0      		ldi r24,lo8(0)
+  68               	.LVL0:
+  69               	.L17:
+  70               	.LBB34:
+  71               	.LSM12:
+  72 000e 4D99      		sbic 41-32,5
+  73 0010 00C0      		rjmp .L17
+  74               	.L14:
+  75               	.LSM13:
+  76 0012 4D9B      		sbis 41-32,5
+  77 0014 00C0      		rjmp .L14
+  78               	.LSM14:
+  79 0016 8F5F      		subi r24,lo8(-(1))
+  80 0018 8C30      		cpi r24,lo8(12)
+  81 001a 01F4      		brne .L17
+  82               	/* epilogue start */
+  83               	.LBE34:
+  84               	.LSM15:
+  85 001c 0895      		ret
+  86               	.LFE120:
+  88               		.section	.text.XPROGTarget_EnableTargetTPI,"ax",@progbits
+  89               	.global	XPROGTarget_EnableTargetTPI
+  91               	XPROGTarget_EnableTargetTPI:
+  92               	.LFB115:
+  93               	.LSM16:
+  94               	/* prologue: function */
+  95               	/* frame size = 0 */
+  96               	.LSM17:
+  97 0000 1092 0000 		sts IsSending,__zero_reg__
+  98               	.LSM18:
+  99 0004 249A      		sbi 36-32,4
+ 100               	.LSM19:
+ 101 0006 2C98      		cbi 37-32,4
+ 102               	.LBB35:
+ 103               	.LBB36:
+ 104               	.LBB37:
+ 105               	.LBB38:
+ 106               	.LSM20:
+ 107 0008 82E0      		ldi r24,lo8(2)
+ 108               	.LVL1:
+ 109               	/* #APP */
+ 110               	 ;  83 "/usr/local/CrossPack-AVR-20100115/lib/gcc/avr/4.3.3/../../../../avr/include/util/delay_basi
+ 111 000a 8A95      		1: dec r24
+ 112 000c 01F4      		brne 1b
+ 113               	 ;  0 "" 2
+ 114               	/* #NOAPP */
+ 115               	.LBE38:
+ 116               	.LBE37:
+ 117               	.LBE36:
+ 118               	.LBE35:
+ 119               	.LSM21:
+ 120 000e 8AB1      		in r24,42-32
+ 121               	.LVL2:
+ 122 0010 8862      		ori r24,lo8(40)
+ 123 0012 8AB9      		out 42-32,r24
+ 124               	.LSM22:
+ 125 0014 5298      		cbi 42-32,2
+ 126               	.LSM23:
+ 127 0016 8FE0      		ldi r24,lo8(15)
+ 128 0018 90E0      		ldi r25,hi8(15)
+ 129 001a 9093 CD00 		sts (204)+1,r25
+ 130 001e 8093 CC00 		sts 204,r24
+ 131               	.LSM24:
+ 132 0022 88E0      		ldi r24,lo8(8)
+ 133 0024 8093 C900 		sts 201,r24
+ 134               	.LSM25:
+ 135 0028 8FE6      		ldi r24,lo8(111)
+ 136 002a 8093 CA00 		sts 202,r24
+ 137               	.LSM26:
+ 138 002e 0E94 0000 		call XPROGTarget_SendIdle
+ 139               	.LSM27:
+ 140 0032 0E94 0000 		call XPROGTarget_SendIdle
+ 141               	/* epilogue start */
+ 142               	.LSM28:
+ 143 0036 0895      		ret
+ 144               	.LFE115:
+ 146               		.section	.text.XPROGTarget_EnableTargetPDI,"ax",@progbits
+ 147               	.global	XPROGTarget_EnableTargetPDI
+ 149               	XPROGTarget_EnableTargetPDI:
+ 150               	.LFB114:
+ 151               	.LSM29:
+ 152               	/* prologue: function */
+ 153               	/* frame size = 0 */
+ 154               	.LSM30:
+ 155 0000 1092 0000 		sts IsSending,__zero_reg__
+ 156               	.LSM31:
+ 157 0004 8AB1      		in r24,42-32
+ 158 0006 8862      		ori r24,lo8(40)
+ 159 0008 8AB9      		out 42-32,r24
+ 160               	.LSM32:
+ 161 000a 5298      		cbi 42-32,2
+ 162               	.LSM33:
+ 163 000c 5B9A      		sbi 43-32,3
+ 164               	.LBB39:
+ 165               	.LBB40:
+ 166               	.LBB41:
+ 167               	.LBB42:
+ 168               	.LSM34:
+ 169 000e 82E0      		ldi r24,lo8(2)
+ 170               	.LVL3:
+ 171               	/* #APP */
+ 172               	 ;  83 "/usr/local/CrossPack-AVR-20100115/lib/gcc/avr/4.3.3/../../../../avr/include/util/delay_basi
+ 173 0010 8A95      		1: dec r24
+ 174 0012 01F4      		brne 1b
+ 175               	 ;  0 "" 2
+ 176               	/* #NOAPP */
+ 177               	.LBE42:
+ 178               	.LBE41:
+ 179               	.LBE40:
+ 180               	.LBE39:
+ 181               	.LSM35:
+ 182 0014 8FE0      		ldi r24,lo8(15)
+ 183 0016 90E0      		ldi r25,hi8(15)
+ 184               	.LVL4:
+ 185 0018 9093 CD00 		sts (204)+1,r25
+ 186 001c 8093 CC00 		sts 204,r24
+ 187               	.LSM36:
+ 188 0020 88E0      		ldi r24,lo8(8)
+ 189 0022 8093 C900 		sts 201,r24
+ 190               	.LSM37:
+ 191 0026 8FE6      		ldi r24,lo8(111)
+ 192 0028 8093 CA00 		sts 202,r24
+ 193               	.LSM38:
+ 194 002c 0E94 0000 		call XPROGTarget_SendIdle
+ 195               	.LSM39:
+ 196 0030 0E94 0000 		call XPROGTarget_SendIdle
+ 197               	/* epilogue start */
+ 198               	.LSM40:
+ 199 0034 0895      		ret
+ 200               	.LFE114:
+ 202               		.section	.text.XPROGTarget_SendByte,"ax",@progbits
+ 203               	.global	XPROGTarget_SendByte
+ 205               	XPROGTarget_SendByte:
+ 206               	.LFB118:
+ 207               	.LSM41:
+ 208               	.LVL5:
+ 209 0000 1F93      		push r17
+ 210               	/* prologue: function */
+ 211               	/* frame size = 0 */
+ 212 0002 182F      		mov r17,r24
+ 213               	.LSM42:
+ 214 0004 8091 0000 		lds r24,IsSending
+ 215               	.LVL6:
+ 216 0008 8823      		tst r24
+ 217 000a 01F4      		brne .L26
+ 218               	.LSM43:
+ 219 000c 0E94 0000 		call XPROGTarget_SetTxMode
+ 220               	.L26:
+ 221               	.LSM44:
+ 222 0010 8091 C800 		lds r24,200
+ 223 0014 85FF      		sbrs r24,5
+ 224 0016 00C0      		rjmp .L26
+ 225               	.LSM45:
+ 226 0018 8091 C800 		lds r24,200
+ 227 001c 8064      		ori r24,lo8(64)
+ 228 001e 8093 C800 		sts 200,r24
+ 229               	.LSM46:
+ 230 0022 1093 CE00 		sts 206,r17
+ 231               	/* epilogue start */
+ 232               	.LSM47:
+ 233 0026 1F91      		pop r17
+ 234               	.LVL7:
+ 235 0028 0895      		ret
+ 236               	.LFE118:
+ 238               		.section	.text.XPROGTarget_SetRxMode,"ax",@progbits
+ 240               	XPROGTarget_SetRxMode:
+ 241               	.LFB122:
+ 242               	.LSM48:
+ 243               	/* prologue: function */
+ 244               	/* frame size = 0 */
+ 245               	.L29:
+ 246               	.LSM49:
+ 247 0000 8091 C800 		lds r24,200
+ 248 0004 86FF      		sbrs r24,6
+ 249 0006 00C0      		rjmp .L29
+ 250               	.LSM50:
+ 251 0008 8091 C800 		lds r24,200
+ 252 000c 8064      		ori r24,lo8(64)
+ 253 000e 8093 C800 		sts 200,r24
+ 254               	.LSM51:
+ 255 0012 8091 C900 		lds r24,201
+ 256 0016 877F      		andi r24,lo8(-9)
+ 257 0018 8093 C900 		sts 201,r24
+ 258               	.LSM52:
+ 259 001c 8091 C900 		lds r24,201
+ 260 0020 8061      		ori r24,lo8(16)
+ 261 0022 8093 C900 		sts 201,r24
+ 262               	.LSM53:
+ 263 0026 5398      		cbi 42-32,3
+ 264               	.LSM54:
+ 265 0028 5B98      		cbi 43-32,3
+ 266               	.LSM55:
+ 267 002a 1092 0000 		sts IsSending,__zero_reg__
+ 268               	/* epilogue start */
+ 269               	.LSM56:
+ 270 002e 0895      		ret
+ 271               	.LFE122:
+ 273               		.section	.text.XPROGTarget_ReceiveByte,"ax",@progbits
+ 274               	.global	XPROGTarget_ReceiveByte
+ 276               	XPROGTarget_ReceiveByte:
+ 277               	.LFB119:
+ 278               	.LSM57:
+ 279               	/* prologue: function */
+ 280               	/* frame size = 0 */
+ 281               	.LSM58:
+ 282 0000 8091 0000 		lds r24,IsSending
+ 283 0004 8823      		tst r24
+ 284 0006 01F0      		breq .L36
+ 285               	.LSM59:
+ 286 0008 0E94 0000 		call XPROGTarget_SetRxMode
+ 287               	.L36:
+ 288               	.LSM60:
+ 289 000c 8091 C800 		lds r24,200
+ 290 0010 87FD      		sbrc r24,7
+ 291 0012 00C0      		rjmp .L34
+ 292 0014 8AB5      		in r24,74-32
+ 293 0016 8823      		tst r24
+ 294 0018 01F4      		brne .L36
+ 295               	.L34:
+ 296               	.LSM61:
+ 297 001a 8091 CE00 		lds r24,206
+ 298               	/* epilogue start */
+ 299               	.LSM62:
+ 300 001e 0895      		ret
+ 301               	.LFE119:
+ 303               		.section	.text.XPROGTarget_DisableTargetTPI,"ax",@progbits
+ 304               	.global	XPROGTarget_DisableTargetTPI
+ 306               	XPROGTarget_DisableTargetTPI:
+ 307               	.LFB117:
+ 308               	.LSM63:
+ 309               	/* prologue: function */
+ 310               	/* frame size = 0 */
+ 311               	.LSM64:
+ 312 0000 0E94 0000 		call XPROGTarget_SetRxMode
+ 313               	.LSM65:
+ 314 0004 E8EC      		ldi r30,lo8(200)
+ 315 0006 F0E0      		ldi r31,hi8(200)
+ 316 0008 8081      		ld r24,Z
+ 317 000a 806C      		ori r24,lo8(-64)
+ 318 000c 8083      		st Z,r24
+ 319               	.LSM66:
+ 320 000e 1092 C900 		sts 201,__zero_reg__
+ 321               	.LSM67:
+ 322 0012 1092 CA00 		sts 202,__zero_reg__
+ 323               	.LSM68:
+ 324 0016 8AB1      		in r24,42-32
+ 325 0018 877D      		andi r24,lo8(-41)
+ 326 001a 8AB9      		out 42-32,r24
+ 327               	.LSM69:
+ 328 001c 8BB1      		in r24,43-32
+ 329 001e 837D      		andi r24,lo8(-45)
+ 330 0020 8BB9      		out 43-32,r24
+ 331               	.LSM70:
+ 332 0022 2498      		cbi 36-32,4
+ 333               	.LSM71:
+ 334 0024 2C98      		cbi 37-32,4
+ 335               	/* epilogue start */
+ 336               	.LSM72:
+ 337 0026 0895      		ret
+ 338               	.LFE117:
+ 340               		.section	.text.XPROGTarget_DisableTargetPDI,"ax",@progbits
+ 341               	.global	XPROGTarget_DisableTargetPDI
+ 343               	XPROGTarget_DisableTargetPDI:
+ 344               	.LFB116:
+ 345               	.LSM73:
+ 346               	/* prologue: function */
+ 347               	/* frame size = 0 */
+ 348               	.LSM74:
+ 349 0000 0E94 0000 		call XPROGTarget_SetRxMode
+ 350               	.LSM75:
+ 351 0004 80EC      		ldi r24,lo8(-64)
+ 352 0006 8093 C800 		sts 200,r24
+ 353               	.LSM76:
+ 354 000a 1092 C900 		sts 201,__zero_reg__
+ 355               	.LSM77:
+ 356 000e 1092 CA00 		sts 202,__zero_reg__
+ 357               	.LSM78:
+ 358 0012 8AB1      		in r24,42-32
+ 359 0014 877D      		andi r24,lo8(-41)
+ 360 0016 8AB9      		out 42-32,r24
+ 361               	.LSM79:
+ 362 0018 8BB1      		in r24,43-32
+ 363 001a 837D      		andi r24,lo8(-45)
+ 364 001c 8BB9      		out 43-32,r24
+ 365               	/* epilogue start */
+ 366               	.LSM80:
+ 367 001e 0895      		ret
+ 368               	.LFE116:
+ 370               		.comm IsSending,1,1
+ 459               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 XPROGTarget.c
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccjy9SJw.s:2      *ABS*:0000003f __SREG__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccjy9SJw.s:3      *ABS*:0000003e __SP_H__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccjy9SJw.s:4      *ABS*:0000003d __SP_L__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccjy9SJw.s:5      *ABS*:00000034 __CCP__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccjy9SJw.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccjy9SJw.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccjy9SJw.s:18     .text.XPROGTarget_SetTxMode:00000000 XPROGTarget_SetTxMode
+                            *COM*:00000001 IsSending
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccjy9SJw.s:54     .text.XPROGTarget_SendIdle:00000000 XPROGTarget_SendIdle
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccjy9SJw.s:91     .text.XPROGTarget_EnableTargetTPI:00000000 XPROGTarget_EnableTargetTPI
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccjy9SJw.s:149    .text.XPROGTarget_EnableTargetPDI:00000000 XPROGTarget_EnableTargetPDI
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccjy9SJw.s:205    .text.XPROGTarget_SendByte:00000000 XPROGTarget_SendByte
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccjy9SJw.s:240    .text.XPROGTarget_SetRxMode:00000000 XPROGTarget_SetRxMode
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccjy9SJw.s:276    .text.XPROGTarget_ReceiveByte:00000000 XPROGTarget_ReceiveByte
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccjy9SJw.s:306    .text.XPROGTarget_DisableTargetTPI:00000000 XPROGTarget_DisableTargetTPI
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccjy9SJw.s:343    .text.XPROGTarget_DisableTargetPDI:00000000 XPROGTarget_DisableTargetPDI
+
+UNDEFINED SYMBOLS
+__do_clear_bss

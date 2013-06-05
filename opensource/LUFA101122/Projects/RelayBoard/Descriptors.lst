@@ -1,0 +1,231 @@
+   1               		.file	"Descriptors.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.CALLBACK_USB_GetDescriptor,"ax",@progbits
+  17               	.global	CALLBACK_USB_GetDescriptor
+  19               	CALLBACK_USB_GetDescriptor:
+  20               	.LFB86:
+  21               	.LSM0:
+  22               	.LVL0:
+  23               	/* prologue: function */
+  24               	/* frame size = 0 */
+  25 0000 DA01      		movw r26,r20
+  26               	.LSM1:
+  27 0002 9230      		cpi r25,lo8(2)
+  28               	.LVL1:
+  29 0004 01F0      		breq .L4
+  30               	.LVL2:
+  31 0006 9330      		cpi r25,lo8(3)
+  32 0008 01F0      		breq .L5
+  33 000a 9130      		cpi r25,lo8(1)
+  34 000c 01F4      		brne .L2
+  35 000e E0E0      		ldi r30,lo8(RelayBoard_DeviceDescriptor)
+  36 0010 F0E0      		ldi r31,hi8(RelayBoard_DeviceDescriptor)
+  37               	.LVL3:
+  38 0012 00C0      		rjmp .L12
+  39               	.LVL4:
+  40               	.L4:
+  41 0014 E0E0      		ldi r30,lo8(RelayBoard_ConfigurationDescriptor)
+  42 0016 F0E0      		ldi r31,hi8(RelayBoard_ConfigurationDescriptor)
+  43               	.LVL5:
+  44               	.L12:
+  45 0018 22E1      		ldi r18,lo8(18)
+  46 001a 30E0      		ldi r19,hi8(18)
+  47               	.LVL6:
+  48 001c 00C0      		rjmp .L6
+  49               	.LVL7:
+  50               	.L5:
+  51               	.LSM2:
+  52 001e 8130      		cpi r24,lo8(1)
+  53 0020 01F0      		breq .L8
+  54 0022 8130      		cpi r24,lo8(1)
+  55 0024 00F0      		brlo .L7
+  56 0026 8230      		cpi r24,lo8(2)
+  57 0028 01F0      		breq .L9
+  58 002a 8330      		cpi r24,lo8(3)
+  59 002c 01F4      		brne .L2
+  60 002e 00C0      		rjmp .L14
+  61               	.L7:
+  62               	.LBB2:
+  63               	.LSM3:
+  64 0030 E0E0      		ldi r30,lo8(RelayBoard_LanguageString)
+  65 0032 F0E0      		ldi r31,hi8(RelayBoard_LanguageString)
+  66               	/* #APP */
+  67               	 ;  181 "Descriptors.c" 1
+  68 0034 8491      		lpm r24, Z
+  69               		
+  70               	 ;  0 "" 2
+  71               	.LVL8:
+  72               	/* #NOAPP */
+  73 0036 00C0      		rjmp .L13
+  74               	.LVL9:
+  75               	.L8:
+  76               	.LBE2:
+  77               	.LBB3:
+  78               	.LSM4:
+  79 0038 E0E0      		ldi r30,lo8(RelayBoard_ManufacturerString)
+  80 003a F0E0      		ldi r31,hi8(RelayBoard_ManufacturerString)
+  81               	/* #APP */
+  82               	 ;  185 "Descriptors.c" 1
+  83 003c 8491      		lpm r24, Z
+  84               		
+  85               	 ;  0 "" 2
+  86               	.LVL10:
+  87               	/* #NOAPP */
+  88 003e 00C0      		rjmp .L13
+  89               	.LVL11:
+  90               	.L9:
+  91               	.LBE3:
+  92               	.LBB4:
+  93               	.LSM5:
+  94 0040 E0E0      		ldi r30,lo8(RelayBoard_ProductString)
+  95 0042 F0E0      		ldi r31,hi8(RelayBoard_ProductString)
+  96               	/* #APP */
+  97               	 ;  189 "Descriptors.c" 1
+  98 0044 8491      		lpm r24, Z
+  99               		
+ 100               	 ;  0 "" 2
+ 101               	.LVL12:
+ 102               	/* #NOAPP */
+ 103 0046 00C0      		rjmp .L13
+ 104               	.LVL13:
+ 105               	.L14:
+ 106               	.LBE4:
+ 107               	.LBB5:
+ 108               	.LSM6:
+ 109 0048 E0E0      		ldi r30,lo8(RelayBoard_SerialString)
+ 110 004a F0E0      		ldi r31,hi8(RelayBoard_SerialString)
+ 111               	/* #APP */
+ 112               	 ;  193 "Descriptors.c" 1
+ 113 004c 8491      		lpm r24, Z
+ 114               		
+ 115               	 ;  0 "" 2
+ 116               	.LVL14:
+ 117               	/* #NOAPP */
+ 118               	.L13:
+ 119               	.LBE5:
+ 120 004e 282F      		mov r18,r24
+ 121               	.LVL15:
+ 122 0050 30E0      		ldi r19,lo8(0)
+ 123               	.LVL16:
+ 124 0052 00C0      		rjmp .L6
+ 125               	.LVL17:
+ 126               	.L2:
+ 127 0054 E0E0      		ldi r30,lo8(0)
+ 128 0056 F0E0      		ldi r31,hi8(0)
+ 129               	.LVL18:
+ 130 0058 20E0      		ldi r18,lo8(0)
+ 131 005a 30E0      		ldi r19,hi8(0)
+ 132               	.LVL19:
+ 133               	.L6:
+ 134               	.LSM7:
+ 135 005c ED93      		st X+,r30
+ 136 005e FC93      		st X,r31
+ 137               	.LSM8:
+ 138 0060 C901      		movw r24,r18
+ 139               	.LVL20:
+ 140               	/* epilogue start */
+ 141 0062 0895      		ret
+ 142               	.LFE86:
+ 144               	.global	RelayBoard_DeviceDescriptor
+ 145               		.section	.progmem.data,"a",@progbits
+ 148               	RelayBoard_DeviceDescriptor:
+ 149 0000 12        		.byte	18
+ 150 0001 01        		.byte	1
+ 151 0002 1001      		.word	272
+ 152 0004 FF        		.byte	-1
+ 153 0005 00        		.byte	0
+ 154 0006 00        		.byte	0
+ 155 0007 08        		.byte	8
+ 156 0008 B404      		.word	1204
+ 157 000a 11FD      		.word	-751
+ 158 000c 0002      		.word	512
+ 159 000e 01        		.byte	1
+ 160 000f 02        		.byte	2
+ 161 0010 03        		.byte	3
+ 162 0011 01        		.byte	1
+ 163               	.global	RelayBoard_ConfigurationDescriptor
+ 166               	RelayBoard_ConfigurationDescriptor:
+ 167 0012 09        		.byte	9
+ 168 0013 02        		.byte	2
+ 169 0014 1200      		.word	18
+ 170 0016 01        		.byte	1
+ 171 0017 01        		.byte	1
+ 172 0018 00        		.byte	0
+ 173 0019 80        		.byte	-128
+ 174 001a FA        		.byte	-6
+ 175 001b 09        		.byte	9
+ 176 001c 04        		.byte	4
+ 177 001d 00        		.byte	0
+ 178 001e 00        		.byte	0
+ 179 001f 00        		.byte	0
+ 180 0020 FF        		.byte	-1
+ 181 0021 00        		.byte	0
+ 182 0022 00        		.byte	0
+ 183 0023 00        		.byte	0
+ 184               	.global	RelayBoard_LanguageString
+ 187               	RelayBoard_LanguageString:
+ 188 0024 04        		.byte	4
+ 189 0025 03        		.byte	3
+ 190 0026 0904      		.word	1033
+ 191               	.global	RelayBoard_ManufacturerString
+ 194               	RelayBoard_ManufacturerString:
+ 195 0028 0C        		.byte	12
+ 196 0029 03        		.byte	3
+ 197 002a 5300      		.string	"S"
+ 198 002c 4900      		.string	"I"
+ 199 002e 5300      		.string	"S"
+ 200 0030 5000      		.string	"P"
+ 201 0032 4D00      		.string	"M"
+ 202 0034 00        		.string	""
+ 203 0035 00        		.string	""
+ 204               	.global	RelayBoard_ProductString
+ 207               	RelayBoard_ProductString:
+ 208 0036 16        		.byte	22
+ 209 0037 03        		.byte	3
+ 210 0038 5200      		.string	"R"
+ 211 003a 6500      		.string	"e"
+ 212 003c 6C00      		.string	"l"
+ 213 003e 6100      		.string	"a"
+ 214 0040 7900      		.string	"y"
+ 215 0042 4200      		.string	"B"
+ 216 0044 6F00      		.string	"o"
+ 217 0046 6100      		.string	"a"
+ 218 0048 7200      		.string	"r"
+ 219 004a 6400      		.string	"d"
+ 220 004c 00        		.string	""
+ 221 004d 00        		.string	""
+ 222               	.global	RelayBoard_SerialString
+ 225               	RelayBoard_SerialString:
+ 226 004e 0C        		.byte	12
+ 227 004f 03        		.byte	3
+ 228 0050 3000      		.string	"0"
+ 229 0052 3000      		.string	"0"
+ 230 0054 3000      		.string	"0"
+ 231 0056 3000      		.string	"0"
+ 232 0058 3100      		.string	"1"
+ 233 005a 00        		.string	""
+ 234 005b 00        		.string	""
+ 259               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 Descriptors.c
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccUQsxa4.s:2      *ABS*:0000003f __SREG__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccUQsxa4.s:3      *ABS*:0000003e __SP_H__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccUQsxa4.s:4      *ABS*:0000003d __SP_L__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccUQsxa4.s:5      *ABS*:00000034 __CCP__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccUQsxa4.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccUQsxa4.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccUQsxa4.s:19     .text.CALLBACK_USB_GetDescriptor:00000000 CALLBACK_USB_GetDescriptor
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccUQsxa4.s:148    .progmem.data:00000000 RelayBoard_DeviceDescriptor
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccUQsxa4.s:166    .progmem.data:00000012 RelayBoard_ConfigurationDescriptor
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccUQsxa4.s:187    .progmem.data:00000024 RelayBoard_LanguageString
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccUQsxa4.s:194    .progmem.data:00000028 RelayBoard_ManufacturerString
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccUQsxa4.s:207    .progmem.data:00000036 RelayBoard_ProductString
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccUQsxa4.s:225    .progmem.data:0000004e RelayBoard_SerialString
+
+NO UNDEFINED SYMBOLS

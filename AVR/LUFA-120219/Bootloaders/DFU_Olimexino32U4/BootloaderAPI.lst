@@ -1,0 +1,265 @@
+   1               		.file	"BootloaderAPI.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.BootloaderAPI_ErasePage,"ax",@progbits
+  17               	.global	BootloaderAPI_ErasePage
+  19               	BootloaderAPI_ErasePage:
+  20               	.LFB17:
+  21               	.LSM0:
+  22               	.LVL0:
+  23               	/* prologue: function */
+  24               	/* frame size = 0 */
+  25 0000 9B01      		movw r18,r22
+  26 0002 AC01      		movw r20,r24
+  27               	.LVL1:
+  28               	.L2:
+  29               	.LSM1:
+  30 0004 07B6      		in __tmp_reg__,87-32
+  31 0006 00FC      		sbrc __tmp_reg__,0
+  32 0008 00C0      		rjmp .L2
+  33               	.L5:
+  34 000a F999      		sbic 63-32,1
+  35 000c 00C0      		rjmp .L5
+  36 000e 83E0      		ldi r24,lo8(3)
+  37 0010 F901      		movw r30,r18
+  38               	.LVL2:
+  39               	/* #APP */
+  40               	 ;  40 "BootloaderAPI.c" 1
+  41 0012 8093 5700 		sts 87, r24
+  42 0016 E895      		spm
+  43               		
+  44               	 ;  0 "" 2
+  45               	.LSM2:
+  46               	/* #NOAPP */
+  47 0018 81E1      		ldi r24,lo8(17)
+  48               	/* #APP */
+  49               	 ;  41 "BootloaderAPI.c" 1
+  50 001a 8093 5700 		sts 87, r24
+  51 001e E895      		spm
+  52               		
+  53               	 ;  0 "" 2
+  54               	/* epilogue start */
+  55               	.LSM3:
+  56               	/* #NOAPP */
+  57 0020 0895      		ret
+  58               	.LFE17:
+  60               		.section	.text.BootloaderAPI_WritePage,"ax",@progbits
+  61               	.global	BootloaderAPI_WritePage
+  63               	BootloaderAPI_WritePage:
+  64               	.LFB18:
+  65               	.LSM4:
+  66               	.LVL3:
+  67               	/* prologue: function */
+  68               	/* frame size = 0 */
+  69 0000 9B01      		movw r18,r22
+  70 0002 AC01      		movw r20,r24
+  71               	.LVL4:
+  72               	.L9:
+  73               	.LSM5:
+  74 0004 07B6      		in __tmp_reg__,87-32
+  75 0006 00FC      		sbrc __tmp_reg__,0
+  76 0008 00C0      		rjmp .L9
+  77               	.L12:
+  78 000a F999      		sbic 63-32,1
+  79 000c 00C0      		rjmp .L12
+  80 000e 85E0      		ldi r24,lo8(5)
+  81 0010 F901      		movw r30,r18
+  82               	.LVL5:
+  83               	/* #APP */
+  84               	 ;  46 "BootloaderAPI.c" 1
+  85 0012 8093 5700 		sts 87, r24
+  86 0016 E895      		spm
+  87               		
+  88               	 ;  0 "" 2
+  89               	.LSM6:
+  90               	/* #NOAPP */
+  91 0018 81E1      		ldi r24,lo8(17)
+  92               	/* #APP */
+  93               	 ;  47 "BootloaderAPI.c" 1
+  94 001a 8093 5700 		sts 87, r24
+  95 001e E895      		spm
+  96               		
+  97               	 ;  0 "" 2
+  98               	/* epilogue start */
+  99               	.LSM7:
+ 100               	/* #NOAPP */
+ 101 0020 0895      		ret
+ 102               	.LFE18:
+ 104               		.section	.text.BootloaderAPI_FillWord,"ax",@progbits
+ 105               	.global	BootloaderAPI_FillWord
+ 107               	BootloaderAPI_FillWord:
+ 108               	.LFB19:
+ 109               	.LSM8:
+ 110               	.LVL6:
+ 111 0000 0F93      		push r16
+ 112 0002 1F93      		push r17
+ 113               	/* prologue: function */
+ 114               	/* frame size = 0 */
+ 115 0004 8B01      		movw r16,r22
+ 116 0006 9C01      		movw r18,r24
+ 117               	.LVL7:
+ 118               	.L16:
+ 119               	.LSM9:
+ 120 0008 07B6      		in __tmp_reg__,87-32
+ 121 000a 00FC      		sbrc __tmp_reg__,0
+ 122 000c 00C0      		rjmp .L16
+ 123               	.L19:
+ 124 000e F999      		sbic 63-32,1
+ 125 0010 00C0      		rjmp .L19
+ 126 0012 81E0      		ldi r24,lo8(1)
+ 127 0014 F801      		movw r30,r16
+ 128               	.LVL8:
+ 129               	/* #APP */
+ 130               	 ;  52 "BootloaderAPI.c" 1
+ 131 0016 0A01      		movw  r0, r20
+ 132 0018 8093 5700 		sts 87, r24
+ 133 001c E895      		spm
+ 134 001e 1124      		clr  r1
+ 135               		
+ 136               	 ;  0 "" 2
+ 137               	/* epilogue start */
+ 138               	.LSM10:
+ 139               	/* #NOAPP */
+ 140 0020 1F91      		pop r17
+ 141 0022 0F91      		pop r16
+ 142 0024 0895      		ret
+ 143               	.LFE19:
+ 145               		.section	.text.BootloaderAPI_ReadSignature,"ax",@progbits
+ 146               	.global	BootloaderAPI_ReadSignature
+ 148               	BootloaderAPI_ReadSignature:
+ 149               	.LFB20:
+ 150               	.LSM11:
+ 151               	.LVL9:
+ 152               	/* prologue: function */
+ 153               	/* frame size = 0 */
+ 154               	.LBB2:
+ 155               	.LSM12:
+ 156 0000 21E2      		ldi r18,lo8(33)
+ 157 0002 FC01      		movw r30,r24
+ 158               	/* #APP */
+ 159               	 ;  57 "BootloaderAPI.c" 1
+ 160 0004 2093 5700 		sts 87, r18
+ 161 0008 2491      		lpm r18, Z
+ 162               		
+ 163               	 ;  0 "" 2
+ 164               	.LVL10:
+ 165               	/* #NOAPP */
+ 166               	.LBE2:
+ 167               	.LSM13:
+ 168 000a 822F      		mov r24,r18
+ 169               	.LVL11:
+ 170               	/* epilogue start */
+ 171 000c 0895      		ret
+ 172               	.LFE20:
+ 174               		.section	.text.BootloaderAPI_ReadFuse,"ax",@progbits
+ 175               	.global	BootloaderAPI_ReadFuse
+ 177               	BootloaderAPI_ReadFuse:
+ 178               	.LFB21:
+ 179               	.LSM14:
+ 180               	.LVL12:
+ 181               	/* prologue: function */
+ 182               	/* frame size = 0 */
+ 183               	.LBB3:
+ 184               	.LSM15:
+ 185 0000 29E0      		ldi r18,lo8(9)
+ 186 0002 FC01      		movw r30,r24
+ 187               	/* #APP */
+ 188               	 ;  62 "BootloaderAPI.c" 1
+ 189 0004 2093 5700 		sts 87, r18
+ 190 0008 2491      		lpm r18, Z
+ 191               		
+ 192               	 ;  0 "" 2
+ 193               	.LVL13:
+ 194               	/* #NOAPP */
+ 195               	.LBE3:
+ 196               	.LSM16:
+ 197 000a 822F      		mov r24,r18
+ 198               	.LVL14:
+ 199               	/* epilogue start */
+ 200 000c 0895      		ret
+ 201               	.LFE21:
+ 203               		.section	.text.BootloaderAPI_ReadLock,"ax",@progbits
+ 204               	.global	BootloaderAPI_ReadLock
+ 206               	BootloaderAPI_ReadLock:
+ 207               	.LFB22:
+ 208               	.LSM17:
+ 209               	/* prologue: function */
+ 210               	/* frame size = 0 */
+ 211               	.LBB4:
+ 212               	.LSM18:
+ 213 0000 E1E0      		ldi r30,lo8(1)
+ 214 0002 F0E0      		ldi r31,hi8(1)
+ 215 0004 89E0      		ldi r24,lo8(9)
+ 216               	/* #APP */
+ 217               	 ;  67 "BootloaderAPI.c" 1
+ 218 0006 8093 5700 		sts 87, r24
+ 219 000a 8491      		lpm r24, Z
+ 220               		
+ 221               	 ;  0 "" 2
+ 222               	.LVL15:
+ 223               	.LVL16:
+ 224               	/* epilogue start */
+ 225               	/* #NOAPP */
+ 226               	.LBE4:
+ 227               	.LSM19:
+ 228 000c 0895      		ret
+ 229               	.LFE22:
+ 231               		.section	.text.BootloaderAPI_WriteLock,"ax",@progbits
+ 232               	.global	BootloaderAPI_WriteLock
+ 234               	BootloaderAPI_WriteLock:
+ 235               	.LFB23:
+ 236               	.LSM20:
+ 237               	.LVL17:
+ 238               	/* prologue: function */
+ 239               	/* frame size = 0 */
+ 240 0000 982F      		mov r25,r24
+ 241               	.LVL18:
+ 242               	.L29:
+ 243               	.LSM21:
+ 244 0002 07B6      		in __tmp_reg__,87-32
+ 245 0004 00FC      		sbrc __tmp_reg__,0
+ 246 0006 00C0      		rjmp .L29
+ 247               	.L32:
+ 248 0008 F999      		sbic 63-32,1
+ 249 000a 00C0      		rjmp .L32
+ 250               	.LBB5:
+ 251 000c 9095      		com r25
+ 252 000e 89E0      		ldi r24,lo8(9)
+ 253               	/* #APP */
+ 254               	 ;  72 "BootloaderAPI.c" 1
+ 255 0010 E1E0      		ldi r30, 1
+ 256 0012 F0E0      		ldi r31, 0
+ 257 0014 092E      		mov r0, r25
+ 258 0016 8093 5700 		sts 87, r24
+ 259 001a E895      		spm
+ 260               		
+ 261               	 ;  0 "" 2
+ 262               	/* epilogue start */
+ 263               	/* #NOAPP */
+ 264               	.LBE5:
+ 265               	.LSM22:
+ 266 001c 0895      		ret
+ 267               	.LFE23:
+ 341               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 BootloaderAPI.c
+     /tmp/ccNoEXCe.s:2      *ABS*:0000003f __SREG__
+     /tmp/ccNoEXCe.s:3      *ABS*:0000003e __SP_H__
+     /tmp/ccNoEXCe.s:4      *ABS*:0000003d __SP_L__
+     /tmp/ccNoEXCe.s:5      *ABS*:00000034 __CCP__
+     /tmp/ccNoEXCe.s:6      *ABS*:00000000 __tmp_reg__
+     /tmp/ccNoEXCe.s:7      *ABS*:00000001 __zero_reg__
+     /tmp/ccNoEXCe.s:19     .text.BootloaderAPI_ErasePage:00000000 BootloaderAPI_ErasePage
+     /tmp/ccNoEXCe.s:63     .text.BootloaderAPI_WritePage:00000000 BootloaderAPI_WritePage
+     /tmp/ccNoEXCe.s:107    .text.BootloaderAPI_FillWord:00000000 BootloaderAPI_FillWord
+     /tmp/ccNoEXCe.s:148    .text.BootloaderAPI_ReadSignature:00000000 BootloaderAPI_ReadSignature
+     /tmp/ccNoEXCe.s:177    .text.BootloaderAPI_ReadFuse:00000000 BootloaderAPI_ReadFuse
+     /tmp/ccNoEXCe.s:206    .text.BootloaderAPI_ReadLock:00000000 BootloaderAPI_ReadLock
+     /tmp/ccNoEXCe.s:234    .text.BootloaderAPI_WriteLock:00000000 BootloaderAPI_WriteLock
+
+NO UNDEFINED SYMBOLS

@@ -1,0 +1,58 @@
+   1               		.file	"mux.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	mux_init
+  18               	mux_init:
+  19               	.LFB2:
+  20               	.LM1:
+  21               	/* prologue: function */
+  22               	/* frame size = 0 */
+  23               	.LM2:
+  24 0000 84B3      		in r24,52-32
+  25 0002 806F      		ori r24,lo8(-16)
+  26 0004 84BB      		out 52-32,r24
+  27               	/* epilogue start */
+  28               	.LM3:
+  29 0006 0895      		ret
+  30               	.LFE2:
+  32               	.global	mux_channelSelect
+  34               	mux_channelSelect:
+  35               	.LFB3:
+  36               	.LM4:
+  37               	.LVL0:
+  38               	/* prologue: function */
+  39               	/* frame size = 0 */
+  40               	.LM5:
+  41 0008 95B3      		in r25,53-32
+  42 000a 907F      		andi r25,lo8(-16)
+  43 000c 95BB      		out 53-32,r25
+  44               	.LM6:
+  45 000e 95B3      		in r25,53-32
+  46 0010 8295      		swap r24
+  47               	.LVL1:
+  48 0012 807F      		andi r24,lo8(-16)
+  49 0014 9F70      		andi r25,lo8(15)
+  50 0016 982B      		or r25,r24
+  51 0018 95BB      		out 53-32,r25
+  52               	/* epilogue start */
+  53               	.LM7:
+  54 001a 0895      		ret
+  55               	.LFE3:
+  89               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 mux.c
+     /tmp/ccc8ZTMR.s:2      *ABS*:0000003f __SREG__
+     /tmp/ccc8ZTMR.s:3      *ABS*:0000003e __SP_H__
+     /tmp/ccc8ZTMR.s:4      *ABS*:0000003d __SP_L__
+     /tmp/ccc8ZTMR.s:5      *ABS*:00000034 __CCP__
+     /tmp/ccc8ZTMR.s:6      *ABS*:00000000 __tmp_reg__
+     /tmp/ccc8ZTMR.s:7      *ABS*:00000001 __zero_reg__
+     /tmp/ccc8ZTMR.s:18     .text:00000000 mux_init
+     /tmp/ccc8ZTMR.s:34     .text:00000008 mux_channelSelect
+
+NO UNDEFINED SYMBOLS

@@ -1,0 +1,111 @@
+   1               		.file	"diskio.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.disk_initialize,"ax",@progbits
+  17               	.global	disk_initialize
+  19               	disk_initialize:
+  20               	.LFB189:
+  21               	.LSM0:
+  22               	.LVL0:
+  23               	/* prologue: function */
+  24               	/* frame size = 0 */
+  25               	.LSM1:
+  26 0000 80E0      		ldi r24,lo8(0)
+  27               	.LVL1:
+  28               	/* epilogue start */
+  29 0002 0895      		ret
+  30               	.LFE189:
+  32               		.section	.text.disk_status,"ax",@progbits
+  33               	.global	disk_status
+  35               	disk_status:
+  36               	.LFB190:
+  37               	.LSM2:
+  38               	.LVL2:
+  39               	/* prologue: function */
+  40               	/* frame size = 0 */
+  41               	.LSM3:
+  42 0000 80E0      		ldi r24,lo8(0)
+  43               	.LVL3:
+  44               	/* epilogue start */
+  45 0002 0895      		ret
+  46               	.LFE190:
+  48               		.section	.text.disk_write,"ax",@progbits
+  49               	.global	disk_write
+  51               	disk_write:
+  52               	.LFB192:
+  53               	.LSM4:
+  54               	.LVL4:
+  55 0000 0F93      		push r16
+  56               	.LVL5:
+  57               	/* prologue: function */
+  58               	/* frame size = 0 */
+  59 0002 FB01      		movw r30,r22
+  60               	.LSM5:
+  61 0004 CA01      		movw r24,r20
+  62 0006 B901      		movw r22,r18
+  63               	.LVL6:
+  64 0008 402F      		mov r20,r16
+  65               	.LVL7:
+  66 000a 50E0      		ldi r21,lo8(0)
+  67 000c 9F01      		movw r18,r30
+  68               	.LVL8:
+  69 000e 0E94 0000 		call DataflashManager_WriteBlocks_RAM
+  70               	.LVL9:
+  71               	.LSM6:
+  72 0012 80E0      		ldi r24,lo8(0)
+  73               	/* epilogue start */
+  74 0014 0F91      		pop r16
+  75               	.LVL10:
+  76 0016 0895      		ret
+  77               	.LFE192:
+  79               		.section	.text.disk_read,"ax",@progbits
+  80               	.global	disk_read
+  82               	disk_read:
+  83               	.LFB191:
+  84               	.LSM7:
+  85               	.LVL11:
+  86 0000 0F93      		push r16
+  87               	.LVL12:
+  88               	/* prologue: function */
+  89               	/* frame size = 0 */
+  90 0002 FB01      		movw r30,r22
+  91               	.LSM8:
+  92 0004 CA01      		movw r24,r20
+  93 0006 B901      		movw r22,r18
+  94               	.LVL13:
+  95 0008 402F      		mov r20,r16
+  96               	.LVL14:
+  97 000a 50E0      		ldi r21,lo8(0)
+  98 000c 9F01      		movw r18,r30
+  99               	.LVL15:
+ 100 000e 0E94 0000 		call DataflashManager_ReadBlocks_RAM
+ 101               	.LVL16:
+ 102               	.LSM9:
+ 103 0012 80E0      		ldi r24,lo8(0)
+ 104               	/* epilogue start */
+ 105 0014 0F91      		pop r16
+ 106               	.LVL17:
+ 107 0016 0895      		ret
+ 108               	.LFE191:
+ 158               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 diskio.c
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cceViIaC.s:2      *ABS*:0000003f __SREG__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cceViIaC.s:3      *ABS*:0000003e __SP_H__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cceViIaC.s:4      *ABS*:0000003d __SP_L__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cceViIaC.s:5      *ABS*:00000034 __CCP__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cceViIaC.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cceViIaC.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cceViIaC.s:19     .text.disk_initialize:00000000 disk_initialize
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cceViIaC.s:35     .text.disk_status:00000000 disk_status
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cceViIaC.s:51     .text.disk_write:00000000 disk_write
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cceViIaC.s:82     .text.disk_read:00000000 disk_read
+
+UNDEFINED SYMBOLS
+DataflashManager_WriteBlocks_RAM
+DataflashManager_ReadBlocks_RAM

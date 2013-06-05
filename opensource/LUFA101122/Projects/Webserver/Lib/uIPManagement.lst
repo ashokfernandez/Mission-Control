@@ -1,0 +1,395 @@
+   1               		.file	"uIPManagement.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.uIPManagement_UDPCallback,"ax",@progbits
+  17               	.global	uIPManagement_UDPCallback
+  19               	uIPManagement_UDPCallback:
+  20               	.LFB199:
+  21               	.LSM0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LSM1:
+  25 0000 E091 0000 		lds r30,uip_udp_conn
+  26 0004 F091 0000 		lds r31,(uip_udp_conn)+1
+  27 0008 8481      		ldd r24,Z+4
+  28 000a 9581      		ldd r25,Z+5
+  29 000c 8050      		subi r24,lo8(17408)
+  30 000e 9444      		sbci r25,hi8(17408)
+  31 0010 01F4      		brne .L4
+  32               	.LSM2:
+  33 0012 0E94 0000 		call DHCPClientApp_Callback
+  34               	.L4:
+  35 0016 0895      		ret
+  36               	.LFE199:
+  38               		.section	.text.uIPManagement_TCPCallback,"ax",@progbits
+  39               	.global	uIPManagement_TCPCallback
+  41               	uIPManagement_TCPCallback:
+  42               	.LFB198:
+  43               	.LSM3:
+  44               	/* prologue: function */
+  45               	/* frame size = 0 */
+  46               	.LSM4:
+  47 0000 E091 0000 		lds r30,uip_conn
+  48 0004 F091 0000 		lds r31,(uip_conn)+1
+  49 0008 8481      		ldd r24,Z+4
+  50 000a 9581      		ldd r25,Z+5
+  51 000c 27E1      		ldi r18,hi8(5888)
+  52 000e 8030      		cpi r24,lo8(5888)
+  53 0010 9207      		cpc r25,r18
+  54 0012 01F0      		breq .L7
+  55 0014 8050      		subi r24,lo8(20480)
+  56 0016 9045      		sbci r25,hi8(20480)
+  57 0018 01F4      		brne .L9
+  58               	.LSM5:
+  59 001a 0E94 0000 		call HTTPServerApp_Callback
+  60 001e 0895      		ret
+  61               	.L7:
+  62               	.LSM6:
+  63 0020 0E94 0000 		call TELNETServerApp_Callback
+  64               	.L9:
+  65 0024 0895      		ret
+  66               	.LFE198:
+  68               		.section	.text.uIPManagement_ManageNetwork,"ax",@progbits
+  69               	.global	uIPManagement_ManageNetwork
+  71               	uIPManagement_ManageNetwork:
+  72               	.LFB197:
+  73               	.LSM7:
+  74 0000 0F93      		push r16
+  75 0002 1F93      		push r17
+  76 0004 CF93      		push r28
+  77 0006 DF93      		push r29
+  78               	/* prologue: function */
+  79               	/* frame size = 0 */
+  80               	.LSM8:
+  81 0008 8091 0000 		lds r24,USB_CurrentMode
+  82 000c 8230      		cpi r24,lo8(2)
+  83 000e 01F0      		breq .+2
+  84 0010 00C0      		rjmp .L24
+  85 0012 8091 0000 		lds r24,USB_HostState
+  86 0016 8C30      		cpi r24,lo8(12)
+  87 0018 01F0      		breq .+2
+  88 001a 00C0      		rjmp .L24
+  89               	.LBB28:
+  90               	.LSM9:
+  91 001c 80E0      		ldi r24,lo8(Ethernet_RNDIS_Interface)
+  92 001e 90E0      		ldi r25,hi8(Ethernet_RNDIS_Interface)
+  93 0020 0E94 0000 		call RNDIS_Host_IsPacketReceived
+  94               	.LBB29:
+  95 0024 8823      		tst r24
+  96 0026 01F4      		brne .+2
+  97 0028 00C0      		rjmp .L12
+  98               	.LBB30:
+  99               	.LBB31:
+ 100               	.LSM10:
+ 101 002a 8BB1      		in r24,43-32
+ 102 002c 8F70      		andi r24,lo8(15)
+ 103 002e 806D      		ori r24,lo8(-48)
+ 104 0030 8BB9      		out 43-32,r24
+ 105               	.LBE31:
+ 106               	.LBE30:
+ 107               	.LSM11:
+ 108 0032 80E0      		ldi r24,lo8(Ethernet_RNDIS_Interface)
+ 109 0034 90E0      		ldi r25,hi8(Ethernet_RNDIS_Interface)
+ 110 0036 60E0      		ldi r22,lo8(uip_buf)
+ 111 0038 70E0      		ldi r23,hi8(uip_buf)
+ 112 003a 40E0      		ldi r20,lo8(uip_len)
+ 113 003c 50E0      		ldi r21,hi8(uip_len)
+ 114 003e 0E94 0000 		call RNDIS_Host_ReadPacket
+ 115               	.LSM12:
+ 116 0042 8091 0000 		lds r24,uip_len
+ 117 0046 9091 0000 		lds r25,(uip_len)+1
+ 118 004a 892B      		or r24,r25
+ 119 004c 01F0      		breq .L13
+ 120               	.LSM13:
+ 121 004e 8091 0000 		lds r24,uip_buf+12
+ 122 0052 9091 0000 		lds r25,(uip_buf+12)+1
+ 123 0056 8830      		cpi r24,8
+ 124 0058 9105      		cpc r25,__zero_reg__
+ 125 005a 01F0      		breq .L14
+ 126 005c 8850      		subi r24,lo8(1544)
+ 127 005e 9640      		sbci r25,hi8(1544)
+ 128 0060 01F4      		brne .L13
+ 129 0062 00C0      		rjmp .L28
+ 130               	.L14:
+ 131               	.LSM14:
+ 132 0064 81E0      		ldi r24,lo8(1)
+ 133 0066 0E94 0000 		call uip_process
+ 134               	.LSM15:
+ 135 006a 8091 0000 		lds r24,uip_len
+ 136 006e 9091 0000 		lds r25,(uip_len)+1
+ 137 0072 892B      		or r24,r25
+ 138 0074 01F0      		breq .L13
+ 139               	.LSM16:
+ 140 0076 0E94 0000 		call uip_arp_out
+ 141 007a 00C0      		rjmp .L27
+ 142               	.L28:
+ 143               	.LSM17:
+ 144 007c 0E94 0000 		call uip_arp_arpin
+ 145               	.LSM18:
+ 146 0080 8091 0000 		lds r24,uip_len
+ 147 0084 9091 0000 		lds r25,(uip_len)+1
+ 148 0088 892B      		or r24,r25
+ 149 008a 01F0      		breq .L13
+ 150               	.L27:
+ 151               	.LSM19:
+ 152 008c 0E94 0000 		call uip_split_output
+ 153               	.L13:
+ 154               	.LSM20:
+ 155 0090 8091 0000 		lds r24,HaveIPConfiguration
+ 156 0094 8823      		tst r24
+ 157 0096 01F4      		brne .L16
+ 158 0098 90EA      		ldi r25,lo8(-96)
+ 159 009a 00C0      		rjmp .L17
+ 160               	.L16:
+ 161 009c 90E6      		ldi r25,lo8(96)
+ 162               	.L17:
+ 163               	.LBB32:
+ 164               	.LBB33:
+ 165               	.LSM21:
+ 166 009e 8BB1      		in r24,43-32
+ 167 00a0 8F70      		andi r24,lo8(15)
+ 168 00a2 982B      		or r25,r24
+ 169 00a4 9BB9      		out 43-32,r25
+ 170               	.L12:
+ 171 00a6 00E0      		ldi r16,lo8(uip_conns)
+ 172 00a8 10E0      		ldi r17,hi8(uip_conns)
+ 173 00aa E801      		movw r28,r16
+ 174               	.L19:
+ 175               	.LBE33:
+ 176               	.LBE32:
+ 177               	.LBE29:
+ 178               	.LBE28:
+ 179               	.LBB34:
+ 180               	.LBB35:
+ 181               	.LBB42:
+ 182               	.LSM22:
+ 183 00ac D093 0000 		sts (uip_conn)+1,r29
+ 184 00b0 C093 0000 		sts uip_conn,r28
+ 185 00b4 83E0      		ldi r24,lo8(3)
+ 186 00b6 0E94 0000 		call uip_process
+ 187               	.LSM23:
+ 188 00ba 8091 0000 		lds r24,uip_len
+ 189 00be 9091 0000 		lds r25,(uip_len)+1
+ 190 00c2 892B      		or r24,r25
+ 191 00c4 01F0      		breq .L18
+ 192               	.LSM24:
+ 193 00c6 0E94 0000 		call uip_arp_out
+ 194               	.LSM25:
+ 195 00ca 0E94 0000 		call uip_split_output
+ 196               	.L18:
+ 197 00ce CF58      		subi r28,lo8(-(113))
+ 198 00d0 DF4F      		sbci r29,hi8(-(113))
+ 199               	.LSM26:
+ 200 00d2 80E0      		ldi r24,hi8(uip_conns+339)
+ 201 00d4 C030      		cpi r28,lo8(uip_conns+339)
+ 202 00d6 D807      		cpc r29,r24
+ 203 00d8 01F4      		brne .L19
+ 204               	.LBE42:
+ 205               	.LBE35:
+ 206               	.LSM27:
+ 207 00da 80E0      		ldi r24,lo8(ConnectionTimer)
+ 208 00dc 90E0      		ldi r25,hi8(ConnectionTimer)
+ 209 00de 0E94 0000 		call timer_expired
+ 210               	.LBB43:
+ 211 00e2 892B      		or r24,r25
+ 212 00e4 01F0      		breq .L20
+ 213               	.LSM28:
+ 214 00e6 80E0      		ldi r24,lo8(ConnectionTimer)
+ 215 00e8 90E0      		ldi r25,hi8(ConnectionTimer)
+ 216 00ea 0E94 0000 		call timer_reset
+ 217               	.LBB40:
+ 218               	.LBB41:
+ 219               	.LSM29:
+ 220 00ee 8BB1      		in r24,43-32
+ 221 00f0 8F70      		andi r24,lo8(15)
+ 222 00f2 806D      		ori r24,lo8(-48)
+ 223 00f4 8BB9      		out 43-32,r24
+ 224               	.L22:
+ 225               	.LBE41:
+ 226               	.LBE40:
+ 227               	.LBB39:
+ 228               	.LSM30:
+ 229 00f6 1093 0000 		sts (uip_conn)+1,r17
+ 230 00fa 0093 0000 		sts uip_conn,r16
+ 231 00fe 82E0      		ldi r24,lo8(2)
+ 232 0100 0E94 0000 		call uip_process
+ 233               	.LSM31:
+ 234 0104 8091 0000 		lds r24,uip_len
+ 235 0108 9091 0000 		lds r25,(uip_len)+1
+ 236 010c 892B      		or r24,r25
+ 237 010e 01F0      		breq .L21
+ 238               	.LSM32:
+ 239 0110 0E94 0000 		call uip_arp_out
+ 240               	.LSM33:
+ 241 0114 0E94 0000 		call uip_split_output
+ 242               	.L21:
+ 243 0118 0F58      		subi r16,lo8(-(113))
+ 244 011a 1F4F      		sbci r17,hi8(-(113))
+ 245               	.LSM34:
+ 246 011c 20E0      		ldi r18,hi8(uip_conns+339)
+ 247 011e 0030      		cpi r16,lo8(uip_conns+339)
+ 248 0120 1207      		cpc r17,r18
+ 249 0122 01F4      		brne .L22
+ 250               	.LBE39:
+ 251               	.LBB38:
+ 252               	.LSM35:
+ 253 0124 80E0      		ldi r24,lo8(uip_udp_conns)
+ 254 0126 90E0      		ldi r25,hi8(uip_udp_conns)
+ 255 0128 9093 0000 		sts (uip_udp_conn)+1,r25
+ 256 012c 8093 0000 		sts uip_udp_conn,r24
+ 257 0130 85E0      		ldi r24,lo8(5)
+ 258 0132 0E94 0000 		call uip_process
+ 259               	.LSM36:
+ 260 0136 8091 0000 		lds r24,uip_len
+ 261 013a 9091 0000 		lds r25,(uip_len)+1
+ 262 013e 892B      		or r24,r25
+ 263 0140 01F0      		breq .L23
+ 264               	.LSM37:
+ 265 0142 0E94 0000 		call uip_arp_out
+ 266               	.LSM38:
+ 267 0146 0E94 0000 		call uip_split_output
+ 268               	.L23:
+ 269               	.LBE38:
+ 270               	.LBB36:
+ 271               	.LBB37:
+ 272               	.LSM39:
+ 273 014a 8BB1      		in r24,43-32
+ 274 014c 8F70      		andi r24,lo8(15)
+ 275 014e 8062      		ori r24,lo8(32)
+ 276 0150 8BB9      		out 43-32,r24
+ 277               	.L20:
+ 278               	.LBE37:
+ 279               	.LBE36:
+ 280               	.LBE43:
+ 281               	.LSM40:
+ 282 0152 80E0      		ldi r24,lo8(ARPTimer)
+ 283 0154 90E0      		ldi r25,hi8(ARPTimer)
+ 284 0156 0E94 0000 		call timer_expired
+ 285               	.LBB44:
+ 286 015a 892B      		or r24,r25
+ 287 015c 01F0      		breq .L24
+ 288               	.LSM41:
+ 289 015e 80E0      		ldi r24,lo8(ARPTimer)
+ 290 0160 90E0      		ldi r25,hi8(ARPTimer)
+ 291 0162 0E94 0000 		call timer_reset
+ 292               	.LSM42:
+ 293 0166 0E94 0000 		call uip_arp_timer
+ 294               	.L24:
+ 295               	/* epilogue start */
+ 296               	.LBE44:
+ 297               	.LBE34:
+ 298               	.LSM43:
+ 299 016a DF91      		pop r29
+ 300 016c CF91      		pop r28
+ 301 016e 1F91      		pop r17
+ 302 0170 0F91      		pop r16
+ 303 0172 0895      		ret
+ 304               	.LFE197:
+ 306               		.section	.text.uIPManagement_Init,"ax",@progbits
+ 307               	.global	uIPManagement_Init
+ 309               	uIPManagement_Init:
+ 310               	.LFB196:
+ 311               	.LSM44:
+ 312               	/* prologue: function */
+ 313               	/* frame size = 0 */
+ 314               	.LSM45:
+ 315 0000 0E94 0000 		call clock_init
+ 316               	.LSM46:
+ 317 0004 80E0      		ldi r24,lo8(ConnectionTimer)
+ 318 0006 90E0      		ldi r25,hi8(ConnectionTimer)
+ 319 0008 62E3      		ldi r22,lo8(50)
+ 320 000a 70E0      		ldi r23,hi8(50)
+ 321 000c 0E94 0000 		call timer_set
+ 322               	.LSM47:
+ 323 0010 80E0      		ldi r24,lo8(ARPTimer)
+ 324 0012 90E0      		ldi r25,hi8(ARPTimer)
+ 325 0014 68EE      		ldi r22,lo8(1000)
+ 326 0016 73E0      		ldi r23,hi8(1000)
+ 327 0018 0E94 0000 		call timer_set
+ 328               	.LSM48:
+ 329 001c 0E94 0000 		call uip_init
+ 330               	.LSM49:
+ 331 0020 0E94 0000 		call uip_arp_init
+ 332               	.LSM50:
+ 333 0024 8091 0000 		lds r24,MACAddress
+ 334 0028 8093 0000 		sts uip_ethaddr,r24
+ 335 002c 8091 0000 		lds r24,MACAddress+1
+ 336 0030 8093 0000 		sts uip_ethaddr+1,r24
+ 337 0034 8091 0000 		lds r24,MACAddress+2
+ 338 0038 8093 0000 		sts uip_ethaddr+2,r24
+ 339 003c 8091 0000 		lds r24,MACAddress+3
+ 340 0040 8093 0000 		sts uip_ethaddr+3,r24
+ 341 0044 8091 0000 		lds r24,MACAddress+4
+ 342 0048 8093 0000 		sts uip_ethaddr+4,r24
+ 343 004c 8091 0000 		lds r24,MACAddress+5
+ 344 0050 8093 0000 		sts uip_ethaddr+5,r24
+ 345               	.LSM51:
+ 346 0054 1092 0000 		sts HaveIPConfiguration,__zero_reg__
+ 347               	.LSM52:
+ 348 0058 0E94 0000 		call DHCPClientApp_Init
+ 349               	.LSM53:
+ 350 005c 0E94 0000 		call HTTPServerApp_Init
+ 351               	.LSM54:
+ 352 0060 0E94 0000 		call TELNETServerApp_Init
+ 353               	/* epilogue start */
+ 354               	.LSM55:
+ 355 0064 0895      		ret
+ 356               	.LFE196:
+ 358               		.comm MACAddress,6,1
+ 359               		.comm HaveIPConfiguration,1,1
+ 360               		.comm ConnectionTimer,4,1
+ 361               		.comm ARPTimer,4,1
+ 410               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 uIPManagement.c
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccPjHi4y.s:2      *ABS*:0000003f __SREG__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccPjHi4y.s:3      *ABS*:0000003e __SP_H__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccPjHi4y.s:4      *ABS*:0000003d __SP_L__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccPjHi4y.s:5      *ABS*:00000034 __CCP__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccPjHi4y.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccPjHi4y.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccPjHi4y.s:19     .text.uIPManagement_UDPCallback:00000000 uIPManagement_UDPCallback
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccPjHi4y.s:41     .text.uIPManagement_TCPCallback:00000000 uIPManagement_TCPCallback
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccPjHi4y.s:71     .text.uIPManagement_ManageNetwork:00000000 uIPManagement_ManageNetwork
+                            *COM*:00000001 HaveIPConfiguration
+                            *COM*:00000004 ConnectionTimer
+                            *COM*:00000004 ARPTimer
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccPjHi4y.s:309    .text.uIPManagement_Init:00000000 uIPManagement_Init
+                            *COM*:00000006 MACAddress
+
+UNDEFINED SYMBOLS
+uip_udp_conn
+DHCPClientApp_Callback
+uip_conn
+HTTPServerApp_Callback
+TELNETServerApp_Callback
+USB_CurrentMode
+USB_HostState
+Ethernet_RNDIS_Interface
+RNDIS_Host_IsPacketReceived
+uip_buf
+uip_len
+RNDIS_Host_ReadPacket
+uip_process
+uip_arp_out
+uip_arp_arpin
+uip_split_output
+uip_conns
+timer_expired
+timer_reset
+uip_udp_conns
+uip_arp_timer
+clock_init
+timer_set
+uip_init
+uip_arp_init
+uip_ethaddr
+DHCPClientApp_Init
+HTTPServerApp_Init
+TELNETServerApp_Init
+__do_clear_bss

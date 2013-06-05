@@ -1,0 +1,390 @@
+   1               		.file	"SoftUART.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.SoftUART_Init,"ax",@progbits
+  17               	.global	SoftUART_Init
+  19               	SoftUART_Init:
+  20               	.LFB128:
+  21               	.LSM0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LSM1:
+  25 0000 599A      		sbi 43-32,1
+  26               	.LSM2:
+  27 0002 519A      		sbi 42-32,1
+  28               	.LSM3:
+  29 0004 589A      		sbi 43-32,0
+  30               	.LSM4:
+  31 0006 82E0      		ldi r24,lo8(2)
+  32 0008 8093 6900 		sts 105,r24
+  33               	.LSM5:
+  34 000c 81E0      		ldi r24,lo8(1)
+  35 000e 8DBB      		out 61-32,r24
+  36               	.LBB49:
+  37               	.LBB50:
+  38               	.LSM6:
+  39 0010 80E4      		ldi r24,lo8(832)
+  40 0012 93E0      		ldi r25,hi8(832)
+  41 0014 9093 8700 		sts (134)+1,r25
+  42 0018 8093 8600 		sts 134,r24
+  43               	.LSM7:
+  44 001c 9093 9700 		sts (150)+1,r25
+  45 0020 8093 9600 		sts 150,r24
+  46               	.LBE50:
+  47               	.LBE49:
+  48               	.LSM8:
+  49 0024 80E2      		ldi r24,lo8(32)
+  50 0026 8093 6F00 		sts 111,r24
+  51               	.LSM9:
+  52 002a 8093 7100 		sts 113,r24
+  53               	.LSM10:
+  54 002e 89E1      		ldi r24,lo8(25)
+  55 0030 8093 9100 		sts 145,r24
+  56               	/* epilogue start */
+  57               	.LSM11:
+  58 0034 0895      		ret
+  59               	.LFE128:
+  61               		.section	.text.__vector_1,"ax",@progbits
+  62               	.global	__vector_1
+  64               	__vector_1:
+  65               	.LFB129:
+  66               	.LSM12:
+  67 0000 1F92      		push __zero_reg__
+  68 0002 0F92      		push r0
+  69 0004 0FB6      		in r0,__SREG__
+  70 0006 0F92      		push r0
+  71 0008 1124      		clr __zero_reg__
+  72 000a 8F93      		push r24
+  73               	/* prologue: Signal */
+  74               	/* frame size = 0 */
+  75               	.LSM13:
+  76 000c 88E0      		ldi r24,lo8(8)
+  77 000e 8093 0000 		sts RX_BitsRemaining,r24
+  78               	.LSM14:
+  79 0012 1092 8500 		sts (132)+1,__zero_reg__
+  80 0016 1092 8400 		sts 132,__zero_reg__
+  81               	.LSM15:
+  82 001a 4899      		sbic 41-32,0
+  83 001c 00C0      		rjmp .L5
+  84               	.LSM16:
+  85 001e 1DBA      		out 61-32,__zero_reg__
+  86               	.LSM17:
+  87 0020 89E1      		ldi r24,lo8(25)
+  88 0022 8093 8100 		sts 129,r24
+  89               	.L5:
+  90               	/* epilogue start */
+  91               	.LSM18:
+  92 0026 8F91      		pop r24
+  93 0028 0F90      		pop r0
+  94 002a 0FBE      		out __SREG__,r0
+  95 002c 0F90      		pop r0
+  96 002e 1F90      		pop __zero_reg__
+  97 0030 1895      		reti
+  98               	.LFE129:
+ 100               		.section	.text.__vector_16,"ax",@progbits
+ 101               	.global	__vector_16
+ 103               	__vector_16:
+ 104               	.LFB130:
+ 105               	.LSM19:
+ 106 0000 1F92      		push __zero_reg__
+ 107 0002 0F92      		push r0
+ 108 0004 0FB6      		in r0,__SREG__
+ 109 0006 0F92      		push r0
+ 110 0008 0BB6      		in r0,91-32
+ 111 000a 0F92      		push r0
+ 112 000c 1124      		clr __zero_reg__
+ 113 000e 2F93      		push r18
+ 114 0010 8F93      		push r24
+ 115 0012 9F93      		push r25
+ 116 0014 EF93      		push r30
+ 117 0016 FF93      		push r31
+ 118               	/* prologue: Signal */
+ 119               	/* frame size = 0 */
+ 120               	.LSM20:
+ 121 0018 29B1      		in r18,41-32
+ 122               	.LVL0:
+ 123 001a 2170      		andi r18,lo8(1)
+ 124               	.LSM21:
+ 125 001c 9091 0000 		lds r25,RX_BitsRemaining
+ 126 0020 9923      		tst r25
+ 127 0022 01F0      		breq .L7
+ 128               	.LSM22:
+ 129 0024 8091 0000 		lds r24,RX_Data
+ 130 0028 8695      		lsr r24
+ 131 002a 8093 0000 		sts RX_Data,r24
+ 132               	.LSM23:
+ 133 002e 9150      		subi r25,lo8(-(-1))
+ 134 0030 9093 0000 		sts RX_BitsRemaining,r25
+ 135               	.LSM24:
+ 136 0034 2223      		tst r18
+ 137 0036 01F0      		breq .L10
+ 138               	.LSM25:
+ 139 0038 8068      		ori r24,lo8(-128)
+ 140 003a 8093 0000 		sts RX_Data,r24
+ 141 003e 00C0      		rjmp .L10
+ 142               	.L7:
+ 143               	.LSM26:
+ 144 0040 1092 8100 		sts 129,__zero_reg__
+ 145               	.LSM27:
+ 146 0044 81E0      		ldi r24,lo8(1)
+ 147 0046 8CBB      		out 60-32,r24
+ 148               	.LSM28:
+ 149 0048 8DBB      		out 61-32,r24
+ 150               	.LSM29:
+ 151 004a 2223      		tst r18
+ 152 004c 01F0      		breq .L10
+ 153               	.LBB51:
+ 154               	.LBB52:
+ 155               	.LSM30:
+ 156 004e E091 0000 		lds r30,UARTtoUSB_Buffer+255
+ 157 0052 F091 0000 		lds r31,(UARTtoUSB_Buffer+255)+1
+ 158 0056 8091 0000 		lds r24,RX_Data
+ 159 005a 8083      		st Z,r24
+ 160               	.LSM31:
+ 161 005c E091 0000 		lds r30,UARTtoUSB_Buffer+255
+ 162 0060 F091 0000 		lds r31,(UARTtoUSB_Buffer+255)+1
+ 163 0064 CF01      		movw r24,r30
+ 164 0066 0196      		adiw r24,1
+ 165 0068 9093 0000 		sts (UARTtoUSB_Buffer+255)+1,r25
+ 166 006c 8093 0000 		sts UARTtoUSB_Buffer+255,r24
+ 167 0070 8050      		subi r24,lo8(UARTtoUSB_Buffer+255)
+ 168 0072 9040      		sbci r25,hi8(UARTtoUSB_Buffer+255)
+ 169               	.LVL1:
+ 170 0074 01F4      		brne .L9
+ 171               	.LSM32:
+ 172 0076 80E0      		ldi r24,lo8(UARTtoUSB_Buffer)
+ 173 0078 90E0      		ldi r25,hi8(UARTtoUSB_Buffer)
+ 174 007a 9283      		std Z+2,r25
+ 175 007c 8183      		std Z+1,r24
+ 176               	.L9:
+ 177               	.LBB53:
+ 178               	.LSM33:
+ 179 007e 9FB7      		in r25,__SREG__
+ 180               	.LBB54:
+ 181               	.LBB55:
+ 182               	.LSM34:
+ 183               	/* #APP */
+ 184               	 ;  50 "/usr/local/CrossPack-AVR-20100115/lib/gcc/avr/4.3.3/../../../../avr/include/util/atomic.h" 
+ 185 0080 F894      		cli
+ 186               	 ;  0 "" 2
+ 187               	/* #NOAPP */
+ 188               	.LBE55:
+ 189               	.LBE54:
+ 190               	.LSM35:
+ 191 0082 8091 0000 		lds r24,UARTtoUSB_Buffer+259
+ 192 0086 8F5F      		subi r24,lo8(-(1))
+ 193 0088 8093 0000 		sts UARTtoUSB_Buffer+259,r24
+ 194               	.LBB56:
+ 195               	.LBB57:
+ 196               	.LSM36:
+ 197 008c 9FBF      		out __SREG__,r25
+ 198               	.LSM37:
+ 199               	.LVL2:
+ 200               	.L10:
+ 201               	/* epilogue start */
+ 202               	.LBE57:
+ 203               	.LBE56:
+ 204               	.LBE53:
+ 205               	.LBE52:
+ 206               	.LBE51:
+ 207               	.LSM38:
+ 208 008e FF91      		pop r31
+ 209 0090 EF91      		pop r30
+ 210 0092 9F91      		pop r25
+ 211 0094 8F91      		pop r24
+ 212 0096 2F91      		pop r18
+ 213               	.LVL3:
+ 214 0098 0F90      		pop r0
+ 215 009a 0BBE      		out 91-32,r0
+ 216 009c 0F90      		pop r0
+ 217 009e 0FBE      		out __SREG__,r0
+ 218 00a0 0F90      		pop r0
+ 219 00a2 1F90      		pop __zero_reg__
+ 220 00a4 1895      		reti
+ 221               	.LFE130:
+ 223               		.section	.text.__vector_31,"ax",@progbits
+ 224               	.global	__vector_31
+ 226               	__vector_31:
+ 227               	.LFB131:
+ 228               	.LSM39:
+ 229 0000 1F92      		push __zero_reg__
+ 230 0002 0F92      		push r0
+ 231 0004 0FB6      		in r0,__SREG__
+ 232 0006 0F92      		push r0
+ 233 0008 0BB6      		in r0,91-32
+ 234 000a 0F92      		push r0
+ 235 000c 1124      		clr __zero_reg__
+ 236 000e 2F93      		push r18
+ 237 0010 8F93      		push r24
+ 238 0012 9F93      		push r25
+ 239 0014 EF93      		push r30
+ 240 0016 FF93      		push r31
+ 241               	/* prologue: Signal */
+ 242               	/* frame size = 0 */
+ 243               	.LSM40:
+ 244 0018 9091 0000 		lds r25,TX_BitsRemaining
+ 245 001c 9923      		tst r25
+ 246 001e 01F0      		breq .L12
+ 247               	.LSM41:
+ 248 0020 8091 0000 		lds r24,TX_Data
+ 249 0024 80FF      		sbrs r24,0
+ 250 0026 00C0      		rjmp .L13
+ 251               	.LSM42:
+ 252 0028 5998      		cbi 43-32,1
+ 253 002a 00C0      		rjmp .L14
+ 254               	.L13:
+ 255               	.LSM43:
+ 256 002c 599A      		sbi 43-32,1
+ 257               	.L14:
+ 258               	.LSM44:
+ 259 002e 8695      		lsr r24
+ 260 0030 8093 0000 		sts TX_Data,r24
+ 261               	.LSM45:
+ 262 0034 9150      		subi r25,lo8(-(-1))
+ 263 0036 9093 0000 		sts TX_BitsRemaining,r25
+ 264 003a 00C0      		rjmp .L17
+ 265               	.L12:
+ 266               	.LSM46:
+ 267 003c 8091 0000 		lds r24,RX_BitsRemaining
+ 268 0040 8823      		tst r24
+ 269 0042 01F4      		brne .L17
+ 270               	.LBB58:
+ 271               	.LBB59:
+ 272               	.LBB60:
+ 273               	.LBB61:
+ 274               	.LBB62:
+ 275               	.LSM47:
+ 276 0044 8FB7      		in r24,__SREG__
+ 277               	.LBB63:
+ 278               	.LBB64:
+ 279               	.LSM48:
+ 280               	/* #APP */
+ 281               	 ;  50 "/usr/local/CrossPack-AVR-20100115/lib/gcc/avr/4.3.3/../../../../avr/include/util/atomic.h" 
+ 282 0046 F894      		cli
+ 283               	 ;  0 "" 2
+ 284               	/* #NOAPP */
+ 285               	.LBE64:
+ 286               	.LBE63:
+ 287               	.LSM49:
+ 288 0048 9091 0000 		lds r25,USBtoUART_Buffer+259
+ 289               	.LVL4:
+ 290               	.LBB65:
+ 291               	.LBB66:
+ 292               	.LSM50:
+ 293 004c 8FBF      		out __SREG__,r24
+ 294               	.LSM51:
+ 295               	.LBE66:
+ 296               	.LBE65:
+ 297               	.LBE62:
+ 298               	.LBE61:
+ 299               	.LBE60:
+ 300               	.LBE59:
+ 301               	.LBE58:
+ 302               	.LSM52:
+ 303 004e 9923      		tst r25
+ 304 0050 01F0      		breq .L17
+ 305               	.LSM53:
+ 306 0052 5998      		cbi 43-32,1
+ 307               	.LBB67:
+ 308               	.LBB68:
+ 309               	.LSM54:
+ 310 0054 E091 0000 		lds r30,USBtoUART_Buffer+257
+ 311 0058 F091 0000 		lds r31,(USBtoUART_Buffer+257)+1
+ 312 005c 2191      		ld r18,Z+
+ 313               	.LVL5:
+ 314               	.LSM55:
+ 315 005e F093 0000 		sts (USBtoUART_Buffer+257)+1,r31
+ 316 0062 E093 0000 		sts USBtoUART_Buffer+257,r30
+ 317 0066 E050      		subi r30,lo8(USBtoUART_Buffer+255)
+ 318 0068 F040      		sbci r31,hi8(USBtoUART_Buffer+255)
+ 319 006a 01F4      		brne .L16
+ 320               	.LSM56:
+ 321 006c 80E0      		ldi r24,lo8(USBtoUART_Buffer)
+ 322 006e 90E0      		ldi r25,hi8(USBtoUART_Buffer)
+ 323 0070 9093 0000 		sts (USBtoUART_Buffer+257)+1,r25
+ 324 0074 8093 0000 		sts USBtoUART_Buffer+257,r24
+ 325               	.L16:
+ 326               	.LBB69:
+ 327               	.LSM57:
+ 328 0078 8FB7      		in r24,__SREG__
+ 329               	.LBB70:
+ 330               	.LBB71:
+ 331               	.LSM58:
+ 332               	/* #APP */
+ 333               	 ;  50 "/usr/local/CrossPack-AVR-20100115/lib/gcc/avr/4.3.3/../../../../avr/include/util/atomic.h" 
+ 334 007a F894      		cli
+ 335               	 ;  0 "" 2
+ 336               	/* #NOAPP */
+ 337               	.LBE71:
+ 338               	.LBE70:
+ 339               	.LSM59:
+ 340 007c 9091 0000 		lds r25,USBtoUART_Buffer+259
+ 341               	.LVL6:
+ 342 0080 9150      		subi r25,lo8(-(-1))
+ 343 0082 9093 0000 		sts USBtoUART_Buffer+259,r25
+ 344               	.LBB72:
+ 345               	.LBB73:
+ 346               	.LSM60:
+ 347 0086 8FBF      		out __SREG__,r24
+ 348               	.LSM61:
+ 349               	.LBE73:
+ 350               	.LBE72:
+ 351               	.LBE69:
+ 352               	.LBE68:
+ 353               	.LBE67:
+ 354               	.LSM62:
+ 355 0088 2095      		com r18
+ 356 008a 2093 0000 		sts TX_Data,r18
+ 357               	.LSM63:
+ 358 008e 89E0      		ldi r24,lo8(9)
+ 359 0090 8093 0000 		sts TX_BitsRemaining,r24
+ 360               	.LVL7:
+ 361               	.L17:
+ 362               	/* epilogue start */
+ 363               	.LSM64:
+ 364 0094 FF91      		pop r31
+ 365 0096 EF91      		pop r30
+ 366 0098 9F91      		pop r25
+ 367               	.LVL8:
+ 368 009a 8F91      		pop r24
+ 369 009c 2F91      		pop r18
+ 370               	.LVL9:
+ 371 009e 0F90      		pop r0
+ 372 00a0 0BBE      		out 91-32,r0
+ 373 00a2 0F90      		pop r0
+ 374 00a4 0FBE      		out __SREG__,r0
+ 375 00a6 0F90      		pop r0
+ 376 00a8 1F90      		pop __zero_reg__
+ 377 00aa 1895      		reti
+ 378               	.LFE131:
+ 380               		.lcomm TX_BitsRemaining,1
+ 381               		.lcomm TX_Data,1
+ 382               		.lcomm RX_BitsRemaining,1
+ 383               		.lcomm RX_Data,1
+ 432               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 SoftUART.c
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGeO7Ly.s:2      *ABS*:0000003f __SREG__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGeO7Ly.s:3      *ABS*:0000003e __SP_H__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGeO7Ly.s:4      *ABS*:0000003d __SP_L__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGeO7Ly.s:5      *ABS*:00000034 __CCP__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGeO7Ly.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGeO7Ly.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGeO7Ly.s:19     .text.SoftUART_Init:00000000 SoftUART_Init
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGeO7Ly.s:64     .text.__vector_1:00000000 __vector_1
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGeO7Ly.s:381    .bss:00000002 RX_BitsRemaining
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGeO7Ly.s:103    .text.__vector_16:00000000 __vector_16
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGeO7Ly.s:382    .bss:00000003 RX_Data
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGeO7Ly.s:226    .text.__vector_31:00000000 __vector_31
+                             .bss:00000000 TX_BitsRemaining
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGeO7Ly.s:380    .bss:00000001 TX_Data
+
+UNDEFINED SYMBOLS
+UARTtoUSB_Buffer
+USBtoUART_Buffer
+__do_clear_bss

@@ -1,0 +1,57 @@
+   1               		.file	"USBTask.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.USB_USBTask,"ax",@progbits
+  17               	.global	USB_USBTask
+  19               	USB_USBTask:
+  20               	.LFB82:
+  21               	.LSM0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LBB18:
+  25               	.LBB19:
+  26               	.LSM1:
+  27 0000 8EB3      		in r24,62-32
+  28 0002 8823      		tst r24
+  29 0004 01F0      		breq .L3
+  30               	.LBB20:
+  31               	.LBB21:
+  32               	.LBB22:
+  33               	.LSM2:
+  34 0006 8091 E800 		lds r24,232
+  35               	.LBE22:
+  36               	.LBE21:
+  37               	.LSM3:
+  38 000a 83FF      		sbrs r24,3
+  39 000c 00C0      		rjmp .L3
+  40               	.LSM4:
+  41 000e 0E94 0000 		call USB_Device_ProcessControlRequest
+  42               	.L3:
+  43 0012 0895      		ret
+  44               	.LBE20:
+  45               	.LBE19:
+  46               	.LBE18:
+  47               	.LFE82:
+  49               		.comm USB_IsInitialized,1,1
+  50               		.comm USB_ControlRequest,8,1
+  75               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 USBTask.c
+     /tmp/ccklHaKU.s:2      *ABS*:0000003f __SREG__
+     /tmp/ccklHaKU.s:3      *ABS*:0000003e __SP_H__
+     /tmp/ccklHaKU.s:4      *ABS*:0000003d __SP_L__
+     /tmp/ccklHaKU.s:5      *ABS*:00000034 __CCP__
+     /tmp/ccklHaKU.s:6      *ABS*:00000000 __tmp_reg__
+     /tmp/ccklHaKU.s:7      *ABS*:00000001 __zero_reg__
+     /tmp/ccklHaKU.s:19     .text.USB_USBTask:00000000 USB_USBTask
+                            *COM*:00000001 USB_IsInitialized
+                            *COM*:00000008 USB_ControlRequest
+
+UNDEFINED SYMBOLS
+USB_Device_ProcessControlRequest
+__do_clear_bss

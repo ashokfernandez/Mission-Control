@@ -1,0 +1,268 @@
+   1               		.file	"V2ProtocolParams.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.V2Params_GetParamFromTable,"ax",@progbits
+  18               	V2Params_GetParamFromTable:
+  19               	.LFB119:
+  20               	.LSM0:
+  21               	.LVL0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24 0000 982F      		mov r25,r24
+  25               	.LSM1:
+  26 0002 E0E0      		ldi r30,lo8(ParameterTable)
+  27 0004 F0E0      		ldi r31,hi8(ParameterTable)
+  28               	.LVL1:
+  29               	.L4:
+  30               	.LBB4:
+  31               	.LSM2:
+  32 0006 8081      		ld r24,Z
+  33 0008 9817      		cp r25,r24
+  34 000a 01F0      		breq .L2
+  35               	.LSM3:
+  36 000c 80E0      		ldi r24,hi8(ParameterTable+27)
+  37 000e E030      		cpi r30,lo8(ParameterTable+27)
+  38 0010 F807      		cpc r31,r24
+  39 0012 01F0      		breq .L3
+  40               	.LSM4:
+  41 0014 3396      		adiw r30,3
+  42 0016 00C0      		rjmp .L4
+  43               	.L3:
+  44 0018 E0E0      		ldi r30,lo8(0)
+  45 001a F0E0      		ldi r31,hi8(0)
+  46               	.L2:
+  47               	.LBE4:
+  48               	.LSM5:
+  49 001c CF01      		movw r24,r30
+  50               	.LVL2:
+  51               	/* epilogue start */
+  52 001e 0895      		ret
+  53               	.LFE119:
+  55               		.section	.text.V2Params_GetParameterValue,"ax",@progbits
+  56               	.global	V2Params_GetParameterValue
+  58               	V2Params_GetParameterValue:
+  59               	.LFB117:
+  60               	.LSM6:
+  61               	.LVL3:
+  62               	/* prologue: function */
+  63               	/* frame size = 0 */
+  64               	.LSM7:
+  65 0000 0E94 0000 		call V2Params_GetParamFromTable
+  66               	.LVL4:
+  67 0004 FC01      		movw r30,r24
+  68               	.LVL5:
+  69               	.LSM8:
+  70 0006 0097      		sbiw r24,0
+  71 0008 01F4      		brne .L7
+  72               	.LVL6:
+  73 000a 80E0      		ldi r24,lo8(0)
+  74               	.LVL7:
+  75 000c 0895      		ret
+  76               	.LVL8:
+  77               	.L7:
+  78               	.LSM9:
+  79 000e 8281      		ldd r24,Z+2
+  80               	.LVL9:
+  81               	.LSM10:
+  82 0010 0895      		ret
+  83               	.LFE117:
+  85               		.section	.text.V2Params_GetParameterPrivileges,"ax",@progbits
+  86               	.global	V2Params_GetParameterPrivileges
+  88               	V2Params_GetParameterPrivileges:
+  89               	.LFB116:
+  90               	.LSM11:
+  91               	.LVL10:
+  92               	/* prologue: function */
+  93               	/* frame size = 0 */
+  94               	.LSM12:
+  95 0000 0E94 0000 		call V2Params_GetParamFromTable
+  96               	.LVL11:
+  97 0004 FC01      		movw r30,r24
+  98               	.LVL12:
+  99               	.LSM13:
+ 100 0006 0097      		sbiw r24,0
+ 101 0008 01F4      		brne .L11
+ 102               	.LVL13:
+ 103 000a 80E0      		ldi r24,lo8(0)
+ 104               	.LVL14:
+ 105 000c 0895      		ret
+ 106               	.LVL15:
+ 107               	.L11:
+ 108               	.LSM14:
+ 109 000e 8181      		ldd r24,Z+1
+ 110               	.LVL16:
+ 111               	.LSM15:
+ 112 0010 0895      		ret
+ 113               	.LFE116:
+ 115               		.section	.text.V2Params_UpdateParamValues,"ax",@progbits
+ 116               	.global	V2Params_UpdateParamValues
+ 118               	V2Params_UpdateParamValues:
+ 119               	.LFB115:
+ 120               	.LSM16:
+ 121               	/* prologue: function */
+ 122               	/* frame size = 0 */
+ 123               	.LSM17:
+ 124 0000 84E9      		ldi r24,lo8(-108)
+ 125 0002 0E94 0000 		call V2Params_GetParamFromTable
+ 126               	.LBB5:
+ 127               	.LBB6:
+ 128               	.LSM18:
+ 129 0006 EAE7      		ldi r30,lo8(122)
+ 130 0008 F0E0      		ldi r31,hi8(122)
+ 131 000a 2081      		ld r18,Z
+ 132 000c 2061      		ori r18,lo8(16)
+ 133 000e 2083      		st Z,r18
+ 134               	.LSM19:
+ 135 0010 2091 7800 		lds r18,120
+ 136 0014 3091 7900 		lds r19,(120)+1
+ 137               	.LBE6:
+ 138               	.LBE5:
+ 139               	.LSM20:
+ 140 0018 A901      		movw r20,r18
+ 141 001a 76E0      		ldi r23,6
+ 142 001c 440F      	1:	lsl r20
+ 143 001e 551F      		rol r21
+ 144 0020 7A95      		dec r23
+ 145 0022 01F4      		brne 1b
+ 146 0024 220F      		lsl r18
+ 147 0026 331F      		rol r19
+ 148 0028 420F      		add r20,r18
+ 149 002a 531F      		adc r21,r19
+ 150 002c 252F      		mov r18,r21
+ 151 002e 2695      		lsr r18
+ 152 0030 2695      		lsr r18
+ 153 0032 FC01      		movw r30,r24
+ 154 0034 2283      		std Z+2,r18
+ 155               	/* epilogue start */
+ 156               	.LSM21:
+ 157 0036 0895      		ret
+ 158               	.LFE115:
+ 160               		.section	.text.V2Params_SetParameterValue,"ax",@progbits
+ 161               	.global	V2Params_SetParameterValue
+ 163               	V2Params_SetParameterValue:
+ 164               	.LFB118:
+ 165               	.LSM22:
+ 166               	.LVL17:
+ 167 0000 0F93      		push r16
+ 168 0002 1F93      		push r17
+ 169               	/* prologue: function */
+ 170               	/* frame size = 0 */
+ 171 0004 182F      		mov r17,r24
+ 172 0006 062F      		mov r16,r22
+ 173               	.LSM23:
+ 174 0008 0E94 0000 		call V2Params_GetParamFromTable
+ 175               	.LVL18:
+ 176 000c FC01      		movw r30,r24
+ 177               	.LVL19:
+ 178               	.LSM24:
+ 179 000e 0097      		sbiw r24,0
+ 180 0010 01F0      		breq .L18
+ 181               	.LVL20:
+ 182               	.LSM25:
+ 183 0012 0283      		std Z+2,r16
+ 184               	.LSM26:
+ 185 0014 1E39      		cpi r17,lo8(-98)
+ 186 0016 01F4      		brne .L18
+ 187               	.LVL21:
+ 188               	.LSM27:
+ 189 0018 80E0      		ldi r24,lo8(EEPROM_Rest_Polarity)
+ 190 001a 90E0      		ldi r25,hi8(EEPROM_Rest_Polarity)
+ 191 001c 602F      		mov r22,r16
+ 192 001e 0E94 0000 		call __eeupd_byte_usb1287
+ 193               	.LVL22:
+ 194               	.L18:
+ 195               	/* epilogue start */
+ 196               	.LSM28:
+ 197 0022 1F91      		pop r17
+ 198               	.LVL23:
+ 199 0024 0F91      		pop r16
+ 200               	.LVL24:
+ 201 0026 0895      		ret
+ 202               	.LFE118:
+ 204               		.section	.text.V2Params_LoadNonVolatileParamValues,"ax",@progbits
+ 205               	.global	V2Params_LoadNonVolatileParamValues
+ 207               	V2Params_LoadNonVolatileParamValues:
+ 208               	.LFB114:
+ 209               	.LSM29:
+ 210 0000 0F93      		push r16
+ 211 0002 1F93      		push r17
+ 212               	/* prologue: function */
+ 213               	/* frame size = 0 */
+ 214               	.LSM30:
+ 215 0004 8EE9      		ldi r24,lo8(-98)
+ 216 0006 0E94 0000 		call V2Params_GetParamFromTable
+ 217 000a 8C01      		movw r16,r24
+ 218 000c 80E0      		ldi r24,lo8(EEPROM_Rest_Polarity)
+ 219 000e 90E0      		ldi r25,hi8(EEPROM_Rest_Polarity)
+ 220 0010 0E94 0000 		call __eerd_byte_usb1287
+ 221 0014 F801      		movw r30,r16
+ 222 0016 8283      		std Z+2,r24
+ 223               	/* epilogue start */
+ 224               	.LSM31:
+ 225 0018 1F91      		pop r17
+ 226 001a 0F91      		pop r16
+ 227 001c 0895      		ret
+ 228               	.LFE114:
+ 230               	.global	EEPROM_Rest_Polarity
+ 231               		.section	.eeprom,"aw",@progbits
+ 234               	EEPROM_Rest_Polarity:
+ 235 0000 00        		.skip 1,0
+ 236               		.data
+ 239               	ParameterTable:
+ 240 0000 80        		.byte	-128
+ 241 0001 01        		.byte	1
+ 242 0002 00        		.byte	0
+ 243 0003 81        		.byte	-127
+ 244 0004 01        		.byte	1
+ 245 0005 00        		.byte	0
+ 246 0006 90        		.byte	-112
+ 247 0007 01        		.byte	1
+ 248 0008 00        		.byte	0
+ 249 0009 91        		.byte	-111
+ 250 000a 01        		.byte	1
+ 251 000b 01        		.byte	1
+ 252 000c 92        		.byte	-110
+ 253 000d 01        		.byte	1
+ 254 000e 0D        		.byte	13
+ 255 000f 94        		.byte	-108
+ 256 0010 01        		.byte	1
+ 257 0011 32        		.byte	50
+ 258 0012 98        		.byte	-104
+ 259 0013 03        		.byte	3
+ 260 0014 06        		.byte	6
+ 261 0015 9E        		.byte	-98
+ 262 0016 02        		.byte	2
+ 263 0017 01        		.byte	1
+ 264 0018 A1        		.byte	-95
+ 265 0019 01        		.byte	1
+ 266 001a 00        		.byte	0
+ 267 001b A4        		.byte	-92
+ 268 001c 02        		.byte	2
+ 269 001d 00        		.byte	0
+ 334               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 V2ProtocolParams.c
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccKmbtjZ.s:2      *ABS*:0000003f __SREG__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccKmbtjZ.s:3      *ABS*:0000003e __SP_H__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccKmbtjZ.s:4      *ABS*:0000003d __SP_L__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccKmbtjZ.s:5      *ABS*:00000034 __CCP__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccKmbtjZ.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccKmbtjZ.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccKmbtjZ.s:18     .text.V2Params_GetParamFromTable:00000000 V2Params_GetParamFromTable
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccKmbtjZ.s:239    .data:00000000 ParameterTable
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccKmbtjZ.s:58     .text.V2Params_GetParameterValue:00000000 V2Params_GetParameterValue
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccKmbtjZ.s:88     .text.V2Params_GetParameterPrivileges:00000000 V2Params_GetParameterPrivileges
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccKmbtjZ.s:118    .text.V2Params_UpdateParamValues:00000000 V2Params_UpdateParamValues
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccKmbtjZ.s:163    .text.V2Params_SetParameterValue:00000000 V2Params_SetParameterValue
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccKmbtjZ.s:234    .eeprom:00000000 EEPROM_Rest_Polarity
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccKmbtjZ.s:207    .text.V2Params_LoadNonVolatileParamValues:00000000 V2Params_LoadNonVolatileParamValues
+
+UNDEFINED SYMBOLS
+__eeupd_byte_usb1287
+__eerd_byte_usb1287
+__do_copy_data

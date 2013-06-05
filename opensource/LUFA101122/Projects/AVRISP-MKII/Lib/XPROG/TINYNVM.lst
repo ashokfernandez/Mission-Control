@@ -1,0 +1,492 @@
+   1               		.file	"TINYNVM.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.TINYNVM_SendWriteNVMRegister,"ax",@progbits
+  18               	TINYNVM_SendWriteNVMRegister:
+  19               	.LFB116:
+  20               	.LSM0:
+  21               	.LVL0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24 0000 282F      		mov r18,r24
+  25               	.LSM1:
+  26 0002 8F70      		andi r24,lo8(15)
+  27               	.LVL1:
+  28 0004 8069      		ori r24,lo8(-112)
+  29 0006 30E0      		ldi r19,lo8(0)
+  30               	.LVL2:
+  31 0008 2073      		andi r18,lo8(48)
+  32 000a 3070      		andi r19,hi8(48)
+  33               	.LVL3:
+  34 000c 220F      		lsl r18
+  35 000e 331F      		rol r19
+  36               	.LVL4:
+  37 0010 822B      		or r24,r18
+  38 0012 0E94 0000 		call XPROGTarget_SendByte
+  39               	.LVL5:
+  40               	/* epilogue start */
+  41               	.LSM2:
+  42 0016 0895      		ret
+  43               	.LFE116:
+  45               		.section	.text.TINYNVM_SendPointerAddress,"ax",@progbits
+  47               	TINYNVM_SendPointerAddress:
+  48               	.LFB114:
+  49               	.LSM3:
+  50               	.LVL6:
+  51 0000 DF93      		push r29
+  52 0002 CF93      		push r28
+  53 0004 00D0      		rcall .
+  54 0006 CDB7      		in r28,__SP_L__
+  55 0008 DEB7      		in r29,__SP_H__
+  56               	/* prologue: function */
+  57               	/* frame size = 2 */
+  58 000a 9A83      		std Y+2,r25
+  59 000c 8983      		std Y+1,r24
+  60               	.LSM4:
+  61 000e 88E6      		ldi r24,lo8(104)
+  62               	.LVL7:
+  63 0010 0E94 0000 		call XPROGTarget_SendByte
+  64               	.LSM5:
+  65 0014 8981      		ldd r24,Y+1
+  66 0016 0E94 0000 		call XPROGTarget_SendByte
+  67               	.LSM6:
+  68 001a 89E6      		ldi r24,lo8(105)
+  69 001c 0E94 0000 		call XPROGTarget_SendByte
+  70               	.LSM7:
+  71 0020 FE01      		movw r30,r28
+  72 0022 3196      		adiw r30,1
+  73 0024 8181      		ldd r24,Z+1
+  74 0026 0E94 0000 		call XPROGTarget_SendByte
+  75               	/* epilogue start */
+  76               	.LSM8:
+  77 002a 0F90      		pop __tmp_reg__
+  78 002c 0F90      		pop __tmp_reg__
+  79 002e CF91      		pop r28
+  80 0030 DF91      		pop r29
+  81 0032 0895      		ret
+  82               	.LFE114:
+  84               		.section	.text.TINYNVM_WaitWhileNVMControllerBusy,"ax",@progbits
+  85               	.global	TINYNVM_WaitWhileNVMControllerBusy
+  87               	TINYNVM_WaitWhileNVMControllerBusy:
+  88               	.LFB118:
+  89               	.LSM9:
+  90               	/* prologue: function */
+  91               	/* frame size = 0 */
+  92               	.LVL8:
+  93               	.L8:
+  94               	.LBB5:
+  95               	.LSM10:
+  96 0000 2091 0000 		lds r18,XPROG_Param_NVMCSRRegAddr
+  97               	.LBB6:
+  98               	.LBB7:
+  99               	.LSM11:
+ 100 0004 822F      		mov r24,r18
+ 101 0006 8F70      		andi r24,lo8(15)
+ 102 0008 8061      		ori r24,lo8(16)
+ 103 000a 30E0      		ldi r19,lo8(0)
+ 104 000c 2073      		andi r18,lo8(48)
+ 105 000e 3070      		andi r19,hi8(48)
+ 106 0010 220F      		lsl r18
+ 107 0012 331F      		rol r19
+ 108 0014 822B      		or r24,r18
+ 109 0016 0E94 0000 		call XPROGTarget_SendByte
+ 110               	.LVL9:
+ 111               	.LBE7:
+ 112               	.LBE6:
+ 113               	.LSM12:
+ 114 001a 0E94 0000 		call XPROGTarget_ReceiveByte
+ 115 001e 982F      		mov r25,r24
+ 116               	.LVL10:
+ 117               	.LSM13:
+ 118 0020 8AB5      		in r24,74-32
+ 119 0022 8823      		tst r24
+ 120 0024 01F0      		breq .L7
+ 121               	.LSM14:
+ 122 0026 97FD      		sbrc r25,7
+ 123 0028 00C0      		rjmp .L8
+ 124 002a 81E0      		ldi r24,lo8(1)
+ 125               	.L7:
+ 126               	.LBE5:
+ 127               	.LSM15:
+ 128 002c 0895      		ret
+ 129               	.LFE118:
+ 131               		.section	.text.TINYNVM_EraseMemory,"ax",@progbits
+ 132               	.global	TINYNVM_EraseMemory
+ 134               	TINYNVM_EraseMemory:
+ 135               	.LFB123:
+ 136               	.LSM16:
+ 137               	.LVL11:
+ 138 0000 1F93      		push r17
+ 139 0002 CF93      		push r28
+ 140 0004 DF93      		push r29
+ 141               	/* prologue: function */
+ 142               	/* frame size = 0 */
+ 143 0006 182F      		mov r17,r24
+ 144 0008 EB01      		movw r28,r22
+ 145               	.LSM17:
+ 146 000a 0E94 0000 		call TINYNVM_WaitWhileNVMControllerBusy
+ 147               	.LVL12:
+ 148 000e 8823      		tst r24
+ 149 0010 01F0      		breq .L13
+ 150               	.LSM18:
+ 151 0012 8091 0000 		lds r24,XPROG_Param_NVMCMDRegAddr
+ 152 0016 0E94 0000 		call TINYNVM_SendWriteNVMRegister
+ 153               	.LSM19:
+ 154 001a 812F      		mov r24,r17
+ 155 001c 0E94 0000 		call XPROGTarget_SendByte
+ 156               	.LSM20:
+ 157 0020 CE01      		movw r24,r28
+ 158 0022 8160      		ori r24,lo8(1)
+ 159 0024 0E94 0000 		call TINYNVM_SendPointerAddress
+ 160               	.LSM21:
+ 161 0028 80E6      		ldi r24,lo8(96)
+ 162 002a 0E94 0000 		call XPROGTarget_SendByte
+ 163               	.LSM22:
+ 164 002e 80E0      		ldi r24,lo8(0)
+ 165 0030 0E94 0000 		call XPROGTarget_SendByte
+ 166               	.LSM23:
+ 167 0034 0E94 0000 		call TINYNVM_WaitWhileNVMControllerBusy
+ 168 0038 8111      		cpse r24,__zero_reg__
+ 169 003a 81E0      		ldi r24,lo8(1)
+ 170               	.L13:
+ 171               	/* epilogue start */
+ 172               	.LSM24:
+ 173 003c DF91      		pop r29
+ 174 003e CF91      		pop r28
+ 175               	.LVL13:
+ 176 0040 1F91      		pop r17
+ 177               	.LVL14:
+ 178 0042 0895      		ret
+ 179               	.LFE123:
+ 181               		.section	.text.TINYNVM_WriteMemory,"ax",@progbits
+ 182               	.global	TINYNVM_WriteMemory
+ 184               	TINYNVM_WriteMemory:
+ 185               	.LFB122:
+ 186               	.LSM25:
+ 187               	.LVL15:
+ 188 0000 EF92      		push r14
+ 189 0002 FF92      		push r15
+ 190 0004 0F93      		push r16
+ 191 0006 1F93      		push r17
+ 192 0008 CF93      		push r28
+ 193 000a DF93      		push r29
+ 194               	/* prologue: function */
+ 195               	/* frame size = 0 */
+ 196 000c 7C01      		movw r14,r24
+ 197 000e 8B01      		movw r16,r22
+ 198 0010 EA01      		movw r28,r20
+ 199               	.LSM26:
+ 200 0012 0E94 0000 		call TINYNVM_WaitWhileNVMControllerBusy
+ 201               	.LVL16:
+ 202 0016 8823      		tst r24
+ 203 0018 01F0      		breq .L17
+ 204               	.LSM27:
+ 205 001a C0FF      		sbrs r28,0
+ 206 001c 00C0      		rjmp .L18
+ 207               	.LSM28:
+ 208 001e F801      		movw r30,r16
+ 209 0020 EC0F      		add r30,r28
+ 210 0022 FD1F      		adc r31,r29
+ 211 0024 8FEF      		ldi r24,lo8(-1)
+ 212 0026 8083      		st Z,r24
+ 213 0028 2196      		adiw r28,1
+ 214               	.L18:
+ 215               	.LSM29:
+ 216 002a 8091 0000 		lds r24,XPROG_Param_NVMCMDRegAddr
+ 217 002e 0E94 0000 		call TINYNVM_SendWriteNVMRegister
+ 218               	.LSM30:
+ 219 0032 8DE1      		ldi r24,lo8(29)
+ 220 0034 0E94 0000 		call XPROGTarget_SendByte
+ 221               	.LSM31:
+ 222 0038 C701      		movw r24,r14
+ 223 003a 0E94 0000 		call TINYNVM_SendPointerAddress
+ 224 003e 00C0      		rjmp .L19
+ 225               	.L20:
+ 226               	.LSM32:
+ 227 0040 0E94 0000 		call TINYNVM_WaitWhileNVMControllerBusy
+ 228 0044 8823      		tst r24
+ 229 0046 01F0      		breq .L17
+ 230               	.LSM33:
+ 231 0048 84E6      		ldi r24,lo8(100)
+ 232 004a 0E94 0000 		call XPROGTarget_SendByte
+ 233               	.LSM34:
+ 234 004e F801      		movw r30,r16
+ 235 0050 8081      		ld r24,Z
+ 236 0052 0E94 0000 		call XPROGTarget_SendByte
+ 237               	.LSM35:
+ 238 0056 84E6      		ldi r24,lo8(100)
+ 239 0058 0E94 0000 		call XPROGTarget_SendByte
+ 240               	.LSM36:
+ 241 005c F801      		movw r30,r16
+ 242 005e 8181      		ldd r24,Z+1
+ 243               	.LSM37:
+ 244 0060 0E5F      		subi r16,lo8(-(2))
+ 245 0062 1F4F      		sbci r17,hi8(-(2))
+ 246               	.LSM38:
+ 247 0064 0E94 0000 		call XPROGTarget_SendByte
+ 248               	.LSM39:
+ 249 0068 2297      		sbiw r28,2
+ 250               	.L19:
+ 251               	.LSM40:
+ 252 006a 2097      		sbiw r28,0
+ 253 006c 01F4      		brne .L20
+ 254 006e 81E0      		ldi r24,lo8(1)
+ 255 0070 00C0      		rjmp .L21
+ 256               	.L17:
+ 257 0072 80E0      		ldi r24,lo8(0)
+ 258               	.L21:
+ 259               	/* epilogue start */
+ 260               	.LSM41:
+ 261 0074 DF91      		pop r29
+ 262 0076 CF91      		pop r28
+ 263               	.LVL17:
+ 264 0078 1F91      		pop r17
+ 265 007a 0F91      		pop r16
+ 266               	.LVL18:
+ 267 007c FF90      		pop r15
+ 268 007e EF90      		pop r14
+ 269               	.LVL19:
+ 270 0080 0895      		ret
+ 271               	.LFE122:
+ 273               		.section	.text.TINYNVM_ReadMemory,"ax",@progbits
+ 274               	.global	TINYNVM_ReadMemory
+ 276               	TINYNVM_ReadMemory:
+ 277               	.LFB121:
+ 278               	.LSM42:
+ 279               	.LVL20:
+ 280 0000 EF92      		push r14
+ 281 0002 FF92      		push r15
+ 282 0004 0F93      		push r16
+ 283 0006 1F93      		push r17
+ 284 0008 CF93      		push r28
+ 285 000a DF93      		push r29
+ 286               	/* prologue: function */
+ 287               	/* frame size = 0 */
+ 288 000c 8C01      		movw r16,r24
+ 289 000e 7B01      		movw r14,r22
+ 290 0010 EA01      		movw r28,r20
+ 291               	.LSM43:
+ 292 0012 0E94 0000 		call TINYNVM_WaitWhileNVMControllerBusy
+ 293               	.LVL21:
+ 294 0016 8823      		tst r24
+ 295 0018 01F0      		breq .L25
+ 296               	.LSM44:
+ 297 001a 8091 0000 		lds r24,XPROG_Param_NVMCMDRegAddr
+ 298 001e 0E94 0000 		call TINYNVM_SendWriteNVMRegister
+ 299               	.LSM45:
+ 300 0022 80E0      		ldi r24,lo8(0)
+ 301 0024 0E94 0000 		call XPROGTarget_SendByte
+ 302               	.LSM46:
+ 303 0028 C801      		movw r24,r16
+ 304 002a 0E94 0000 		call TINYNVM_SendPointerAddress
+ 305 002e 00C0      		rjmp .L26
+ 306               	.L28:
+ 307               	.LSM47:
+ 308 0030 84E2      		ldi r24,lo8(36)
+ 309 0032 0E94 0000 		call XPROGTarget_SendByte
+ 310               	.LSM48:
+ 311 0036 0E94 0000 		call XPROGTarget_ReceiveByte
+ 312 003a F701      		movw r30,r14
+ 313 003c 8193      		st Z+,r24
+ 314 003e 7F01      		movw r14,r30
+ 315               	.L26:
+ 316               	.LSM49:
+ 317 0040 2097      		sbiw r28,0
+ 318 0042 01F0      		breq .L27
+ 319 0044 8AB5      		in r24,74-32
+ 320 0046 2197      		sbiw r28,1
+ 321 0048 8823      		tst r24
+ 322 004a 01F4      		brne .L28
+ 323               	.L27:
+ 324               	.LSM50:
+ 325 004c 8AB5      		in r24,74-32
+ 326 004e 8111      		cpse r24,__zero_reg__
+ 327 0050 81E0      		ldi r24,lo8(1)
+ 328               	.L25:
+ 329               	/* epilogue start */
+ 330               	.LSM51:
+ 331 0052 DF91      		pop r29
+ 332 0054 CF91      		pop r28
+ 333               	.LVL22:
+ 334 0056 1F91      		pop r17
+ 335 0058 0F91      		pop r16
+ 336               	.LVL23:
+ 337 005a FF90      		pop r15
+ 338 005c EF90      		pop r14
+ 339               	.LVL24:
+ 340 005e 0895      		ret
+ 341               	.LFE121:
+ 343               		.section	.text.TINYNVM_WaitWhileNVMBusBusy,"ax",@progbits
+ 344               	.global	TINYNVM_WaitWhileNVMBusBusy
+ 346               	TINYNVM_WaitWhileNVMBusBusy:
+ 347               	.LFB117:
+ 348               	.LSM52:
+ 349               	/* prologue: function */
+ 350               	/* frame size = 0 */
+ 351               	.LVL25:
+ 352               	.L34:
+ 353               	.LBB8:
+ 354               	.LSM53:
+ 355 0000 80E8      		ldi r24,lo8(-128)
+ 356 0002 0E94 0000 		call XPROGTarget_SendByte
+ 357               	.LVL26:
+ 358               	.LSM54:
+ 359 0006 0E94 0000 		call XPROGTarget_ReceiveByte
+ 360 000a 982F      		mov r25,r24
+ 361               	.LVL27:
+ 362               	.LSM55:
+ 363 000c 8AB5      		in r24,74-32
+ 364 000e 8823      		tst r24
+ 365 0010 01F0      		breq .L33
+ 366               	.LSM56:
+ 367 0012 91FF      		sbrs r25,1
+ 368 0014 00C0      		rjmp .L34
+ 369 0016 81E0      		ldi r24,lo8(1)
+ 370               	.L33:
+ 371               	.LBE8:
+ 372               	.LSM57:
+ 373 0018 0895      		ret
+ 374               	.LFE117:
+ 376               		.section	.text.TINYNVM_DisableTPI,"ax",@progbits
+ 377               	.global	TINYNVM_DisableTPI
+ 379               	TINYNVM_DisableTPI:
+ 380               	.LFB120:
+ 381               	.LSM58:
+ 382               	/* prologue: function */
+ 383               	/* frame size = 0 */
+ 384               	.LSM59:
+ 385 0000 0E94 0000 		call TINYNVM_WaitWhileNVMBusBusy
+ 386               	.LSM60:
+ 387 0004 80EC      		ldi r24,lo8(-64)
+ 388 0006 0E94 0000 		call XPROGTarget_SendByte
+ 389               	.LSM61:
+ 390 000a 80E0      		ldi r24,lo8(0)
+ 391 000c 0E94 0000 		call XPROGTarget_SendByte
+ 392               	.LSM62:
+ 393 0010 0E94 0000 		call XPROGTarget_DisableTargetTPI
+ 394               	/* epilogue start */
+ 395               	.LSM63:
+ 396 0014 0895      		ret
+ 397               	.LFE120:
+ 399               		.section	.text.TINYNVM_EnableTPI,"ax",@progbits
+ 400               	.global	TINYNVM_EnableTPI
+ 402               	TINYNVM_EnableTPI:
+ 403               	.LFB119:
+ 404               	.LSM64:
+ 405 0000 EF92      		push r14
+ 406 0002 FF92      		push r15
+ 407 0004 0F93      		push r16
+ 408 0006 1F93      		push r17
+ 409 0008 DF93      		push r29
+ 410 000a CF93      		push r28
+ 411 000c CDB7      		in r28,__SP_L__
+ 412 000e DEB7      		in r29,__SP_H__
+ 413 0010 2897      		sbiw r28,8
+ 414 0012 0FB6      		in __tmp_reg__,__SREG__
+ 415 0014 F894      		cli
+ 416 0016 DEBF      		out __SP_H__,r29
+ 417 0018 0FBE      		out __SREG__,__tmp_reg__
+ 418 001a CDBF      		out __SP_L__,r28
+ 419               	/* prologue: function */
+ 420               	/* frame size = 8 */
+ 421               	.LSM65:
+ 422 001c 0E94 0000 		call XPROGTarget_EnableTargetTPI
+ 423               	.LSM66:
+ 424 0020 82EC      		ldi r24,lo8(-62)
+ 425 0022 0E94 0000 		call XPROGTarget_SendByte
+ 426               	.LSM67:
+ 427 0026 87E0      		ldi r24,lo8(7)
+ 428 0028 0E94 0000 		call XPROGTarget_SendByte
+ 429               	.LSM68:
+ 430 002c 80EE      		ldi r24,lo8(-32)
+ 431 002e 0E94 0000 		call XPROGTarget_SendByte
+ 432 0032 8E01      		movw r16,r28
+ 433 0034 085F      		subi r16,lo8(-(8))
+ 434 0036 1F4F      		sbci r17,hi8(-(8))
+ 435               	.LBB9:
+ 436               	.LSM69:
+ 437 0038 7E01      		movw r14,r28
+ 438 003a 0894      		sec
+ 439 003c E11C      		adc r14,__zero_reg__
+ 440 003e F11C      		adc r15,__zero_reg__
+ 441               	.L41:
+ 442 0040 D701      		movw r26,r14
+ 443 0042 E0E0      		ldi r30,lo8(C.17.3954)
+ 444 0044 F0E0      		ldi r31,hi8(C.17.3954)
+ 445 0046 88E0      		ldi r24,lo8(8)
+ 446               	.L40:
+ 447 0048 0190      		ld r0,Z+
+ 448 004a 0D92      		st X+,r0
+ 449 004c 8150      		subi r24,lo8(-(-1))
+ 450 004e 01F4      		brne .L40
+ 451 0050 F801      		movw r30,r16
+ 452 0052 8081      		ld r24,Z
+ 453 0054 0E94 0000 		call XPROGTarget_SendByte
+ 454 0058 0150      		subi r16,lo8(-(-1))
+ 455 005a 1040      		sbci r17,hi8(-(-1))
+ 456               	.LSM70:
+ 457 005c 0C17      		cp r16,r28
+ 458 005e 1D07      		cpc r17,r29
+ 459 0060 01F4      		brne .L41
+ 460               	.LBE9:
+ 461               	.LSM71:
+ 462 0062 0E94 0000 		call TINYNVM_WaitWhileNVMBusBusy
+ 463               	/* epilogue start */
+ 464               	.LSM72:
+ 465 0066 2896      		adiw r28,8
+ 466 0068 0FB6      		in __tmp_reg__,__SREG__
+ 467 006a F894      		cli
+ 468 006c DEBF      		out __SP_H__,r29
+ 469 006e 0FBE      		out __SREG__,__tmp_reg__
+ 470 0070 CDBF      		out __SP_L__,r28
+ 471 0072 CF91      		pop r28
+ 472 0074 DF91      		pop r29
+ 473 0076 1F91      		pop r17
+ 474 0078 0F91      		pop r16
+ 475 007a FF90      		pop r15
+ 476 007c EF90      		pop r14
+ 477 007e 0895      		ret
+ 478               	.LFE119:
+ 480               		.data
+ 483               	C.17.3954:
+ 484 0000 12        		.byte	18
+ 485 0001 89        		.byte	-119
+ 486 0002 AB        		.byte	-85
+ 487 0003 45        		.byte	69
+ 488 0004 CD        		.byte	-51
+ 489 0005 D8        		.byte	-40
+ 490 0006 88        		.byte	-120
+ 491 0007 FF        		.byte	-1
+ 580               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 TINYNVM.c
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cchymcbu.s:2      *ABS*:0000003f __SREG__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cchymcbu.s:3      *ABS*:0000003e __SP_H__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cchymcbu.s:4      *ABS*:0000003d __SP_L__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cchymcbu.s:5      *ABS*:00000034 __CCP__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cchymcbu.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cchymcbu.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cchymcbu.s:18     .text.TINYNVM_SendWriteNVMRegister:00000000 TINYNVM_SendWriteNVMRegister
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cchymcbu.s:47     .text.TINYNVM_SendPointerAddress:00000000 TINYNVM_SendPointerAddress
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cchymcbu.s:87     .text.TINYNVM_WaitWhileNVMControllerBusy:00000000 TINYNVM_WaitWhileNVMControllerBusy
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cchymcbu.s:134    .text.TINYNVM_EraseMemory:00000000 TINYNVM_EraseMemory
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cchymcbu.s:184    .text.TINYNVM_WriteMemory:00000000 TINYNVM_WriteMemory
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cchymcbu.s:276    .text.TINYNVM_ReadMemory:00000000 TINYNVM_ReadMemory
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cchymcbu.s:346    .text.TINYNVM_WaitWhileNVMBusBusy:00000000 TINYNVM_WaitWhileNVMBusBusy
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cchymcbu.s:379    .text.TINYNVM_DisableTPI:00000000 TINYNVM_DisableTPI
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cchymcbu.s:402    .text.TINYNVM_EnableTPI:00000000 TINYNVM_EnableTPI
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cchymcbu.s:483    .data:00000000 C.17.3954
+
+UNDEFINED SYMBOLS
+XPROGTarget_SendByte
+XPROG_Param_NVMCSRRegAddr
+XPROGTarget_ReceiveByte
+XPROG_Param_NVMCMDRegAddr
+XPROGTarget_DisableTargetTPI
+XPROGTarget_EnableTargetTPI
+__do_copy_data

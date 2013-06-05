@@ -1,0 +1,444 @@
+   1               		.file	"Magstripe.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.EVENT_USB_Device_StartOfFrame,"ax",@progbits
+  17               	.global	EVENT_USB_Device_StartOfFrame
+  19               	EVENT_USB_Device_StartOfFrame:
+  20               	.LFB93:
+  21               	.LSM0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LBB18:
+  25               	.LBB19:
+  26               	.LSM1:
+  27 0000 8091 0000 		lds r24,Keyboard_HID_Interface+11
+  28 0004 9091 0000 		lds r25,(Keyboard_HID_Interface+11)+1
+  29 0008 0097      		sbiw r24,0
+  30 000a 01F0      		breq .L3
+  31               	.LSM2:
+  32 000c 0197      		sbiw r24,1
+  33 000e 9093 0000 		sts (Keyboard_HID_Interface+11)+1,r25
+  34 0012 8093 0000 		sts Keyboard_HID_Interface+11,r24
+  35               	.L3:
+  36 0016 0895      		ret
+  37               	.LBE19:
+  38               	.LBE18:
+  39               	.LFE93:
+  41               		.section	.text.CALLBACK_HID_Device_ProcessHIDReport,"ax",@progbits
+  42               	.global	CALLBACK_HID_Device_ProcessHIDReport
+  44               	CALLBACK_HID_Device_ProcessHIDReport:
+  45               	.LFB95:
+  46               	.LSM3:
+  47               	.LVL0:
+  48               	/* prologue: function */
+  49               	/* frame size = 0 */
+  50               	/* epilogue start */
+  51               	.LSM4:
+  52 0000 0895      		ret
+  53               	.LFE95:
+  55               		.section	.text.CALLBACK_HID_Device_CreateHIDReport,"ax",@progbits
+  56               	.global	CALLBACK_HID_Device_CreateHIDReport
+  58               	CALLBACK_HID_Device_CreateHIDReport:
+  59               	.LFB94:
+  60               	.LSM5:
+  61               	.LVL1:
+  62 0000 0F93      		push r16
+  63               	.LVL2:
+  64 0002 1F93      		push r17
+  65 0004 CF93      		push r28
+  66 0006 DF93      		push r29
+  67               	/* prologue: function */
+  68               	/* frame size = 0 */
+  69               	.LSM6:
+  70 0008 E901      		movw r28,r18
+  71               	.LVL3:
+  72               	.LSM7:
+  73 000a 8091 0000 		lds r24,IsKeyReleaseReport.3600
+  74               	.LVL4:
+  75 000e 91E0      		ldi r25,lo8(1)
+  76 0010 8927      		eor r24,r25
+  77 0012 8093 0000 		sts IsKeyReleaseReport.3600,r24
+  78               	.LSM8:
+  79 0016 8823      		tst r24
+  80 0018 01F4      		brne .L7
+  81 001a E091 0000 		lds r30,CurrentTrackBuffer
+  82 001e F091 0000 		lds r31,(CurrentTrackBuffer)+1
+  83 0022 80E0      		ldi r24,hi8(TrackDataBuffers+3096)
+  84 0024 E030      		cpi r30,lo8(TrackDataBuffers+3096)
+  85 0026 F807      		cpc r31,r24
+  86 0028 01F4      		brne .L8
+  87               	.L7:
+  88               	.LSM9:
+  89 002a 1A82      		std Y+2,__zero_reg__
+  90               	.LVL5:
+  91 002c 00C0      		rjmp .L9
+  92               	.LVL6:
+  93               	.L8:
+  94               	.LSM10:
+  95 002e E050      		subi r30,lo8(-(1024))
+  96 0030 FC4F      		sbci r31,hi8(-(1024))
+  97 0032 8081      		ld r24,Z
+  98 0034 9181      		ldd r25,Z+1
+  99 0036 E050      		subi r30,lo8(-(-1024))
+ 100 0038 F440      		sbci r31,hi8(-(-1024))
+ 101 003a 892B      		or r24,r25
+ 102 003c 01F4      		brne .L10
+ 103               	.LSM11:
+ 104 003e 88E2      		ldi r24,lo8(40)
+ 105 0040 8A83      		std Y+2,r24
+ 106               	.LVL7:
+ 107               	.LSM12:
+ 108 0042 8091 0000 		lds r24,CurrentTrackBuffer
+ 109 0046 9091 0000 		lds r25,(CurrentTrackBuffer)+1
+ 110 004a 885F      		subi r24,lo8(-(1032))
+ 111 004c 9B4F      		sbci r25,hi8(-(1032))
+ 112 004e 9093 0000 		sts (CurrentTrackBuffer)+1,r25
+ 113 0052 8093 0000 		sts CurrentTrackBuffer,r24
+ 114 0056 00C0      		rjmp .L9
+ 115               	.LVL8:
+ 116               	.L10:
+ 117               	.LSM13:
+ 118 0058 CF01      		movw r24,r30
+ 119 005a 0E94 0000 		call BitBuffer_GetNextBit
+ 120               	.LVL9:
+ 121 005e 8823      		tst r24
+ 122 0060 01F4      		brne .L11
+ 123 0062 87E2      		ldi r24,lo8(39)
+ 124 0064 00C0      		rjmp .L12
+ 125               	.L11:
+ 126 0066 8EE1      		ldi r24,lo8(30)
+ 127               	.L12:
+ 128 0068 8A83      		std Y+2,r24
+ 129               	.LVL10:
+ 130               	.L9:
+ 131               	.LSM14:
+ 132 006a 88E0      		ldi r24,lo8(8)
+ 133 006c 90E0      		ldi r25,hi8(8)
+ 134 006e F801      		movw r30,r16
+ 135               	.LVL11:
+ 136 0070 9183      		std Z+1,r25
+ 137 0072 8083      		st Z,r24
+ 138               	.LSM15:
+ 139 0074 80E0      		ldi r24,lo8(0)
+ 140               	/* epilogue start */
+ 141 0076 DF91      		pop r29
+ 142 0078 CF91      		pop r28
+ 143               	.LVL12:
+ 144 007a 1F91      		pop r17
+ 145 007c 0F91      		pop r16
+ 146               	.LVL13:
+ 147 007e 0895      		ret
+ 148               	.LFE94:
+ 150               		.section	.text.EVENT_USB_Device_ControlRequest,"ax",@progbits
+ 151               	.global	EVENT_USB_Device_ControlRequest
+ 153               	EVENT_USB_Device_ControlRequest:
+ 154               	.LFB92:
+ 155               	.LSM16:
+ 156               	/* prologue: function */
+ 157               	/* frame size = 0 */
+ 158               	.LSM17:
+ 159 0000 80E0      		ldi r24,lo8(Keyboard_HID_Interface)
+ 160 0002 90E0      		ldi r25,hi8(Keyboard_HID_Interface)
+ 161 0004 0E94 0000 		call HID_Device_ProcessControlRequest
+ 162               	/* epilogue start */
+ 163               	.LSM18:
+ 164 0008 0895      		ret
+ 165               	.LFE92:
+ 167               		.section	.text.EVENT_USB_Device_ConfigurationChanged,"ax",@progbits
+ 168               	.global	EVENT_USB_Device_ConfigurationChanged
+ 170               	EVENT_USB_Device_ConfigurationChanged:
+ 171               	.LFB91:
+ 172               	.LSM19:
+ 173               	/* prologue: function */
+ 174               	/* frame size = 0 */
+ 175               	.LSM20:
+ 176 0000 80E0      		ldi r24,lo8(Keyboard_HID_Interface)
+ 177 0002 90E0      		ldi r25,hi8(Keyboard_HID_Interface)
+ 178 0004 0E94 0000 		call HID_Device_ConfigureEndpoints
+ 179               	.LBB20:
+ 180               	.LBB21:
+ 181               	.LSM21:
+ 182 0008 E2EE      		ldi r30,lo8(226)
+ 183 000a F0E0      		ldi r31,hi8(226)
+ 184 000c 8081      		ld r24,Z
+ 185 000e 8460      		ori r24,lo8(4)
+ 186 0010 8083      		st Z,r24
+ 187               	/* epilogue start */
+ 188               	.LBE21:
+ 189               	.LBE20:
+ 190               	.LSM22:
+ 191 0012 0895      		ret
+ 192               	.LFE91:
+ 194               		.section	.text.ReadMagstripeData,"ax",@progbits
+ 195               	.global	ReadMagstripeData
+ 197               	ReadMagstripeData:
+ 198               	.LFB90:
+ 199               	.LSM23:
+ 200 0000 EF92      		push r14
+ 201 0002 FF92      		push r15
+ 202 0004 0F93      		push r16
+ 203 0006 1F93      		push r17
+ 204 0008 CF93      		push r28
+ 205 000a DF93      		push r29
+ 206               	/* prologue: function */
+ 207               	/* frame size = 0 */
+ 208               	.LBB22:
+ 209               	.LBB23:
+ 210               	.LSM24:
+ 211 000c 13B1      		in r17,35-32
+ 212               	.LVL14:
+ 213 000e 1095      		com r17
+ 214 0010 1F77      		andi r17,lo8(127)
+ 215 0012 20E0      		ldi r18,lo8(0)
+ 216               	.LVL15:
+ 217 0014 00C0      		rjmp .L19
+ 218               	.L22:
+ 219               	.LBE23:
+ 220               	.LBE22:
+ 221               	.LBB24:
+ 222               	.LBB25:
+ 223               	.LSM25:
+ 224 0016 2981      		ldd r18,Y+1
+ 225               	.LVL16:
+ 226               	.LSM26:
+ 227 0018 9881      		ld r25,Y
+ 228               	.LSM27:
+ 229 001a 812F      		mov r24,r17
+ 230 001c 8923      		and r24,r25
+ 231 001e 01F0      		breq .L20
+ 232 0020 9023      		and r25,r16
+ 233 0022 01F0      		breq .L20
+ 234               	.LSM28:
+ 235 0024 60E0      		ldi r22,lo8(0)
+ 236 0026 2123      		and r18,r17
+ 237 0028 01F0      		breq .L21
+ 238 002a 61E0      		ldi r22,lo8(1)
+ 239               	.L21:
+ 240 002c C701      		movw r24,r14
+ 241 002e 0E94 0000 		call BitBuffer_StoreNextBit
+ 242               	.L20:
+ 243 0032 2296      		adiw r28,2
+ 244 0034 88E0      		ldi r24,lo8(1032)
+ 245 0036 94E0      		ldi r25,hi8(1032)
+ 246 0038 E80E      		add r14,r24
+ 247 003a F91E      		adc r15,r25
+ 248               	.LBE25:
+ 249               	.LSM29:
+ 250 003c 90E0      		ldi r25,hi8(TrackInfo.3556+6)
+ 251 003e C030      		cpi r28,lo8(TrackInfo.3556+6)
+ 252 0040 D907      		cpc r29,r25
+ 253 0042 01F4      		brne .L22
+ 254               	.LBE24:
+ 255               	.LBB27:
+ 256               	.LBB28:
+ 257               	.LSM30:
+ 258 0044 83B1      		in r24,35-32
+ 259 0046 8095      		com r24
+ 260 0048 212F      		mov r18,r17
+ 261               	.LVL17:
+ 262 004a 182F      		mov r17,r24
+ 263 004c 1F77      		andi r17,lo8(127)
+ 264               	.L19:
+ 265 004e 80E0      		ldi r24,lo8(TrackDataBuffers)
+ 266 0050 90E0      		ldi r25,hi8(TrackDataBuffers)
+ 267               	.LBE28:
+ 268               	.LBE27:
+ 269               	.LSM31:
+ 270 0052 16FF      		sbrs r17,6
+ 271 0054 00C0      		rjmp .L23
+ 272 0056 C0E0      		ldi r28,lo8(TrackInfo.3556)
+ 273 0058 D0E0      		ldi r29,hi8(TrackInfo.3556)
+ 274 005a 7C01      		movw r14,r24
+ 275               	.LBB29:
+ 276               	.LBB26:
+ 277               	.LSM32:
+ 278 005c 012F      		mov r16,r17
+ 279 005e 0227      		eor r16,r18
+ 280 0060 00C0      		rjmp .L22
+ 281               	.L23:
+ 282               	.LBE26:
+ 283               	.LBE29:
+ 284               	.LSM33:
+ 285 0062 9093 0000 		sts (CurrentTrackBuffer)+1,r25
+ 286 0066 8093 0000 		sts CurrentTrackBuffer,r24
+ 287               	/* epilogue start */
+ 288               	.LSM34:
+ 289 006a DF91      		pop r29
+ 290 006c CF91      		pop r28
+ 291 006e 1F91      		pop r17
+ 292               	.LVL18:
+ 293 0070 0F91      		pop r16
+ 294 0072 FF90      		pop r15
+ 295 0074 EF90      		pop r14
+ 296 0076 0895      		ret
+ 297               	.LFE90:
+ 299               		.section	.text.SetupHardware,"ax",@progbits
+ 300               	.global	SetupHardware
+ 302               	SetupHardware:
+ 303               	.LFB89:
+ 304               	.LSM35:
+ 305               	/* prologue: function */
+ 306               	/* frame size = 0 */
+ 307               	.LSM36:
+ 308 0000 84B7      		in r24,84-32
+ 309 0002 877F      		andi r24,lo8(-9)
+ 310 0004 84BF      		out 84-32,r24
+ 311               	.LSM37:
+ 312 0006 88E1      		ldi r24,lo8(24)
+ 313               	/* #APP */
+ 314               	 ;  97 "Magstripe.c" 1
+ 315 0008 0FB6      		in __tmp_reg__, __SREG__
+ 316 000a F894      		cli
+ 317 000c 8093 6000 		sts 96, r24
+ 318 0010 1092 6000 		sts 96, __zero_reg__
+ 319 0014 0FBE      		out __SREG__,__tmp_reg__
+ 320               		
+ 321               	 ;  0 "" 2
+ 322               	/* #NOAPP */
+ 323               	.LBB30:
+ 324               	.LSM38:
+ 325 0016 80E0      		ldi r24,lo8(0)
+ 326 0018 90E0      		ldi r25,hi8(0)
+ 327 001a 20E8      		ldi r18,lo8(-128)
+ 328               	/* #APP */
+ 329               	 ;  100 "Magstripe.c" 1
+ 330 001c 0FB6      		in __tmp_reg__,__SREG__
+ 331 001e F894      		cli
+ 332 0020 2093 6100 		sts 97, r18
+ 333 0024 8093 6100 		sts 97, r24
+ 334 0028 0FBE      		out __SREG__, __tmp_reg__
+ 335               	 ;  0 "" 2
+ 336               	/* #NOAPP */
+ 337               	.LBE30:
+ 338               	.LBB31:
+ 339               	.LBB32:
+ 340               	.LSM39:
+ 341 002a 84B1      		in r24,36-32
+ 342 002c 8078      		andi r24,lo8(-128)
+ 343 002e 84B9      		out 36-32,r24
+ 344               	.LSM40:
+ 345 0030 85B1      		in r24,37-32
+ 346 0032 8F67      		ori r24,lo8(127)
+ 347 0034 85B9      		out 37-32,r24
+ 348               	.LBE32:
+ 349               	.LBE31:
+ 350               	.LSM41:
+ 351 0036 0E94 0000 		call USB_Init
+ 352               	/* epilogue start */
+ 353               	.LSM42:
+ 354 003a 0895      		ret
+ 355               	.LFE89:
+ 357               		.section	.text.main,"ax",@progbits
+ 358               	.global	main
+ 360               	main:
+ 361               	.LFB88:
+ 362               	.LSM43:
+ 363               	/* prologue: function */
+ 364               	/* frame size = 0 */
+ 365               	.LSM44:
+ 366 0000 0E94 0000 		call SetupHardware
+ 367               	.LBB33:
+ 368               	.LSM45:
+ 369 0004 80E0      		ldi r24,lo8(TrackDataBuffers)
+ 370 0006 90E0      		ldi r25,hi8(TrackDataBuffers)
+ 371 0008 0E94 0000 		call BitBuffer_Init
+ 372 000c 80E0      		ldi r24,lo8(TrackDataBuffers+1032)
+ 373 000e 90E0      		ldi r25,hi8(TrackDataBuffers+1032)
+ 374 0010 0E94 0000 		call BitBuffer_Init
+ 375 0014 80E0      		ldi r24,lo8(TrackDataBuffers+2064)
+ 376 0016 90E0      		ldi r25,hi8(TrackDataBuffers+2064)
+ 377 0018 0E94 0000 		call BitBuffer_Init
+ 378               	.LBE33:
+ 379               	.LSM46:
+ 380               	/* #APP */
+ 381               	 ;  80 "Magstripe.c" 1
+ 382 001c 7894      		sei
+ 383               	 ;  0 "" 2
+ 384               	/* #NOAPP */
+ 385               	.L30:
+ 386               	.LBB34:
+ 387               	.LBB35:
+ 388               	.LSM47:
+ 389 001e 83B1      		in r24,35-32
+ 390               	.LBE35:
+ 391               	.LBE34:
+ 392               	.LSM48:
+ 393 0020 8095      		com r24
+ 394 0022 8F77      		andi r24,lo8(127)
+ 395 0024 86FF      		sbrs r24,6
+ 396 0026 00C0      		rjmp .L29
+ 397               	.LSM49:
+ 398 0028 0E94 0000 		call ReadMagstripeData
+ 399               	.L29:
+ 400               	.LSM50:
+ 401 002c 80E0      		ldi r24,lo8(Keyboard_HID_Interface)
+ 402 002e 90E0      		ldi r25,hi8(Keyboard_HID_Interface)
+ 403 0030 0E94 0000 		call HID_Device_USBTask
+ 404               	.LSM51:
+ 405 0034 0E94 0000 		call USB_USBTask
+ 406 0038 00C0      		rjmp .L30
+ 407               	.LFE88:
+ 409               	.global	CurrentTrackBuffer
+ 410               		.data
+ 413               	CurrentTrackBuffer:
+ 414 0000 0000      		.word	TrackDataBuffers+3096
+ 415               	.global	Keyboard_HID_Interface
+ 418               	Keyboard_HID_Interface:
+ 419 0002 00        		.byte	0
+ 420 0003 01        		.byte	1
+ 421 0004 0800      		.word	8
+ 422 0006 01        		.byte	1
+ 423 0007 0000      		.word	PrevKeyboardHIDReportBuffer
+ 424 0009 08        		.byte	8
+ 425 000a 0000 0000 		.skip 5,0
+ 425      00
+ 426               		.lcomm IsKeyReleaseReport.3600,1
+ 429               	TrackInfo.3556:
+ 430 000f 01        		.byte	1
+ 431 0010 02        		.byte	2
+ 432 0011 04        		.byte	4
+ 433 0012 08        		.byte	8
+ 434 0013 10        		.byte	16
+ 435 0014 20        		.byte	32
+ 436               		.comm TrackDataBuffers,3096,1
+ 437               		.comm PrevKeyboardHIDReportBuffer,8,1
+ 518               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 Magstripe.c
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccnZUTh3.s:2      *ABS*:0000003f __SREG__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccnZUTh3.s:3      *ABS*:0000003e __SP_H__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccnZUTh3.s:4      *ABS*:0000003d __SP_L__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccnZUTh3.s:5      *ABS*:00000034 __CCP__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccnZUTh3.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccnZUTh3.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccnZUTh3.s:19     .text.EVENT_USB_Device_StartOfFrame:00000000 EVENT_USB_Device_StartOfFrame
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccnZUTh3.s:418    .data:00000002 Keyboard_HID_Interface
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccnZUTh3.s:44     .text.CALLBACK_HID_Device_ProcessHIDReport:00000000 CALLBACK_HID_Device_ProcessHIDReport
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccnZUTh3.s:58     .text.CALLBACK_HID_Device_CreateHIDReport:00000000 CALLBACK_HID_Device_CreateHIDReport
+                             .bss:00000000 IsKeyReleaseReport.3600
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccnZUTh3.s:413    .data:00000000 CurrentTrackBuffer
+                            *COM*:00000c18 TrackDataBuffers
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccnZUTh3.s:153    .text.EVENT_USB_Device_ControlRequest:00000000 EVENT_USB_Device_ControlRequest
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccnZUTh3.s:170    .text.EVENT_USB_Device_ConfigurationChanged:00000000 EVENT_USB_Device_ConfigurationChanged
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccnZUTh3.s:197    .text.ReadMagstripeData:00000000 ReadMagstripeData
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccnZUTh3.s:429    .data:0000000f TrackInfo.3556
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccnZUTh3.s:302    .text.SetupHardware:00000000 SetupHardware
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccnZUTh3.s:360    .text.main:00000000 main
+                            *COM*:00000008 PrevKeyboardHIDReportBuffer
+
+UNDEFINED SYMBOLS
+BitBuffer_GetNextBit
+HID_Device_ProcessControlRequest
+HID_Device_ConfigureEndpoints
+BitBuffer_StoreNextBit
+USB_Init
+BitBuffer_Init
+HID_Device_USBTask
+USB_USBTask
+__do_copy_data
+__do_clear_bss

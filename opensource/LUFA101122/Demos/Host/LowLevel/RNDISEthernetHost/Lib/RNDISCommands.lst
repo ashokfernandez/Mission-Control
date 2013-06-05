@@ -1,0 +1,841 @@
+   1               		.file	"RNDISCommands.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.RNDIS_GetPacketLength,"ax",@progbits
+  17               	.global	RNDIS_GetPacketLength
+  19               	RNDIS_GetPacketLength:
+  20               	.LFB134:
+  21               	.LSM0:
+  22               	.LVL0:
+  23 0000 EF92      		push r14
+  24 0002 FF92      		push r15
+  25 0004 1F93      		push r17
+  26 0006 DF93      		push r29
+  27 0008 CF93      		push r28
+  28 000a CDB7      		in r28,__SP_L__
+  29 000c DEB7      		in r29,__SP_H__
+  30 000e AC97      		sbiw r28,44
+  31 0010 0FB6      		in __tmp_reg__,__SREG__
+  32 0012 F894      		cli
+  33 0014 DEBF      		out __SP_H__,r29
+  34 0016 0FBE      		out __SREG__,__tmp_reg__
+  35 0018 CDBF      		out __SP_L__,r28
+  36               	/* prologue: function */
+  37               	/* frame size = 44 */
+  38 001a 7C01      		movw r14,r24
+  39               	.LBB18:
+  40               	.LBB19:
+  41               	.LSM1:
+  42 001c 81E0      		ldi r24,lo8(1)
+  43               	.LVL1:
+  44 001e 8093 A700 		sts 167,r24
+  45               	.LBE19:
+  46               	.LBE18:
+  47               	.LBB20:
+  48               	.LBB21:
+  49               	.LSM2:
+  50 0022 8091 AA00 		lds r24,170
+  51 0026 8F7C      		andi r24,lo8(-49)
+  52 0028 8061      		ori r24,lo8(16)
+  53 002a 8093 AA00 		sts 170,r24
+  54               	.LBE21:
+  55               	.LBE20:
+  56               	.LBB22:
+  57               	.LBB23:
+  58               	.LSM3:
+  59 002e 8091 A900 		lds r24,169
+  60 0032 8F7B      		andi r24,lo8(-65)
+  61 0034 8093 A900 		sts 169,r24
+  62               	.LBE23:
+  63               	.LBE22:
+  64               	.LBB24:
+  65               	.LBB25:
+  66               	.LSM4:
+  67 0038 8091 A600 		lds r24,166
+  68               	.LBE25:
+  69               	.LBE24:
+  70               	.LSM5:
+  71 003c 85FD      		sbrc r24,5
+  72 003e 00C0      		rjmp .L2
+  73               	.LSM6:
+  74 0040 F701      		movw r30,r14
+  75 0042 1182      		std Z+1,__zero_reg__
+  76 0044 1082      		st Z,__zero_reg__
+  77               	.LBB26:
+  78               	.LBB27:
+  79               	.LSM7:
+  80 0046 8091 A900 		lds r24,169
+  81 004a 8064      		ori r24,lo8(64)
+  82 004c 8093 A900 		sts 169,r24
+  83 0050 10E0      		ldi r17,lo8(0)
+  84               	.LVL2:
+  85 0052 00C0      		rjmp .L3
+  86               	.LVL3:
+  87               	.L2:
+  88               	.LBE27:
+  89               	.LBE26:
+  90               	.LSM8:
+  91 0054 CE01      		movw r24,r28
+  92 0056 0196      		adiw r24,1
+  93 0058 6CE2      		ldi r22,lo8(44)
+  94 005a 70E0      		ldi r23,hi8(44)
+  95 005c 0E94 0000 		call Pipe_Read_Stream_LE
+  96 0060 182F      		mov r17,r24
+  97               	.LVL4:
+  98 0062 8823      		tst r24
+  99 0064 01F4      		brne .L3
+ 100               	.LVL5:
+ 101               	.LSM9:
+ 102 0066 8D85      		ldd r24,Y+13
+ 103 0068 9E85      		ldd r25,Y+14
+ 104               	.LVL6:
+ 105 006a F701      		movw r30,r14
+ 106 006c 9183      		std Z+1,r25
+ 107 006e 8083      		st Z,r24
+ 108               	.LSM10:
+ 109 0070 8985      		ldd r24,Y+9
+ 110 0072 9A85      		ldd r25,Y+10
+ 111 0074 8497      		sbiw r24,36
+ 112 0076 0E94 0000 		call Pipe_Discard_Stream
+ 113               	.LBB28:
+ 114               	.LBB29:
+ 115               	.LSM11:
+ 116 007a 8091 A900 		lds r24,169
+ 117 007e 8064      		ori r24,lo8(64)
+ 118 0080 8093 A900 		sts 169,r24
+ 119               	.LVL7:
+ 120               	.L3:
+ 121               	.LBE29:
+ 122               	.LBE28:
+ 123               	.LSM12:
+ 124 0084 812F      		mov r24,r17
+ 125               	/* epilogue start */
+ 126 0086 AC96      		adiw r28,44
+ 127 0088 0FB6      		in __tmp_reg__,__SREG__
+ 128 008a F894      		cli
+ 129 008c DEBF      		out __SP_H__,r29
+ 130 008e 0FBE      		out __SREG__,__tmp_reg__
+ 131 0090 CDBF      		out __SP_L__,r28
+ 132 0092 CF91      		pop r28
+ 133 0094 DF91      		pop r29
+ 134 0096 1F91      		pop r17
+ 135               	.LVL8:
+ 136 0098 FF90      		pop r15
+ 137 009a EF90      		pop r14
+ 138               	.LVL9:
+ 139 009c 0895      		ret
+ 140               	.LFE134:
+ 142               		.section	.text.RNDIS_GetEncapsulatedResponse,"ax",@progbits
+ 143               	.global	RNDIS_GetEncapsulatedResponse
+ 145               	RNDIS_GetEncapsulatedResponse:
+ 146               	.LFB129:
+ 147               	.LSM13:
+ 148               	.LVL10:
+ 149               	/* prologue: function */
+ 150               	/* frame size = 0 */
+ 151               	.LSM14:
+ 152 0000 21EA      		ldi r18,lo8(-95)
+ 153 0002 2093 0000 		sts USB_ControlRequest,r18
+ 154 0006 21E0      		ldi r18,lo8(1)
+ 155 0008 2093 0000 		sts USB_ControlRequest+1,r18
+ 156 000c 1092 0000 		sts (USB_ControlRequest+2)+1,__zero_reg__
+ 157 0010 1092 0000 		sts USB_ControlRequest+2,__zero_reg__
+ 158 0014 1092 0000 		sts (USB_ControlRequest+4)+1,__zero_reg__
+ 159 0018 1092 0000 		sts USB_ControlRequest+4,__zero_reg__
+ 160 001c 7093 0000 		sts (USB_ControlRequest+6)+1,r23
+ 161 0020 6093 0000 		sts USB_ControlRequest+6,r22
+ 162               	.LBB30:
+ 163               	.LBB31:
+ 164               	.LSM15:
+ 165 0024 1092 A700 		sts 167,__zero_reg__
+ 166               	.LBE31:
+ 167               	.LBE30:
+ 168               	.LSM16:
+ 169 0028 0E94 0000 		call USB_Host_SendControlRequest
+ 170               	.LVL11:
+ 171               	/* epilogue start */
+ 172               	.LSM17:
+ 173 002c 0895      		ret
+ 174               	.LFE129:
+ 176               		.section	.text.RNDIS_SendEncapsulatedCommand,"ax",@progbits
+ 177               	.global	RNDIS_SendEncapsulatedCommand
+ 179               	RNDIS_SendEncapsulatedCommand:
+ 180               	.LFB128:
+ 181               	.LSM18:
+ 182               	.LVL12:
+ 183               	/* prologue: function */
+ 184               	/* frame size = 0 */
+ 185               	.LSM19:
+ 186 0000 21E2      		ldi r18,lo8(33)
+ 187 0002 2093 0000 		sts USB_ControlRequest,r18
+ 188 0006 1092 0000 		sts USB_ControlRequest+1,__zero_reg__
+ 189 000a 1092 0000 		sts (USB_ControlRequest+2)+1,__zero_reg__
+ 190 000e 1092 0000 		sts USB_ControlRequest+2,__zero_reg__
+ 191 0012 1092 0000 		sts (USB_ControlRequest+4)+1,__zero_reg__
+ 192 0016 1092 0000 		sts USB_ControlRequest+4,__zero_reg__
+ 193 001a 7093 0000 		sts (USB_ControlRequest+6)+1,r23
+ 194 001e 6093 0000 		sts USB_ControlRequest+6,r22
+ 195               	.LBB32:
+ 196               	.LBB33:
+ 197               	.LSM20:
+ 198 0022 1092 A700 		sts 167,__zero_reg__
+ 199               	.LBE33:
+ 200               	.LBE32:
+ 201               	.LSM21:
+ 202 0026 0E94 0000 		call USB_Host_SendControlRequest
+ 203               	.LVL13:
+ 204               	/* epilogue start */
+ 205               	.LSM22:
+ 206 002a 0895      		ret
+ 207               	.LFE128:
+ 209               		.section	.text.RNDIS_QueryRNDISProperty,"ax",@progbits
+ 210               	.global	RNDIS_QueryRNDISProperty
+ 212               	RNDIS_QueryRNDISProperty:
+ 213               	.LFB133:
+ 214               	.LSM23:
+ 215               	.LVL14:
+ 216 0000 7F92      		push r7
+ 217 0002 8F92      		push r8
+ 218 0004 9F92      		push r9
+ 219 0006 AF92      		push r10
+ 220 0008 BF92      		push r11
+ 221 000a CF92      		push r12
+ 222 000c DF92      		push r13
+ 223 000e EF92      		push r14
+ 224 0010 FF92      		push r15
+ 225 0012 0F93      		push r16
+ 226 0014 1F93      		push r17
+ 227 0016 DF93      		push r29
+ 228 0018 CF93      		push r28
+ 229 001a CDB7      		in r28,__SP_L__
+ 230 001c DEB7      		in r29,__SP_H__
+ 231 001e 6C97      		sbiw r28,28
+ 232 0020 0FB6      		in __tmp_reg__,__SREG__
+ 233 0022 F894      		cli
+ 234 0024 DEBF      		out __SP_H__,r29
+ 235 0026 0FBE      		out __SREG__,__tmp_reg__
+ 236 0028 CDBF      		out __SP_L__,r28
+ 237               	/* prologue: function */
+ 238               	/* frame size = 28 */
+ 239 002a 042F      		mov r16,r20
+ 240 002c 752E      		mov r7,r21
+ 241               	.LVL15:
+ 242 002e 6901      		movw r12,r18
+ 243               	.LSM24:
+ 244 0030 8DB6      		in r8,__SP_L__
+ 245 0032 9EB6      		in r9,__SP_H__
+ 246               	.LSM25:
+ 247 0034 28E1      		ldi r18,lo8(24)
+ 248 0036 A22E      		mov r10,r18
+ 249 0038 B12C      		mov r11,__zero_reg__
+ 250               	.LVL16:
+ 251 003a AC0C      		add r10,r12
+ 252 003c BD1C      		adc r11,r13
+ 253 003e 2DB7      		in r18,__SP_L__
+ 254 0040 3EB7      		in r19,__SP_H__
+ 255 0042 2A19      		sub r18,r10
+ 256 0044 3B09      		sbc r19,r11
+ 257 0046 0FB6      		in __tmp_reg__,__SREG__
+ 258 0048 F894      		cli
+ 259 004a 3EBF      		out __SP_H__,r19
+ 260 004c 0FBE      		out __SREG__,__tmp_reg__
+ 261 004e 2DBF      		out __SP_L__,r18
+ 262 0050 EDB6      		in r14,__SP_L__
+ 263 0052 FEB6      		in r15,__SP_H__
+ 264 0054 0894      		sec
+ 265 0056 E11C      		adc r14,__zero_reg__
+ 266 0058 F11C      		adc r15,__zero_reg__
+ 267               	.LSM26:
+ 268 005a 24E0      		ldi r18,lo8(4)
+ 269 005c 30E0      		ldi r19,hi8(4)
+ 270 005e 40E0      		ldi r20,hlo8(4)
+ 271 0060 50E0      		ldi r21,hhi8(4)
+ 272 0062 2983      		std Y+1,r18
+ 273 0064 3A83      		std Y+2,r19
+ 274 0066 4B83      		std Y+3,r20
+ 275 0068 5C83      		std Y+4,r21
+ 276               	.LSM27:
+ 277 006a 2CE1      		ldi r18,lo8(28)
+ 278 006c 30E0      		ldi r19,hi8(28)
+ 279 006e 40E0      		ldi r20,hlo8(28)
+ 280 0070 50E0      		ldi r21,hhi8(28)
+ 281 0072 2D83      		std Y+5,r18
+ 282 0074 3E83      		std Y+6,r19
+ 283 0076 4F83      		std Y+7,r20
+ 284 0078 5887      		std Y+8,r21
+ 285               	.LSM28:
+ 286 007a 2091 0000 		lds r18,RequestID
+ 287 007e 3091 0000 		lds r19,(RequestID)+1
+ 288 0082 4091 0000 		lds r20,(RequestID)+2
+ 289 0086 5091 0000 		lds r21,(RequestID)+3
+ 290 008a 2987      		std Y+9,r18
+ 291 008c 3A87      		std Y+10,r19
+ 292 008e 4B87      		std Y+11,r20
+ 293 0090 5C87      		std Y+12,r21
+ 294 0092 2F5F      		subi r18,lo8(-(1))
+ 295 0094 3F4F      		sbci r19,hi8(-(1))
+ 296 0096 4F4F      		sbci r20,hlo8(-(1))
+ 297 0098 5F4F      		sbci r21,hhi8(-(1))
+ 298 009a 2093 0000 		sts RequestID,r18
+ 299 009e 3093 0000 		sts (RequestID)+1,r19
+ 300 00a2 4093 0000 		sts (RequestID)+2,r20
+ 301 00a6 5093 0000 		sts (RequestID)+3,r21
+ 302               	.LSM29:
+ 303 00aa 6D87      		std Y+13,r22
+ 304 00ac 7E87      		std Y+14,r23
+ 305 00ae 8F87      		std Y+15,r24
+ 306 00b0 988B      		std Y+16,r25
+ 307               	.LSM30:
+ 308 00b2 198A      		std Y+17,__zero_reg__
+ 309 00b4 1A8A      		std Y+18,__zero_reg__
+ 310 00b6 1B8A      		std Y+19,__zero_reg__
+ 311 00b8 1C8A      		std Y+20,__zero_reg__
+ 312               	.LSM31:
+ 313 00ba 1D8A      		std Y+21,__zero_reg__
+ 314 00bc 1E8A      		std Y+22,__zero_reg__
+ 315 00be 1F8A      		std Y+23,__zero_reg__
+ 316 00c0 188E      		std Y+24,__zero_reg__
+ 317               	.LSM32:
+ 318 00c2 198E      		std Y+25,__zero_reg__
+ 319 00c4 1A8E      		std Y+26,__zero_reg__
+ 320 00c6 1B8E      		std Y+27,__zero_reg__
+ 321 00c8 1C8E      		std Y+28,__zero_reg__
+ 322               	.LSM33:
+ 323 00ca CE01      		movw r24,r28
+ 324 00cc 0196      		adiw r24,1
+ 325 00ce 6CE1      		ldi r22,lo8(28)
+ 326 00d0 70E0      		ldi r23,hi8(28)
+ 327               	.LVL17:
+ 328 00d2 0E94 0000 		call RNDIS_SendEncapsulatedCommand
+ 329               	.LVL18:
+ 330 00d6 182F      		mov r17,r24
+ 331               	.LVL19:
+ 332 00d8 8823      		tst r24
+ 333 00da 01F4      		brne .L10
+ 334               	.LVL20:
+ 335               	.LSM34:
+ 336 00dc C701      		movw r24,r14
+ 337               	.LVL21:
+ 338 00de B501      		movw r22,r10
+ 339 00e0 0E94 0000 		call RNDIS_GetEncapsulatedResponse
+ 340 00e4 182F      		mov r17,r24
+ 341 00e6 8823      		tst r24
+ 342 00e8 01F4      		brne .L10
+ 343               	.LVL22:
+ 344               	.LSM35:
+ 345 00ea F701      		movw r30,r14
+ 346 00ec 8485      		ldd r24,Z+12
+ 347 00ee 9585      		ldd r25,Z+13
+ 348 00f0 A685      		ldd r26,Z+14
+ 349 00f2 B785      		ldd r27,Z+15
+ 350               	.LVL23:
+ 351 00f4 0097      		sbiw r24,0
+ 352 00f6 A105      		cpc r26,__zero_reg__
+ 353 00f8 B105      		cpc r27,__zero_reg__
+ 354 00fa 01F0      		breq .L11
+ 355 00fc 10EC      		ldi r17,lo8(-64)
+ 356 00fe 00C0      		rjmp .L10
+ 357               	.L11:
+ 358               	.LSM36:
+ 359 0100 9701      		movw r18,r14
+ 360 0102 285E      		subi r18,lo8(-(24))
+ 361 0104 3F4F      		sbci r19,hi8(-(24))
+ 362 0106 802F      		mov r24,r16
+ 363 0108 972D      		mov r25,r7
+ 364 010a B901      		movw r22,r18
+ 365 010c A601      		movw r20,r12
+ 366               	.LVL24:
+ 367 010e 0E94 0000 		call memcpy
+ 368               	.LVL25:
+ 369               	.L10:
+ 370               	.LSM37:
+ 371 0112 812F      		mov r24,r17
+ 372 0114 0FB6      		in __tmp_reg__,__SREG__
+ 373 0116 F894      		cli
+ 374 0118 9EBE      		out __SP_H__,r9
+ 375 011a 0FBE      		out __SREG__,__tmp_reg__
+ 376 011c 8DBE      		out __SP_L__,r8
+ 377               	/* epilogue start */
+ 378 011e 6C96      		adiw r28,28
+ 379 0120 0FB6      		in __tmp_reg__,__SREG__
+ 380 0122 F894      		cli
+ 381 0124 DEBF      		out __SP_H__,r29
+ 382 0126 0FBE      		out __SREG__,__tmp_reg__
+ 383 0128 CDBF      		out __SP_L__,r28
+ 384 012a CF91      		pop r28
+ 385 012c DF91      		pop r29
+ 386 012e 1F91      		pop r17
+ 387               	.LVL26:
+ 388 0130 0F91      		pop r16
+ 389               	.LVL27:
+ 390 0132 FF90      		pop r15
+ 391 0134 EF90      		pop r14
+ 392 0136 DF90      		pop r13
+ 393 0138 CF90      		pop r12
+ 394               	.LVL28:
+ 395 013a BF90      		pop r11
+ 396 013c AF90      		pop r10
+ 397 013e 9F90      		pop r9
+ 398 0140 8F90      		pop r8
+ 399 0142 7F90      		pop r7
+ 400               	.LVL29:
+ 401 0144 0895      		ret
+ 402               	.LFE133:
+ 404               		.section	.text.RNDIS_SetRNDISProperty,"ax",@progbits
+ 405               	.global	RNDIS_SetRNDISProperty
+ 407               	RNDIS_SetRNDISProperty:
+ 408               	.LFB132:
+ 409               	.LSM38:
+ 410               	.LVL30:
+ 411 0000 6F92      		push r6
+ 412 0002 7F92      		push r7
+ 413 0004 8F92      		push r8
+ 414 0006 9F92      		push r9
+ 415 0008 AF92      		push r10
+ 416 000a BF92      		push r11
+ 417 000c CF92      		push r12
+ 418 000e DF92      		push r13
+ 419 0010 EF92      		push r14
+ 420 0012 FF92      		push r15
+ 421 0014 0F93      		push r16
+ 422 0016 1F93      		push r17
+ 423 0018 DF93      		push r29
+ 424 001a CF93      		push r28
+ 425 001c CDB7      		in r28,__SP_L__
+ 426 001e DEB7      		in r29,__SP_H__
+ 427 0020 6097      		sbiw r28,16
+ 428 0022 0FB6      		in __tmp_reg__,__SREG__
+ 429 0024 F894      		cli
+ 430 0026 DEBF      		out __SP_H__,r29
+ 431 0028 0FBE      		out __SREG__,__tmp_reg__
+ 432 002a CDBF      		out __SP_L__,r28
+ 433               	/* prologue: function */
+ 434               	/* frame size = 16 */
+ 435               	.LSM39:
+ 436 002c 6DB6      		in r6,__SP_L__
+ 437 002e 7EB6      		in r7,__SP_H__
+ 438               	.LSM40:
+ 439 0030 BCE1      		ldi r27,lo8(28)
+ 440 0032 AB2E      		mov r10,r27
+ 441 0034 B12C      		mov r11,__zero_reg__
+ 442 0036 A20E      		add r10,r18
+ 443 0038 B31E      		adc r11,r19
+ 444 003a EDB7      		in r30,__SP_L__
+ 445 003c FEB7      		in r31,__SP_H__
+ 446 003e EA19      		sub r30,r10
+ 447 0040 FB09      		sbc r31,r11
+ 448 0042 0FB6      		in __tmp_reg__,__SREG__
+ 449 0044 F894      		cli
+ 450 0046 FEBF      		out __SP_H__,r31
+ 451 0048 0FBE      		out __SREG__,__tmp_reg__
+ 452 004a EDBF      		out __SP_L__,r30
+ 453 004c 8DB6      		in r8,__SP_L__
+ 454 004e 9EB6      		in r9,__SP_H__
+ 455 0050 0894      		sec
+ 456 0052 811C      		adc r8,__zero_reg__
+ 457 0054 911C      		adc r9,__zero_reg__
+ 458               	.LSM41:
+ 459 0056 A5E0      		ldi r26,lo8(5)
+ 460 0058 EA2E      		mov r14,r26
+ 461 005a F12C      		mov r15,__zero_reg__
+ 462 005c 012D      		mov r16,__zero_reg__
+ 463 005e 112D      		mov r17,__zero_reg__
+ 464 0060 E182      		std Z+1,r14
+ 465 0062 F282      		std Z+2,r15
+ 466 0064 0383      		std Z+3,r16
+ 467 0066 1483      		std Z+4,r17
+ 468               	.LSM42:
+ 469 0068 CC24      		clr r12
+ 470 006a DD24      		clr r13
+ 471 006c F401      		movw r30,r8
+ 472 006e A482      		std Z+4,r10
+ 473 0070 B582      		std Z+5,r11
+ 474 0072 C682      		std Z+6,r12
+ 475 0074 D782      		std Z+7,r13
+ 476               	.LSM43:
+ 477 0076 E090 0000 		lds r14,RequestID
+ 478 007a F090 0000 		lds r15,(RequestID)+1
+ 479 007e 0091 0000 		lds r16,(RequestID)+2
+ 480 0082 1091 0000 		lds r17,(RequestID)+3
+ 481 0086 E086      		std Z+8,r14
+ 482 0088 F186      		std Z+9,r15
+ 483 008a 0287      		std Z+10,r16
+ 484 008c 1387      		std Z+11,r17
+ 485 008e 0894      		sec
+ 486 0090 E11C      		adc r14,__zero_reg__
+ 487 0092 F11C      		adc r15,__zero_reg__
+ 488 0094 011D      		adc r16,__zero_reg__
+ 489 0096 111D      		adc r17,__zero_reg__
+ 490 0098 E092 0000 		sts RequestID,r14
+ 491 009c F092 0000 		sts (RequestID)+1,r15
+ 492 00a0 0093 0000 		sts (RequestID)+2,r16
+ 493 00a4 1093 0000 		sts (RequestID)+3,r17
+ 494               	.LSM44:
+ 495 00a8 6487      		std Z+12,r22
+ 496 00aa 7587      		std Z+13,r23
+ 497 00ac 8687      		std Z+14,r24
+ 498 00ae 9787      		std Z+15,r25
+ 499               	.LSM45:
+ 500 00b0 C901      		movw r24,r18
+ 501 00b2 A0E0      		ldi r26,lo8(0)
+ 502 00b4 B0E0      		ldi r27,hi8(0)
+ 503               	.LVL31:
+ 504 00b6 808B      		std Z+16,r24
+ 505 00b8 918B      		std Z+17,r25
+ 506 00ba A28B      		std Z+18,r26
+ 507 00bc B38B      		std Z+19,r27
+ 508               	.LSM46:
+ 509 00be 84E1      		ldi r24,lo8(20)
+ 510 00c0 90E0      		ldi r25,hi8(20)
+ 511 00c2 A0E0      		ldi r26,hlo8(20)
+ 512 00c4 B0E0      		ldi r27,hhi8(20)
+ 513 00c6 848B      		std Z+20,r24
+ 514 00c8 958B      		std Z+21,r25
+ 515 00ca A68B      		std Z+22,r26
+ 516 00cc B78B      		std Z+23,r27
+ 517               	.LSM47:
+ 518 00ce 108E      		std Z+24,__zero_reg__
+ 519 00d0 118E      		std Z+25,__zero_reg__
+ 520 00d2 128E      		std Z+26,__zero_reg__
+ 521 00d4 138E      		std Z+27,__zero_reg__
+ 522               	.LSM48:
+ 523 00d6 6DB7      		in r22,__SP_L__
+ 524 00d8 7EB7      		in r23,__SP_H__
+ 525               	.LVL32:
+ 526 00da 635E      		subi r22,lo8(-(29))
+ 527 00dc 7F4F      		sbci r23,hi8(-(29))
+ 528 00de CB01      		movw r24,r22
+ 529 00e0 BA01      		movw r22,r20
+ 530               	.LVL33:
+ 531 00e2 A901      		movw r20,r18
+ 532               	.LVL34:
+ 533 00e4 0E94 0000 		call memcpy
+ 534               	.LVL35:
+ 535               	.LSM49:
+ 536 00e8 F401      		movw r30,r8
+ 537 00ea 6481      		ldd r22,Z+4
+ 538 00ec 7581      		ldd r23,Z+5
+ 539 00ee C401      		movw r24,r8
+ 540 00f0 0E94 0000 		call RNDIS_SendEncapsulatedCommand
+ 541 00f4 282F      		mov r18,r24
+ 542               	.LVL36:
+ 543 00f6 8823      		tst r24
+ 544 00f8 01F4      		brne .L16
+ 545               	.LVL37:
+ 546               	.LSM50:
+ 547 00fa CE01      		movw r24,r28
+ 548               	.LVL38:
+ 549 00fc 0196      		adiw r24,1
+ 550 00fe 60E1      		ldi r22,lo8(16)
+ 551 0100 70E0      		ldi r23,hi8(16)
+ 552 0102 0E94 0000 		call RNDIS_GetEncapsulatedResponse
+ 553               	.LVL39:
+ 554 0106 282F      		mov r18,r24
+ 555               	.LVL40:
+ 556 0108 8823      		tst r24
+ 557 010a 01F4      		brne .L16
+ 558               	.LVL41:
+ 559               	.LSM51:
+ 560 010c 8D85      		ldd r24,Y+13
+ 561 010e 9E85      		ldd r25,Y+14
+ 562 0110 AF85      		ldd r26,Y+15
+ 563 0112 B889      		ldd r27,Y+16
+ 564               	.LVL42:
+ 565 0114 0097      		sbiw r24,0
+ 566 0116 A105      		cpc r26,__zero_reg__
+ 567 0118 B105      		cpc r27,__zero_reg__
+ 568 011a 01F0      		breq .L16
+ 569 011c 20EC      		ldi r18,lo8(-64)
+ 570               	.LVL43:
+ 571               	.L16:
+ 572               	.LSM52:
+ 573 011e 822F      		mov r24,r18
+ 574 0120 0FB6      		in __tmp_reg__,__SREG__
+ 575 0122 F894      		cli
+ 576 0124 7EBE      		out __SP_H__,r7
+ 577 0126 0FBE      		out __SREG__,__tmp_reg__
+ 578 0128 6DBE      		out __SP_L__,r6
+ 579               	/* epilogue start */
+ 580 012a 6096      		adiw r28,16
+ 581 012c 0FB6      		in __tmp_reg__,__SREG__
+ 582 012e F894      		cli
+ 583 0130 DEBF      		out __SP_H__,r29
+ 584 0132 0FBE      		out __SREG__,__tmp_reg__
+ 585 0134 CDBF      		out __SP_L__,r28
+ 586 0136 CF91      		pop r28
+ 587 0138 DF91      		pop r29
+ 588 013a 1F91      		pop r17
+ 589 013c 0F91      		pop r16
+ 590 013e FF90      		pop r15
+ 591 0140 EF90      		pop r14
+ 592 0142 DF90      		pop r13
+ 593 0144 CF90      		pop r12
+ 594 0146 BF90      		pop r11
+ 595 0148 AF90      		pop r10
+ 596 014a 9F90      		pop r9
+ 597 014c 8F90      		pop r8
+ 598 014e 7F90      		pop r7
+ 599 0150 6F90      		pop r6
+ 600 0152 0895      		ret
+ 601               	.LFE132:
+ 603               		.section	.text.RNDIS_InitializeDevice,"ax",@progbits
+ 604               	.global	RNDIS_InitializeDevice
+ 606               	RNDIS_InitializeDevice:
+ 607               	.LFB131:
+ 608               	.LSM53:
+ 609               	.LVL44:
+ 610 0000 0F93      		push r16
+ 611 0002 1F93      		push r17
+ 612 0004 DF93      		push r29
+ 613 0006 CF93      		push r28
+ 614 0008 CDB7      		in r28,__SP_L__
+ 615 000a DEB7      		in r29,__SP_H__
+ 616 000c CC54      		subi r28,lo8(-(-76))
+ 617 000e D040      		sbci r29,hi8(-(-76))
+ 618 0010 0FB6      		in __tmp_reg__,__SREG__
+ 619 0012 F894      		cli
+ 620 0014 DEBF      		out __SP_H__,r29
+ 621 0016 0FBE      		out __SREG__,__tmp_reg__
+ 622 0018 CDBF      		out __SP_L__,r28
+ 623               	/* prologue: function */
+ 624               	/* frame size = 76 */
+ 625 001a 8B01      		movw r16,r22
+ 626               	.LSM54:
+ 627 001c 22E0      		ldi r18,lo8(2)
+ 628 001e 30E0      		ldi r19,hi8(2)
+ 629 0020 40E0      		ldi r20,hlo8(2)
+ 630 0022 50E0      		ldi r21,hhi8(2)
+ 631 0024 2983      		std Y+1,r18
+ 632 0026 3A83      		std Y+2,r19
+ 633 0028 4B83      		std Y+3,r20
+ 634 002a 5C83      		std Y+4,r21
+ 635               	.LSM55:
+ 636 002c 28E1      		ldi r18,lo8(24)
+ 637 002e 30E0      		ldi r19,hi8(24)
+ 638 0030 40E0      		ldi r20,hlo8(24)
+ 639 0032 50E0      		ldi r21,hhi8(24)
+ 640 0034 2D83      		std Y+5,r18
+ 641 0036 3E83      		std Y+6,r19
+ 642 0038 4F83      		std Y+7,r20
+ 643 003a 5887      		std Y+8,r21
+ 644               	.LSM56:
+ 645 003c 2091 0000 		lds r18,RequestID
+ 646 0040 3091 0000 		lds r19,(RequestID)+1
+ 647 0044 4091 0000 		lds r20,(RequestID)+2
+ 648 0048 5091 0000 		lds r21,(RequestID)+3
+ 649 004c 2987      		std Y+9,r18
+ 650 004e 3A87      		std Y+10,r19
+ 651 0050 4B87      		std Y+11,r20
+ 652 0052 5C87      		std Y+12,r21
+ 653 0054 2F5F      		subi r18,lo8(-(1))
+ 654 0056 3F4F      		sbci r19,hi8(-(1))
+ 655 0058 4F4F      		sbci r20,hlo8(-(1))
+ 656 005a 5F4F      		sbci r21,hhi8(-(1))
+ 657 005c 2093 0000 		sts RequestID,r18
+ 658 0060 3093 0000 		sts (RequestID)+1,r19
+ 659 0064 4093 0000 		sts (RequestID)+2,r20
+ 660 0068 5093 0000 		sts (RequestID)+3,r21
+ 661               	.LSM57:
+ 662 006c 21E0      		ldi r18,lo8(1)
+ 663 006e 30E0      		ldi r19,hi8(1)
+ 664 0070 40E0      		ldi r20,hlo8(1)
+ 665 0072 50E0      		ldi r21,hhi8(1)
+ 666 0074 2D87      		std Y+13,r18
+ 667 0076 3E87      		std Y+14,r19
+ 668 0078 4F87      		std Y+15,r20
+ 669 007a 588B      		std Y+16,r21
+ 670               	.LSM58:
+ 671 007c 198A      		std Y+17,__zero_reg__
+ 672 007e 1A8A      		std Y+18,__zero_reg__
+ 673 0080 1B8A      		std Y+19,__zero_reg__
+ 674 0082 1C8A      		std Y+20,__zero_reg__
+ 675               	.LSM59:
+ 676 0084 A0E0      		ldi r26,lo8(0)
+ 677 0086 B0E0      		ldi r27,hi8(0)
+ 678               	.LVL45:
+ 679 0088 8D8B      		std Y+21,r24
+ 680 008a 9E8B      		std Y+22,r25
+ 681 008c AF8B      		std Y+23,r26
+ 682 008e B88F      		std Y+24,r27
+ 683               	.LSM60:
+ 684 0090 CE01      		movw r24,r28
+ 685               	.LVL46:
+ 686 0092 0196      		adiw r24,1
+ 687 0094 68E1      		ldi r22,lo8(24)
+ 688 0096 70E0      		ldi r23,hi8(24)
+ 689               	.LVL47:
+ 690 0098 0E94 0000 		call RNDIS_SendEncapsulatedCommand
+ 691               	.LVL48:
+ 692 009c 282F      		mov r18,r24
+ 693               	.LVL49:
+ 694 009e 8823      		tst r24
+ 695 00a0 01F4      		brne .L19
+ 696               	.LVL50:
+ 697               	.LSM61:
+ 698 00a2 CE01      		movw r24,r28
+ 699               	.LVL51:
+ 700 00a4 4996      		adiw r24,25
+ 701 00a6 64E3      		ldi r22,lo8(52)
+ 702 00a8 70E0      		ldi r23,hi8(52)
+ 703 00aa 0E94 0000 		call RNDIS_GetEncapsulatedResponse
+ 704               	.LVL52:
+ 705 00ae 282F      		mov r18,r24
+ 706               	.LVL53:
+ 707 00b0 8823      		tst r24
+ 708 00b2 01F4      		brne .L19
+ 709               	.LVL54:
+ 710               	.LSM62:
+ 711 00b4 8DA1      		ldd r24,Y+37
+ 712 00b6 9EA1      		ldd r25,Y+38
+ 713 00b8 AFA1      		ldd r26,Y+39
+ 714 00ba B8A5      		ldd r27,Y+40
+ 715               	.LVL55:
+ 716 00bc 0097      		sbiw r24,0
+ 717 00be A105      		cpc r26,__zero_reg__
+ 718 00c0 B105      		cpc r27,__zero_reg__
+ 719 00c2 01F0      		breq .L20
+ 720 00c4 20EC      		ldi r18,lo8(-64)
+ 721 00c6 00C0      		rjmp .L19
+ 722               	.L20:
+ 723               	.LSM63:
+ 724 00c8 8DAD      		ldd r24,Y+61
+ 725 00ca 9EAD      		ldd r25,Y+62
+ 726 00cc F801      		movw r30,r16
+ 727 00ce 9183      		std Z+1,r25
+ 728 00d0 8083      		st Z,r24
+ 729               	.LVL56:
+ 730               	.L19:
+ 731               	.LSM64:
+ 732 00d2 822F      		mov r24,r18
+ 733               	/* epilogue start */
+ 734 00d4 C45B      		subi r28,lo8(-(76))
+ 735 00d6 DF4F      		sbci r29,hi8(-(76))
+ 736 00d8 0FB6      		in __tmp_reg__,__SREG__
+ 737 00da F894      		cli
+ 738 00dc DEBF      		out __SP_H__,r29
+ 739 00de 0FBE      		out __SREG__,__tmp_reg__
+ 740 00e0 CDBF      		out __SP_L__,r28
+ 741 00e2 CF91      		pop r28
+ 742 00e4 DF91      		pop r29
+ 743 00e6 1F91      		pop r17
+ 744 00e8 0F91      		pop r16
+ 745               	.LVL57:
+ 746 00ea 0895      		ret
+ 747               	.LFE131:
+ 749               		.section	.text.RNDIS_SendKeepAlive,"ax",@progbits
+ 750               	.global	RNDIS_SendKeepAlive
+ 752               	RNDIS_SendKeepAlive:
+ 753               	.LFB130:
+ 754               	.LSM65:
+ 755 0000 DF93      		push r29
+ 756 0002 CF93      		push r28
+ 757 0004 CDB7      		in r28,__SP_L__
+ 758 0006 DEB7      		in r29,__SP_H__
+ 759 0008 6C97      		sbiw r28,28
+ 760 000a 0FB6      		in __tmp_reg__,__SREG__
+ 761 000c F894      		cli
+ 762 000e DEBF      		out __SP_H__,r29
+ 763 0010 0FBE      		out __SREG__,__tmp_reg__
+ 764 0012 CDBF      		out __SP_L__,r28
+ 765               	/* prologue: function */
+ 766               	/* frame size = 28 */
+ 767               	.LSM66:
+ 768 0014 88E0      		ldi r24,lo8(8)
+ 769 0016 90E0      		ldi r25,hi8(8)
+ 770 0018 A0E0      		ldi r26,hlo8(8)
+ 771 001a B0E0      		ldi r27,hhi8(8)
+ 772 001c 8983      		std Y+1,r24
+ 773 001e 9A83      		std Y+2,r25
+ 774 0020 AB83      		std Y+3,r26
+ 775 0022 BC83      		std Y+4,r27
+ 776               	.LSM67:
+ 777 0024 8CE0      		ldi r24,lo8(12)
+ 778 0026 90E0      		ldi r25,hi8(12)
+ 779 0028 A0E0      		ldi r26,hlo8(12)
+ 780 002a B0E0      		ldi r27,hhi8(12)
+ 781 002c 8D83      		std Y+5,r24
+ 782 002e 9E83      		std Y+6,r25
+ 783 0030 AF83      		std Y+7,r26
+ 784 0032 B887      		std Y+8,r27
+ 785               	.LSM68:
+ 786 0034 8091 0000 		lds r24,RequestID
+ 787 0038 9091 0000 		lds r25,(RequestID)+1
+ 788 003c A091 0000 		lds r26,(RequestID)+2
+ 789 0040 B091 0000 		lds r27,(RequestID)+3
+ 790 0044 8987      		std Y+9,r24
+ 791 0046 9A87      		std Y+10,r25
+ 792 0048 AB87      		std Y+11,r26
+ 793 004a BC87      		std Y+12,r27
+ 794 004c 0196      		adiw r24,1
+ 795 004e A11D      		adc r26,__zero_reg__
+ 796 0050 B11D      		adc r27,__zero_reg__
+ 797 0052 8093 0000 		sts RequestID,r24
+ 798 0056 9093 0000 		sts (RequestID)+1,r25
+ 799 005a A093 0000 		sts (RequestID)+2,r26
+ 800 005e B093 0000 		sts (RequestID)+3,r27
+ 801               	.LSM69:
+ 802 0062 CE01      		movw r24,r28
+ 803 0064 0196      		adiw r24,1
+ 804 0066 6CE0      		ldi r22,lo8(12)
+ 805 0068 70E0      		ldi r23,hi8(12)
+ 806 006a 0E94 0000 		call RNDIS_SendEncapsulatedCommand
+ 807 006e 8823      		tst r24
+ 808               	.LVL58:
+ 809 0070 01F4      		brne .L23
+ 810               	.LSM70:
+ 811 0072 CE01      		movw r24,r28
+ 812               	.LVL59:
+ 813 0074 0D96      		adiw r24,13
+ 814 0076 60E1      		ldi r22,lo8(16)
+ 815 0078 70E0      		ldi r23,hi8(16)
+ 816 007a 0E94 0000 		call RNDIS_GetEncapsulatedResponse
+ 817               	.LVL60:
+ 818               	.L23:
+ 819               	.LVL61:
+ 820               	/* epilogue start */
+ 821               	.LSM71:
+ 822 007e 6C96      		adiw r28,28
+ 823 0080 0FB6      		in __tmp_reg__,__SREG__
+ 824 0082 F894      		cli
+ 825 0084 DEBF      		out __SP_H__,r29
+ 826 0086 0FBE      		out __SREG__,__tmp_reg__
+ 827 0088 CDBF      		out __SP_L__,r28
+ 828 008a CF91      		pop r28
+ 829 008c DF91      		pop r29
+ 830 008e 0895      		ret
+ 831               	.LFE130:
+ 833               	.global	RequestID
+ 834               	.global	RequestID
+ 835               		.section .bss
+ 838               	RequestID:
+ 839 0000 0000 0000 		.skip 4,0
+ 912               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 RNDISCommands.c
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccfv3hre.s:2      *ABS*:0000003f __SREG__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccfv3hre.s:3      *ABS*:0000003e __SP_H__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccfv3hre.s:4      *ABS*:0000003d __SP_L__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccfv3hre.s:5      *ABS*:00000034 __CCP__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccfv3hre.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccfv3hre.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccfv3hre.s:19     .text.RNDIS_GetPacketLength:00000000 RNDIS_GetPacketLength
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccfv3hre.s:145    .text.RNDIS_GetEncapsulatedResponse:00000000 RNDIS_GetEncapsulatedResponse
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccfv3hre.s:179    .text.RNDIS_SendEncapsulatedCommand:00000000 RNDIS_SendEncapsulatedCommand
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccfv3hre.s:212    .text.RNDIS_QueryRNDISProperty:00000000 RNDIS_QueryRNDISProperty
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccfv3hre.s:838    .bss:00000000 RequestID
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccfv3hre.s:407    .text.RNDIS_SetRNDISProperty:00000000 RNDIS_SetRNDISProperty
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccfv3hre.s:606    .text.RNDIS_InitializeDevice:00000000 RNDIS_InitializeDevice
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccfv3hre.s:752    .text.RNDIS_SendKeepAlive:00000000 RNDIS_SendKeepAlive
+
+UNDEFINED SYMBOLS
+Pipe_Read_Stream_LE
+Pipe_Discard_Stream
+USB_ControlRequest
+USB_Host_SendControlRequest
+memcpy
+__do_clear_bss

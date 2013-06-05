@@ -1,0 +1,121 @@
+   1               		.file	"clock.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.__vector_17,"ax",@progbits
+  17               	.global	__vector_17
+  19               	__vector_17:
+  20               	.LFB8:
+  21               	.LSM0:
+  22 0000 1F92      		push __zero_reg__
+  23 0002 0F92      		push r0
+  24 0004 0FB6      		in r0,__SREG__
+  25 0006 0F92      		push r0
+  26 0008 1124      		clr __zero_reg__
+  27 000a 8F93      		push r24
+  28 000c 9F93      		push r25
+  29               	/* prologue: Signal */
+  30               	/* frame size = 0 */
+  31               	.LSM1:
+  32 000e 8091 0000 		lds r24,clock_datetime
+  33 0012 9091 0000 		lds r25,(clock_datetime)+1
+  34 0016 0196      		adiw r24,1
+  35 0018 9093 0000 		sts (clock_datetime)+1,r25
+  36 001c 8093 0000 		sts clock_datetime,r24
+  37               	/* epilogue start */
+  38               	.LSM2:
+  39 0020 9F91      		pop r25
+  40 0022 8F91      		pop r24
+  41 0024 0F90      		pop r0
+  42 0026 0FBE      		out __SREG__,r0
+  43 0028 0F90      		pop r0
+  44 002a 1F90      		pop __zero_reg__
+  45 002c 1895      		reti
+  46               	.LFE8:
+  48               		.section	.text.clock_init,"ax",@progbits
+  49               	.global	clock_init
+  51               	clock_init:
+  52               	.LFB9:
+  53               	.LSM3:
+  54               	/* prologue: function */
+  55               	/* frame size = 0 */
+  56               	.LSM4:
+  57 0000 8DE4      		ldi r24,lo8(77)
+  58 0002 90E0      		ldi r25,hi8(77)
+  59 0004 9093 8900 		sts (136)+1,r25
+  60 0008 8093 8800 		sts 136,r24
+  61               	.LSM5:
+  62 000c 8DE0      		ldi r24,lo8(13)
+  63 000e 8093 8100 		sts 129,r24
+  64               	.LSM6:
+  65 0012 82E0      		ldi r24,lo8(2)
+  66 0014 8093 6F00 		sts 111,r24
+  67               	/* epilogue start */
+  68               	.LSM7:
+  69 0018 0895      		ret
+  70               	.LFE9:
+  72               		.section	.text.clock_time,"ax",@progbits
+  73               	.global	clock_time
+  75               	clock_time:
+  76               	.LFB10:
+  77               	.LSM8:
+  78               	/* prologue: function */
+  79               	/* frame size = 0 */
+  80               	.LBB7:
+  81               	.LBB8:
+  82               	.LBB9:
+  83               	.LSM9:
+  84               	/* #APP */
+  85               	 ;  50 "/usr/local/CrossPack-AVR-20100115/lib/gcc/avr/4.3.3/../../../../avr/include/util/atomic.h" 
+  86 0000 F894      		cli
+  87               	 ;  0 "" 2
+  88               	/* #NOAPP */
+  89               	.LBE9:
+  90               	.LBE8:
+  91               	.LSM10:
+  92 0002 2091 0000 		lds r18,clock_datetime
+  93 0006 3091 0000 		lds r19,(clock_datetime)+1
+  94               	.LVL0:
+  95               	.LBB10:
+  96               	.LBB11:
+  97               	.LSM11:
+  98               	/* #APP */
+  99               	 ;  56 "/usr/local/CrossPack-AVR-20100115/lib/gcc/avr/4.3.3/../../../../avr/include/util/atomic.h" 
+ 100 000a 7894      		sei
+ 101               	 ;  0 "" 2
+ 102               	.LSM12:
+ 103               	/* #NOAPP */
+ 104               	.LBE11:
+ 105               	.LBE10:
+ 106               	.LBE7:
+ 107               	.LSM13:
+ 108 000c C901      		movw r24,r18
+ 109               	.LVL1:
+ 110               	/* epilogue start */
+ 111 000e 0895      		ret
+ 112               	.LFE10:
+ 114               	.global	clock_datetime
+ 115               	.global	clock_datetime
+ 116               		.section .bss
+ 119               	clock_datetime:
+ 120 0000 0000      		.skip 2,0
+ 161               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 clock.c
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccmVw7pj.s:2      *ABS*:0000003f __SREG__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccmVw7pj.s:3      *ABS*:0000003e __SP_H__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccmVw7pj.s:4      *ABS*:0000003d __SP_L__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccmVw7pj.s:5      *ABS*:00000034 __CCP__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccmVw7pj.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccmVw7pj.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccmVw7pj.s:19     .text.__vector_17:00000000 __vector_17
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccmVw7pj.s:119    .bss:00000000 clock_datetime
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccmVw7pj.s:51     .text.clock_init:00000000 clock_init
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccmVw7pj.s:75     .text.clock_time:00000000 clock_time
+
+UNDEFINED SYMBOLS
+__do_clear_bss

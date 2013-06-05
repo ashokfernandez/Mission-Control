@@ -1,0 +1,45 @@
+# File:   Makefile
+# Author: M. P. Hayes, UCECE
+# Date:   12 Sep 2010
+# Descr:  Makefile for ex1
+
+# Definitions.
+CC = avr-gcc
+CFLAGS = -mmcu=atmega1284p -Os -Wall -Wstrict-prototypes -Wextra -g -I ../../drivers/avr/
+OBJCOPY = avr-objcopy
+SIZE = avr-size
+DEL = rm
+
+
+# Default target.
+all: ex1.out
+
+
+# Compile: create object files from C source files.
+ex1.o: ex1.c ../../drivers/avr/system.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
+system.o: ../../drivers/avr/system.c ../../drivers/avr/system.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
+
+
+# Link: create ELF output file from object files.
+ex1.out: ex1.o system.o
+	$(CC) $(CFLAGS) $^ -o $@ -lm
+	$(SIZE) $@
+
+
+# Target: clean project.
+.PHONY: clean
+clean: 
+	-$(DEL) *.o *.out *.hex
+
+
+# Target: program project.
+.PHONY: program
+program: ex1.out
+	$(OBJCOPY) -O ihex ex1.out ex1.hex
+	avrdude -c usbasp -p m1284p -u -U flash:w:ex1.hex
+
+

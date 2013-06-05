@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html><head> 
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+    <meta name="description" content="Interfacing an AVR microcontroller to an HD44780 LCD using just 3 wires. Source code provided for the avr-gcc toolchain.">
+    <link rel="shortcut icon" href="http://www.micahcarrick.com/favicon.png">
+    <link rel="stylesheet" type="text/css" href="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/reset.css"> 
+    <link rel="stylesheet" type="text/css" href="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/style.css"> 
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" type="text/css" href="//static.micahcarrick.com/css/ie.css"/> 
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/sh_nedit.css"> 
+    
+    <script async="" src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/a"></script><script gapi_processed="true" src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/plusone.js" async="" type="text/javascript"></script><script src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/ga.js" async="" type="text/javascript"></script><script type="text/javascript" src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/jquery.js"></script>
+    
+    <script type="text/javascript" src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/sh_main.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        console.log("test");
+        sh_highlightDocument('//static.micahcarrick.com/js/lang/', '.min.js');
+    });
+    </script>
+
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17404508-1']);
+  _gaq.push(['_setDomainName', 'micahcarrick.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+    <title>AVR 3-Wire HD44780 LCD Interface (avr-gcc)</title>
+<script src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/all.js" async="" id="facebook-jssdk"></script><script src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/embed.js" async="" type="text/javascript"></script><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}
+.fb_invisible{display:none}
+.fb_reset{background:none;border-spacing:0;border:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size: 11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}
+.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}
+.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px}
+.fb_dialog_content{background:#fff;color:#333}
+.fb_dialog_close_icon{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v1/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px;top:8px\9;right:7px\9}
+.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}
+.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}
+.fb_dialog_close_icon:hover{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v1/yL/r/s816eWC-2sl.gif)}
+.fb_dialog_close_icon:active{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v1/yL/r/s816eWC-2sl.gif)}
+.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size: 24px;padding:20px}
+.fb_dialog_top_left,
+.fb_dialog_top_right,
+.fb_dialog_bottom_left,
+.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}
+.fb_dialog_top_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}
+.fb_dialog_top_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}
+.fb_dialog_bottom_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}
+.fb_dialog_bottom_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}
+.fb_dialog_vert_left,
+.fb_dialog_vert_right,
+.fb_dialog_horiz_top,
+.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}
+.fb_dialog_vert_left,
+.fb_dialog_vert_right{width:10px;height:100%}
+.fb_dialog_vert_left{margin-left:-10px}
+.fb_dialog_vert_right{right:0;margin-right:-10px}
+.fb_dialog_horiz_top,
+.fb_dialog_horiz_bottom{width:100%;height:10px}
+.fb_dialog_horiz_top{margin-top:-10px}
+.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}
+.fb_dialog_iframe{line-height:0}
+.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size: 14px;font-weight:bold;margin:0}
+.fb_dialog_content .dialog_title > span{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/yd/r/Cou7n-nqK52.gif)
+no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}
+body.fb_hidden{-webkit-transform:none;height:100%;margin:0;left:-10000px;overflow:visible;position:absolute;top:-10000px;width:100%
+}
+.fb_dialog.fb_dialog_mobile.loading{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/yO/r/_j03izEX40U.gif)
+white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}
+.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}
+#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}
+#fb-root #fb_dialog_ipad_overlay.hidden{display:none}
+.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}
+.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0 0, 0 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}
+.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%
+}
+.fb_dialog_content .dialog_header td.header_left{font-size: 12px;padding-left:5px;vertical-align:middle;width:60px
+}
+.fb_dialog_content .dialog_header td.header_right{font-size: 12px;padding-right:5px;vertical-align:middle;width:60px
+}
+.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0 0, 0 100%, from(#4966A6),
+color-stop(0.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset,
+rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}
+.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}
+.fb_dialog_content .dialog_header .header_center{color:#fff;font-size: 16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}
+.fb_dialog_content .dialog_content{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}
+.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}
+#fb_dialog_loader_close{float:left}
+.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}
+.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}
+.fb_iframe_widget{position:relative;display:-moz-inline-block;display:inline-block}
+.fb_iframe_widget iframe{position:relative;vertical-align:text-bottom}
+.fb_iframe_widget span{position:relative}
+.fb_hide_iframes iframe{position:relative;left:-10000px}
+.fb_iframe_widget_loader{position:relative;display:inline-block}
+.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}
+.fb_iframe_widget_loader .FB_Loader{background:url(http://static.ak.fbcdn.net/rsrc.php/v1/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}
+.fb_button_simple,
+.fb_button_simple_rtl{background-image:url(http://static.ak.fbcdn.net/rsrc.php/v1/yH/r/eIpbnVKI9lR.png);background-repeat:no-repeat;cursor:pointer;outline:none;text-decoration:none}
+.fb_button_simple_rtl{background-position:right 0}
+.fb_button_simple .fb_button_text{margin:0 0 0 20px;padding-bottom:1px}
+.fb_button_simple_rtl .fb_button_text{margin:0 10px 0 0}
+a.fb_button_simple:hover .fb_button_text,
+a.fb_button_simple_rtl:hover .fb_button_text,
+.fb_button_simple:hover .fb_button_text,
+.fb_button_simple_rtl:hover .fb_button_text{text-decoration:underline}
+.fb_button,
+.fb_button_rtl{background:#29447e url(http://static.ak.fbcdn.net/rsrc.php/v1/yL/r/FGFbc80dUKj.png);background-repeat:no-repeat;cursor:pointer;display:inline-block;padding:0 0 0 1px;text-decoration:none;outline:none}
+.fb_button .fb_button_text,
+.fb_button_rtl .fb_button_text{background:#5f78ab url(http://static.ak.fbcdn.net/rsrc.php/v1/yL/r/FGFbc80dUKj.png);border-top:solid 1px #879ac0;border-bottom:solid 1px #1a356e;color:#fff;display:block;font-family:"lucida grande",tahoma,verdana,arial,sans-serif;font-weight:bold;padding:2px 6px 3px 6px;margin:1px 1px 0 21px;text-shadow:none}
+a.fb_button,
+a.fb_button_rtl,
+.fb_button,
+.fb_button_rtl{text-decoration:none}
+a.fb_button:active .fb_button_text,
+a.fb_button_rtl:active .fb_button_text,
+.fb_button:active .fb_button_text,
+.fb_button_rtl:active .fb_button_text{border-bottom:solid 1px #29447e;border-top:solid 1px #45619d;background:#4f6aa3;text-shadow:none}
+.fb_button_xlarge,
+.fb_button_xlarge_rtl{background-position:left -60px;font-size: 24px;line-height:30px}
+.fb_button_xlarge .fb_button_text{padding:3px 8px 3px 12px;margin-left:38px}
+a.fb_button_xlarge:active{background-position:left -99px}
+.fb_button_xlarge_rtl{background-position:right -268px}
+.fb_button_xlarge_rtl .fb_button_text{padding:3px 8px 3px 12px;margin-right:39px}
+a.fb_button_xlarge_rtl:active{background-position:right -307px}
+.fb_button_large,
+.fb_button_large_rtl{background-position:left -138px;font-size: 13px;line-height:16px}
+.fb_button_large .fb_button_text{margin-left:24px;padding:2px 6px 4px 6px}
+a.fb_button_large:active{background-position:left -163px}
+.fb_button_large_rtl{background-position:right -346px}
+.fb_button_large_rtl .fb_button_text{margin-right:25px}
+a.fb_button_large_rtl:active{background-position:right -371px}
+.fb_button_medium,
+.fb_button_medium_rtl{background-position:left -188px;font-size: 11px;line-height:14px}
+a.fb_button_medium:active{background-position:left -210px}
+.fb_button_medium_rtl{background-position:right -396px}
+.fb_button_text_rtl,
+.fb_button_medium_rtl .fb_button_text{padding:2px 6px 3px 6px;margin-right:22px}
+a.fb_button_medium_rtl:active{background-position:right -418px}
+.fb_button_small,
+.fb_button_small_rtl{background-position:left -232px;font-size: 10px;line-height:10px}
+.fb_button_small .fb_button_text{padding:2px 6px 3px;margin-left:17px}
+a.fb_button_small:active,
+.fb_button_small:active{background-position:left -250px}
+.fb_button_small_rtl{background-position:right -440px}
+.fb_button_small_rtl .fb_button_text{padding:2px 6px;margin-right:18px}
+a.fb_button_small_rtl:active{background-position:right -458px}
+.fb_share_count_wrapper{position:relative;float:left}
+.fb_share_count{background:#b0b9ec none repeat scroll 0 0;color:#333;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;text-align:center}
+.fb_share_count_inner{background:#e8ebf2;display:block}
+.fb_share_count_right{margin-left:-1px;display:inline-block}
+.fb_share_count_right .fb_share_count_inner{border-top:solid 1px #e8ebf2;border-bottom:solid 1px #b0b9ec;margin:1px 1px 0 1px;font-size: 10px;line-height:10px;padding:2px 6px 3px;font-weight:bold}
+.fb_share_count_top{display:block;letter-spacing:-1px;line-height:34px;margin-bottom:7px;font-size: 22px;border:solid 1px #b0b9ec}
+.fb_share_count_nub_top{border:none;display:block;position:absolute;left:7px;top:35px;margin:0;padding:0;width:6px;height:7px;background-repeat:no-repeat;background-image:url(http://static.ak.fbcdn.net/rsrc.php/v1/yU/r/bSOHtKbCGYI.png)}
+.fb_share_count_nub_right{border:none;display:inline-block;padding:0;width:5px;height:10px;background-repeat:no-repeat;background-image:url(http://static.ak.fbcdn.net/rsrc.php/v1/yX/r/i_oIVTKMYsL.png);vertical-align:top;background-position:right 5px;z-index:10;left:2px;margin:0 2px 0 0;position:relative}
+.fb_share_no_count{display:none}
+.fb_share_size_Small .fb_share_count_right .fb_share_count_inner{font-size: 10px}
+.fb_share_size_Medium .fb_share_count_right .fb_share_count_inner{font-size: 11px;padding:2px 6px 3px;letter-spacing:-1px;line-height:14px}
+.fb_share_size_Large .fb_share_count_right .fb_share_count_inner{font-size: 13px;line-height:16px;padding:2px 6px 4px;font-weight:normal;letter-spacing:-1px}
+.fb_share_count_hidden .fb_share_count_nub_top,
+.fb_share_count_hidden .fb_share_count_top,
+.fb_share_count_hidden .fb_share_count_nub_right,
+.fb_share_count_hidden .fb_share_count_right{visibility:hidden}
+.fb_connect_bar_container div,
+.fb_connect_bar_container span,
+.fb_connect_bar_container a,
+.fb_connect_bar_container img,
+.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}
+.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}
+.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode=="CSS1Compat"? document.documentElement.scrollTop+"px":body.scrollTop+"px")}
+.fb_connect_bar{position:relative;margin:auto;height:100%;width:100%;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:"lucida grande", tahoma, verdana, arial, sans-serif !important;font-size: 13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}
+.fb_connect_bar a:hover{color:#fff}
+.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}
+.fb_connect_bar div a,
+.fb_connect_bar span,
+.fb_connect_bar span a{color:#bac6da;font-size: 11px;text-decoration:none}
+.fb_connect_bar .fb_buttons{float:right;margin-top:7px}
+.fb_edge_widget_with_comment{position:relative;*z-index:1000}
+.fb_edge_widget_with_comment span.fb_edge_comment_widget{position:absolute}
+.fb_edge_widget_with_comment span.fb_edge_comment_widget iframe.fb_ltr{left:-4px}
+.fb_edge_widget_with_comment span.fb_edge_comment_widget iframe.fb_rtl{left:2px}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget{left:0;z-index:1}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget .FB_Loader{left:0;top:1px;margin-top:6px;margin-left:0;background-position:50% 50%;background-color:#fff;height:150px;width:394px;border:1px #666 solid;border-bottom:2px solid #283e6c;z-index:1}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget.dark .FB_Loader{background-color:#000;border-bottom:2px solid #ccc}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget.siderender
+.FB_Loader{margin-top:0}
+.fbpluginrecommendationsbarleft,
+.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}
+/* @noflip */
+.fbpluginrecommendationsbarleft{left:10px}
+/* @noflip */
+.fbpluginrecommendationsbarright{right:10px}
+</style><script charset="UTF-8" async="" src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/thread.js"></script><link href="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/defaults.css" type="text/css" rel="stylesheet"><script charset="UTF-8" async="" src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/disqus.js"></script><link href="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/dsq7884a9652e94555c70f96b6be63be216.css" type="text/css" rel="stylesheet"><script charset="UTF-8" async="" src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/dsq7884a9652e94555c70f96b6be63be216.js"></script></head>
+<body data-rendering="true"><iframe src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/hub.html" style="position: absolute; top: -9999em; width: 10px; height: 10px;" name="twttrHubFrame" tabindex="0" allowtransparency="true" id="twttrHubFrame" frameborder="0" scrolling="no"></iframe>
+    <div id="head">
+        <div class="content floatwrap">
+            <div class="col1">
+                <a class="logo" href="http://www.micahcarrick.com/">micah carrick</a>
+            </div>
+            <div class="col2">
+                Django, Python, GTK+, PHP, and a pinch of salt.
+            </div>
+        </div>
+    </div>
+    <div id="main" class="floatwrap">
+        <div class="col1">
+            
+<div class="post-detail">
+    <div class="post-meta floatwrap">
+        Feb 26, 2006
+        
+<!-- google -->
+<div class="share-google share-button">
+    <!-- Place this tag where you want the +1 button to render -->
+    <div style="height: 20px; width: 90px; display: inline-block; text-indent: 0pt; margin: 0pt; padding: 0pt; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline;" id="___plusone_0"><iframe allowtransparency="true" hspace="0" id="I1_1325913276495" marginheight="0" marginwidth="0" name="I1_1325913276495" src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/fastbutton.html" style="position: static; left: 0pt; top: 0pt; width: 90px; margin: 0px; border-style: none; height: 20px; visibility: visible;" tabindex="-1" vspace="0" title="+1" frameborder="0" scrolling="no" width="100%"></iframe></div>
+</div>
+<!-- Place this render call where appropriate -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+
+<!-- twitter -->
+<div class="share-twitter share-button">
+    <iframe title="Twitter Tweet Button" style="width: 110px; height: 20px;" class="twitter-share-button twitter-count-horizontal" src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/tweet_button.html" allowtransparency="true" frameborder="0" scrolling="no"></iframe><script type="text/javascript" src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/widgets.js"></script>
+</div>
+
+
+<!-- facebook -->
+<div class="share-facebook share-button">
+    <div class=" fb_reset" id="fb-root"><div style="position: absolute; top: -10000px; height: 0pt; width: 0pt;"></div></div>
+    <script>(function(d){
+      var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+      js = d.createElement('script'); js.id = id; js.async = true;
+      js.src = "//connect.facebook.net/en_US/all.js#appId=150653265025885&xfbml=1";
+      d.getElementsByTagName('head')[0].appendChild(js);
+    }(document));</script>
+    <div class="fb-like fb_edge_widget_with_comment fb_iframe_widget" data-href="http://www.micahcarrick.com/avr-3-wire-hd44780-lcd-interface-avr-gcc.html" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"><span><iframe src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/like.html" class="fb_ltr" title="Like this content on Facebook." style="border: medium none; overflow: hidden; height: 20px; width: 90px;" name="f10a6c2711e35a4" id="f3f997b926a081c" scrolling="no"></iframe></span></div>
+</div>
+
+
+
+    </div>
+    <h1>AVR 3-Wire HD44780 LCD Interface (avr-gcc)</h1>
+    <div class="post">
+        
+            I purchased a Powertip PC-1202A 12x2 LCD with backlight from
+ Wright Hobbies a while back since it was only $7.95.  I will be using 
+it often for various projects with robotics and microcontrollers.  The 
+problem was, I didn't want to take up all my IO pins on my processor 
+just with the LCD interfacing.  I found some circuits for 3-wire and 
+2-wire interfaces.  I went with the 3-wire interface (4 if you want the 
+AVR to control the backlight) and wrote my own little set of routines 
+for controlling the LCD.
+
+<!--more-->Now, there are many great LCD routines out there (see <a href="http://www.micahcarrick.com/v2/content/view/27/27/#Resources">Resources</a>),
+ however, I wanted to learn how to control the LCD myself and I couldn't
+ quickly find an avr-gcc library that supported this 3-wire interface.  
+The code I used is based on descriptions, tutorials, and AVR ASM or PIC 
+ASM code from various locations on the internet (see <a href="http://www.micahcarrick.com/v2/AVR%20PC1202A%20Interface.html#Resources">Resources</a>).
+
+The code I have written for interfacing with the LCD (<a href="http://www.micahcarrick.com/files/atmega8/lcd.c">lcd.c</a> and <a href="http://www.micahcarrick.com/files/atmega8/lcd.c">lcd.h</a>)
+ is minimal.  I have written it to be somewhat generic--that is, it 
+should work with any HD44780 based parallel LCD.  However, I haven't 
+studied the datasheet to ensure I'm allowing proper delays and I have 
+only tested it with the Powertip PC-1202A LCD (See <a href="http://www.micahcarrick.com/v2/AVR%20PC1202A%20Interface.html#Resources">Resources</a> for datasheet and vendors).  At this point in time, it only supports the following functionality:
+<ul>
+	<li>Initialize Display</li>
+	<li>Turn on/off backlight</li>
+	<li>Load a byte into the 74HCT164 shift register</li>
+	<li>Send the byte in the '164 as a command to the LCD</li>
+	<li>Send the byte in the '164 as a character to the LCD</li>
+	<li>Send a character to the LCD</li>
+	<li>Move the cursor to a specified position (row and column)</li>
+	<li>Increment the cursor position</li>
+	<li>Decrement the cursor position</li>
+</ul>
+As you can see, I haven't put in any support for sending strings.  This 
+is because I'm not familiar enough with the ins and outs of AVR 
+programming and am not sure how I want to implement that in terms of 
+program (flash) memory vs. eeprom memory etc.  As I use this code for 
+projects, these issues will come up and I will modify these files and 
+update them herre on the website.  So as of now, to load a string into 
+the LCD, you have to do it one character at a time.
+<h4><a title="Circuit_Description" name="Circuit_Description"></a>Circuit Description</h4>
+Below is the schematic diagram for the circuit I'm using.  The circuit 
+is derived from Stefan Heinzmann's circuit which is a 3-wire interface 
+to a PIC12C508 microcontroller (see <a href="http://www.micahcarrick.com/v2/AVR%20PC1202A%20Interface.html#Resources">Resources</a>).
+
+<p style="text-align: center"><a href="http://www.micahcarrick.com/v2/images/stories/avr/atmega8/pc1202a/circuit.png"><img src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/circuit.png" style="border: 2px solid; width: 400px; height: 204px;" alt="PC-1202A LCD 3-wire Interface to AVR ATMega8"></a>
+<a href="http://www.micahcarrick.com/v2/images/stories/avr/atmega8/pc1202a/circuit.png">[click to enlarge]</a>
+
+</p><p align="center"><a href="http://www.micahcarrick.com/v2/images/stories/avr/atmega8/pc1202a/pc1202a.jpg"><img src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/pc1202a.jpg" style="border: 2px solid; width: 400px; height: 300px;" alt="The circuit in action on my breadboard"></a>
+<a href="http://www.micahcarrick.com/v2/images/stories/avr/atmega8/pc1202a/pc1202a.jpg"> [click to enlarge] </a>
+
+The AvrUsb500 connector is not necessary.  That's just my in-circuit 
+connector for programming AVRs using the AvrUsb500 programmer.  You can 
+omit that if you have other means of programming your AVRs.  The LCD 
+uses PORTD of the ATMega8.  PD7 is "dashed" in the schematic because 
+that is an optional connection.  That is for the backlight.  You could 
+optionally pull it high or low manually to enable/disable the backlight 
+respectively.  You could also use a '555 timer to setup a "one shot" 
+with the E signal to turn on the backlight for a predetermined amount of
+ time after the LCD is written to.
+
+The way this works, is the E pin at PD4 is held low, "disabling" the 
+LCD.  The DS/RS at PD5 serves two purposes: DS when E is low and RS when
+ E is high.  As DS, the byte is shifted out one bit at a time into the 
+'164 with the CLOCK signal at PD6.  Once the byte is loaded into the 
+'164, the E signal is pulsed to move that byte into the LCD in 8-bit 
+parallel mode.  Before strobing E, the DS/RS line at PD5 is set high if 
+the data in the '164 is a character and is set low if the data in the 
+'164 is a command.  Thus, the DS/RS line is operating as RS for the 
+duration that the E is high.
+</p><h4><a title="Download_Project_Files" name="Download_Project_Files"></a>Download Project Files</h4>
+Download <a href="http://www.micahcarrick.com/files/atmega8/lcd_pc1202a.tar.gz">lcd_pc1202a.tar.gz</a>
+
+This tarball contains the following files to build pc1202a.hex, a 
+program for the ATMega8 that outputs "Micah" to line one of the LCD and 
+"Carrick" to the second line.
+<ul>
+	<li>circuit.png - the schematic diagram shown above</li>
+	<li>gpl.txt - GPL license information</li>
+	<li>main.c - the test program</li>
+	<li>lcd.h - header for the LCD routines</li>
+	<li>lcd.c - LCD routines</li>
+	<li>Makefile - the Makefile that builds pc1202a.hex and optionally programs the chip using the AvrUsb500</li>
+</ul>
+<h4><a title="Resources" name="Resources"></a>Resources</h4>
+<ul>
+	<li><a href="http://www.powertip.com.tw/product/PC%20SERIES/PC%201202A.PDF">Powertip PC-1202A LCD Datasheet</a></li>
+	<li><a href="http://www.wrighthobbies.net/catalog/product_info.php?cPath=33&amp;products_id=70&amp;osCsid=27af3f233724299fb27e3fd8f57758fe">Powertip PC-1202A LCD from Wright Hobbies - $7.95</a></li>
+	<li><a href="http://www.goldmine-elec-products.com/prodinfo.asp?number=G13745&amp;variation=&amp;aitem=1&amp;mitem=1">Powertip PC-1202A LCD from Electronics Goldmine - $7.95</a></li>
+	<li><a href="http://home.iae.nl/users/pouweha/lcd/lcd_examp.shtml#_3">Stefan Heinzmann's original PIC12C508 3-wire Interface</a></li>
+	<li><a href="http://www.nongnu.org/avr-libc/user-manual/modules.html">avr-libc Reference Documentation</a></li>
+	<li><a href="http://homepage.hispeed.ch/peterfleury/avr-lcd44780.html">Peter Fleury's "Interfacing a HD44780 Based LCD to an AVR"</a></li>
+	<li><a href="http://homepage.hispeed.ch/peterfleury/avr-lcd44780.html">Myke Predko's "LCD Interfacing Reference Page"</a></li>
+	<li><a href="http://semiconductor.hitachi.com/products/pdf/99rtd006d2.pdf">Hitachi HD44780 Datasheet</a></li>
+</ul>
+        
+    </div>
+</div>
+
+
+  <div style="margin: 20px 0; padding: 12px; background-color: #ebffeb; border-radius: 10px; border: 1px solid gray;">
+    Did you enjoy <strong>AVR 3-Wire HD44780 LCD Interface (avr-gcc)?</strong> If you would like to help 
+    support my work, A donation of a buck or two would be very much appreciated.
+    <div style="text-align: center; padding: 10px 0;">
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+        <input name="cmd" value="_s-xclick" type="hidden">
+        <input name="hosted_button_id" value="P76HRKQG489DS" type="hidden">
+        <input src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/btn_donate_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!" border="0" type="image">
+        <img alt="" src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/pixel.gif" border="0" height="1" width="1">
+        </form>
+    </div>
+</div>
+
+
+<div id="disqus_thread"><div style="display: none;" id="dsq-content-stub"><img alt="DISQUS" src="data:image/png;base64,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" height="17" width="71"><img alt="..." src="data:image/gif;base64,R0lGODlhEAALAPQAAP///z2LqeLt8dvp7u7090GNqz2LqV+fuJ/F1IW2ycrf51aatHWswaXJ14i4ys3h6FmctUCMqniuw+vz9eHs8fb5+meku+Tu8vT4+cfd5bbT3tbm7PH2+AAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCwAAACwAAAAAEAALAAAFLSAgjmRpnqSgCuLKAq5AEIM4zDVw03ve27ifDgfkEYe04kDIDC5zrtYKRa2WQgAh+QQJCwAAACwAAAAAEAALAAAFJGBhGAVgnqhpHIeRvsDawqns0qeN5+y967tYLyicBYE7EYkYAgAh+QQJCwAAACwAAAAAEAALAAAFNiAgjothLOOIJAkiGgxjpGKiKMkbz7SN6zIawJcDwIK9W/HISxGBzdHTuBNOmcJVCyoUlk7CEAAh+QQJCwAAACwAAAAAEAALAAAFNSAgjqQIRRFUAo3jNGIkSdHqPI8Tz3V55zuaDacDyIQ+YrBH+hWPzJFzOQQaeavWi7oqnVIhACH5BAkLAAAALAAAAAAQAAsAAAUyICCOZGme1rJY5kRRk7hI0mJSVUXJtF3iOl7tltsBZsNfUegjAY3I5sgFY55KqdX1GgIAIfkECQsAAAAsAAAAABAACwAABTcgII5kaZ4kcV2EqLJipmnZhWGXaOOitm2aXQ4g7P2Ct2ER4AMul00kj5g0Al8tADY2y6C+4FIIACH5BAkLAAAALAAAAAAQAAsAAAUvICCOZGme5ERRk6iy7qpyHCVStA3gNa/7txxwlwv2isSacYUc+l4tADQGQ1mvpBAAIfkECQsAAAAsAAAAABAACwAABS8gII5kaZ7kRFGTqLLuqnIcJVK0DeA1r/u3HHCXC/aKxJpxhRz6Xi0ANAZDWa+kEAA7AAAAAAAAAAAA" style="margin: 0pt 0pt 3px 5px;" height="11" width="16"></div><div class="clearfix" style="display: block;" id="dsq-content">      <div id="dsq-global-toolbar" class="dsq-clearfix">        <ul class="dsq-global-toolbar-right dsq-clearfix">                            <li class="dsq-community-box">                <a href="#" class="dsq-toolbar-item dsq-tt" onclick="DISQUS.dtpl.actions.fire('community.show'); return false" title="Expand Community Box"><span class="dsq-toolbar-icon"></span></a>            </li>                            <li class="dsq-global-toolbar-dropdown-container">                    <div id="dsq-toolbar-dropdown">    <a href="#" class="dsq-toolbar-logo dsq-toolbar-item dsq-clearfix"><span class="dsq-toolbar-icon">Disqus</span></a>    <div id="dsq-toolbar-dropdown-wrap" style="display: none">      <ul class="dsq-clearfix">                    <li class="dsq-login-link"><a href="#" onclick="DISQUS.dtpl.actions.fire('auth.login'); return false"><span class="dsq-toolbar-icon"></span><span class="dsq-toolbar-label">Login</span></a></li>                    <li class="dsq-about-link"><a href="http://disqus.com/" target="_blank"><span class="dsq-toolbar-icon"></span><span class="dsq-toolbar-label">About Disqus</span></a></li>      </ul>    </div>  </div>            </li>        </ul>            </div>    <div id="dsq-like-tooltip">      <div id="dsq-share-step-1" class="dsq-share-step">        <h3>Glad you liked it. Would you like to share?</h3>        <p class="dsq-tooltip-checkbox"><input id="dsq-share-thread-facebook" value="Facebook" type="checkbox"><label for="dsq-share-thread-facebook"><span class="dsq-facebook">Facebook</span></label></p>        <p class="dsq-tooltip-checkbox"><input id="dsq-share-thread-twitter" value="Twitter" type="checkbox"><label for="dsq-share-thread-twitter"><span class="dsq-twitter">Twitter</span></label></p>        <ul id="dsq-tooltip-actions">                        <li><a href="#" onclick="DISQUS.dtpl.actions.fire('thread.share.send'); return false" class="dsq-primary-action">Share</a></li>                    <li><a href="#" onclick="DISQUS.dtpl.actions.fire('thread.share.cancel'); return false" class="dsq-secondary-action">No thanks</a></li>        </ul>      </div>      <div id="dsq-share-step-2" class="dsq-share-step" style="display:none !important">        <p>Sharing this page …</p>      </div>      <div id="dsq-share-step-3" class="dsq-share-step" style="display:none !important">        <p>Thanks! <a href="#" class="dsq-tooltip-decline" onclick="DISQUS.dtpl.actions.fire('thread.share.cancel'); return false">Close</a></p>      </div>    </div>                            <div id="dsq-sort-by">    <select id="dsq-sort-select" onchange="DISQUS.dtpl.actions.fire('thread.sort', this.value);">              <option value="hot">          Sort by popular now        </option>              <option value="best">          Sort by best rating        </option>              <option value="newest" selected="selected">          Sort by newest first        </option>              <option value="oldest">          Sort by oldest first        </option>          </select>  </div>      <h3>            Showing <span id="dsq-num-posts">5</span> of <span id="dsq-total-posts">9</span> comments        </h3>        <ul id="dsq-comments">            <li id="dsq-comment-382214984" data-dsq-comment-id="382214984" class="dsq-comment dsq-clearfix                        " style="margin-left:0px;">    <div class="dsq-avatar dsq-tt" title="Expand jsmxbox's profile">      <a href="http://disqus.com/guest/fd7723e77643d96f3018c2efd7a2a87d/" onclick="DISQUS.dtpl.actions.fire('profile.show', 382214984, null); return false">        <img src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/noavatar32.png" class="dsq-deferred-avatar" data-src="http://mediacdn.disqus.com/1325732276/images/noavatar32.png" alt="">      </a>    </div>    <div id="dsq-comment-body-382214984" class="dsq-comment-body">      <div class="dsq-comment-header">        <span class="dsq-commenter-name">jsmxbox</span>                <span class="dsq-collapsed-count">                      1 comment collapsed                  </span>                <a href="#" class="dsq-collapse-toggle dsq-collapse" title="Collapse thread" onclick="DISQUS.dtpl.actions.fire('comments.collapse', 382214984); return false;"><span>Collapse</span></a>        <a href="#" class="dsq-collapse-toggle dsq-expand" title="Expand thread" onclick="DISQUS.dtpl.actions.fire('comments.expand', 382214984); return false;"><span>Expand</span></a>      </div>        <div class="dsq-comment-message" id="dsq-comment-message-382214984">                <div class="dsq-comment-text" id="dsq-comment-text-382214984">        Could i change the 74HCT164 for a 74HC595 would the wiring be the same or different??      </div>                        </div>            <!-- edit box dynamically inserted here -->      <div id="dsq-append-edit-382214984"></div>        <div class="dsq-comment-footer">    <ul class="dsq-comment-actions">              <li id="dsq-like-382214984">          <span class="dsq-like-thumb dsq-font">A</span>          <a href="#" onclick="DISQUS.dtpl.actions.fire('comments.like', this,382214984); return false">Like</a>        </li>                          <li>          <a href="#" class="dsq-comment-reply" onclick="DISQUS.dtpl.actions.fire('comments.reply',382214984, this); return false">Reply</a>        </li>         </ul>    <ul class="dsq-comment-meta">      <li>  <a href="#comment-382214984" onclick="DISQUS.dtpl.actions.fire('comments.permalink', 382214984);" title="Link to comment by jsmxbox">          5 months ago      </a></li>            <li style="display:none">          <a href="#" id="dsq-comment-like-count-382214984" class="dsq-comment-like-count" onclick="return DISQUS.dtpl.actions.fire('comments.showUserVotes', 382214984); return false">0          Like      </a>      </li>              <li class="dsq-comment-flag" style="visibility: hidden">          <a href="#" class="dsq-comment-flag dsq-font" onclick="return DISQUS.dtpl.actions.fire('comments.report', 382214984, false);">F</a>        </li>          </ul>  </div>      <!-- reply box dynamically inserted here -->      <div id="dsq-append-reply-382214984"></div>    </div>  </li>  <!-- new replies dynamically inserted here -->  <li id="dsq-append-post-382214984"></li>            <li id="dsq-comment-382214986" data-dsq-comment-id="382214986" class="dsq-comment dsq-clearfix                        " style="margin-left:0px;">    <div class="dsq-avatar dsq-tt" title="Expand tom's profile">      <a href="http://disqus.com/guest/1d116f6eff0e6ad4f7ce33b617a142aa/" onclick="DISQUS.dtpl.actions.fire('profile.show', 382214986, null); return false">        <img src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/noavatar32.png" class="dsq-deferred-avatar" data-src="http://mediacdn.disqus.com/1325732276/images/noavatar32.png" alt="">      </a>    </div>    <div id="dsq-comment-body-382214986" class="dsq-comment-body">      <div class="dsq-comment-header">        <span class="dsq-commenter-name">tom</span>                <span class="dsq-collapsed-count">                      1 comment collapsed                  </span>                <a href="#" class="dsq-collapse-toggle dsq-collapse" title="Collapse thread" onclick="DISQUS.dtpl.actions.fire('comments.collapse', 382214986); return false;"><span>Collapse</span></a>        <a href="#" class="dsq-collapse-toggle dsq-expand" title="Expand thread" onclick="DISQUS.dtpl.actions.fire('comments.expand', 382214986); return false;"><span>Expand</span></a>      </div>        <div class="dsq-comment-message" id="dsq-comment-message-382214986">                <div class="dsq-comment-text" id="dsq-comment-text-382214986">
+        any special instructions for startup of the lcd? at first 
+everything worked fine but now it seems like the lcd controller and not 
+loading ok and it goes into 1 line mode. also some characters are not 
+what they should be.      </div>                        </div>            <!-- edit box dynamically inserted here -->      <div id="dsq-append-edit-382214986"></div>        <div class="dsq-comment-footer">    <ul class="dsq-comment-actions">              <li id="dsq-like-382214986">          <span class="dsq-like-thumb dsq-font">A</span>          <a href="#" onclick="DISQUS.dtpl.actions.fire('comments.like', this,382214986); return false">Like</a>        </li>                          <li>          <a href="#" class="dsq-comment-reply" onclick="DISQUS.dtpl.actions.fire('comments.reply',382214986, this); return false">Reply</a>        </li>         </ul>    <ul class="dsq-comment-meta">      <li>  <a href="#comment-382214986" onclick="DISQUS.dtpl.actions.fire('comments.permalink', 382214986);" title="Link to comment by tom">          7 months ago      </a></li>            <li style="display:none">          <a href="#" id="dsq-comment-like-count-382214986" class="dsq-comment-like-count" onclick="return DISQUS.dtpl.actions.fire('comments.showUserVotes', 382214986); return false">0          Like      </a>      </li>              <li class="dsq-comment-flag" style="visibility: hidden">          <a href="#" class="dsq-comment-flag dsq-font" onclick="return DISQUS.dtpl.actions.fire('comments.report', 382214986, false);">F</a>        </li>          </ul>  </div>      <!-- reply box dynamically inserted here -->      <div id="dsq-append-reply-382214986"></div>    </div>  </li>  <!-- new replies dynamically inserted here -->  <li id="dsq-append-post-382214986"></li>            <li id="dsq-comment-382214988" data-dsq-comment-id="382214988" class="dsq-comment dsq-clearfix                        " style="margin-left:0px;">    <div class="dsq-avatar dsq-tt" title="Expand Jamie's profile">      <a href="http://disqus.com/guest/df853a1174f9aaadd22f4b83193a1437/" onclick="DISQUS.dtpl.actions.fire('profile.show', 382214988, null); return false">        <img src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/noavatar32.png" class="dsq-deferred-avatar" data-src="http://mediacdn.disqus.com/1325732276/images/noavatar32.png" alt="">      </a>    </div>    <div id="dsq-comment-body-382214988" class="dsq-comment-body">      <div class="dsq-comment-header">        <span class="dsq-commenter-name">Jamie</span>                <span class="dsq-collapsed-count">                      1 comment collapsed                  </span>                <a href="#" class="dsq-collapse-toggle dsq-collapse" title="Collapse thread" onclick="DISQUS.dtpl.actions.fire('comments.collapse', 382214988); return false;"><span>Collapse</span></a>        <a href="#" class="dsq-collapse-toggle dsq-expand" title="Expand thread" onclick="DISQUS.dtpl.actions.fire('comments.expand', 382214988); return false;"><span>Expand</span></a>      </div>        <div class="dsq-comment-message" id="dsq-comment-message-382214988">                <div class="dsq-comment-text" id="dsq-comment-text-382214988">        Hi,<br><br>I've tried the above codes and circuit and it doesn't seem to be working although I did exactly the same as you mentioned.<br><br>Do you know what might be the problem I'm facing? Could you please reply me if you think my problem is?<br><br>i'm using ATMEGA88PA-PU<br><br>what clock frequency do i need to use it for this? thanks      </div>                        </div>            <!-- edit box dynamically inserted here -->      <div id="dsq-append-edit-382214988"></div>        <div class="dsq-comment-footer">    <ul class="dsq-comment-actions">              <li id="dsq-like-382214988">          <span class="dsq-like-thumb dsq-font">A</span>          <a href="#" onclick="DISQUS.dtpl.actions.fire('comments.like', this,382214988); return false">Like</a>        </li>                          <li>          <a href="#" class="dsq-comment-reply" onclick="DISQUS.dtpl.actions.fire('comments.reply',382214988, this); return false">Reply</a>        </li>         </ul>    <ul class="dsq-comment-meta">      <li>  <a href="#comment-382214988" onclick="DISQUS.dtpl.actions.fire('comments.permalink', 382214988);" title="Link to comment by Jamie">          1 year ago      </a></li>            <li style="display:none">          <a href="#" id="dsq-comment-like-count-382214988" class="dsq-comment-like-count" onclick="return DISQUS.dtpl.actions.fire('comments.showUserVotes', 382214988); return false">0          Like      </a>      </li>              <li class="dsq-comment-flag" style="visibility: hidden">          <a href="#" class="dsq-comment-flag dsq-font" onclick="return DISQUS.dtpl.actions.fire('comments.report', 382214988, false);">F</a>        </li>          </ul>  </div>      <!-- reply box dynamically inserted here -->      <div id="dsq-append-reply-382214988"></div>    </div>  </li>  <!-- new replies dynamically inserted here -->  <li id="dsq-append-post-382214988"></li>            <li id="dsq-comment-382214991" data-dsq-comment-id="382214991" class="dsq-comment dsq-clearfix                        " style="margin-left:0px;">    <div class="dsq-avatar dsq-tt" title="Expand Amie Dejarnette's profile">      <a href="http://disqus.com/guest/0305539f1f4670fd613a23aa915b2c4a/" onclick="DISQUS.dtpl.actions.fire('profile.show', 382214991, null); return false">        <img src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/noavatar32.png" class="dsq-deferred-avatar" data-src="http://mediacdn.disqus.com/1325732276/images/noavatar32.png" alt="">      </a>    </div>    <div id="dsq-comment-body-382214991" class="dsq-comment-body">      <div class="dsq-comment-header">        <a href="http://www.42inchlcdtv.org/" target="_blank" class="dsq-commenter-name" rel="nofollow">Amie Dejarnette</a>                <span class="dsq-collapsed-count">                      1 comment collapsed                  </span>                <a href="#" class="dsq-collapse-toggle dsq-collapse" title="Collapse thread" onclick="DISQUS.dtpl.actions.fire('comments.collapse', 382214991); return false;"><span>Collapse</span></a>        <a href="#" class="dsq-collapse-toggle dsq-expand" title="Expand thread" onclick="DISQUS.dtpl.actions.fire('comments.expand', 382214991); return false;"><span>Expand</span></a>      </div>        <div class="dsq-comment-message" id="dsq-comment-message-382214991">                <div class="dsq-comment-text" id="dsq-comment-text-382214991">
+        Hello, I just now come across this blog whilst I'm browsing 
+around online as I am seeking some material on LCD TVs!. I think it's a 
+very interesting site so I have bookmarked your site and will revisit 
+another day to give it a better read when I have more time.      </div>                        </div>            <!-- edit box dynamically inserted here -->      <div id="dsq-append-edit-382214991"></div>        <div class="dsq-comment-footer">    <ul class="dsq-comment-actions">              <li id="dsq-like-382214991">          <span class="dsq-like-thumb dsq-font">A</span>          <a href="#" onclick="DISQUS.dtpl.actions.fire('comments.like', this,382214991); return false">Like</a>        </li>                          <li>          <a href="#" class="dsq-comment-reply" onclick="DISQUS.dtpl.actions.fire('comments.reply',382214991, this); return false">Reply</a>        </li>         </ul>    <ul class="dsq-comment-meta">      <li>  <a href="#comment-382214991" onclick="DISQUS.dtpl.actions.fire('comments.permalink', 382214991);" title="Link to comment by Amie Dejarnette">          2 years ago      </a></li>            <li style="display:none">          <a href="#" id="dsq-comment-like-count-382214991" class="dsq-comment-like-count" onclick="return DISQUS.dtpl.actions.fire('comments.showUserVotes', 382214991); return false">0          Like      </a>      </li>              <li class="dsq-comment-flag" style="visibility: hidden">          <a href="#" class="dsq-comment-flag dsq-font" onclick="return DISQUS.dtpl.actions.fire('comments.report', 382214991, false);">F</a>        </li>          </ul>  </div>      <!-- reply box dynamically inserted here -->      <div id="dsq-append-reply-382214991"></div>    </div>  </li>  <!-- new replies dynamically inserted here -->  <li id="dsq-append-post-382214991"></li>            <li id="dsq-comment-382214989" data-dsq-comment-id="382214989" class="dsq-comment dsq-clearfix                        " style="margin-left:0px;">    <div class="dsq-avatar dsq-tt" title="Expand Valera's profile">      <a href="http://disqus.com/guest/c02a791f30d9aa8f48e3c85404a2be45/" onclick="DISQUS.dtpl.actions.fire('profile.show', 382214989, null); return false">        <img src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/noavatar32.png" class="dsq-deferred-avatar" data-src="http://mediacdn.disqus.com/1325732276/images/noavatar32.png" alt="">      </a>    </div>    <div id="dsq-comment-body-382214989" class="dsq-comment-body">      <div class="dsq-comment-header">        <span class="dsq-commenter-name">Valera</span>                <span class="dsq-collapsed-count">                      1 comment collapsed                  </span>                <a href="#" class="dsq-collapse-toggle dsq-collapse" title="Collapse thread" onclick="DISQUS.dtpl.actions.fire('comments.collapse', 382214989); return false;"><span>Collapse</span></a>        <a href="#" class="dsq-collapse-toggle dsq-expand" title="Expand thread" onclick="DISQUS.dtpl.actions.fire('comments.expand', 382214989); return false;"><span>Expand</span></a>      </div>        <div class="dsq-comment-message" id="dsq-comment-message-382214989">                <div class="dsq-comment-text" id="dsq-comment-text-382214989">        /* <br> *  Prints a string at line 1 of the LCD<br> *<br>*/<br>void lcd_puts_1(const unsigned char *str) {<br>	uint8_t i;<br><br>        /* goto line 1 */<br>        lcd_move_cursor(LCD_LINE_1, 0);<br>        <br>	i=0;<br>	while (str[i] &amp;&amp; (i      </div>                        </div>            <!-- edit box dynamically inserted here -->      <div id="dsq-append-edit-382214989"></div>        <div class="dsq-comment-footer">    <ul class="dsq-comment-actions">              <li id="dsq-like-382214989">          <span class="dsq-like-thumb dsq-font">A</span>          <a href="#" onclick="DISQUS.dtpl.actions.fire('comments.like', this,382214989); return false">Like</a>        </li>                          <li>          <a href="#" class="dsq-comment-reply" onclick="DISQUS.dtpl.actions.fire('comments.reply',382214989, this); return false">Reply</a>        </li>         </ul>    <ul class="dsq-comment-meta">      <li>  <a href="#comment-382214989" onclick="DISQUS.dtpl.actions.fire('comments.permalink', 382214989);" title="Link to comment by Valera">          2 years ago      </a></li>            <li style="display:none">          <a href="#" id="dsq-comment-like-count-382214989" class="dsq-comment-like-count" onclick="return DISQUS.dtpl.actions.fire('comments.showUserVotes', 382214989); return false">0          Like      </a>      </li>              <li class="dsq-comment-flag" style="visibility: hidden">          <a href="#" class="dsq-comment-flag dsq-font" onclick="return DISQUS.dtpl.actions.fire('comments.report', 382214989, false);">F</a>        </li>          </ul>  </div>      <!-- reply box dynamically inserted here -->      <div id="dsq-append-reply-382214989"></div>    </div>  </li>  <!-- new replies dynamically inserted here -->  <li id="dsq-append-post-382214989"></li>      </ul>        <div id="dsq-pagination">      <ul id="dsq-footer" class="dsq-clearfix">        <div id="dsq-subscribe">            <li>      <a href="#" class="dsq-subscribe-email" onclick="return DISQUS.dtpl.actions.fire('thread.subscribe');">        <span class="dsq-font">M</span> <em>Subscribe by email</em>      </a>    </li>    <li>    <a href="http://micahcarrick.disqus.com/avr_3_wire_hd44780_lcd_interface_avr_gcc/latest.rss" class="dsq-subscribe-rss">      <span class="dsq-font">S</span> <em>RSS</em>    </a>  </li>    </div>  </ul>            <a class="dsq-more-button" href="#" onclick="DISQUS.dtpl.actions.fire('thread.paginate', 2, this); return false">        Load more comments      </a>        </div>                    <div class="dsq-reply " id="dsq-reply">          <div id="dsq-account-dropdown">                  <a href="#" onclick="DISQUS.dtpl.actions.fire('auth.login'); return false;">Login</a>              </div>      <h3>Add New Comment</h3>        <div class="dsq-avatar">              <img src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/noavatar32.png">          </div>    <div class="dsq-textarea dsq-textarea-reply">      <div class="dsq-textarea-background">        <div style="height: auto;" class="dsq-textarea-wrapper">          <!-- filled dynamically -->        <iframe style="height: 59px;" src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/reply.html" id="easyXDM_DISQUS_net_default7745_provider" name="easyXDM_DISQUS_net_default7745_provider" frameborder="0" scrolling="no"></iframe></div>                <div class="dsq-post-tools">          <ul>            <li class="dsq-post-as">                                <button type="button" class="dsq-button" onclick="DISQUS.dtpl.actions.fire('comments.validate', null, this);">                    Post as …                  </button>                          </li>                        <li class="dsq-share-on dsq-clearfix">                            </li>          </ul>        </div>      </div>    </div>  </div>              </div><div>  </div></div>
+<script type="text/javascript">
+    var disqus_shortname = 'micahcarrick'; 
+    var disqus_identifier = 'avr-3-wire-hd44780-lcd-interface-avr-gcc';
+    var disqus_title = 'AVR 3-Wire HD44780 LCD Interface (avr-gcc)';
+    var disqus_url = 'http://www.micahcarrick.com/avr-3-wire-hd44780-lcd-interface-avr-gcc.html';
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+        </div>
+        <div class="col2">
+            <div id="sidenav">
+    <!-- 
+    <div class="sideblock">
+        <input type="text" name="s"/>
+        <input type="submit" value="Search"/>
+    </div>
+    -->
+    <div class="sideblock">
+        <ul class="sitelinks">
+            <!-- 
+            <li><a href="">About Me</a></li>
+            <li><a href="">Contact</a></li>
+            -->
+        </ul>
+        <p class="social">
+        <a href="http://www.facebook.com/micah.d.carrick"><img src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/facebook.png" alt="Find me on Facebook"></a>
+        <a href="http://twitter.com/#%21/MicahCarrick"><img src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/twitter.png" alt="Follow me on Twitter"></a>
+        <a href="http://www.micahcarrick.com/rss/"><img src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/rss.png" alt="RSS Feed"></a>
+        </p>
+        <script type="text/javascript"><!--
+            google_ad_client = "ca-pub-0691097486991650";
+            /* micahcarrick.com_side1 */
+            google_ad_slot = "1891963103";
+            google_ad_width = 234;
+            google_ad_height = 60;
+            //-->
+        </script>
+        <script type="text/javascript" src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/show_ads.js">
+        </script>
+    </div>
+
+    <div class="sideblock">
+        <h3>Categories</h3>
+        <ul>
+            
+            <li><a href="http://www.micahcarrick.com/django/">Django</a>
+            
+            </li><li><a href="http://www.micahcarrick.com/gnome/">GNOME</a>
+            
+            </li><li><a href="http://www.micahcarrick.com/gtk-programming/">GTK+ Programming</a>
+            
+            </li><li><a href="http://www.micahcarrick.com/linux/">Linux</a>
+            
+            </li><li><a href="http://www.micahcarrick.com/python-programming/">Python Programming</a>
+            
+            </li><li><a href="http://www.micahcarrick.com/robotics-electronics/">Robotics &amp; Electronics</a>
+            
+            </li><li><a href="http://www.micahcarrick.com/web-development/">Web Development</a>
+            
+        </li></ul>
+    </div>
+    
+    <div class="sideblock">
+        <h3>Recent Posts</h3>
+        <ul>
+            
+            <li><a href="http://www.micahcarrick.com/application-launchers-in-gnome-3.html">Create Application Launchers in GNOME 3</a>
+            
+            </li><li><a href="http://www.micahcarrick.com/3-taskbars-for-gnome-3.html">3 Taskbar Options for GNOME 3.2</a>
+            
+            </li><li><a href="http://www.micahcarrick.com/change-image-with-jquery.html">Change Image with jQuery</a>
+            
+            </li><li><a href="http://www.micahcarrick.com/gedit-as-a-django-ide-for-linux.html">Gedit as a Django IDE for Linux</a>
+            
+            </li><li><a href="http://www.micahcarrick.com/paypal-ipn-with-php.html">PayPal IPN with PHP</a>
+            
+            </li><li><a href="http://www.micahcarrick.com/php5-zip-code-range-and-distance.html">PHP 5 Zip Code Range and Distance Calculation</a>
+            
+            </li><li><a href="http://www.micahcarrick.com/django-project-gedit-plugin.html">Django Project Plugin for Gedit 3</a>
+            
+            </li><li><a href="http://www.micahcarrick.com/favorites-plugin-for-gedit-3.html">Favorites Plugin for Gedit 3</a>
+            
+            </li><li><a href="http://www.micahcarrick.com/writing-plugins-for-gedit-3-in-python.html">Writing Plugins for gedit 3 with Python</a>
+            
+            </li><li><a href="http://www.micahcarrick.com/gtk3-python-hello-world.html">"Hello World" in Python with GTK+ 3</a>
+            
+        </li></ul>
+    </div>
+</div>
+
+<div style="margin: 12px 0;">
+<a href="http://www.rackspacecloud.com/2851-0-1-26.html" target="_blank"><img class=" uufcfciyitflcurxeakk" src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/linux-250x250.png" alt="Linux Servers on the Cloud IN MINUTES" border="0" height="250" width="250"></a>
+</div>
+
+<div style="margin: 12px 0;">
+<script type="text/javascript"><!--
+    google_ad_client = "ca-pub-0691097486991650";
+    /* micahcarrick.com_sidenav */
+    google_ad_slot = "3348298581";
+    google_ad_width = 250;
+    google_ad_height = 250;
+    //-->
+</script>
+<script type="text/javascript" src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/show_ads.js">
+</script>
+</div>
+
+<div style="margin: 12px 0;">
+<script type="text/javascript"><!--
+    google_ad_client = "ca-pub-0691097486991650";
+    /* micahcarrick.com_sidenav */
+    google_ad_slot = "3348298581";
+    google_ad_width = 250;
+    google_ad_height = 250;
+    //-->
+</script>
+<script type="text/javascript" src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/show_ads.js">
+</script>
+</div>
+
+
+        </div>
+    </div>
+    <div id="foot">
+        <p>
+            Copyright © 2004 - 2012 Micah Carrick.
+        </p>
+        <p>
+            <a href="http://www.djangoproject.com/"><img src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/djangomade124x25.gif" alt="Made with Django." title="Made with Django." height="25" width="124"></a>
+        </p>
+    </div>
+
+<iframe src="avr-3-wire-hd44780-lcd-interface-avr-gcc_files/def.html" style="position: absolute; top: -2000px; left: 0px;" id="easyXDM_DISQUS_net_default7744_provider" name="easyXDM_DISQUS_net_default7744_provider" frameborder="0"></iframe></body></html>

@@ -1,0 +1,371 @@
+   1               		.file	"RelayBoard.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.EVENT_USB_Device_ControlRequest,"ax",@progbits
+  17               	.global	EVENT_USB_Device_ControlRequest
+  19               	EVENT_USB_Device_ControlRequest:
+  20               	.LFB95:
+  21               	.LSM0:
+  22 0000 DF93      		push r29
+  23 0002 CF93      		push r28
+  24 0004 CDB7      		in r28,__SP_L__
+  25 0006 DEB7      		in r29,__SP_H__
+  26 0008 2797      		sbiw r28,7
+  27 000a 0FB6      		in __tmp_reg__,__SREG__
+  28 000c F894      		cli
+  29 000e DEBF      		out __SP_H__,r29
+  30 0010 0FBE      		out __SREG__,__tmp_reg__
+  31 0012 CDBF      		out __SP_L__,r28
+  32               	/* prologue: function */
+  33               	/* frame size = 7 */
+  34               	.LSM1:
+  35 0014 DE01      		movw r26,r28
+  36 0016 1396      		adiw r26,3
+  37 0018 E0E0      		ldi r30,lo8(C.11.3565)
+  38 001a F0E0      		ldi r31,hi8(C.11.3565)
+  39 001c 85E0      		ldi r24,lo8(5)
+  40               	.L2:
+  41 001e 0190      		ld r0,Z+
+  42 0020 0D92      		st X+,r0
+  43 0022 8150      		subi r24,lo8(-(-1))
+  44 0024 01F4      		brne .L2
+  45               	.LSM2:
+  46 0026 1982      		std Y+1,__zero_reg__
+  47 0028 1A82      		std Y+2,__zero_reg__
+  48               	.LSM3:
+  49 002a 8091 0000 		lds r24,USB_ControlRequest+1
+  50 002e 8130      		cpi r24,lo8(1)
+  51 0030 01F4      		brne .+2
+  52 0032 00C0      		rjmp .L4
+  53 0034 8930      		cpi r24,lo8(9)
+  54 0036 01F0      		breq .+2
+  55 0038 00C0      		rjmp .L31
+  56               	.LSM4:
+  57 003a 8091 0000 		lds r24,USB_ControlRequest
+  58 003e 8132      		cpi r24,lo8(33)
+  59 0040 01F0      		breq .+2
+  60 0042 00C0      		rjmp .L31
+  61               	.LBB14:
+  62               	.LBB15:
+  63               	.LSM5:
+  64 0044 8BB1      		in r24,43-32
+  65 0046 90E1      		ldi r25,lo8(16)
+  66 0048 8927      		eor r24,r25
+  67 004a 8BB9      		out 43-32,r24
+  68               	.LBE15:
+  69               	.LBE14:
+  70               	.LBB16:
+  71               	.LBB17:
+  72               	.LSM6:
+  73 004c 8091 E800 		lds r24,232
+  74 0050 877F      		andi r24,lo8(-9)
+  75 0052 8093 E800 		sts 232,r24
+  76               	.LBE17:
+  77               	.LBE16:
+  78               	.LSM7:
+  79 0056 CE01      		movw r24,r28
+  80 0058 0196      		adiw r24,1
+  81 005a 62E0      		ldi r22,lo8(2)
+  82 005c 70E0      		ldi r23,hi8(2)
+  83 005e 0E94 0000 		call Endpoint_Read_Control_Stream_LE
+  84               	.LBB18:
+  85               	.LBB19:
+  86               	.LSM8:
+  87 0062 8091 E800 		lds r24,232
+  88 0066 8E7F      		andi r24,lo8(-2)
+  89 0068 8093 E800 		sts 232,r24
+  90               	.LBE19:
+  91               	.LBE18:
+  92               	.LSM9:
+  93 006c 8091 0000 		lds r24,USB_ControlRequest+2
+  94 0070 9091 0000 		lds r25,(USB_ControlRequest+2)+1
+  95 0074 23E0      		ldi r18,hi8(774)
+  96 0076 8630      		cpi r24,lo8(774)
+  97 0078 9207      		cpc r25,r18
+  98 007a 01F0      		breq .L7
+  99 007c 23E0      		ldi r18,hi8(775)
+ 100 007e 8730      		cpi r24,lo8(775)
+ 101 0080 9207      		cpc r25,r18
+ 102 0082 00F4      		brsh .L10
+ 103 0084 8350      		subi r24,lo8(771)
+ 104 0086 9340      		sbci r25,hi8(771)
+ 105 0088 01F0      		breq .+2
+ 106 008a 00C0      		rjmp .L31
+ 107 008c 00C0      		rjmp .L34
+ 108               	.L10:
+ 109 008e 23E0      		ldi r18,hi8(777)
+ 110 0090 8930      		cpi r24,lo8(777)
+ 111 0092 9207      		cpc r25,r18
+ 112 0094 01F0      		breq .L8
+ 113 0096 8C50      		subi r24,lo8(780)
+ 114 0098 9340      		sbci r25,hi8(780)
+ 115 009a 01F0      		breq .+2
+ 116 009c 00C0      		rjmp .L31
+ 117 009e 00C0      		rjmp .L35
+ 118               	.L34:
+ 119               	.LSM10:
+ 120 00a0 8A81      		ldd r24,Y+2
+ 121 00a2 8823      		tst r24
+ 122 00a4 01F0      		breq .L11
+ 123 00a6 4798      		cbi 40-32,7
+ 124 00a8 00C0      		rjmp .L31
+ 125               	.L11:
+ 126 00aa 479A      		sbi 40-32,7
+ 127 00ac 00C0      		rjmp .L31
+ 128               	.L7:
+ 129               	.LSM11:
+ 130 00ae 8A81      		ldd r24,Y+2
+ 131 00b0 8823      		tst r24
+ 132 00b2 01F0      		breq .L12
+ 133 00b4 4698      		cbi 40-32,6
+ 134 00b6 00C0      		rjmp .L31
+ 135               	.L12:
+ 136 00b8 469A      		sbi 40-32,6
+ 137 00ba 00C0      		rjmp .L31
+ 138               	.L8:
+ 139               	.LSM12:
+ 140 00bc 8A81      		ldd r24,Y+2
+ 141 00be 8823      		tst r24
+ 142 00c0 01F0      		breq .L13
+ 143 00c2 4598      		cbi 40-32,5
+ 144 00c4 00C0      		rjmp .L31
+ 145               	.L13:
+ 146 00c6 459A      		sbi 40-32,5
+ 147 00c8 00C0      		rjmp .L31
+ 148               	.L35:
+ 149               	.LSM13:
+ 150 00ca 8A81      		ldd r24,Y+2
+ 151 00cc 8823      		tst r24
+ 152 00ce 01F0      		breq .L14
+ 153 00d0 4498      		cbi 40-32,4
+ 154 00d2 00C0      		rjmp .L31
+ 155               	.L14:
+ 156 00d4 449A      		sbi 40-32,4
+ 157 00d6 00C0      		rjmp .L31
+ 158               	.L4:
+ 159               	.LSM14:
+ 160 00d8 8091 0000 		lds r24,USB_ControlRequest
+ 161 00dc 813A      		cpi r24,lo8(-95)
+ 162 00de 01F0      		breq .+2
+ 163 00e0 00C0      		rjmp .L31
+ 164               	.LBB20:
+ 165               	.LBB21:
+ 166               	.LSM15:
+ 167 00e2 8BB1      		in r24,43-32
+ 168 00e4 90E1      		ldi r25,lo8(16)
+ 169 00e6 8927      		eor r24,r25
+ 170 00e8 8BB9      		out 43-32,r24
+ 171               	.LBE21:
+ 172               	.LBE20:
+ 173               	.LBB22:
+ 174               	.LBB23:
+ 175               	.LSM16:
+ 176 00ea 8091 E800 		lds r24,232
+ 177 00ee 877F      		andi r24,lo8(-9)
+ 178 00f0 8093 E800 		sts 232,r24
+ 179               	.LBE23:
+ 180               	.LBE22:
+ 181               	.LSM17:
+ 182 00f4 8091 0000 		lds r24,USB_ControlRequest+2
+ 183 00f8 9091 0000 		lds r25,(USB_ControlRequest+2)+1
+ 184 00fc 23E0      		ldi r18,hi8(774)
+ 185 00fe 8630      		cpi r24,lo8(774)
+ 186 0100 9207      		cpc r25,r18
+ 187 0102 01F0      		breq .L18
+ 188 0104 23E0      		ldi r18,hi8(775)
+ 189 0106 8730      		cpi r24,lo8(775)
+ 190 0108 9207      		cpc r25,r18
+ 191 010a 00F4      		brsh .L21
+ 192 010c 23E0      		ldi r18,hi8(769)
+ 193 010e 8130      		cpi r24,lo8(769)
+ 194 0110 9207      		cpc r25,r18
+ 195 0112 01F0      		breq .L16
+ 196 0114 8350      		subi r24,lo8(771)
+ 197 0116 9340      		sbci r25,hi8(771)
+ 198 0118 01F4      		brne .L15
+ 199 011a 00C0      		rjmp .L36
+ 200               	.L21:
+ 201 011c 23E0      		ldi r18,hi8(777)
+ 202 011e 8930      		cpi r24,lo8(777)
+ 203 0120 9207      		cpc r25,r18
+ 204 0122 01F0      		breq .L19
+ 205 0124 8C50      		subi r24,lo8(780)
+ 206 0126 9340      		sbci r25,hi8(780)
+ 207 0128 01F4      		brne .L15
+ 208 012a 00C0      		rjmp .L37
+ 209               	.L16:
+ 210               	.LSM18:
+ 211 012c CE01      		movw r24,r28
+ 212 012e 0396      		adiw r24,3
+ 213 0130 65E0      		ldi r22,lo8(5)
+ 214 0132 70E0      		ldi r23,hi8(5)
+ 215 0134 0E94 0000 		call Endpoint_Write_Control_Stream_LE
+ 216 0138 00C0      		rjmp .L15
+ 217               	.L36:
+ 218               	.LSM19:
+ 219 013a 98B1      		in r25,40-32
+ 220 013c 991F      		rol r25
+ 221 013e 9927      		clr r25
+ 222 0140 991F      		rol r25
+ 223 0142 83E0      		ldi r24,lo8(3)
+ 224 0144 891B      		sub r24,r25
+ 225 0146 00C0      		rjmp .L29
+ 226               	.L18:
+ 227               	.LSM20:
+ 228 0148 4699      		sbic 40-32,6
+ 229 014a 00C0      		rjmp .L28
+ 230 014c 00C0      		rjmp .L33
+ 231               	.L19:
+ 232               	.LSM21:
+ 233 014e 4599      		sbic 40-32,5
+ 234 0150 00C0      		rjmp .L28
+ 235 0152 00C0      		rjmp .L33
+ 236               	.L37:
+ 237               	.LSM22:
+ 238 0154 4499      		sbic 40-32,4
+ 239 0156 00C0      		rjmp .L28
+ 240               	.L33:
+ 241 0158 83E0      		ldi r24,lo8(3)
+ 242 015a 00C0      		rjmp .L29
+ 243               	.L28:
+ 244 015c 82E0      		ldi r24,lo8(2)
+ 245               	.L29:
+ 246 015e 8A83      		std Y+2,r24
+ 247               	.L15:
+ 248               	.LSM23:
+ 249 0160 8A81      		ldd r24,Y+2
+ 250 0162 8823      		tst r24
+ 251 0164 01F0      		breq .L30
+ 252               	.LSM24:
+ 253 0166 CE01      		movw r24,r28
+ 254 0168 0196      		adiw r24,1
+ 255 016a 62E0      		ldi r22,lo8(2)
+ 256 016c 70E0      		ldi r23,hi8(2)
+ 257 016e 0E94 0000 		call Endpoint_Write_Control_Stream_LE
+ 258               	.L30:
+ 259               	.LBB24:
+ 260               	.LBB25:
+ 261               	.LSM25:
+ 262 0172 8091 E800 		lds r24,232
+ 263 0176 8B7F      		andi r24,lo8(-5)
+ 264 0178 8093 E800 		sts 232,r24
+ 265               	.L31:
+ 266               	/* epilogue start */
+ 267               	.LBE25:
+ 268               	.LBE24:
+ 269               	.LSM26:
+ 270 017c 2796      		adiw r28,7
+ 271 017e 0FB6      		in __tmp_reg__,__SREG__
+ 272 0180 F894      		cli
+ 273 0182 DEBF      		out __SP_H__,r29
+ 274 0184 0FBE      		out __SREG__,__tmp_reg__
+ 275 0186 CDBF      		out __SP_L__,r28
+ 276 0188 CF91      		pop r28
+ 277 018a DF91      		pop r29
+ 278 018c 0895      		ret
+ 279               	.LFE95:
+ 281               		.section	.text.SetupHardware,"ax",@progbits
+ 282               	.global	SetupHardware
+ 284               	SetupHardware:
+ 285               	.LFB94:
+ 286               	.LSM27:
+ 287               	/* prologue: function */
+ 288               	/* frame size = 0 */
+ 289               	.LSM28:
+ 290 0000 84B7      		in r24,84-32
+ 291 0002 877F      		andi r24,lo8(-9)
+ 292 0004 84BF      		out 84-32,r24
+ 293               	.LSM29:
+ 294 0006 88E1      		ldi r24,lo8(24)
+ 295               	/* #APP */
+ 296               	 ;  59 "RelayBoard.c" 1
+ 297 0008 0FB6      		in __tmp_reg__, __SREG__
+ 298 000a F894      		cli
+ 299 000c 8093 6000 		sts 96, r24
+ 300 0010 1092 6000 		sts 96, __zero_reg__
+ 301 0014 0FBE      		out __SREG__,__tmp_reg__
+ 302               		
+ 303               	 ;  0 "" 2
+ 304               	/* #NOAPP */
+ 305               	.LBB26:
+ 306               	.LSM30:
+ 307 0016 80E0      		ldi r24,lo8(0)
+ 308 0018 90E0      		ldi r25,hi8(0)
+ 309 001a 20E8      		ldi r18,lo8(-128)
+ 310               	/* #APP */
+ 311               	 ;  62 "RelayBoard.c" 1
+ 312 001c 0FB6      		in __tmp_reg__,__SREG__
+ 313 001e F894      		cli
+ 314 0020 2093 6100 		sts 97, r18
+ 315 0024 8093 6100 		sts 97, r24
+ 316 0028 0FBE      		out __SREG__, __tmp_reg__
+ 317               	 ;  0 "" 2
+ 318               	/* #NOAPP */
+ 319               	.LBE26:
+ 320               	.LSM31:
+ 321 002a 0E94 0000 		call USB_Init
+ 322               	.LSM32:
+ 323 002e 87B1      		in r24,39-32
+ 324 0030 806F      		ori r24,lo8(-16)
+ 325 0032 87B9      		out 39-32,r24
+ 326               	.LSM33:
+ 327 0034 88B1      		in r24,40-32
+ 328 0036 8F70      		andi r24,lo8(15)
+ 329 0038 88B9      		out 40-32,r24
+ 330               	/* epilogue start */
+ 331               	.LSM34:
+ 332 003a 0895      		ret
+ 333               	.LFE94:
+ 335               		.section	.text.main,"ax",@progbits
+ 336               	.global	main
+ 338               	main:
+ 339               	.LFB93:
+ 340               	.LSM35:
+ 341               	/* prologue: function */
+ 342               	/* frame size = 0 */
+ 343               	.LSM36:
+ 344 0000 0E94 0000 		call SetupHardware
+ 345               	.LSM37:
+ 346               	/* #APP */
+ 347               	 ;  48 "RelayBoard.c" 1
+ 348 0004 7894      		sei
+ 349               	 ;  0 "" 2
+ 350               	/* #NOAPP */
+ 351               	.L41:
+ 352               	.LSM38:
+ 353 0006 0E94 0000 		call USB_USBTask
+ 354 000a 00C0      		rjmp .L41
+ 355               	.LFE93:
+ 357               		.data
+ 360               	C.11.3565:
+ 361 0000 00        		.byte	0
+ 362 0001 00        		.byte	0
+ 363 0002 00        		.byte	0
+ 364 0003 00        		.byte	0
+ 365 0004 01        		.byte	1
+ 406               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 RelayBoard.c
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc4OPisy.s:2      *ABS*:0000003f __SREG__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc4OPisy.s:3      *ABS*:0000003e __SP_H__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc4OPisy.s:4      *ABS*:0000003d __SP_L__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc4OPisy.s:5      *ABS*:00000034 __CCP__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc4OPisy.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc4OPisy.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc4OPisy.s:19     .text.EVENT_USB_Device_ControlRequest:00000000 EVENT_USB_Device_ControlRequest
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc4OPisy.s:360    .data:00000000 C.11.3565
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc4OPisy.s:284    .text.SetupHardware:00000000 SetupHardware
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc4OPisy.s:338    .text.main:00000000 main
+
+UNDEFINED SYMBOLS
+USB_ControlRequest
+Endpoint_Read_Control_Stream_LE
+Endpoint_Write_Control_Stream_LE
+USB_Init
+USB_USBTask
+__do_copy_data

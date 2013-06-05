@@ -1,0 +1,2943 @@
+   1               		.file	"uip.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.uip_setipid,"ax",@progbits
+  17               	.global	uip_setipid
+  19               	uip_setipid:
+  20               	.LFB7:
+  21               	.LSM0:
+  22               	.LVL0:
+  23               	/* prologue: function */
+  24               	/* frame size = 0 */
+  25               	.LSM1:
+  26 0000 9093 0000 		sts (ipid)+1,r25
+  27 0004 8093 0000 		sts ipid,r24
+  28               	/* epilogue start */
+  29 0008 0895      		ret
+  30               	.LFE7:
+  32               		.section	.text.uip_add32,"ax",@progbits
+  33               	.global	uip_add32
+  35               	uip_add32:
+  36               	.LFB8:
+  37               	.LSM2:
+  38               	.LVL1:
+  39               	/* prologue: function */
+  40               	/* frame size = 0 */
+  41 0000 FC01      		movw r30,r24
+  42               	.LSM3:
+  43 0002 5381      		ldd r21,Z+3
+  44 0004 560F      		add r21,r22
+  45 0006 5093 0000 		sts uip_acc32+3,r21
+  46               	.LSM4:
+  47 000a 272F      		mov r18,r23
+  48 000c 3327      		clr r19
+  49               	.LVL2:
+  50 000e 4281      		ldd r20,Z+2
+  51 0010 420F      		add r20,r18
+  52 0012 4093 0000 		sts uip_acc32+2,r20
+  53               	.LSM5:
+  54 0016 A181      		ldd r26,Z+1
+  55 0018 A093 0000 		sts uip_acc32+1,r26
+  56               	.LSM6:
+  57 001c E081      		ld r30,Z
+  58               	.LVL3:
+  59 001e E093 0000 		sts uip_acc32,r30
+  60               	.LSM7:
+  61 0022 842F      		mov r24,r20
+  62 0024 90E0      		ldi r25,lo8(0)
+  63 0026 8217      		cp r24,r18
+  64 0028 9307      		cpc r25,r19
+  65 002a 00F4      		brsh .L4
+  66               	.LSM8:
+  67 002c 8A2F      		mov r24,r26
+  68 002e 8F5F      		subi r24,lo8(-(1))
+  69 0030 8093 0000 		sts uip_acc32+1,r24
+  70               	.LSM9:
+  71 0034 8823      		tst r24
+  72 0036 01F4      		brne .L4
+  73               	.LSM10:
+  74 0038 EF5F      		subi r30,lo8(-(1))
+  75 003a E093 0000 		sts uip_acc32,r30
+  76               	.L4:
+  77               	.LSM11:
+  78 003e 852F      		mov r24,r21
+  79 0040 90E0      		ldi r25,lo8(0)
+  80 0042 7070      		andi r23,hi8(255)
+  81               	.LVL4:
+  82 0044 8617      		cp r24,r22
+  83 0046 9707      		cpc r25,r23
+  84 0048 00F4      		brsh .L6
+  85               	.LSM12:
+  86 004a 842F      		mov r24,r20
+  87 004c 8F5F      		subi r24,lo8(-(1))
+  88 004e 8093 0000 		sts uip_acc32+2,r24
+  89               	.LSM13:
+  90 0052 8823      		tst r24
+  91 0054 01F4      		brne .L6
+  92               	.LSM14:
+  93 0056 8091 0000 		lds r24,uip_acc32+1
+  94 005a 8F5F      		subi r24,lo8(-(1))
+  95 005c 8093 0000 		sts uip_acc32+1,r24
+  96               	.LSM15:
+  97 0060 8823      		tst r24
+  98 0062 01F4      		brne .L6
+  99               	.LSM16:
+ 100 0064 8091 0000 		lds r24,uip_acc32
+ 101 0068 8F5F      		subi r24,lo8(-(1))
+ 102 006a 8093 0000 		sts uip_acc32,r24
+ 103               	.L6:
+ 104 006e 0895      		ret
+ 105               	.LFE8:
+ 107               		.section	.text.chksum,"ax",@progbits
+ 109               	chksum:
+ 110               	.LFB9:
+ 111               	.LSM17:
+ 112               	.LVL5:
+ 113               	/* prologue: function */
+ 114               	/* frame size = 0 */
+ 115 0000 9C01      		movw r18,r24
+ 116               	.LSM18:
+ 117 0002 4150      		subi r20,lo8(-(-1))
+ 118 0004 5040      		sbci r21,hi8(-(-1))
+ 119               	.LVL6:
+ 120 0006 460F      		add r20,r22
+ 121 0008 571F      		adc r21,r23
+ 122 000a FB01      		movw r30,r22
+ 123               	.LVL7:
+ 124 000c 00C0      		rjmp .L8
+ 125               	.LVL8:
+ 126               	.L10:
+ 127               	.LSM19:
+ 128 000e 7081      		ld r23,Z
+ 129 0010 60E0      		ldi r22,lo8(0)
+ 130               	.LVL9:
+ 131 0012 8181      		ldd r24,Z+1
+ 132 0014 DB01      		movw r26,r22
+ 133               	.LVL10:
+ 134 0016 A80F      		add r26,r24
+ 135 0018 B11D      		adc r27,__zero_reg__
+ 136               	.LSM20:
+ 137 001a 2A0F      		add r18,r26
+ 138 001c 3B1F      		adc r19,r27
+ 139               	.LVL11:
+ 140               	.LSM21:
+ 141 001e 2A17      		cp r18,r26
+ 142 0020 3B07      		cpc r19,r27
+ 143 0022 00F4      		brsh .L9
+ 144               	.LSM22:
+ 145 0024 2F5F      		subi r18,lo8(-(1))
+ 146 0026 3F4F      		sbci r19,hi8(-(1))
+ 147               	.L9:
+ 148               	.LSM23:
+ 149 0028 3296      		adiw r30,2
+ 150               	.LVL12:
+ 151               	.L8:
+ 152               	.LSM24:
+ 153 002a E417      		cp r30,r20
+ 154 002c F507      		cpc r31,r21
+ 155 002e 00F0      		brlo .L10
+ 156               	.LSM25:
+ 157 0030 E417      		cp r30,r20
+ 158 0032 F507      		cpc r31,r21
+ 159 0034 01F4      		brne .L11
+ 160               	.LSM26:
+ 161 0036 9081      		ld r25,Z
+ 162               	.LVL13:
+ 163 0038 80E0      		ldi r24,lo8(0)
+ 164               	.LVL14:
+ 165               	.LSM27:
+ 166 003a 280F      		add r18,r24
+ 167 003c 391F      		adc r19,r25
+ 168               	.LSM28:
+ 169 003e 2817      		cp r18,r24
+ 170 0040 3907      		cpc r19,r25
+ 171 0042 00F4      		brsh .L11
+ 172               	.LSM29:
+ 173 0044 2F5F      		subi r18,lo8(-(1))
+ 174 0046 3F4F      		sbci r19,hi8(-(1))
+ 175               	.LVL15:
+ 176               	.L11:
+ 177               	.LSM30:
+ 178 0048 C901      		movw r24,r18
+ 179               	.LVL16:
+ 180               	/* epilogue start */
+ 181 004a 0895      		ret
+ 182               	.LFE9:
+ 184               		.section	.text.uip_init,"ax",@progbits
+ 185               	.global	uip_init
+ 187               	uip_init:
+ 188               	.LFB14:
+ 189               	.LSM31:
+ 190               	/* prologue: function */
+ 191               	/* frame size = 0 */
+ 192               	.LSM32:
+ 193 0000 80E0      		ldi r24,lo8(0)
+ 194 0002 00C0      		rjmp .L14
+ 195               	.L15:
+ 196               	.LSM33:
+ 197 0004 E82F      		mov r30,r24
+ 198 0006 F0E0      		ldi r31,lo8(0)
+ 199 0008 EE0F      		lsl r30
+ 200 000a FF1F      		rol r31
+ 201 000c E050      		subi r30,lo8(-(uip_listenports))
+ 202 000e F040      		sbci r31,hi8(-(uip_listenports))
+ 203 0010 1182      		std Z+1,__zero_reg__
+ 204 0012 1082      		st Z,__zero_reg__
+ 205 0014 8F5F      		subi r24,lo8(-(1))
+ 206               	.L14:
+ 207               	.LSM34:
+ 208 0016 8530      		cpi r24,lo8(5)
+ 209 0018 00F0      		brlo .L15
+ 210 001a 20E0      		ldi r18,lo8(0)
+ 211               	.LSM35:
+ 212 001c 41E7      		ldi r20,lo8(113)
+ 213 001e 50E0      		ldi r21,hi8(113)
+ 214 0020 00C0      		rjmp .L16
+ 215               	.L17:
+ 216 0022 822F      		mov r24,r18
+ 217 0024 90E0      		ldi r25,lo8(0)
+ 218 0026 849F      		mul r24,r20
+ 219 0028 F001      		movw r30,r0
+ 220 002a 859F      		mul r24,r21
+ 221 002c F00D      		add r31,r0
+ 222 002e 949F      		mul r25,r20
+ 223 0030 F00D      		add r31,r0
+ 224 0032 1124      		clr r1
+ 225 0034 E050      		subi r30,lo8(-(uip_conns))
+ 226 0036 F040      		sbci r31,hi8(-(uip_conns))
+ 227 0038 118E      		std Z+25,__zero_reg__
+ 228 003a 2F5F      		subi r18,lo8(-(1))
+ 229               	.L16:
+ 230               	.LSM36:
+ 231 003c 2330      		cpi r18,lo8(3)
+ 232 003e 00F0      		brlo .L17
+ 233               	.LSM37:
+ 234 0040 80E0      		ldi r24,lo8(1024)
+ 235 0042 94E0      		ldi r25,hi8(1024)
+ 236 0044 9093 0000 		sts (lastport)+1,r25
+ 237 0048 8093 0000 		sts lastport,r24
+ 238               	.LSM38:
+ 239 004c 1092 0000 		sts (uip_udp_conns+4)+1,__zero_reg__
+ 240 0050 1092 0000 		sts uip_udp_conns+4,__zero_reg__
+ 241 0054 81E0      		ldi r24,lo8(1)
+ 242 0056 8093 0000 		sts c,r24
+ 243               	/* epilogue start */
+ 244               	.LSM39:
+ 245 005a 0895      		ret
+ 246               	.LFE14:
+ 248               		.section	.text.uip_unlisten,"ax",@progbits
+ 249               	.global	uip_unlisten
+ 251               	uip_unlisten:
+ 252               	.LFB17:
+ 253               	.LSM40:
+ 254               	.LVL17:
+ 255               	/* prologue: function */
+ 256               	/* frame size = 0 */
+ 257 0000 AC01      		movw r20,r24
+ 258               	.LSM41:
+ 259 0002 1092 0000 		sts c,__zero_reg__
+ 260 0006 20E0      		ldi r18,lo8(0)
+ 261 0008 00C0      		rjmp .L22
+ 262               	.LVL18:
+ 263               	.L25:
+ 264               	.LSM42:
+ 265 000a E22F      		mov r30,r18
+ 266 000c F0E0      		ldi r31,lo8(0)
+ 267 000e 322F      		mov r19,r18
+ 268 0010 3F5F      		subi r19,lo8(-(1))
+ 269 0012 EE0F      		lsl r30
+ 270 0014 FF1F      		rol r31
+ 271 0016 E050      		subi r30,lo8(-(uip_listenports))
+ 272 0018 F040      		sbci r31,hi8(-(uip_listenports))
+ 273 001a 8081      		ld r24,Z
+ 274 001c 9181      		ldd r25,Z+1
+ 275 001e 8417      		cp r24,r20
+ 276 0020 9507      		cpc r25,r21
+ 277 0022 01F4      		brne .L23
+ 278 0024 2093 0000 		sts c,r18
+ 279               	.LSM43:
+ 280 0028 1182      		std Z+1,__zero_reg__
+ 281 002a 1082      		st Z,__zero_reg__
+ 282 002c 0895      		ret
+ 283               	.L23:
+ 284               	.LSM44:
+ 285 002e 232F      		mov r18,r19
+ 286               	.LVL19:
+ 287               	.L22:
+ 288               	.LSM45:
+ 289 0030 2530      		cpi r18,lo8(5)
+ 290 0032 00F0      		brlo .L25
+ 291 0034 2093 0000 		sts c,r18
+ 292 0038 0895      		ret
+ 293               	.LFE17:
+ 295               		.section	.text.uip_listen,"ax",@progbits
+ 296               	.global	uip_listen
+ 298               	uip_listen:
+ 299               	.LFB18:
+ 300               	.LSM46:
+ 301               	.LVL20:
+ 302               	/* prologue: function */
+ 303               	/* frame size = 0 */
+ 304 0000 AC01      		movw r20,r24
+ 305               	.LSM47:
+ 306 0002 1092 0000 		sts c,__zero_reg__
+ 307 0006 20E0      		ldi r18,lo8(0)
+ 308 0008 00C0      		rjmp .L28
+ 309               	.LVL21:
+ 310               	.L31:
+ 311               	.LSM48:
+ 312 000a E22F      		mov r30,r18
+ 313 000c F0E0      		ldi r31,lo8(0)
+ 314 000e 322F      		mov r19,r18
+ 315 0010 3F5F      		subi r19,lo8(-(1))
+ 316 0012 EE0F      		lsl r30
+ 317 0014 FF1F      		rol r31
+ 318 0016 E050      		subi r30,lo8(-(uip_listenports))
+ 319 0018 F040      		sbci r31,hi8(-(uip_listenports))
+ 320 001a 8081      		ld r24,Z
+ 321 001c 9181      		ldd r25,Z+1
+ 322 001e 892B      		or r24,r25
+ 323 0020 01F4      		brne .L29
+ 324 0022 2093 0000 		sts c,r18
+ 325               	.LSM49:
+ 326 0026 5183      		std Z+1,r21
+ 327 0028 4083      		st Z,r20
+ 328 002a 0895      		ret
+ 329               	.L29:
+ 330               	.LSM50:
+ 331 002c 232F      		mov r18,r19
+ 332               	.LVL22:
+ 333               	.L28:
+ 334               	.LSM51:
+ 335 002e 2530      		cpi r18,lo8(5)
+ 336 0030 00F0      		brlo .L31
+ 337 0032 2093 0000 		sts c,r18
+ 338 0036 0895      		ret
+ 339               	.LFE18:
+ 341               		.section	.text.uip_add_rcv_nxt,"ax",@progbits
+ 343               	uip_add_rcv_nxt:
+ 344               	.LFB19:
+ 345               	.LSM52:
+ 346               	.LVL23:
+ 347               	/* prologue: function */
+ 348               	/* frame size = 0 */
+ 349 0000 BC01      		movw r22,r24
+ 350               	.LSM53:
+ 351 0002 8091 0000 		lds r24,uip_conn
+ 352 0006 9091 0000 		lds r25,(uip_conn)+1
+ 353               	.LVL24:
+ 354 000a 0896      		adiw r24,8
+ 355 000c 0E94 0000 		call uip_add32
+ 356               	.LVL25:
+ 357               	.LSM54:
+ 358 0010 E091 0000 		lds r30,uip_conn
+ 359 0014 F091 0000 		lds r31,(uip_conn)+1
+ 360 0018 8091 0000 		lds r24,uip_acc32
+ 361 001c 8087      		std Z+8,r24
+ 362               	.LSM55:
+ 363 001e E091 0000 		lds r30,uip_conn
+ 364 0022 F091 0000 		lds r31,(uip_conn)+1
+ 365 0026 8091 0000 		lds r24,uip_acc32+1
+ 366 002a 8187      		std Z+9,r24
+ 367               	.LSM56:
+ 368 002c E091 0000 		lds r30,uip_conn
+ 369 0030 F091 0000 		lds r31,(uip_conn)+1
+ 370 0034 8091 0000 		lds r24,uip_acc32+2
+ 371 0038 8287      		std Z+10,r24
+ 372               	.LSM57:
+ 373 003a E091 0000 		lds r30,uip_conn
+ 374 003e F091 0000 		lds r31,(uip_conn)+1
+ 375 0042 8091 0000 		lds r24,uip_acc32+3
+ 376 0046 8387      		std Z+11,r24
+ 377               	/* epilogue start */
+ 378               	.LSM58:
+ 379 0048 0895      		ret
+ 380               	.LFE19:
+ 382               		.section	.text.htons,"ax",@progbits
+ 383               	.global	htons
+ 385               	htons:
+ 386               	.LFB21:
+ 387               	.LSM59:
+ 388               	.LVL26:
+ 389               	/* prologue: function */
+ 390               	/* frame size = 0 */
+ 391 0000 282F      		mov r18,r24
+ 392               	.LSM60:
+ 393 0002 892F      		mov r24,r25
+ 394               	.LVL27:
+ 395 0004 922F      		mov r25,r18
+ 396               	.LVL28:
+ 397               	/* epilogue start */
+ 398 0006 0895      		ret
+ 399               	.LFE21:
+ 401               		.section	.text.uip_connect,"ax",@progbits
+ 402               	.global	uip_connect
+ 404               	uip_connect:
+ 405               	.LFB15:
+ 406               	.LSM61:
+ 407               	.LVL29:
+ 408 0000 AF92      		push r10
+ 409 0002 BF92      		push r11
+ 410 0004 CF92      		push r12
+ 411 0006 DF92      		push r13
+ 412 0008 EF92      		push r14
+ 413 000a FF92      		push r15
+ 414 000c 0F93      		push r16
+ 415 000e 1F93      		push r17
+ 416 0010 CF93      		push r28
+ 417 0012 DF93      		push r29
+ 418               	/* prologue: function */
+ 419               	/* frame size = 0 */
+ 420 0014 5C01      		movw r10,r24
+ 421 0016 6B01      		movw r12,r22
+ 422               	.L38:
+ 423               	.LSM62:
+ 424 0018 0091 0000 		lds r16,lastport
+ 425 001c 1091 0000 		lds r17,(lastport)+1
+ 426               	.LSM63:
+ 427 0020 E1E7      		ldi r30,lo8(113)
+ 428 0022 EE2E      		mov r14,r30
+ 429               	.LVL30:
+ 430               	.L42:
+ 431               	.LSM64:
+ 432 0024 0F5F      		subi r16,lo8(-(1))
+ 433 0026 1F4F      		sbci r17,hi8(-(1))
+ 434               	.LSM65:
+ 435 0028 8DE7      		ldi r24,hi8(32000)
+ 436 002a 0030      		cpi r16,lo8(32000)
+ 437 002c 1807      		cpc r17,r24
+ 438 002e 00F0      		brlo .L39
+ 439 0030 00E0      		ldi r16,lo8(4096)
+ 440 0032 10E1      		ldi r17,hi8(4096)
+ 441               	.L39:
+ 442 0034 FF24      		clr r15
+ 443 0036 00C0      		rjmp .L40
+ 444               	.L43:
+ 445               	.LSM66:
+ 446 0038 FE9C      		mul r15,r14
+ 447 003a E001      		movw r28,r0
+ 448 003c 1124      		clr r1
+ 449 003e C050      		subi r28,lo8(-(uip_conns))
+ 450 0040 D040      		sbci r29,hi8(-(uip_conns))
+ 451               	.LSM67:
+ 452 0042 898D      		ldd r24,Y+25
+ 453 0044 8823      		tst r24
+ 454 0046 01F0      		breq .L41
+ 455 0048 C801      		movw r24,r16
+ 456 004a 0E94 0000 		call htons
+ 457 004e 2C81      		ldd r18,Y+4
+ 458 0050 3D81      		ldd r19,Y+5
+ 459 0052 2817      		cp r18,r24
+ 460 0054 3907      		cpc r19,r25
+ 461 0056 01F0      		breq .L42
+ 462               	.LVL31:
+ 463               	.L41:
+ 464               	.LSM68:
+ 465 0058 F394      		inc r15
+ 466               	.L40:
+ 467               	.LSM69:
+ 468 005a E3E0      		ldi r30,lo8(3)
+ 469 005c FE16      		cp r15,r30
+ 470 005e 01F4      		brne .L43
+ 471 0060 0093 0000 		sts lastport,r16
+ 472 0064 1093 0000 		sts lastport+1,r17
+ 473               	.LSM70:
+ 474 0068 1092 0000 		sts c,__zero_reg__
+ 475 006c C0E0      		ldi r28,lo8(0)
+ 476 006e D0E0      		ldi r29,hi8(0)
+ 477               	.LVL32:
+ 478 0070 20E0      		ldi r18,lo8(0)
+ 479               	.LSM71:
+ 480 0072 31E7      		ldi r19,lo8(113)
+ 481 0074 00C0      		rjmp .L44
+ 482               	.LVL33:
+ 483               	.L49:
+ 484 0076 239F      		mul r18,r19
+ 485 0078 F001      		movw r30,r0
+ 486 007a 1124      		clr r1
+ 487 007c E050      		subi r30,lo8(-(uip_conns))
+ 488 007e F040      		sbci r31,hi8(-(uip_conns))
+ 489               	.LSM72:
+ 490 0080 818D      		ldd r24,Z+25
+ 491 0082 8823      		tst r24
+ 492 0084 01F4      		brne .L45
+ 493 0086 2093 0000 		sts c,r18
+ 494 008a EF01      		movw r28,r30
+ 495 008c 00C0      		rjmp .L46
+ 496               	.L45:
+ 497               	.LSM73:
+ 498 008e 8730      		cpi r24,lo8(7)
+ 499 0090 01F4      		brne .L47
+ 500               	.LSM74:
+ 501 0092 2097      		sbiw r28,0
+ 502 0094 01F0      		breq .L48
+ 503 0096 928D      		ldd r25,Z+26
+ 504 0098 8A8D      		ldd r24,Y+26
+ 505 009a 8917      		cp r24,r25
+ 506 009c 00F4      		brsh .L47
+ 507               	.L48:
+ 508 009e EF01      		movw r28,r30
+ 509               	.L47:
+ 510 00a0 2F5F      		subi r18,lo8(-(1))
+ 511               	.L44:
+ 512               	.LSM75:
+ 513 00a2 2330      		cpi r18,lo8(3)
+ 514 00a4 00F0      		brlo .L49
+ 515 00a6 2093 0000 		sts c,r18
+ 516               	.L46:
+ 517               	.LSM76:
+ 518 00aa 2097      		sbiw r28,0
+ 519 00ac 01F0      		breq .L50
+ 520               	.LSM77:
+ 521 00ae 82E0      		ldi r24,lo8(2)
+ 522 00b0 898F      		std Y+25,r24
+ 523               	.LSM78:
+ 524 00b2 8091 0000 		lds r24,iss
+ 525 00b6 8C87      		std Y+12,r24
+ 526               	.LSM79:
+ 527 00b8 8091 0000 		lds r24,iss+1
+ 528 00bc 8D87      		std Y+13,r24
+ 529               	.LSM80:
+ 530 00be 8091 0000 		lds r24,iss+2
+ 531 00c2 8E87      		std Y+14,r24
+ 532               	.LSM81:
+ 533 00c4 8091 0000 		lds r24,iss+3
+ 534 00c8 8F87      		std Y+15,r24
+ 535               	.LSM82:
+ 536 00ca 84EB      		ldi r24,lo8(1460)
+ 537 00cc 95E0      		ldi r25,hi8(1460)
+ 538 00ce 9B8B      		std Y+19,r25
+ 539 00d0 8A8B      		std Y+18,r24
+ 540 00d2 9D8B      		std Y+21,r25
+ 541 00d4 8C8B      		std Y+20,r24
+ 542               	.LSM83:
+ 543 00d6 81E0      		ldi r24,lo8(1)
+ 544 00d8 90E0      		ldi r25,hi8(1)
+ 545 00da 998B      		std Y+17,r25
+ 546 00dc 888B      		std Y+16,r24
+ 547               	.LSM84:
+ 548 00de 1B8E      		std Y+27,__zero_reg__
+ 549               	.LSM85:
+ 550 00e0 81E0      		ldi r24,lo8(1)
+ 551 00e2 8A8F      		std Y+26,r24
+ 552               	.LSM86:
+ 553 00e4 83E0      		ldi r24,lo8(3)
+ 554 00e6 888F      		std Y+24,r24
+ 555               	.LSM87:
+ 556 00e8 1E8A      		std Y+22,__zero_reg__
+ 557               	.LSM88:
+ 558 00ea 80E1      		ldi r24,lo8(16)
+ 559 00ec 8F8B      		std Y+23,r24
+ 560               	.LSM89:
+ 561 00ee C801      		movw r24,r16
+ 562 00f0 0E94 0000 		call htons
+ 563               	.LVL34:
+ 564 00f4 9D83      		std Y+5,r25
+ 565 00f6 8C83      		std Y+4,r24
+ 566               	.LSM90:
+ 567 00f8 DF82      		std Y+7,r13
+ 568 00fa CE82      		std Y+6,r12
+ 569               	.LSM91:
+ 570 00fc F501      		movw r30,r10
+ 571 00fe 8081      		ld r24,Z
+ 572 0100 9181      		ldd r25,Z+1
+ 573 0102 A281      		ldd r26,Z+2
+ 574 0104 B381      		ldd r27,Z+3
+ 575 0106 8883      		st Y,r24
+ 576 0108 9983      		std Y+1,r25
+ 577 010a AA83      		std Y+2,r26
+ 578 010c BB83      		std Y+3,r27
+ 579               	.LVL35:
+ 580               	.L50:
+ 581               	.LSM92:
+ 582 010e CE01      		movw r24,r28
+ 583               	.LVL36:
+ 584               	/* epilogue start */
+ 585 0110 DF91      		pop r29
+ 586 0112 CF91      		pop r28
+ 587 0114 1F91      		pop r17
+ 588 0116 0F91      		pop r16
+ 589 0118 FF90      		pop r15
+ 590 011a EF90      		pop r14
+ 591 011c DF90      		pop r13
+ 592 011e CF90      		pop r12
+ 593               	.LVL37:
+ 594 0120 BF90      		pop r11
+ 595 0122 AF90      		pop r10
+ 596               	.LVL38:
+ 597 0124 0895      		ret
+ 598               	.LFE15:
+ 600               		.section	.text.uip_tcpchksum,"ax",@progbits
+ 601               	.global	uip_tcpchksum
+ 603               	uip_tcpchksum:
+ 604               	.LFB13:
+ 605               	.LSM93:
+ 606 0000 0F93      		push r16
+ 607 0002 1F93      		push r17
+ 608               	/* prologue: function */
+ 609               	/* frame size = 0 */
+ 610               	.LBB4:
+ 611               	.LBB5:
+ 612               	.LSM94:
+ 613 0004 0091 0000 		lds r16,uip_buf+17
+ 614 0008 10E0      		ldi r17,lo8(0)
+ 615               	.LVL39:
+ 616 000a 0451      		subi r16,lo8(-(-20))
+ 617 000c 1040      		sbci r17,hi8(-(-20))
+ 618               	.LVL40:
+ 619 000e 9091 0000 		lds r25,uip_buf+16
+ 620 0012 80E0      		ldi r24,lo8(0)
+ 621 0014 080F      		add r16,r24
+ 622 0016 191F      		adc r17,r25
+ 623               	.LBE5:
+ 624               	.LSM95:
+ 625 0018 C801      		movw r24,r16
+ 626 001a 0696      		adiw r24,6
+ 627 001c 60E0      		ldi r22,lo8(uip_buf+26)
+ 628 001e 70E0      		ldi r23,hi8(uip_buf+26)
+ 629 0020 48E0      		ldi r20,lo8(8)
+ 630 0022 50E0      		ldi r21,hi8(8)
+ 631 0024 0E94 0000 		call chksum
+ 632               	.LSM96:
+ 633 0028 60E0      		ldi r22,lo8(uip_buf+34)
+ 634 002a 70E0      		ldi r23,hi8(uip_buf+34)
+ 635 002c A801      		movw r20,r16
+ 636 002e 0E94 0000 		call chksum
+ 637               	.LBB6:
+ 638               	.LSM97:
+ 639 0032 0097      		sbiw r24,0
+ 640               	.LVL41:
+ 641 0034 01F4      		brne .L54
+ 642 0036 2FEF      		ldi r18,lo8(-1)
+ 643 0038 3FEF      		ldi r19,hi8(-1)
+ 644 003a 00C0      		rjmp .L55
+ 645               	.L54:
+ 646               	.LBE6:
+ 647 003c 0E94 0000 		call htons
+ 648               	.LVL42:
+ 649 0040 9C01      		movw r18,r24
+ 650               	.LVL43:
+ 651               	.L55:
+ 652               	.LBE4:
+ 653               	.LSM98:
+ 654 0042 C901      		movw r24,r18
+ 655               	.LVL44:
+ 656               	/* epilogue start */
+ 657 0044 1F91      		pop r17
+ 658               	.LVL45:
+ 659 0046 0F91      		pop r16
+ 660               	.LVL46:
+ 661 0048 0895      		ret
+ 662               	.LFE13:
+ 664               		.section	.text.uip_ipchksum,"ax",@progbits
+ 665               	.global	uip_ipchksum
+ 667               	uip_ipchksum:
+ 668               	.LFB11:
+ 669               	.LSM99:
+ 670               	/* prologue: function */
+ 671               	/* frame size = 0 */
+ 672               	.LSM100:
+ 673 0000 80E0      		ldi r24,lo8(0)
+ 674 0002 90E0      		ldi r25,hi8(0)
+ 675 0004 60E0      		ldi r22,lo8(uip_buf+14)
+ 676 0006 70E0      		ldi r23,hi8(uip_buf+14)
+ 677 0008 44E1      		ldi r20,lo8(20)
+ 678 000a 50E0      		ldi r21,hi8(20)
+ 679 000c 0E94 0000 		call chksum
+ 680               	.LSM101:
+ 681 0010 0097      		sbiw r24,0
+ 682               	.LVL47:
+ 683 0012 01F4      		brne .L58
+ 684 0014 2FEF      		ldi r18,lo8(-1)
+ 685 0016 3FEF      		ldi r19,hi8(-1)
+ 686 0018 00C0      		rjmp .L59
+ 687               	.L58:
+ 688 001a 0E94 0000 		call htons
+ 689               	.LVL48:
+ 690 001e 9C01      		movw r18,r24
+ 691               	.LVL49:
+ 692               	.L59:
+ 693               	.LSM102:
+ 694 0020 C901      		movw r24,r18
+ 695               	.LVL50:
+ 696               	/* epilogue start */
+ 697 0022 0895      		ret
+ 698               	.LFE11:
+ 700               		.section	.text.uip_chksum,"ax",@progbits
+ 701               	.global	uip_chksum
+ 703               	uip_chksum:
+ 704               	.LFB10:
+ 705               	.LSM103:
+ 706               	.LVL51:
+ 707               	/* prologue: function */
+ 708               	/* frame size = 0 */
+ 709 0000 9C01      		movw r18,r24
+ 710 0002 AB01      		movw r20,r22
+ 711               	.LSM104:
+ 712 0004 80E0      		ldi r24,lo8(0)
+ 713 0006 90E0      		ldi r25,hi8(0)
+ 714               	.LVL52:
+ 715 0008 B901      		movw r22,r18
+ 716               	.LVL53:
+ 717 000a 0E94 0000 		call chksum
+ 718               	.LVL54:
+ 719 000e 0E94 0000 		call htons
+ 720               	/* epilogue start */
+ 721               	.LSM105:
+ 722 0012 0895      		ret
+ 723               	.LFE10:
+ 725               		.section	.text.htonl,"ax",@progbits
+ 726               	.global	htonl
+ 728               	htonl:
+ 729               	.LFB22:
+ 730               	.LSM106:
+ 731               	.LVL55:
+ 732 0000 EF92      		push r14
+ 733 0002 FF92      		push r15
+ 734 0004 0F93      		push r16
+ 735 0006 1F93      		push r17
+ 736               	/* prologue: function */
+ 737               	/* frame size = 0 */
+ 738               	.LSM107:
+ 739 0008 9C01      		movw r18,r24
+ 740 000a 4427      		clr r20
+ 741 000c 5527      		clr r21
+ 742 000e F22E      		mov r15,r18
+ 743 0010 E32E      		mov r14,r19
+ 744 0012 00E0      		ldi r16,lo8(0)
+ 745 0014 10E0      		ldi r17,hi8(0)
+ 746 0016 362F      		mov r19,r22
+ 747               	.LVL56:
+ 748 0018 272F      		mov r18,r23
+ 749               	.LVL57:
+ 750 001a 40E0      		ldi r20,lo8(0)
+ 751 001c 50E0      		ldi r21,hi8(0)
+ 752               	.LVL58:
+ 753 001e A901      		movw r20,r18
+ 754 0020 3327      		clr r19
+ 755 0022 2227      		clr r18
+ 756               	.LVL59:
+ 757 0024 E22A      		or r14,r18
+ 758 0026 F32A      		or r15,r19
+ 759 0028 042B      		or r16,r20
+ 760 002a 152B      		or r17,r21
+ 761               	.LSM108:
+ 762 002c B701      		movw r22,r14
+ 763 002e C801      		movw r24,r16
+ 764               	/* epilogue start */
+ 765 0030 1F91      		pop r17
+ 766 0032 0F91      		pop r16
+ 767 0034 FF90      		pop r15
+ 768 0036 EF90      		pop r14
+ 769 0038 0895      		ret
+ 770               	.LFE22:
+ 772               		.section	.text.uip_send,"ax",@progbits
+ 773               	.global	uip_send
+ 775               	uip_send:
+ 776               	.LFB23:
+ 777               	.LSM109:
+ 778               	.LVL60:
+ 779               	/* prologue: function */
+ 780               	/* frame size = 0 */
+ 781 0000 FC01      		movw r30,r24
+ 782               	.LSM110:
+ 783 0002 4091 0000 		lds r20,uip_sappdata
+ 784 0006 5091 0000 		lds r21,(uip_sappdata)+1
+ 785 000a 20E0      		ldi r18,lo8(uip_buf+1514)
+ 786 000c 30E0      		ldi r19,hi8(uip_buf+1514)
+ 787               	.LVL61:
+ 788 000e 241B      		sub r18,r20
+ 789 0010 350B      		sbc r19,r21
+ 790 0012 6217      		cp r22,r18
+ 791 0014 7307      		cpc r23,r19
+ 792 0016 04F4      		brge .L66
+ 793               	.LVL62:
+ 794 0018 9B01      		movw r18,r22
+ 795               	.L66:
+ 796               	.LSM111:
+ 797 001a 1216      		cp __zero_reg__,r18
+ 798 001c 1306      		cpc __zero_reg__,r19
+ 799 001e 04F4      		brge .L69
+ 800               	.LSM112:
+ 801 0020 2093 0000 		sts uip_slen,r18
+ 802 0024 3093 0000 		sts uip_slen+1,r19
+ 803               	.LVL63:
+ 804               	.LSM113:
+ 805 0028 E417      		cp r30,r20
+ 806 002a F507      		cpc r31,r21
+ 807 002c 01F0      		breq .L69
+ 808               	.LSM114:
+ 809 002e CA01      		movw r24,r20
+ 810 0030 BF01      		movw r22,r30
+ 811               	.LVL64:
+ 812 0032 A901      		movw r20,r18
+ 813               	.LVL65:
+ 814 0034 0E94 0000 		call memcpy
+ 815               	.LVL66:
+ 816               	.L69:
+ 817 0038 0895      		ret
+ 818               	.LFE23:
+ 820               		.section	.text.uip_process,"ax",@progbits
+ 821               	.global	uip_process
+ 823               	uip_process:
+ 824               	.LFB20:
+ 825               	.LSM115:
+ 826               	.LVL67:
+ 827 0000 0F93      		push r16
+ 828 0002 1F93      		push r17
+ 829 0004 CF93      		push r28
+ 830 0006 DF93      		push r29
+ 831               	/* prologue: function */
+ 832               	/* frame size = 0 */
+ 833               	.LSM116:
+ 834 0008 C091 0000 		lds r28,uip_conn
+ 835 000c D091 0000 		lds r29,(uip_conn)+1
+ 836               	.LVL68:
+ 837               	.LSM117:
+ 838 0010 8430      		cpi r24,lo8(4)
+ 839 0012 01F4      		brne .+2
+ 840 0014 00C0      		rjmp .L71
+ 841               	.LSM118:
+ 842 0016 20E0      		ldi r18,lo8(uip_buf+54)
+ 843 0018 30E0      		ldi r19,hi8(uip_buf+54)
+ 844 001a 3093 0000 		sts (uip_appdata)+1,r19
+ 845 001e 2093 0000 		sts uip_appdata,r18
+ 846 0022 3093 0000 		sts (uip_sappdata)+1,r19
+ 847 0026 2093 0000 		sts uip_sappdata,r18
+ 848               	.LSM119:
+ 849 002a 8330      		cpi r24,lo8(3)
+ 850 002c 01F4      		brne .L72
+ 851               	.LSM120:
+ 852 002e 898D      		ldd r24,Y+25
+ 853               	.LVL69:
+ 854 0030 8F70      		andi r24,lo8(15)
+ 855 0032 8330      		cpi r24,lo8(3)
+ 856 0034 01F0      		breq .+2
+ 857 0036 00C0      		rjmp .L73
+ 858 0038 8889      		ldd r24,Y+16
+ 859 003a 9989      		ldd r25,Y+17
+ 860 003c 892B      		or r24,r25
+ 861 003e 01F0      		breq .+2
+ 862 0040 00C0      		rjmp .L73
+ 863 0042 00C0      		rjmp .L190
+ 864               	.LVL70:
+ 865               	.L72:
+ 866               	.LSM121:
+ 867 0044 8230      		cpi r24,lo8(2)
+ 868 0046 01F0      		breq .+2
+ 869 0048 00C0      		rjmp .L75
+ 870               	.LSM122:
+ 871 004a 8091 0000 		lds r24,iss+3
+ 872               	.LVL71:
+ 873 004e 8F5F      		subi r24,lo8(-(1))
+ 874 0050 8093 0000 		sts iss+3,r24
+ 875 0054 8823      		tst r24
+ 876 0056 01F4      		brne .L76
+ 877               	.LSM123:
+ 878 0058 8091 0000 		lds r24,iss+2
+ 879 005c 8F5F      		subi r24,lo8(-(1))
+ 880 005e 8093 0000 		sts iss+2,r24
+ 881 0062 8823      		tst r24
+ 882 0064 01F4      		brne .L76
+ 883               	.LSM124:
+ 884 0066 8091 0000 		lds r24,iss+1
+ 885 006a 8F5F      		subi r24,lo8(-(1))
+ 886 006c 8093 0000 		sts iss+1,r24
+ 887 0070 8823      		tst r24
+ 888 0072 01F4      		brne .L76
+ 889               	.LSM125:
+ 890 0074 8091 0000 		lds r24,iss
+ 891 0078 8F5F      		subi r24,lo8(-(1))
+ 892 007a 8093 0000 		sts iss,r24
+ 893               	.L76:
+ 894               	.LSM126:
+ 895 007e 1092 0000 		sts (uip_len)+1,__zero_reg__
+ 896 0082 1092 0000 		sts uip_len,__zero_reg__
+ 897               	.LSM127:
+ 898 0086 1092 0000 		sts (uip_slen)+1,__zero_reg__
+ 899 008a 1092 0000 		sts uip_slen,__zero_reg__
+ 900               	.LSM128:
+ 901 008e 298D      		ldd r18,Y+25
+ 902 0090 2730      		cpi r18,lo8(7)
+ 903 0092 01F0      		breq .L77
+ 904 0094 2530      		cpi r18,lo8(5)
+ 905 0096 01F4      		brne .L78
+ 906               	.L77:
+ 907               	.LSM129:
+ 908 0098 8A8D      		ldd r24,Y+26
+ 909 009a 8F5F      		subi r24,lo8(-(1))
+ 910 009c 8A8F      		std Y+26,r24
+ 911               	.LSM130:
+ 912 009e 8837      		cpi r24,lo8(120)
+ 913 00a0 01F0      		breq .+2
+ 914 00a2 00C0      		rjmp .L73
+ 915               	.LSM131:
+ 916 00a4 198E      		std Y+25,__zero_reg__
+ 917 00a6 00C0      		rjmp .L73
+ 918               	.L78:
+ 919               	.LSM132:
+ 920 00a8 2223      		tst r18
+ 921 00aa 01F4      		brne .+2
+ 922 00ac 00C0      		rjmp .L73
+ 923               	.LSM133:
+ 924 00ae 8889      		ldd r24,Y+16
+ 925 00b0 9989      		ldd r25,Y+17
+ 926 00b2 892B      		or r24,r25
+ 927 00b4 01F4      		brne .+2
+ 928 00b6 00C0      		rjmp .L79
+ 929               	.LSM134:
+ 930 00b8 8A8D      		ldd r24,Y+26
+ 931 00ba 8150      		subi r24,lo8(-(-1))
+ 932 00bc 8A8F      		std Y+26,r24
+ 933 00be 8F5F      		subi r24,lo8(-(1))
+ 934 00c0 01F0      		breq .+2
+ 935 00c2 00C0      		rjmp .L73
+ 936               	.LSM135:
+ 937 00c4 3B8D      		ldd r19,Y+27
+ 938 00c6 3830      		cpi r19,lo8(8)
+ 939 00c8 01F0      		breq .L80
+ 940 00ca 2150      		subi r18,lo8(-(-1))
+ 941 00cc 2230      		cpi r18,lo8(2)
+ 942 00ce 00F4      		brsh .L81
+ 943 00d0 3530      		cpi r19,lo8(5)
+ 944 00d2 01F4      		brne .L81
+ 945               	.L80:
+ 946               	.LSM136:
+ 947 00d4 198E      		std Y+25,__zero_reg__
+ 948               	.LSM137:
+ 949 00d6 80E8      		ldi r24,lo8(-128)
+ 950 00d8 8093 0000 		sts uip_flags,r24
+ 951               	.LSM138:
+ 952 00dc 0E94 0000 		call uIPManagement_TCPCallback
+ 953 00e0 00C0      		rjmp .L189
+ 954               	.L81:
+ 955               	.LSM139:
+ 956 00e2 3530      		cpi r19,lo8(5)
+ 957 00e4 00F0      		brlo .L83
+ 958 00e6 80E3      		ldi r24,lo8(48)
+ 959 00e8 00C0      		rjmp .L84
+ 960               	.L83:
+ 961 00ea 83E0      		ldi r24,lo8(3)
+ 962 00ec 90E0      		ldi r25,hi8(3)
+ 963 00ee 00C0      		rjmp 2f
+ 964 00f0 880F      	1:	lsl r24
+ 965 00f2 991F      		rol r25
+ 966 00f4 3A95      	2:	dec r19
+ 967 00f6 02F4      		brpl 1b
+ 968               	.L84:
+ 969 00f8 8A8F      		std Y+26,r24
+ 970               	.LSM140:
+ 971 00fa 8B8D      		ldd r24,Y+27
+ 972 00fc 8F5F      		subi r24,lo8(-(1))
+ 973 00fe 8B8F      		std Y+27,r24
+ 974               	.LSM141:
+ 975 0100 898D      		ldd r24,Y+25
+ 976 0102 90E0      		ldi r25,lo8(0)
+ 977 0104 8F70      		andi r24,lo8(15)
+ 978 0106 9070      		andi r25,hi8(15)
+ 979 0108 8330      		cpi r24,3
+ 980 010a 9105      		cpc r25,__zero_reg__
+ 981 010c 01F0      		breq .L87
+ 982 010e 8430      		cpi r24,4
+ 983 0110 9105      		cpc r25,__zero_reg__
+ 984 0112 04F4      		brge .L89
+ 985 0114 8130      		cpi r24,1
+ 986 0116 9105      		cpc r25,__zero_reg__
+ 987 0118 01F4      		brne .+2
+ 988 011a 00C0      		rjmp .L85
+ 989 011c 0297      		sbiw r24,2
+ 990 011e 01F0      		breq .+2
+ 991 0120 00C0      		rjmp .L73
+ 992 0122 00C0      		rjmp .L193
+ 993               	.L89:
+ 994 0124 8630      		cpi r24,6
+ 995 0126 9105      		cpc r25,__zero_reg__
+ 996 0128 01F4      		brne .+2
+ 997 012a 00C0      		rjmp .L88
+ 998 012c 8830      		cpi r24,8
+ 999 012e 9105      		cpc r25,__zero_reg__
+ 1000 0130 01F4      		brne .+2
+ 1001 0132 00C0      		rjmp .L88
+ 1002 0134 0497      		sbiw r24,4
+ 1003 0136 01F0      		breq .+2
+ 1004 0138 00C0      		rjmp .L73
+ 1005 013a 00C0      		rjmp .L88
+ 1006               	.L193:
+ 1007               	.LSM142:
+ 1008 013c 1092 0000 		sts uip_buf+47,__zero_reg__
+ 1009 0140 00C0      		rjmp .L90
+ 1010               	.L87:
+ 1011               	.LSM143:
+ 1012 0142 84E0      		ldi r24,lo8(4)
+ 1013 0144 8093 0000 		sts uip_flags,r24
+ 1014               	.LSM144:
+ 1015 0148 0E94 0000 		call uIPManagement_TCPCallback
+ 1016 014c 00C0      		rjmp .L91
+ 1017               	.L79:
+ 1018               	.LSM145:
+ 1019 014e 2F70      		andi r18,lo8(15)
+ 1020 0150 2330      		cpi r18,lo8(3)
+ 1021 0152 01F0      		breq .+2
+ 1022 0154 00C0      		rjmp .L73
+ 1023               	.L190:
+ 1024               	.LSM146:
+ 1025 0156 1092 0000 		sts (uip_slen)+1,__zero_reg__
+ 1026 015a 1092 0000 		sts uip_slen,__zero_reg__
+ 1027 015e 1092 0000 		sts (uip_len)+1,__zero_reg__
+ 1028 0162 1092 0000 		sts uip_len,__zero_reg__
+ 1029               	.LSM147:
+ 1030 0166 88E0      		ldi r24,lo8(8)
+ 1031 0168 8093 0000 		sts uip_flags,r24
+ 1032 016c 00C0      		rjmp .L182
+ 1033               	.LVL72:
+ 1034               	.L75:
+ 1035               	.LSM148:
+ 1036 016e 8530      		cpi r24,lo8(5)
+ 1037 0170 01F4      		brne .L92
+ 1038               	.LSM149:
+ 1039 0172 E091 0000 		lds r30,uip_udp_conn
+ 1040 0176 F091 0000 		lds r31,(uip_udp_conn)+1
+ 1041 017a 8481      		ldd r24,Z+4
+ 1042 017c 9581      		ldd r25,Z+5
+ 1043               	.LVL73:
+ 1044 017e 892B      		or r24,r25
+ 1045 0180 01F4      		brne .+2
+ 1046 0182 00C0      		rjmp .L73
+ 1047               	.LSM150:
+ 1048 0184 1092 0000 		sts (uip_conn)+1,__zero_reg__
+ 1049 0188 1092 0000 		sts uip_conn,__zero_reg__
+ 1050               	.LSM151:
+ 1051 018c C901      		movw r24,r18
+ 1052 018e 0C97      		sbiw r24,12
+ 1053 0190 9093 0000 		sts (uip_appdata)+1,r25
+ 1054 0194 8093 0000 		sts uip_appdata,r24
+ 1055 0198 9093 0000 		sts (uip_sappdata)+1,r25
+ 1056 019c 8093 0000 		sts uip_sappdata,r24
+ 1057               	.LSM152:
+ 1058 01a0 1092 0000 		sts (uip_slen)+1,__zero_reg__
+ 1059 01a4 1092 0000 		sts uip_slen,__zero_reg__
+ 1060 01a8 1092 0000 		sts (uip_len)+1,__zero_reg__
+ 1061 01ac 1092 0000 		sts uip_len,__zero_reg__
+ 1062               	.LSM153:
+ 1063 01b0 88E0      		ldi r24,lo8(8)
+ 1064 01b2 8093 0000 		sts uip_flags,r24
+ 1065 01b6 00C0      		rjmp .L181
+ 1066               	.LVL74:
+ 1067               	.L92:
+ 1068               	.LSM154:
+ 1069 01b8 8901      		movw r16,r18
+ 1070 01ba 0852      		subi r16,lo8(-(-40))
+ 1071 01bc 1040      		sbci r17,hi8(-(-40))
+ 1072 01be 8091 0000 		lds r24,uip_buf+14
+ 1073               	.LVL75:
+ 1074 01c2 8534      		cpi r24,lo8(69)
+ 1075 01c4 01F0      		breq .+2
+ 1076 01c6 00C0      		rjmp .L73
+ 1077               	.LSM155:
+ 1078 01c8 9091 0000 		lds r25,uip_buf+16
+ 1079 01cc 80E0      		ldi r24,lo8(0)
+ 1080 01ce 2091 0000 		lds r18,uip_buf+17
+ 1081 01d2 AC01      		movw r20,r24
+ 1082 01d4 420F      		add r20,r18
+ 1083 01d6 511D      		adc r21,__zero_reg__
+ 1084 01d8 8091 0000 		lds r24,uip_len
+ 1085 01dc 9091 0000 		lds r25,(uip_len)+1
+ 1086 01e0 8417      		cp r24,r20
+ 1087 01e2 9507      		cpc r25,r21
+ 1088 01e4 00F4      		brsh .+2
+ 1089 01e6 00C0      		rjmp .L73
+ 1090               	.LSM156:
+ 1091 01e8 5093 0000 		sts (uip_len)+1,r21
+ 1092 01ec 4093 0000 		sts uip_len,r20
+ 1093               	.LSM157:
+ 1094 01f0 8091 0000 		lds r24,uip_buf+20
+ 1095 01f4 90E0      		ldi r25,lo8(0)
+ 1096 01f6 8F73      		andi r24,lo8(63)
+ 1097 01f8 9070      		andi r25,hi8(63)
+ 1098 01fa 892B      		or r24,r25
+ 1099 01fc 01F0      		breq .+2
+ 1100 01fe 00C0      		rjmp .L73
+ 1101 0200 8091 0000 		lds r24,uip_buf+21
+ 1102 0204 8823      		tst r24
+ 1103 0206 01F0      		breq .+2
+ 1104 0208 00C0      		rjmp .L73
+ 1105               	.LSM158:
+ 1106 020a 4091 0000 		lds r20,uip_hostaddr
+ 1107 020e 5091 0000 		lds r21,(uip_hostaddr)+1
+ 1108 0212 C091 0000 		lds r28,uip_all_zeroes_addr
+ 1109 0216 D091 0000 		lds r29,(uip_all_zeroes_addr)+1
+ 1110               	.LVL76:
+ 1111 021a 4C17      		cp r20,r28
+ 1112 021c 5D07      		cpc r21,r29
+ 1113 021e 01F4      		brne .L93
+ 1114 0220 2091 0000 		lds r18,uip_hostaddr+2
+ 1115 0224 3091 0000 		lds r19,(uip_hostaddr+2)+1
+ 1116 0228 8091 0000 		lds r24,uip_all_zeroes_addr+2
+ 1117 022c 9091 0000 		lds r25,(uip_all_zeroes_addr+2)+1
+ 1118 0230 2817      		cp r18,r24
+ 1119 0232 3907      		cpc r19,r25
+ 1120 0234 01F0      		breq .L94
+ 1121               	.L93:
+ 1122               	.LSM159:
+ 1123 0236 8091 0000 		lds r24,uip_buf+30
+ 1124 023a 9091 0000 		lds r25,(uip_buf+30)+1
+ 1125 023e 8417      		cp r24,r20
+ 1126 0240 9507      		cpc r25,r21
+ 1127 0242 01F0      		breq .+2
+ 1128 0244 00C0      		rjmp .L73
+ 1129 0246 2091 0000 		lds r18,uip_buf+32
+ 1130 024a 3091 0000 		lds r19,(uip_buf+32)+1
+ 1131 024e 8091 0000 		lds r24,uip_hostaddr+2
+ 1132 0252 9091 0000 		lds r25,(uip_hostaddr+2)+1
+ 1133 0256 2817      		cp r18,r24
+ 1134 0258 3907      		cpc r19,r25
+ 1135 025a 01F0      		breq .+2
+ 1136 025c 00C0      		rjmp .L73
+ 1137               	.L94:
+ 1138               	.LSM160:
+ 1139 025e 0E94 0000 		call uip_ipchksum
+ 1140 0262 8F5F      		subi r24,lo8(-1)
+ 1141 0264 9F4F      		sbci r25,hi8(-1)
+ 1142 0266 01F0      		breq .+2
+ 1143 0268 00C0      		rjmp .L73
+ 1144               	.LSM161:
+ 1145 026a 8091 0000 		lds r24,uip_buf+23
+ 1146 026e 8630      		cpi r24,lo8(6)
+ 1147 0270 01F4      		brne .+2
+ 1148 0272 00C0      		rjmp .L95
+ 1149               	.LSM162:
+ 1150 0274 8131      		cpi r24,lo8(17)
+ 1151 0276 01F0      		breq .L96
+ 1152               	.LSM163:
+ 1153 0278 8130      		cpi r24,lo8(1)
+ 1154 027a 01F0      		breq .+2
+ 1155 027c 00C0      		rjmp .L73
+ 1156               	.LSM164:
+ 1157 027e 8091 0000 		lds r24,uip_buf+34
+ 1158 0282 8830      		cpi r24,lo8(8)
+ 1159 0284 01F0      		breq .+2
+ 1160 0286 00C0      		rjmp .L73
+ 1161               	.LSM165:
+ 1162 0288 1092 0000 		sts uip_buf+34,__zero_reg__
+ 1163               	.LSM166:
+ 1164 028c 8091 0000 		lds r24,uip_buf+36
+ 1165 0290 9091 0000 		lds r25,(uip_buf+36)+1
+ 1166 0294 EFEF      		ldi r30,hi8(-9)
+ 1167 0296 873F      		cpi r24,lo8(-9)
+ 1168 0298 9E07      		cpc r25,r30
+ 1169 029a 00F0      		brlo .L97
+ 1170               	.LSM167:
+ 1171 029c 0996      		adiw r24,9
+ 1172 029e 00C0      		rjmp .L180
+ 1173               	.L97:
+ 1174               	.LSM168:
+ 1175 02a0 0896      		adiw r24,8
+ 1176               	.L180:
+ 1177 02a2 9093 0000 		sts (uip_buf+36)+1,r25
+ 1178 02a6 8093 0000 		sts uip_buf+36,r24
+ 1179               	.LSM169:
+ 1180 02aa 8091 0000 		lds r24,uip_buf+26
+ 1181 02ae 9091 0000 		lds r25,(uip_buf+26)+1
+ 1182 02b2 A091 0000 		lds r26,(uip_buf+26)+2
+ 1183 02b6 B091 0000 		lds r27,(uip_buf+26)+3
+ 1184 02ba 8093 0000 		sts uip_buf+30,r24
+ 1185 02be 9093 0000 		sts (uip_buf+30)+1,r25
+ 1186 02c2 A093 0000 		sts (uip_buf+30)+2,r26
+ 1187 02c6 B093 0000 		sts (uip_buf+30)+3,r27
+ 1188               	.LSM170:
+ 1189 02ca 8091 0000 		lds r24,uip_hostaddr
+ 1190 02ce 9091 0000 		lds r25,(uip_hostaddr)+1
+ 1191 02d2 A091 0000 		lds r26,(uip_hostaddr)+2
+ 1192 02d6 B091 0000 		lds r27,(uip_hostaddr)+3
+ 1193 02da 8093 0000 		sts uip_buf+26,r24
+ 1194 02de 9093 0000 		sts (uip_buf+26)+1,r25
+ 1195 02e2 A093 0000 		sts (uip_buf+26)+2,r26
+ 1196 02e6 B093 0000 		sts (uip_buf+26)+3,r27
+ 1197               	.LSM171:
+ 1198 02ea 80E4      		ldi r24,lo8(64)
+ 1199 02ec F801      		movw r30,r16
+ 1200 02ee 8087      		std Z+8,r24
+ 1201 02f0 00C0      		rjmp .L99
+ 1202               	.L96:
+ 1203               	.LSM172:
+ 1204 02f2 8091 0000 		lds r24,uip_len
+ 1205 02f6 9091 0000 		lds r25,(uip_len)+1
+ 1206 02fa 4C97      		sbiw r24,28
+ 1207 02fc 9093 0000 		sts (uip_len)+1,r25
+ 1208 0300 8093 0000 		sts uip_len,r24
+ 1209               	.LSM173:
+ 1210 0304 80E0      		ldi r24,lo8(uip_udp_conns)
+ 1211 0306 90E0      		ldi r25,hi8(uip_udp_conns)
+ 1212 0308 9093 0000 		sts (uip_udp_conn)+1,r25
+ 1213 030c 8093 0000 		sts uip_udp_conn,r24
+ 1214               	.LSM174:
+ 1215 0310 A091 0000 		lds r26,uip_all_zeroes_addr+2
+ 1216 0314 B091 0000 		lds r27,(uip_all_zeroes_addr+2)+1
+ 1217 0318 6091 0000 		lds r22,uip_broadcast_addr
+ 1218 031c 7091 0000 		lds r23,(uip_broadcast_addr)+1
+ 1219 0320 4091 0000 		lds r20,uip_broadcast_addr+2
+ 1220 0324 5091 0000 		lds r21,(uip_broadcast_addr+2)+1
+ 1221 0328 00C0      		rjmp .L100
+ 1222               	.L106:
+ 1223               	.LSM175:
+ 1224 032a 2481      		ldd r18,Z+4
+ 1225 032c 3581      		ldd r19,Z+5
+ 1226               	.LSM176:
+ 1227 032e 2115      		cp r18,__zero_reg__
+ 1228 0330 3105      		cpc r19,__zero_reg__
+ 1229 0332 01F0      		breq .L101
+ 1230 0334 8091 0000 		lds r24,uip_buf+36
+ 1231 0338 9091 0000 		lds r25,(uip_buf+36)+1
+ 1232 033c 8217      		cp r24,r18
+ 1233 033e 9307      		cpc r25,r19
+ 1234 0340 01F4      		brne .L101
+ 1235 0342 2681      		ldd r18,Z+6
+ 1236 0344 3781      		ldd r19,Z+7
+ 1237 0346 2115      		cp r18,__zero_reg__
+ 1238 0348 3105      		cpc r19,__zero_reg__
+ 1239 034a 01F0      		breq .L102
+ 1240 034c 8091 0000 		lds r24,uip_buf+34
+ 1241 0350 9091 0000 		lds r25,(uip_buf+34)+1
+ 1242 0354 8217      		cp r24,r18
+ 1243 0356 9307      		cpc r25,r19
+ 1244 0358 01F4      		brne .L101
+ 1245               	.L102:
+ 1246 035a 2081      		ld r18,Z
+ 1247 035c 3181      		ldd r19,Z+1
+ 1248 035e 2C17      		cp r18,r28
+ 1249 0360 3D07      		cpc r19,r29
+ 1250 0362 01F4      		brne .L103
+ 1251 0364 8281      		ldd r24,Z+2
+ 1252 0366 9381      		ldd r25,Z+3
+ 1253 0368 8A17      		cp r24,r26
+ 1254 036a 9B07      		cpc r25,r27
+ 1255 036c 01F4      		brne .+2
+ 1256 036e 00C0      		rjmp .L104
+ 1257               	.L103:
+ 1258 0370 2617      		cp r18,r22
+ 1259 0372 3707      		cpc r19,r23
+ 1260 0374 01F4      		brne .L105
+ 1261 0376 8281      		ldd r24,Z+2
+ 1262 0378 9381      		ldd r25,Z+3
+ 1263 037a 8417      		cp r24,r20
+ 1264 037c 9507      		cpc r25,r21
+ 1265 037e 01F4      		brne .+2
+ 1266 0380 00C0      		rjmp .L104
+ 1267               	.L105:
+ 1268 0382 8091 0000 		lds r24,uip_buf+26
+ 1269 0386 9091 0000 		lds r25,(uip_buf+26)+1
+ 1270 038a 8217      		cp r24,r18
+ 1271 038c 9307      		cpc r25,r19
+ 1272 038e 01F4      		brne .L101
+ 1273 0390 2091 0000 		lds r18,uip_buf+28
+ 1274 0394 3091 0000 		lds r19,(uip_buf+28)+1
+ 1275 0398 8281      		ldd r24,Z+2
+ 1276 039a 9381      		ldd r25,Z+3
+ 1277 039c 2817      		cp r18,r24
+ 1278 039e 3907      		cpc r19,r25
+ 1279 03a0 01F4      		brne .+2
+ 1280 03a2 00C0      		rjmp .L104
+ 1281               	.L101:
+ 1282               	.LSM177:
+ 1283 03a4 7E96      		adiw r30,30
+ 1284 03a6 F093 0000 		sts (uip_udp_conn)+1,r31
+ 1285 03aa E093 0000 		sts uip_udp_conn,r30
+ 1286               	.L100:
+ 1287               	.LSM178:
+ 1288 03ae E091 0000 		lds r30,uip_udp_conn
+ 1289 03b2 F091 0000 		lds r31,(uip_udp_conn)+1
+ 1290 03b6 20E0      		ldi r18,hi8(uip_udp_conns+30)
+ 1291 03b8 E030      		cpi r30,lo8(uip_udp_conns+30)
+ 1292 03ba F207      		cpc r31,r18
+ 1293 03bc 00F4      		brsh .+2
+ 1294 03be 00C0      		rjmp .L106
+ 1295               	.LSM179:
+ 1296 03c0 E0E0      		ldi r30,lo8(uip_buf+42)
+ 1297 03c2 F0E0      		ldi r31,hi8(uip_buf+42)
+ 1298 03c4 DF01      		movw r26,r30
+ 1299 03c6 5C97      		sbiw r26,28
+ 1300 03c8 8CE1      		ldi r24,lo8(28)
+ 1301               	.L107:
+ 1302 03ca 0D90      		ld r0,X+
+ 1303 03cc 0192      		st Z+,r0
+ 1304 03ce 8150      		subi r24,lo8(-(-1))
+ 1305 03d0 01F4      		brne .L107
+ 1306               	.LSM180:
+ 1307 03d2 83E0      		ldi r24,lo8(3)
+ 1308 03d4 8093 0000 		sts uip_buf+34,r24
+ 1309               	.LSM181:
+ 1310 03d8 8093 0000 		sts uip_buf+35,r24
+ 1311               	.LSM182:
+ 1312 03dc 1092 0000 		sts (uip_buf+36)+1,__zero_reg__
+ 1313 03e0 1092 0000 		sts uip_buf+36,__zero_reg__
+ 1314               	.LSM183:
+ 1315 03e4 80E0      		ldi r24,lo8(uip_buf+34)
+ 1316 03e6 90E0      		ldi r25,hi8(uip_buf+34)
+ 1317 03e8 64E2      		ldi r22,lo8(36)
+ 1318 03ea 70E0      		ldi r23,hi8(36)
+ 1319 03ec 0E94 0000 		call uip_chksum
+ 1320 03f0 8095      		com r24
+ 1321 03f2 9095      		com r25
+ 1322 03f4 9093 0000 		sts (uip_buf+36)+1,r25
+ 1323 03f8 8093 0000 		sts uip_buf+36,r24
+ 1324               	.LSM184:
+ 1325 03fc 8091 0000 		lds r24,uip_buf+26
+ 1326 0400 9091 0000 		lds r25,(uip_buf+26)+1
+ 1327 0404 A091 0000 		lds r26,(uip_buf+26)+2
+ 1328 0408 B091 0000 		lds r27,(uip_buf+26)+3
+ 1329 040c 8093 0000 		sts uip_buf+30,r24
+ 1330 0410 9093 0000 		sts (uip_buf+30)+1,r25
+ 1331 0414 A093 0000 		sts (uip_buf+30)+2,r26
+ 1332 0418 B093 0000 		sts (uip_buf+30)+3,r27
+ 1333               	.LSM185:
+ 1334 041c 8091 0000 		lds r24,uip_hostaddr
+ 1335 0420 9091 0000 		lds r25,(uip_hostaddr)+1
+ 1336 0424 A091 0000 		lds r26,(uip_hostaddr)+2
+ 1337 0428 B091 0000 		lds r27,(uip_hostaddr)+3
+ 1338 042c 8093 0000 		sts uip_buf+26,r24
+ 1339 0430 9093 0000 		sts (uip_buf+26)+1,r25
+ 1340 0434 A093 0000 		sts (uip_buf+26)+2,r26
+ 1341 0438 B093 0000 		sts (uip_buf+26)+3,r27
+ 1342               	.LSM186:
+ 1343 043c 88E3      		ldi r24,lo8(56)
+ 1344 043e 90E0      		ldi r25,hi8(56)
+ 1345 0440 9093 0000 		sts (uip_len)+1,r25
+ 1346 0444 8093 0000 		sts uip_len,r24
+ 1347               	.LSM187:
+ 1348 0448 1092 0000 		sts uip_buf+16,__zero_reg__
+ 1349               	.LSM188:
+ 1350 044c 8093 0000 		sts uip_buf+17,r24
+ 1351               	.LSM189:
+ 1352 0450 80E4      		ldi r24,lo8(64)
+ 1353 0452 8093 0000 		sts uip_buf+22,r24
+ 1354               	.LSM190:
+ 1355 0456 81E0      		ldi r24,lo8(1)
+ 1356 0458 8093 0000 		sts uip_buf+23,r24
+ 1357 045c 00C0      		rjmp .L99
+ 1358               	.L104:
+ 1359               	.LSM191:
+ 1360 045e 1092 0000 		sts (uip_conn)+1,__zero_reg__
+ 1361 0462 1092 0000 		sts uip_conn,__zero_reg__
+ 1362               	.LSM192:
+ 1363 0466 82E0      		ldi r24,lo8(2)
+ 1364 0468 8093 0000 		sts uip_flags,r24
+ 1365               	.LSM193:
+ 1366 046c 80E0      		ldi r24,lo8(uip_buf+42)
+ 1367 046e 90E0      		ldi r25,hi8(uip_buf+42)
+ 1368 0470 9093 0000 		sts (uip_appdata)+1,r25
+ 1369 0474 8093 0000 		sts uip_appdata,r24
+ 1370 0478 9093 0000 		sts (uip_sappdata)+1,r25
+ 1371 047c 8093 0000 		sts uip_sappdata,r24
+ 1372               	.LSM194:
+ 1373 0480 1092 0000 		sts (uip_slen)+1,__zero_reg__
+ 1374 0484 1092 0000 		sts uip_slen,__zero_reg__
+ 1375               	.LVL77:
+ 1376               	.L181:
+ 1377               	.LSM195:
+ 1378 0488 0E94 0000 		call uIPManagement_UDPCallback
+ 1379               	.LVL78:
+ 1380               	.L71:
+ 1381               	.LSM196:
+ 1382 048c 2091 0000 		lds r18,uip_slen
+ 1383 0490 3091 0000 		lds r19,(uip_slen)+1
+ 1384 0494 2115      		cp r18,__zero_reg__
+ 1385 0496 3105      		cpc r19,__zero_reg__
+ 1386 0498 01F4      		brne .+2
+ 1387 049a 00C0      		rjmp .L73
+ 1388               	.LSM197:
+ 1389 049c C901      		movw r24,r18
+ 1390               	.LVL79:
+ 1391 049e 4C96      		adiw r24,28
+ 1392 04a0 9093 0000 		sts (uip_len)+1,r25
+ 1393 04a4 8093 0000 		sts uip_len,r24
+ 1394               	.LSM198:
+ 1395 04a8 9093 0000 		sts uip_buf+16,r25
+ 1396               	.LSM199:
+ 1397 04ac 8093 0000 		sts uip_buf+17,r24
+ 1398               	.LSM200:
+ 1399 04b0 E091 0000 		lds r30,uip_udp_conn
+ 1400 04b4 F091 0000 		lds r31,(uip_udp_conn)+1
+ 1401 04b8 8085      		ldd r24,Z+8
+ 1402 04ba 8093 0000 		sts uip_buf+22,r24
+ 1403               	.LSM201:
+ 1404 04be 81E1      		ldi r24,lo8(17)
+ 1405 04c0 8093 0000 		sts uip_buf+23,r24
+ 1406               	.LSM202:
+ 1407 04c4 C901      		movw r24,r18
+ 1408 04c6 0896      		adiw r24,8
+ 1409 04c8 9093 0000 		sts uip_buf+38,r25
+ 1410 04cc 8093 0000 		sts uip_buf+39,r24
+ 1411               	.LSM203:
+ 1412 04d0 1092 0000 		sts (uip_buf+40)+1,__zero_reg__
+ 1413 04d4 1092 0000 		sts uip_buf+40,__zero_reg__
+ 1414               	.LSM204:
+ 1415 04d8 8481      		ldd r24,Z+4
+ 1416 04da 9581      		ldd r25,Z+5
+ 1417 04dc 9093 0000 		sts (uip_buf+34)+1,r25
+ 1418 04e0 8093 0000 		sts uip_buf+34,r24
+ 1419               	.LSM205:
+ 1420 04e4 8681      		ldd r24,Z+6
+ 1421 04e6 9781      		ldd r25,Z+7
+ 1422 04e8 9093 0000 		sts (uip_buf+36)+1,r25
+ 1423 04ec 8093 0000 		sts uip_buf+36,r24
+ 1424               	.LSM206:
+ 1425 04f0 8091 0000 		lds r24,uip_hostaddr
+ 1426 04f4 9091 0000 		lds r25,(uip_hostaddr)+1
+ 1427 04f8 A091 0000 		lds r26,(uip_hostaddr)+2
+ 1428 04fc B091 0000 		lds r27,(uip_hostaddr)+3
+ 1429 0500 8093 0000 		sts uip_buf+26,r24
+ 1430 0504 9093 0000 		sts (uip_buf+26)+1,r25
+ 1431 0508 A093 0000 		sts (uip_buf+26)+2,r26
+ 1432 050c B093 0000 		sts (uip_buf+26)+3,r27
+ 1433               	.LSM207:
+ 1434 0510 8081      		ld r24,Z
+ 1435 0512 9181      		ldd r25,Z+1
+ 1436 0514 A281      		ldd r26,Z+2
+ 1437 0516 B381      		ldd r27,Z+3
+ 1438 0518 8093 0000 		sts uip_buf+30,r24
+ 1439 051c 9093 0000 		sts (uip_buf+30)+1,r25
+ 1440 0520 A093 0000 		sts (uip_buf+30)+2,r26
+ 1441 0524 B093 0000 		sts (uip_buf+30)+3,r27
+ 1442               	.LSM208:
+ 1443 0528 80E0      		ldi r24,lo8(uip_buf+54)
+ 1444 052a 90E0      		ldi r25,hi8(uip_buf+54)
+ 1445 052c 9093 0000 		sts (uip_appdata)+1,r25
+ 1446 0530 8093 0000 		sts uip_appdata,r24
+ 1447 0534 00C0      		rjmp .L99
+ 1448               	.LVL80:
+ 1449               	.L95:
+ 1450               	.LSM209:
+ 1451 0536 0E94 0000 		call uip_tcpchksum
+ 1452 053a 8F5F      		subi r24,lo8(-1)
+ 1453 053c 9F4F      		sbci r25,hi8(-1)
+ 1454 053e 01F0      		breq .+2
+ 1455 0540 00C0      		rjmp .L73
+ 1456               	.LSM210:
+ 1457 0542 C0E0      		ldi r28,lo8(uip_conns)
+ 1458 0544 D0E0      		ldi r29,hi8(uip_conns)
+ 1459               	.LVL81:
+ 1460               	.L110:
+ 1461               	.LSM211:
+ 1462 0546 898D      		ldd r24,Y+25
+ 1463 0548 8823      		tst r24
+ 1464 054a 01F0      		breq .L108
+ 1465 054c 2091 0000 		lds r18,uip_buf+36
+ 1466 0550 3091 0000 		lds r19,(uip_buf+36)+1
+ 1467 0554 8C81      		ldd r24,Y+4
+ 1468 0556 9D81      		ldd r25,Y+5
+ 1469 0558 2817      		cp r18,r24
+ 1470 055a 3907      		cpc r19,r25
+ 1471 055c 01F4      		brne .L108
+ 1472 055e 2091 0000 		lds r18,uip_buf+34
+ 1473 0562 3091 0000 		lds r19,(uip_buf+34)+1
+ 1474 0566 8E81      		ldd r24,Y+6
+ 1475 0568 9F81      		ldd r25,Y+7
+ 1476 056a 2817      		cp r18,r24
+ 1477 056c 3907      		cpc r19,r25
+ 1478 056e 01F4      		brne .L108
+ 1479 0570 2091 0000 		lds r18,uip_buf+26
+ 1480 0574 3091 0000 		lds r19,(uip_buf+26)+1
+ 1481 0578 8881      		ld r24,Y
+ 1482 057a 9981      		ldd r25,Y+1
+ 1483 057c 2817      		cp r18,r24
+ 1484 057e 3907      		cpc r19,r25
+ 1485 0580 01F4      		brne .L108
+ 1486 0582 2091 0000 		lds r18,uip_buf+28
+ 1487 0586 3091 0000 		lds r19,(uip_buf+28)+1
+ 1488 058a 8A81      		ldd r24,Y+2
+ 1489 058c 9B81      		ldd r25,Y+3
+ 1490 058e 2817      		cp r18,r24
+ 1491 0590 3907      		cpc r19,r25
+ 1492 0592 01F4      		brne .+2
+ 1493 0594 00C0      		rjmp .L109
+ 1494               	.L108:
+ 1495               	.LSM212:
+ 1496 0596 CF58      		subi r28,lo8(-(113))
+ 1497 0598 DF4F      		sbci r29,hi8(-(113))
+ 1498               	.LSM213:
+ 1499 059a 50E0      		ldi r21,hi8(uip_conns+226)
+ 1500 059c C030      		cpi r28,lo8(uip_conns+226)
+ 1501 059e D507      		cpc r29,r21
+ 1502 05a0 01F0      		breq .L110
+ 1503 05a2 00F0      		brlo .L110
+ 1504               	.LSM214:
+ 1505 05a4 8091 0000 		lds r24,uip_buf+47
+ 1506 05a8 8F73      		andi r24,lo8(63)
+ 1507 05aa 8230      		cpi r24,lo8(2)
+ 1508 05ac 01F4      		brne .L111
+ 1509               	.LSM215:
+ 1510 05ae 8091 0000 		lds r24,uip_buf+36
+ 1511 05b2 9091 0000 		lds r25,(uip_buf+36)+1
+ 1512 05b6 9093 0000 		sts (tmp16)+1,r25
+ 1513 05ba 8093 0000 		sts tmp16,r24
+ 1514               	.LSM216:
+ 1515 05be 1092 0000 		sts c,__zero_reg__
+ 1516 05c2 00C0      		rjmp .L112
+ 1517               	.L114:
+ 1518               	.LSM217:
+ 1519 05c4 E42F      		mov r30,r20
+ 1520 05c6 F0E0      		ldi r31,lo8(0)
+ 1521 05c8 EE0F      		lsl r30
+ 1522 05ca FF1F      		rol r31
+ 1523 05cc E050      		subi r30,lo8(-(uip_listenports))
+ 1524 05ce F040      		sbci r31,hi8(-(uip_listenports))
+ 1525 05d0 2091 0000 		lds r18,tmp16
+ 1526 05d4 3091 0000 		lds r19,(tmp16)+1
+ 1527 05d8 8081      		ld r24,Z
+ 1528 05da 9181      		ldd r25,Z+1
+ 1529 05dc 2817      		cp r18,r24
+ 1530 05de 3907      		cpc r19,r25
+ 1531 05e0 01F4      		brne .+2
+ 1532 05e2 00C0      		rjmp .L113
+ 1533               	.LSM218:
+ 1534 05e4 4F5F      		subi r20,lo8(-(1))
+ 1535 05e6 4093 0000 		sts c,r20
+ 1536               	.L112:
+ 1537 05ea 4091 0000 		lds r20,c
+ 1538 05ee 4530      		cpi r20,lo8(5)
+ 1539 05f0 00F0      		brlo .L114
+ 1540               	.L111:
+ 1541               	.LSM219:
+ 1542 05f2 8091 0000 		lds r24,uip_buf+47
+ 1543 05f6 82FD      		sbrc r24,2
+ 1544 05f8 00C0      		rjmp .L73
+ 1545               	.LSM220:
+ 1546 05fa 84E1      		ldi r24,lo8(20)
+ 1547 05fc F801      		movw r30,r16
+ 1548 05fe 81A3      		std Z+33,r24
+ 1549               	.LSM221:
+ 1550 0600 88E2      		ldi r24,lo8(40)
+ 1551 0602 90E0      		ldi r25,hi8(40)
+ 1552 0604 9093 0000 		sts (uip_len)+1,r25
+ 1553 0608 8093 0000 		sts uip_len,r24
+ 1554               	.LSM222:
+ 1555 060c 80E5      		ldi r24,lo8(80)
+ 1556 060e 80A3      		std Z+32,r24
+ 1557               	.LSM223:
+ 1558 0610 9091 0000 		lds r25,uip_buf+41
+ 1559               	.LSM224:
+ 1560 0614 8091 0000 		lds r24,uip_buf+45
+ 1561 0618 838F      		std Z+27,r24
+ 1562               	.LSM225:
+ 1563 061a 3091 0000 		lds r19,uip_buf+40
+ 1564               	.LSM226:
+ 1565 061e 8091 0000 		lds r24,uip_buf+44
+ 1566 0622 828F      		std Z+26,r24
+ 1567               	.LSM227:
+ 1568 0624 368F      		std Z+30,r19
+ 1569               	.LSM228:
+ 1570 0626 4091 0000 		lds r20,uip_buf+39
+ 1571               	.LSM229:
+ 1572 062a 8091 0000 		lds r24,uip_buf+43
+ 1573 062e 818F      		std Z+25,r24
+ 1574               	.LSM230:
+ 1575 0630 458F      		std Z+29,r20
+ 1576               	.LSM231:
+ 1577 0632 2091 0000 		lds r18,uip_buf+38
+ 1578 0636 2093 0000 		sts c,r18
+ 1579               	.LSM232:
+ 1580 063a 8091 0000 		lds r24,uip_buf+42
+ 1581 063e 808F      		std Z+24,r24
+ 1582               	.LSM233:
+ 1583 0640 248F      		std Z+28,r18
+ 1584               	.LSM234:
+ 1585 0642 9F5F      		subi r25,lo8(-(1))
+ 1586 0644 978F      		std Z+31,r25
+ 1587 0646 9923      		tst r25
+ 1588 0648 01F4      		brne .L115
+ 1589               	.LSM235:
+ 1590 064a 832F      		mov r24,r19
+ 1591 064c 8F5F      		subi r24,lo8(-(1))
+ 1592 064e 868F      		std Z+30,r24
+ 1593 0650 8823      		tst r24
+ 1594 0652 01F4      		brne .L115
+ 1595               	.LSM236:
+ 1596 0654 842F      		mov r24,r20
+ 1597 0656 8F5F      		subi r24,lo8(-(1))
+ 1598 0658 858F      		std Z+29,r24
+ 1599 065a 8823      		tst r24
+ 1600 065c 01F4      		brne .L115
+ 1601               	.LSM237:
+ 1602 065e 2F5F      		subi r18,lo8(-(1))
+ 1603 0660 248F      		std Z+28,r18
+ 1604               	.L115:
+ 1605               	.LSM238:
+ 1606 0662 2091 0000 		lds r18,uip_buf+34
+ 1607 0666 3091 0000 		lds r19,(uip_buf+34)+1
+ 1608 066a 3093 0000 		sts (tmp16)+1,r19
+ 1609 066e 2093 0000 		sts tmp16,r18
+ 1610               	.LSM239:
+ 1611 0672 8091 0000 		lds r24,uip_buf+36
+ 1612 0676 9091 0000 		lds r25,(uip_buf+36)+1
+ 1613 067a F801      		movw r30,r16
+ 1614 067c 958B      		std Z+21,r25
+ 1615 067e 848B      		std Z+20,r24
+ 1616               	.LSM240:
+ 1617 0680 378B      		std Z+23,r19
+ 1618 0682 268B      		std Z+22,r18
+ 1619               	.LSM241:
+ 1620 0684 8091 0000 		lds r24,uip_buf+26
+ 1621 0688 9091 0000 		lds r25,(uip_buf+26)+1
+ 1622 068c A091 0000 		lds r26,(uip_buf+26)+2
+ 1623 0690 B091 0000 		lds r27,(uip_buf+26)+3
+ 1624 0694 8093 0000 		sts uip_buf+30,r24
+ 1625 0698 9093 0000 		sts (uip_buf+30)+1,r25
+ 1626 069c A093 0000 		sts (uip_buf+30)+2,r26
+ 1627 06a0 B093 0000 		sts (uip_buf+30)+3,r27
+ 1628               	.LSM242:
+ 1629 06a4 8091 0000 		lds r24,uip_hostaddr
+ 1630 06a8 9091 0000 		lds r25,(uip_hostaddr)+1
+ 1631 06ac A091 0000 		lds r26,(uip_hostaddr)+2
+ 1632 06b0 B091 0000 		lds r27,(uip_hostaddr)+3
+ 1633 06b4 8093 0000 		sts uip_buf+26,r24
+ 1634 06b8 9093 0000 		sts (uip_buf+26)+1,r25
+ 1635 06bc A093 0000 		sts (uip_buf+26)+2,r26
+ 1636 06c0 B093 0000 		sts (uip_buf+26)+3,r27
+ 1637 06c4 00C0      		rjmp .L116
+ 1638               	.L113:
+ 1639               	.LSM243:
+ 1640 06c6 1092 0000 		sts c,__zero_reg__
+ 1641 06ca C0E0      		ldi r28,lo8(0)
+ 1642 06cc D0E0      		ldi r29,hi8(0)
+ 1643               	.LSM244:
+ 1644 06ce 41E7      		ldi r20,lo8(113)
+ 1645 06d0 50E0      		ldi r21,hi8(113)
+ 1646               	.LSM245:
+ 1647 06d2 31E7      		ldi r19,lo8(113)
+ 1648 06d4 00C0      		rjmp .L117
+ 1649               	.L122:
+ 1650               	.LSM246:
+ 1651 06d6 822F      		mov r24,r18
+ 1652 06d8 90E0      		ldi r25,lo8(0)
+ 1653 06da 849F      		mul r24,r20
+ 1654 06dc F001      		movw r30,r0
+ 1655 06de 859F      		mul r24,r21
+ 1656 06e0 F00D      		add r31,r0
+ 1657 06e2 949F      		mul r25,r20
+ 1658 06e4 F00D      		add r31,r0
+ 1659 06e6 1124      		clr r1
+ 1660 06e8 E050      		subi r30,lo8(-(uip_conns))
+ 1661 06ea F040      		sbci r31,hi8(-(uip_conns))
+ 1662 06ec 818D      		ldd r24,Z+25
+ 1663 06ee 8823      		tst r24
+ 1664 06f0 01F4      		brne .L118
+ 1665               	.LSM247:
+ 1666 06f2 81E7      		ldi r24,lo8(113)
+ 1667 06f4 289F      		mul r18,r24
+ 1668 06f6 E001      		movw r28,r0
+ 1669 06f8 1124      		clr r1
+ 1670 06fa C050      		subi r28,lo8(-(uip_conns))
+ 1671 06fc D040      		sbci r29,hi8(-(uip_conns))
+ 1672 06fe 00C0      		rjmp .L119
+ 1673               	.L118:
+ 1674               	.LSM248:
+ 1675 0700 8730      		cpi r24,lo8(7)
+ 1676 0702 01F4      		brne .L120
+ 1677               	.LSM249:
+ 1678 0704 2097      		sbiw r28,0
+ 1679 0706 01F0      		breq .L121
+ 1680 0708 928D      		ldd r25,Z+26
+ 1681 070a 8A8D      		ldd r24,Y+26
+ 1682 070c 8917      		cp r24,r25
+ 1683 070e 00F4      		brsh .L120
+ 1684               	.L121:
+ 1685               	.LSM250:
+ 1686 0710 239F      		mul r18,r19
+ 1687 0712 E001      		movw r28,r0
+ 1688 0714 1124      		clr r1
+ 1689 0716 C050      		subi r28,lo8(-(uip_conns))
+ 1690 0718 D040      		sbci r29,hi8(-(uip_conns))
+ 1691               	.L120:
+ 1692               	.LSM251:
+ 1693 071a 2F5F      		subi r18,lo8(-(1))
+ 1694 071c 2093 0000 		sts c,r18
+ 1695               	.L117:
+ 1696 0720 2091 0000 		lds r18,c
+ 1697 0724 2330      		cpi r18,lo8(3)
+ 1698 0726 00F0      		brlo .L122
+ 1699               	.L119:
+ 1700               	.LSM252:
+ 1701 0728 2097      		sbiw r28,0
+ 1702 072a 01F4      		brne .+2
+ 1703 072c 00C0      		rjmp .L73
+ 1704               	.LSM253:
+ 1705 072e D093 0000 		sts (uip_conn)+1,r29
+ 1706 0732 C093 0000 		sts uip_conn,r28
+ 1707               	.LSM254:
+ 1708 0736 83E0      		ldi r24,lo8(3)
+ 1709 0738 8A8F      		std Y+26,r24
+ 1710 073a 888F      		std Y+24,r24
+ 1711               	.LSM255:
+ 1712 073c 1E8A      		std Y+22,__zero_reg__
+ 1713               	.LSM256:
+ 1714 073e 84E0      		ldi r24,lo8(4)
+ 1715 0740 8F8B      		std Y+23,r24
+ 1716               	.LSM257:
+ 1717 0742 1B8E      		std Y+27,__zero_reg__
+ 1718               	.LSM258:
+ 1719 0744 8091 0000 		lds r24,uip_buf+36
+ 1720 0748 9091 0000 		lds r25,(uip_buf+36)+1
+ 1721 074c 9D83      		std Y+5,r25
+ 1722 074e 8C83      		std Y+4,r24
+ 1723               	.LSM259:
+ 1724 0750 8091 0000 		lds r24,uip_buf+34
+ 1725 0754 9091 0000 		lds r25,(uip_buf+34)+1
+ 1726 0758 9F83      		std Y+7,r25
+ 1727 075a 8E83      		std Y+6,r24
+ 1728               	.LSM260:
+ 1729 075c 8091 0000 		lds r24,uip_buf+26
+ 1730 0760 9091 0000 		lds r25,(uip_buf+26)+1
+ 1731 0764 A091 0000 		lds r26,(uip_buf+26)+2
+ 1732 0768 B091 0000 		lds r27,(uip_buf+26)+3
+ 1733 076c 8883      		st Y,r24
+ 1734 076e 9983      		std Y+1,r25
+ 1735 0770 AA83      		std Y+2,r26
+ 1736 0772 BB83      		std Y+3,r27
+ 1737               	.LSM261:
+ 1738 0774 81E0      		ldi r24,lo8(1)
+ 1739 0776 898F      		std Y+25,r24
+ 1740               	.LSM262:
+ 1741 0778 8091 0000 		lds r24,iss
+ 1742 077c 8C87      		std Y+12,r24
+ 1743               	.LSM263:
+ 1744 077e 8091 0000 		lds r24,iss+1
+ 1745 0782 8D87      		std Y+13,r24
+ 1746               	.LSM264:
+ 1747 0784 8091 0000 		lds r24,iss+2
+ 1748 0788 8E87      		std Y+14,r24
+ 1749               	.LSM265:
+ 1750 078a 8091 0000 		lds r24,iss+3
+ 1751 078e 8F87      		std Y+15,r24
+ 1752               	.LSM266:
+ 1753 0790 81E0      		ldi r24,lo8(1)
+ 1754 0792 90E0      		ldi r25,hi8(1)
+ 1755 0794 998B      		std Y+17,r25
+ 1756 0796 888B      		std Y+16,r24
+ 1757               	.LSM267:
+ 1758 0798 8091 0000 		lds r24,uip_buf+41
+ 1759 079c 8B87      		std Y+11,r24
+ 1760               	.LSM268:
+ 1761 079e 8091 0000 		lds r24,uip_buf+40
+ 1762 07a2 8A87      		std Y+10,r24
+ 1763               	.LSM269:
+ 1764 07a4 8091 0000 		lds r24,uip_buf+39
+ 1765 07a8 8987      		std Y+9,r24
+ 1766               	.LSM270:
+ 1767 07aa 8091 0000 		lds r24,uip_buf+38
+ 1768 07ae 8887      		std Y+8,r24
+ 1769               	.LSM271:
+ 1770 07b0 81E0      		ldi r24,lo8(1)
+ 1771 07b2 90E0      		ldi r25,hi8(1)
+ 1772 07b4 0E94 0000 		call uip_add_rcv_nxt
+ 1773               	.LSM272:
+ 1774 07b8 8091 0000 		lds r24,uip_buf+46
+ 1775 07bc 90E0      		ldi r25,lo8(0)
+ 1776 07be 807F      		andi r24,lo8(240)
+ 1777 07c0 9070      		andi r25,hi8(240)
+ 1778 07c2 8135      		cpi r24,81
+ 1779 07c4 9105      		cpc r25,__zero_reg__
+ 1780 07c6 04F4      		brge .+2
+ 1781 07c8 00C0      		rjmp .L85
+ 1782               	.LSM273:
+ 1783 07ca 1092 0000 		sts c,__zero_reg__
+ 1784 07ce 00C0      		rjmp .L178
+ 1785               	.L127:
+ 1786               	.LSM274:
+ 1787 07d0 F901      		movw r30,r18
+ 1788 07d2 E050      		subi r30,lo8(-(uip_buf))
+ 1789 07d4 F040      		sbci r31,hi8(-(uip_buf))
+ 1790 07d6 86A9      		ldd r24,Z+54
+ 1791 07d8 8093 0000 		sts opt,r24
+ 1792               	.LSM275:
+ 1793 07dc 8823      		tst r24
+ 1794 07de 01F0      		breq .L85
+ 1795               	.LSM276:
+ 1796 07e0 8130      		cpi r24,lo8(1)
+ 1797 07e2 01F4      		brne .L124
+ 1798               	.LSM277:
+ 1799 07e4 4F5F      		subi r20,lo8(-(1))
+ 1800 07e6 4093 0000 		sts c,r20
+ 1801 07ea 00C0      		rjmp .L178
+ 1802               	.L124:
+ 1803               	.LSM278:
+ 1804 07ec 8230      		cpi r24,lo8(2)
+ 1805 07ee 01F4      		brne .L125
+ 1806 07f0 87A9      		ldd r24,Z+55
+ 1807 07f2 8430      		cpi r24,lo8(4)
+ 1808 07f4 01F4      		brne .L125
+ 1809               	.LSM279:
+ 1810 07f6 30AD      		ldd r19,Z+56
+ 1811 07f8 20E0      		ldi r18,lo8(0)
+ 1812 07fa 81AD      		ldd r24,Z+57
+ 1813 07fc 90E0      		ldi r25,lo8(0)
+ 1814 07fe 822B      		or r24,r18
+ 1815 0800 932B      		or r25,r19
+ 1816 0802 9093 0000 		sts (tmp16)+1,r25
+ 1817 0806 8093 0000 		sts tmp16,r24
+ 1818               	.LSM280:
+ 1819 080a F5E0      		ldi r31,hi8(1461)
+ 1820 080c 853B      		cpi r24,lo8(1461)
+ 1821 080e 9F07      		cpc r25,r31
+ 1822 0810 00F0      		brlo .L126
+ 1823 0812 84EB      		ldi r24,lo8(1460)
+ 1824 0814 95E0      		ldi r25,hi8(1460)
+ 1825               	.L126:
+ 1826 0816 9B8B      		std Y+19,r25
+ 1827 0818 8A8B      		std Y+18,r24
+ 1828 081a 9D8B      		std Y+21,r25
+ 1829 081c 8C8B      		std Y+20,r24
+ 1830 081e 00C0      		rjmp .L85
+ 1831               	.L125:
+ 1832               	.LSM281:
+ 1833 0820 9091 0000 		lds r25,c
+ 1834 0824 E92F      		mov r30,r25
+ 1835 0826 F0E0      		ldi r31,lo8(0)
+ 1836 0828 E050      		subi r30,lo8(-(uip_buf))
+ 1837 082a F040      		sbci r31,hi8(-(uip_buf))
+ 1838 082c 87A9      		ldd r24,Z+55
+ 1839 082e 8823      		tst r24
+ 1840 0830 01F0      		breq .L85
+ 1841               	.LSM282:
+ 1842 0832 890F      		add r24,r25
+ 1843 0834 8093 0000 		sts c,r24
+ 1844               	.L178:
+ 1845               	.LSM283:
+ 1846 0838 4091 0000 		lds r20,c
+ 1847 083c 242F      		mov r18,r20
+ 1848 083e 30E0      		ldi r19,lo8(0)
+ 1849 0840 8091 0000 		lds r24,uip_buf+46
+ 1850 0844 8295      		swap r24
+ 1851 0846 8F70      		andi r24,lo8(15)
+ 1852 0848 90E0      		ldi r25,lo8(0)
+ 1853 084a 0597      		sbiw r24,5
+ 1854 084c 880F      		lsl r24
+ 1855 084e 991F      		rol r25
+ 1856 0850 880F      		lsl r24
+ 1857 0852 991F      		rol r25
+ 1858 0854 2817      		cp r18,r24
+ 1859 0856 3907      		cpc r19,r25
+ 1860 0858 04F4      		brge .+2
+ 1861 085a 00C0      		rjmp .L127
+ 1862               	.L85:
+ 1863               	.LSM284:
+ 1864 085c 80E1      		ldi r24,lo8(16)
+ 1865 085e 8093 0000 		sts uip_buf+47,r24
+ 1866               	.L90:
+ 1867               	.LSM285:
+ 1868 0862 8091 0000 		lds r24,uip_buf+47
+ 1869 0866 8260      		ori r24,lo8(2)
+ 1870 0868 8093 0000 		sts uip_buf+47,r24
+ 1871               	.LSM286:
+ 1872 086c 82E0      		ldi r24,lo8(2)
+ 1873 086e 8093 0000 		sts uip_buf+54,r24
+ 1874               	.LSM287:
+ 1875 0872 84E0      		ldi r24,lo8(4)
+ 1876 0874 8093 0000 		sts uip_buf+55,r24
+ 1877               	.LSM288:
+ 1878 0878 85E0      		ldi r24,lo8(5)
+ 1879 087a 8093 0000 		sts uip_buf+56,r24
+ 1880               	.LSM289:
+ 1881 087e 84EB      		ldi r24,lo8(-76)
+ 1882 0880 8093 0000 		sts uip_buf+57,r24
+ 1883               	.LSM290:
+ 1884 0884 8CE2      		ldi r24,lo8(44)
+ 1885 0886 90E0      		ldi r25,hi8(44)
+ 1886 0888 9093 0000 		sts (uip_len)+1,r25
+ 1887 088c 8093 0000 		sts uip_len,r24
+ 1888               	.LSM291:
+ 1889 0890 80E6      		ldi r24,lo8(96)
+ 1890 0892 00C0      		rjmp .L186
+ 1891               	.L109:
+ 1892               	.LSM292:
+ 1893 0894 D093 0000 		sts (uip_conn)+1,r29
+ 1894 0898 C093 0000 		sts uip_conn,r28
+ 1895               	.LSM293:
+ 1896 089c 1092 0000 		sts uip_flags,__zero_reg__
+ 1897               	.LSM294:
+ 1898 08a0 8091 0000 		lds r24,uip_buf+47
+ 1899 08a4 482F      		mov r20,r24
+ 1900 08a6 50E0      		ldi r21,lo8(0)
+ 1901 08a8 82FF      		sbrs r24,2
+ 1902 08aa 00C0      		rjmp .L129
+ 1903               	.LSM295:
+ 1904 08ac 198E      		std Y+25,__zero_reg__
+ 1905               	.LSM296:
+ 1906 08ae 80E2      		ldi r24,lo8(32)
+ 1907 08b0 00C0      		rjmp .L187
+ 1908               	.L129:
+ 1909               	.LSM297:
+ 1910 08b2 8091 0000 		lds r24,uip_buf+46
+ 1911 08b6 8295      		swap r24
+ 1912 08b8 8F70      		andi r24,lo8(15)
+ 1913 08ba 880F      		lsl r24
+ 1914 08bc 880F      		lsl r24
+ 1915 08be 8093 0000 		sts c,r24
+ 1916               	.LSM298:
+ 1917 08c2 2091 0000 		lds r18,uip_len
+ 1918 08c6 3091 0000 		lds r19,(uip_len)+1
+ 1919 08ca 2451      		subi r18,lo8(-(-20))
+ 1920 08cc 3040      		sbci r19,hi8(-(-20))
+ 1921 08ce 281B      		sub r18,r24
+ 1922 08d0 3109      		sbc r19,__zero_reg__
+ 1923 08d2 3093 0000 		sts (uip_len)+1,r19
+ 1924 08d6 2093 0000 		sts uip_len,r18
+ 1925               	.LSM299:
+ 1926 08da 898D      		ldd r24,Y+25
+ 1927 08dc 8F70      		andi r24,lo8(15)
+ 1928 08de 8230      		cpi r24,lo8(2)
+ 1929 08e0 01F4      		brne .L130
+ 1930 08e2 4F73      		andi r20,lo8(63)
+ 1931 08e4 5070      		andi r21,hi8(63)
+ 1932 08e6 4231      		cpi r20,18
+ 1933 08e8 5105      		cpc r21,__zero_reg__
+ 1934 08ea 01F0      		breq .L131
+ 1935               	.L130:
+ 1936               	.LSM300:
+ 1937 08ec 232B      		or r18,r19
+ 1938 08ee 01F4      		brne .L132
+ 1939 08f0 8091 0000 		lds r24,uip_buf+47
+ 1940 08f4 90E0      		ldi r25,lo8(0)
+ 1941 08f6 8370      		andi r24,lo8(3)
+ 1942 08f8 9070      		andi r25,hi8(3)
+ 1943 08fa 892B      		or r24,r25
+ 1944 08fc 01F0      		breq .L131
+ 1945               	.L132:
+ 1946 08fe 9091 0000 		lds r25,uip_buf+38
+ 1947 0902 8885      		ldd r24,Y+8
+ 1948 0904 9817      		cp r25,r24
+ 1949 0906 01F0      		breq .+2
+ 1950 0908 00C0      		rjmp .L133
+ 1951 090a 9091 0000 		lds r25,uip_buf+39
+ 1952 090e 8985      		ldd r24,Y+9
+ 1953 0910 9817      		cp r25,r24
+ 1954 0912 01F0      		breq .+2
+ 1955 0914 00C0      		rjmp .L133
+ 1956 0916 9091 0000 		lds r25,uip_buf+40
+ 1957 091a 8A85      		ldd r24,Y+10
+ 1958 091c 9817      		cp r25,r24
+ 1959 091e 01F0      		breq .+2
+ 1960 0920 00C0      		rjmp .L133
+ 1961 0922 9091 0000 		lds r25,uip_buf+41
+ 1962 0926 8B85      		ldd r24,Y+11
+ 1963 0928 9817      		cp r25,r24
+ 1964 092a 01F0      		breq .+2
+ 1965 092c 00C0      		rjmp .L133
+ 1966               	.L131:
+ 1967               	.LSM301:
+ 1968 092e 8091 0000 		lds r24,uip_buf+47
+ 1969 0932 84FF      		sbrs r24,4
+ 1970 0934 00C0      		rjmp .L134
+ 1971 0936 6889      		ldd r22,Y+16
+ 1972 0938 7989      		ldd r23,Y+17
+ 1973 093a 6115      		cp r22,__zero_reg__
+ 1974 093c 7105      		cpc r23,__zero_reg__
+ 1975 093e 01F4      		brne .+2
+ 1976 0940 00C0      		rjmp .L134
+ 1977               	.LSM302:
+ 1978 0942 CE01      		movw r24,r28
+ 1979 0944 0C96      		adiw r24,12
+ 1980 0946 0E94 0000 		call uip_add32
+ 1981               	.LSM303:
+ 1982 094a 2091 0000 		lds r18,uip_buf+42
+ 1983 094e 8091 0000 		lds r24,uip_acc32
+ 1984 0952 2817      		cp r18,r24
+ 1985 0954 01F0      		breq .+2
+ 1986 0956 00C0      		rjmp .L134
+ 1987 0958 9091 0000 		lds r25,uip_buf+43
+ 1988 095c 8091 0000 		lds r24,uip_acc32+1
+ 1989 0960 9817      		cp r25,r24
+ 1990 0962 01F4      		brne .L134
+ 1991 0964 9091 0000 		lds r25,uip_buf+44
+ 1992 0968 8091 0000 		lds r24,uip_acc32+2
+ 1993 096c 9817      		cp r25,r24
+ 1994 096e 01F4      		brne .L134
+ 1995 0970 9091 0000 		lds r25,uip_buf+45
+ 1996 0974 8091 0000 		lds r24,uip_acc32+3
+ 1997 0978 9817      		cp r25,r24
+ 1998 097a 01F4      		brne .L134
+ 1999               	.LSM304:
+ 2000 097c 2C87      		std Y+12,r18
+ 2001               	.LSM305:
+ 2002 097e 8091 0000 		lds r24,uip_acc32+1
+ 2003 0982 8D87      		std Y+13,r24
+ 2004               	.LSM306:
+ 2005 0984 8091 0000 		lds r24,uip_acc32+2
+ 2006 0988 8E87      		std Y+14,r24
+ 2007               	.LSM307:
+ 2008 098a 8091 0000 		lds r24,uip_acc32+3
+ 2009 098e 8F87      		std Y+15,r24
+ 2010               	.LSM308:
+ 2011 0990 8B8D      		ldd r24,Y+27
+ 2012 0992 8823      		tst r24
+ 2013 0994 01F4      		brne .L135
+ 2014               	.LBB7:
+ 2015               	.LSM309:
+ 2016 0996 2E89      		ldd r18,Y+22
+ 2017 0998 988D      		ldd r25,Y+24
+ 2018 099a 8A8D      		ldd r24,Y+26
+ 2019 099c 981B      		sub r25,r24
+ 2020 099e 822F      		mov r24,r18
+ 2021 09a0 8695      		lsr r24
+ 2022 09a2 8695      		lsr r24
+ 2023 09a4 8695      		lsr r24
+ 2024 09a6 981B      		sub r25,r24
+ 2025               	.LSM310:
+ 2026 09a8 392F      		mov r19,r25
+ 2027 09aa 320F      		add r19,r18
+ 2028 09ac 3E8B      		std Y+22,r19
+ 2029               	.LSM311:
+ 2030 09ae 8F89      		ldd r24,Y+23
+ 2031               	.LSM312:
+ 2032 09b0 282F      		mov r18,r24
+ 2033 09b2 2695      		lsr r18
+ 2034 09b4 2695      		lsr r18
+ 2035 09b6 821B      		sub r24,r18
+ 2036 09b8 97FD      		sbrc r25,7
+ 2037 09ba 9195      		neg r25
+ 2038 09bc 890F      		add r24,r25
+ 2039 09be 8F8B      		std Y+23,r24
+ 2040               	.LSM313:
+ 2041 09c0 3695      		lsr r19
+ 2042 09c2 3695      		lsr r19
+ 2043 09c4 3695      		lsr r19
+ 2044 09c6 830F      		add r24,r19
+ 2045 09c8 888F      		std Y+24,r24
+ 2046               	.L135:
+ 2047               	.LBE7:
+ 2048               	.LSM314:
+ 2049 09ca 81E0      		ldi r24,lo8(1)
+ 2050 09cc 8093 0000 		sts uip_flags,r24
+ 2051               	.LSM315:
+ 2052 09d0 888D      		ldd r24,Y+24
+ 2053 09d2 8A8F      		std Y+26,r24
+ 2054               	.LSM316:
+ 2055 09d4 198A      		std Y+17,__zero_reg__
+ 2056 09d6 188A      		std Y+16,__zero_reg__
+ 2057               	.L134:
+ 2058               	.LSM317:
+ 2059 09d8 898D      		ldd r24,Y+25
+ 2060 09da 282F      		mov r18,r24
+ 2061 09dc 30E0      		ldi r19,lo8(0)
+ 2062 09de C901      		movw r24,r18
+ 2063 09e0 8F70      		andi r24,lo8(15)
+ 2064 09e2 9070      		andi r25,hi8(15)
+ 2065 09e4 8430      		cpi r24,4
+ 2066 09e6 9105      		cpc r25,__zero_reg__
+ 2067 09e8 01F4      		brne .+2
+ 2068 09ea 00C0      		rjmp .L139
+ 2069 09ec 8530      		cpi r24,5
+ 2070 09ee 9105      		cpc r25,__zero_reg__
+ 2071 09f0 04F4      		brge .L143
+ 2072 09f2 8230      		cpi r24,2
+ 2073 09f4 9105      		cpc r25,__zero_reg__
+ 2074 09f6 01F0      		breq .L137
+ 2075 09f8 8330      		cpi r24,3
+ 2076 09fa 9105      		cpc r25,__zero_reg__
+ 2077 09fc 04F0      		brlt .+2
+ 2078 09fe 00C0      		rjmp .L138
+ 2079 0a00 0197      		sbiw r24,1
+ 2080 0a02 01F0      		breq .+2
+ 2081 0a04 00C0      		rjmp .L73
+ 2082 0a06 00C0      		rjmp .L194
+ 2083               	.L143:
+ 2084 0a08 8630      		cpi r24,6
+ 2085 0a0a 9105      		cpc r25,__zero_reg__
+ 2086 0a0c 01F4      		brne .+2
+ 2087 0a0e 00C0      		rjmp .L141
+ 2088 0a10 8630      		cpi r24,6
+ 2089 0a12 9105      		cpc r25,__zero_reg__
+ 2090 0a14 04F4      		brge .+2
+ 2091 0a16 00C0      		rjmp .L140
+ 2092 0a18 8730      		cpi r24,7
+ 2093 0a1a 9105      		cpc r25,__zero_reg__
+ 2094 0a1c 01F4      		brne .+2
+ 2095 0a1e 00C0      		rjmp .L133
+ 2096 0a20 0897      		sbiw r24,8
+ 2097 0a22 01F0      		breq .+2
+ 2098 0a24 00C0      		rjmp .L73
+ 2099 0a26 00C0      		rjmp .L195
+ 2100               	.L194:
+ 2101               	.LSM318:
+ 2102 0a28 8091 0000 		lds r24,uip_flags
+ 2103 0a2c 80FF      		sbrs r24,0
+ 2104 0a2e 00C0      		rjmp .L73
+ 2105               	.LSM319:
+ 2106 0a30 83E0      		ldi r24,lo8(3)
+ 2107 0a32 898F      		std Y+25,r24
+ 2108               	.LSM320:
+ 2109 0a34 80E4      		ldi r24,lo8(64)
+ 2110 0a36 8093 0000 		sts uip_flags,r24
+ 2111               	.LSM321:
+ 2112 0a3a 198A      		std Y+17,__zero_reg__
+ 2113 0a3c 188A      		std Y+16,__zero_reg__
+ 2114               	.LSM322:
+ 2115 0a3e 2091 0000 		lds r18,uip_len
+ 2116 0a42 3091 0000 		lds r19,(uip_len)+1
+ 2117 0a46 2115      		cp r18,__zero_reg__
+ 2118 0a48 3105      		cpc r19,__zero_reg__
+ 2119 0a4a 01F4      		brne .+2
+ 2120 0a4c 00C0      		rjmp .L191
+ 2121               	.LSM323:
+ 2122 0a4e 8091 0000 		lds r24,uip_flags
+ 2123 0a52 8260      		ori r24,lo8(2)
+ 2124 0a54 8093 0000 		sts uip_flags,r24
+ 2125               	.LSM324:
+ 2126 0a58 C901      		movw r24,r18
+ 2127 0a5a 0E94 0000 		call uip_add_rcv_nxt
+ 2128 0a5e 00C0      		rjmp .L191
+ 2129               	.L137:
+ 2130               	.LSM325:
+ 2131 0a60 8091 0000 		lds r24,uip_flags
+ 2132 0a64 80FF      		sbrs r24,0
+ 2133 0a66 00C0      		rjmp .L145
+ 2134 0a68 8091 0000 		lds r24,uip_buf+47
+ 2135 0a6c 8F73      		andi r24,lo8(63)
+ 2136 0a6e 8231      		cpi r24,lo8(18)
+ 2137 0a70 01F0      		breq .+2
+ 2138 0a72 00C0      		rjmp .L145
+ 2139               	.LSM326:
+ 2140 0a74 8091 0000 		lds r24,uip_buf+46
+ 2141 0a78 90E0      		ldi r25,lo8(0)
+ 2142 0a7a 807F      		andi r24,lo8(240)
+ 2143 0a7c 9070      		andi r25,hi8(240)
+ 2144 0a7e 8135      		cpi r24,81
+ 2145 0a80 9105      		cpc r25,__zero_reg__
+ 2146 0a82 04F4      		brge .+2
+ 2147 0a84 00C0      		rjmp .L146
+ 2148               	.LSM327:
+ 2149 0a86 1092 0000 		sts c,__zero_reg__
+ 2150 0a8a 00C0      		rjmp .L179
+ 2151               	.L151:
+ 2152               	.LSM328:
+ 2153 0a8c F901      		movw r30,r18
+ 2154 0a8e E050      		subi r30,lo8(-(uip_buf))
+ 2155 0a90 F040      		sbci r31,hi8(-(uip_buf))
+ 2156 0a92 86A9      		ldd r24,Z+54
+ 2157 0a94 8093 0000 		sts opt,r24
+ 2158               	.LSM329:
+ 2159 0a98 8823      		tst r24
+ 2160 0a9a 01F0      		breq .L146
+ 2161               	.LSM330:
+ 2162 0a9c 8130      		cpi r24,lo8(1)
+ 2163 0a9e 01F4      		brne .L148
+ 2164               	.LSM331:
+ 2165 0aa0 4F5F      		subi r20,lo8(-(1))
+ 2166 0aa2 4093 0000 		sts c,r20
+ 2167 0aa6 00C0      		rjmp .L179
+ 2168               	.L148:
+ 2169               	.LSM332:
+ 2170 0aa8 8230      		cpi r24,lo8(2)
+ 2171 0aaa 01F4      		brne .L149
+ 2172 0aac 87A9      		ldd r24,Z+55
+ 2173 0aae 8430      		cpi r24,lo8(4)
+ 2174 0ab0 01F4      		brne .L149
+ 2175               	.LSM333:
+ 2176 0ab2 30AD      		ldd r19,Z+56
+ 2177 0ab4 20E0      		ldi r18,lo8(0)
+ 2178 0ab6 81AD      		ldd r24,Z+57
+ 2179 0ab8 90E0      		ldi r25,lo8(0)
+ 2180 0aba 822B      		or r24,r18
+ 2181 0abc 932B      		or r25,r19
+ 2182 0abe 9093 0000 		sts (tmp16)+1,r25
+ 2183 0ac2 8093 0000 		sts tmp16,r24
+ 2184               	.LSM334:
+ 2185 0ac6 25E0      		ldi r18,hi8(1461)
+ 2186 0ac8 853B      		cpi r24,lo8(1461)
+ 2187 0aca 9207      		cpc r25,r18
+ 2188 0acc 00F0      		brlo .L150
+ 2189 0ace 84EB      		ldi r24,lo8(1460)
+ 2190 0ad0 95E0      		ldi r25,hi8(1460)
+ 2191               	.L150:
+ 2192 0ad2 9B8B      		std Y+19,r25
+ 2193 0ad4 8A8B      		std Y+18,r24
+ 2194 0ad6 9D8B      		std Y+21,r25
+ 2195 0ad8 8C8B      		std Y+20,r24
+ 2196 0ada 00C0      		rjmp .L146
+ 2197               	.L149:
+ 2198               	.LSM335:
+ 2199 0adc 9091 0000 		lds r25,c
+ 2200 0ae0 E92F      		mov r30,r25
+ 2201 0ae2 F0E0      		ldi r31,lo8(0)
+ 2202 0ae4 E050      		subi r30,lo8(-(uip_buf))
+ 2203 0ae6 F040      		sbci r31,hi8(-(uip_buf))
+ 2204 0ae8 87A9      		ldd r24,Z+55
+ 2205 0aea 8823      		tst r24
+ 2206 0aec 01F0      		breq .L146
+ 2207               	.LSM336:
+ 2208 0aee 890F      		add r24,r25
+ 2209 0af0 8093 0000 		sts c,r24
+ 2210               	.L179:
+ 2211               	.LSM337:
+ 2212 0af4 4091 0000 		lds r20,c
+ 2213 0af8 242F      		mov r18,r20
+ 2214 0afa 30E0      		ldi r19,lo8(0)
+ 2215 0afc 8091 0000 		lds r24,uip_buf+46
+ 2216 0b00 8295      		swap r24
+ 2217 0b02 8F70      		andi r24,lo8(15)
+ 2218 0b04 90E0      		ldi r25,lo8(0)
+ 2219 0b06 0597      		sbiw r24,5
+ 2220 0b08 880F      		lsl r24
+ 2221 0b0a 991F      		rol r25
+ 2222 0b0c 880F      		lsl r24
+ 2223 0b0e 991F      		rol r25
+ 2224 0b10 2817      		cp r18,r24
+ 2225 0b12 3907      		cpc r19,r25
+ 2226 0b14 04F4      		brge .+2
+ 2227 0b16 00C0      		rjmp .L151
+ 2228               	.L146:
+ 2229               	.LSM338:
+ 2230 0b18 83E0      		ldi r24,lo8(3)
+ 2231 0b1a 898F      		std Y+25,r24
+ 2232               	.LSM339:
+ 2233 0b1c 8091 0000 		lds r24,uip_buf+38
+ 2234 0b20 8887      		std Y+8,r24
+ 2235               	.LSM340:
+ 2236 0b22 8091 0000 		lds r24,uip_buf+39
+ 2237 0b26 8987      		std Y+9,r24
+ 2238               	.LSM341:
+ 2239 0b28 8091 0000 		lds r24,uip_buf+40
+ 2240 0b2c 8A87      		std Y+10,r24
+ 2241               	.LSM342:
+ 2242 0b2e 8091 0000 		lds r24,uip_buf+41
+ 2243 0b32 8B87      		std Y+11,r24
+ 2244               	.LSM343:
+ 2245 0b34 81E0      		ldi r24,lo8(1)
+ 2246 0b36 90E0      		ldi r25,hi8(1)
+ 2247 0b38 0E94 0000 		call uip_add_rcv_nxt
+ 2248               	.LSM344:
+ 2249 0b3c 82E4      		ldi r24,lo8(66)
+ 2250 0b3e 8093 0000 		sts uip_flags,r24
+ 2251               	.LSM345:
+ 2252 0b42 198A      		std Y+17,__zero_reg__
+ 2253 0b44 188A      		std Y+16,__zero_reg__
+ 2254               	.LSM346:
+ 2255 0b46 1092 0000 		sts (uip_len)+1,__zero_reg__
+ 2256 0b4a 1092 0000 		sts uip_len,__zero_reg__
+ 2257 0b4e 00C0      		rjmp .L191
+ 2258               	.L145:
+ 2259               	.LSM347:
+ 2260 0b50 80E2      		ldi r24,lo8(32)
+ 2261 0b52 8093 0000 		sts uip_flags,r24
+ 2262               	.LSM348:
+ 2263 0b56 0E94 0000 		call uIPManagement_TCPCallback
+ 2264               	.LSM349:
+ 2265 0b5a E091 0000 		lds r30,uip_conn
+ 2266 0b5e F091 0000 		lds r31,(uip_conn)+1
+ 2267 0b62 118E      		std Z+25,__zero_reg__
+ 2268 0b64 00C0      		rjmp .L111
+ 2269               	.L138:
+ 2270               	.LSM350:
+ 2271 0b66 8091 0000 		lds r24,uip_buf+47
+ 2272 0b6a 80FF      		sbrs r24,0
+ 2273 0b6c 00C0      		rjmp .L152
+ 2274 0b6e 24FD      		sbrc r18,4
+ 2275 0b70 00C0      		rjmp .L152
+ 2276               	.LSM351:
+ 2277 0b72 8889      		ldd r24,Y+16
+ 2278 0b74 9989      		ldd r25,Y+17
+ 2279 0b76 892B      		or r24,r25
+ 2280 0b78 01F0      		breq .+2
+ 2281 0b7a 00C0      		rjmp .L73
+ 2282               	.LSM352:
+ 2283 0b7c 8091 0000 		lds r24,uip_len
+ 2284 0b80 9091 0000 		lds r25,(uip_len)+1
+ 2285 0b84 0196      		adiw r24,1
+ 2286 0b86 0E94 0000 		call uip_add_rcv_nxt
+ 2287               	.LSM353:
+ 2288 0b8a 2091 0000 		lds r18,uip_flags
+ 2289 0b8e 822F      		mov r24,r18
+ 2290 0b90 8061      		ori r24,lo8(16)
+ 2291 0b92 8093 0000 		sts uip_flags,r24
+ 2292               	.LSM354:
+ 2293 0b96 8091 0000 		lds r24,uip_len
+ 2294 0b9a 9091 0000 		lds r25,(uip_len)+1
+ 2295 0b9e 892B      		or r24,r25
+ 2296 0ba0 01F0      		breq .L153
+ 2297               	.LSM355:
+ 2298 0ba2 2261      		ori r18,lo8(18)
+ 2299 0ba4 2093 0000 		sts uip_flags,r18
+ 2300               	.L153:
+ 2301               	.LSM356:
+ 2302 0ba8 0E94 0000 		call uIPManagement_TCPCallback
+ 2303               	.LSM357:
+ 2304 0bac 81E0      		ldi r24,lo8(1)
+ 2305 0bae 90E0      		ldi r25,hi8(1)
+ 2306 0bb0 998B      		std Y+17,r25
+ 2307 0bb2 888B      		std Y+16,r24
+ 2308               	.LSM358:
+ 2309 0bb4 88E0      		ldi r24,lo8(8)
+ 2310               	.L192:
+ 2311 0bb6 898F      		std Y+25,r24
+ 2312               	.LSM359:
+ 2313 0bb8 1B8E      		std Y+27,__zero_reg__
+ 2314               	.L88:
+ 2315               	.LSM360:
+ 2316 0bba 81E1      		ldi r24,lo8(17)
+ 2317               	.L184:
+ 2318 0bbc 8093 0000 		sts uip_buf+47,r24
+ 2319 0bc0 00C0      		rjmp .L82
+ 2320               	.L152:
+ 2321               	.LSM361:
+ 2322 0bc2 85FF      		sbrs r24,5
+ 2323 0bc4 00C0      		rjmp .L154
+ 2324               	.LSM362:
+ 2325 0bc6 6091 0000 		lds r22,uip_buf+52
+ 2326 0bca 362F      		mov r19,r22
+ 2327 0bcc 20E0      		ldi r18,lo8(0)
+ 2328 0bce 4091 0000 		lds r20,uip_buf+53
+ 2329 0bd2 50E0      		ldi r21,lo8(0)
+ 2330 0bd4 242B      		or r18,r20
+ 2331 0bd6 352B      		or r19,r21
+ 2332 0bd8 8091 0000 		lds r24,uip_appdata
+ 2333 0bdc 9091 0000 		lds r25,(uip_appdata)+1
+ 2334 0be0 820F      		add r24,r18
+ 2335 0be2 931F      		adc r25,r19
+ 2336 0be4 9093 0000 		sts (uip_appdata)+1,r25
+ 2337 0be8 8093 0000 		sts uip_appdata,r24
+ 2338               	.LSM363:
+ 2339 0bec 962F      		mov r25,r22
+ 2340 0bee 80E0      		ldi r24,lo8(0)
+ 2341 0bf0 842B      		or r24,r20
+ 2342 0bf2 952B      		or r25,r21
+ 2343 0bf4 2091 0000 		lds r18,uip_len
+ 2344 0bf8 3091 0000 		lds r19,(uip_len)+1
+ 2345 0bfc 281B      		sub r18,r24
+ 2346 0bfe 390B      		sbc r19,r25
+ 2347 0c00 3093 0000 		sts (uip_len)+1,r19
+ 2348 0c04 2093 0000 		sts uip_len,r18
+ 2349               	.L154:
+ 2350               	.LSM364:
+ 2351 0c08 2091 0000 		lds r18,uip_len
+ 2352 0c0c 3091 0000 		lds r19,(uip_len)+1
+ 2353 0c10 2115      		cp r18,__zero_reg__
+ 2354 0c12 3105      		cpc r19,__zero_reg__
+ 2355 0c14 01F0      		breq .L155
+ 2356 0c16 898D      		ldd r24,Y+25
+ 2357 0c18 84FD      		sbrc r24,4
+ 2358 0c1a 00C0      		rjmp .L155
+ 2359               	.LSM365:
+ 2360 0c1c 8091 0000 		lds r24,uip_flags
+ 2361 0c20 8260      		ori r24,lo8(2)
+ 2362 0c22 8093 0000 		sts uip_flags,r24
+ 2363               	.LSM366:
+ 2364 0c26 C901      		movw r24,r18
+ 2365 0c28 0E94 0000 		call uip_add_rcv_nxt
+ 2366               	.L155:
+ 2367               	.LSM367:
+ 2368 0c2c 9091 0000 		lds r25,uip_buf+48
+ 2369 0c30 80E0      		ldi r24,lo8(0)
+ 2370 0c32 2091 0000 		lds r18,uip_buf+49
+ 2371 0c36 820F      		add r24,r18
+ 2372 0c38 911D      		adc r25,__zero_reg__
+ 2373 0c3a 9093 0000 		sts (tmp16)+1,r25
+ 2374 0c3e 8093 0000 		sts tmp16,r24
+ 2375               	.LSM368:
+ 2376 0c42 2C89      		ldd r18,Y+20
+ 2377 0c44 3D89      		ldd r19,Y+21
+ 2378 0c46 2817      		cp r18,r24
+ 2379 0c48 3907      		cpc r19,r25
+ 2380 0c4a 00F0      		brlo .L156
+ 2381 0c4c 892B      		or r24,r25
+ 2382 0c4e 01F4      		brne .L157
+ 2383               	.L156:
+ 2384               	.LSM369:
+ 2385 0c50 3093 0000 		sts (tmp16)+1,r19
+ 2386 0c54 2093 0000 		sts tmp16,r18
+ 2387               	.L157:
+ 2388               	.LSM370:
+ 2389 0c58 8091 0000 		lds r24,tmp16
+ 2390 0c5c 9091 0000 		lds r25,(tmp16)+1
+ 2391 0c60 9B8B      		std Y+19,r25
+ 2392 0c62 8A8B      		std Y+18,r24
+ 2393               	.LSM371:
+ 2394 0c64 8091 0000 		lds r24,uip_flags
+ 2395 0c68 90E0      		ldi r25,lo8(0)
+ 2396 0c6a 8370      		andi r24,lo8(3)
+ 2397 0c6c 9070      		andi r25,hi8(3)
+ 2398 0c6e 892B      		or r24,r25
+ 2399 0c70 01F4      		brne .+2
+ 2400 0c72 00C0      		rjmp .L73
+ 2401               	.L191:
+ 2402               	.LSM372:
+ 2403 0c74 1092 0000 		sts (uip_slen)+1,__zero_reg__
+ 2404 0c78 1092 0000 		sts uip_slen,__zero_reg__
+ 2405               	.L182:
+ 2406               	.LSM373:
+ 2407 0c7c 0E94 0000 		call uIPManagement_TCPCallback
+ 2408               	.L74:
+ 2409               	.LSM374:
+ 2410 0c80 8091 0000 		lds r24,uip_flags
+ 2411 0c84 282F      		mov r18,r24
+ 2412 0c86 85FF      		sbrs r24,5
+ 2413 0c88 00C0      		rjmp .L158
+ 2414               	.LSM375:
+ 2415 0c8a 1092 0000 		sts (uip_slen)+1,__zero_reg__
+ 2416 0c8e 1092 0000 		sts uip_slen,__zero_reg__
+ 2417               	.LSM376:
+ 2418 0c92 198E      		std Y+25,__zero_reg__
+ 2419               	.L189:
+ 2420               	.LSM377:
+ 2421 0c94 84E1      		ldi r24,lo8(20)
+ 2422 0c96 00C0      		rjmp .L184
+ 2423               	.L158:
+ 2424               	.LSM378:
+ 2425 0c98 84FF      		sbrs r24,4
+ 2426 0c9a 00C0      		rjmp .L159
+ 2427               	.LSM379:
+ 2428 0c9c 1092 0000 		sts (uip_slen)+1,__zero_reg__
+ 2429 0ca0 1092 0000 		sts uip_slen,__zero_reg__
+ 2430               	.LSM380:
+ 2431 0ca4 81E0      		ldi r24,lo8(1)
+ 2432 0ca6 90E0      		ldi r25,hi8(1)
+ 2433 0ca8 998B      		std Y+17,r25
+ 2434 0caa 888B      		std Y+16,r24
+ 2435               	.LSM381:
+ 2436 0cac 84E0      		ldi r24,lo8(4)
+ 2437 0cae 00C0      		rjmp .L192
+ 2438               	.L159:
+ 2439               	.LSM382:
+ 2440 0cb0 8091 0000 		lds r24,uip_slen
+ 2441 0cb4 9091 0000 		lds r25,(uip_slen)+1
+ 2442 0cb8 892B      		or r24,r25
+ 2443 0cba 01F0      		breq .L160
+ 2444               	.LSM383:
+ 2445 0cbc 20FF      		sbrs r18,0
+ 2446 0cbe 00C0      		rjmp .L161
+ 2447               	.LSM384:
+ 2448 0cc0 198A      		std Y+17,__zero_reg__
+ 2449 0cc2 188A      		std Y+16,__zero_reg__
+ 2450               	.L161:
+ 2451               	.LSM385:
+ 2452 0cc4 8889      		ldd r24,Y+16
+ 2453 0cc6 9989      		ldd r25,Y+17
+ 2454 0cc8 0097      		sbiw r24,0
+ 2455 0cca 01F4      		brne .L162
+ 2456               	.LSM386:
+ 2457 0ccc 2A89      		ldd r18,Y+18
+ 2458 0cce 3B89      		ldd r19,Y+19
+ 2459 0cd0 8091 0000 		lds r24,uip_slen
+ 2460 0cd4 9091 0000 		lds r25,(uip_slen)+1
+ 2461 0cd8 2817      		cp r18,r24
+ 2462 0cda 3907      		cpc r19,r25
+ 2463 0cdc 00F4      		brsh .L163
+ 2464               	.LSM387:
+ 2465 0cde 3093 0000 		sts (uip_slen)+1,r19
+ 2466 0ce2 2093 0000 		sts uip_slen,r18
+ 2467               	.L163:
+ 2468               	.LSM388:
+ 2469 0ce6 8091 0000 		lds r24,uip_slen
+ 2470 0cea 9091 0000 		lds r25,(uip_slen)+1
+ 2471 0cee 998B      		std Y+17,r25
+ 2472 0cf0 888B      		std Y+16,r24
+ 2473 0cf2 00C0      		rjmp .L160
+ 2474               	.L162:
+ 2475               	.LSM389:
+ 2476 0cf4 9093 0000 		sts (uip_slen)+1,r25
+ 2477 0cf8 8093 0000 		sts uip_slen,r24
+ 2478               	.L160:
+ 2479               	.LSM390:
+ 2480 0cfc 1B8E      		std Y+27,__zero_reg__
+ 2481               	.L91:
+ 2482               	.LSM391:
+ 2483 0cfe 8091 0000 		lds r24,uip_sappdata
+ 2484 0d02 9091 0000 		lds r25,(uip_sappdata)+1
+ 2485 0d06 9093 0000 		sts (uip_appdata)+1,r25
+ 2486 0d0a 8093 0000 		sts uip_appdata,r24
+ 2487               	.LSM392:
+ 2488 0d0e 8091 0000 		lds r24,uip_slen
+ 2489 0d12 9091 0000 		lds r25,(uip_slen)+1
+ 2490 0d16 892B      		or r24,r25
+ 2491 0d18 01F0      		breq .L164
+ 2492 0d1a 8889      		ldd r24,Y+16
+ 2493 0d1c 9989      		ldd r25,Y+17
+ 2494 0d1e 0097      		sbiw r24,0
+ 2495 0d20 01F0      		breq .L164
+ 2496               	.LSM393:
+ 2497 0d22 8896      		adiw r24,40
+ 2498 0d24 9093 0000 		sts (uip_len)+1,r25
+ 2499 0d28 8093 0000 		sts uip_len,r24
+ 2500               	.LSM394:
+ 2501 0d2c 88E1      		ldi r24,lo8(24)
+ 2502 0d2e 00C0      		rjmp .L185
+ 2503               	.L164:
+ 2504               	.LSM395:
+ 2505 0d30 8091 0000 		lds r24,uip_flags
+ 2506 0d34 81FF      		sbrs r24,1
+ 2507 0d36 00C0      		rjmp .L73
+ 2508               	.LSM396:
+ 2509 0d38 88E2      		ldi r24,lo8(40)
+ 2510 0d3a 90E0      		ldi r25,hi8(40)
+ 2511 0d3c 9093 0000 		sts (uip_len)+1,r25
+ 2512 0d40 8093 0000 		sts uip_len,r24
+ 2513               	.LSM397:
+ 2514 0d44 80E1      		ldi r24,lo8(16)
+ 2515               	.L185:
+ 2516 0d46 8093 0000 		sts uip_buf+47,r24
+ 2517 0d4a 00C0      		rjmp .L165
+ 2518               	.L195:
+ 2519               	.LSM398:
+ 2520 0d4c 8091 0000 		lds r24,uip_flags
+ 2521 0d50 80FF      		sbrs r24,0
+ 2522 0d52 00C0      		rjmp .L73
+ 2523               	.LSM399:
+ 2524 0d54 198E      		std Y+25,__zero_reg__
+ 2525               	.LSM400:
+ 2526 0d56 80E1      		ldi r24,lo8(16)
+ 2527               	.L187:
+ 2528 0d58 8093 0000 		sts uip_flags,r24
+ 2529               	.LSM401:
+ 2530 0d5c 0E94 0000 		call uIPManagement_TCPCallback
+ 2531 0d60 00C0      		rjmp .L73
+ 2532               	.L139:
+ 2533               	.LSM402:
+ 2534 0d62 8091 0000 		lds r24,uip_len
+ 2535 0d66 9091 0000 		lds r25,(uip_len)+1
+ 2536 0d6a 0097      		sbiw r24,0
+ 2537 0d6c 01F0      		breq .L166
+ 2538               	.LSM403:
+ 2539 0d6e 0E94 0000 		call uip_add_rcv_nxt
+ 2540               	.L166:
+ 2541               	.LSM404:
+ 2542 0d72 8091 0000 		lds r24,uip_buf+47
+ 2543 0d76 9091 0000 		lds r25,uip_flags
+ 2544 0d7a 80FF      		sbrs r24,0
+ 2545 0d7c 00C0      		rjmp .L167
+ 2546               	.LSM405:
+ 2547 0d7e 90FF      		sbrs r25,0
+ 2548 0d80 00C0      		rjmp .L168
+ 2549               	.LSM406:
+ 2550 0d82 87E0      		ldi r24,lo8(7)
+ 2551 0d84 898F      		std Y+25,r24
+ 2552               	.LSM407:
+ 2553 0d86 1A8E      		std Y+26,__zero_reg__
+ 2554               	.LSM408:
+ 2555 0d88 198A      		std Y+17,__zero_reg__
+ 2556 0d8a 188A      		std Y+16,__zero_reg__
+ 2557 0d8c 00C0      		rjmp .L183
+ 2558               	.L168:
+ 2559               	.LSM409:
+ 2560 0d8e 86E0      		ldi r24,lo8(6)
+ 2561 0d90 898F      		std Y+25,r24
+ 2562 0d92 00C0      		rjmp .L183
+ 2563               	.L167:
+ 2564               	.LSM410:
+ 2565 0d94 90FF      		sbrs r25,0
+ 2566 0d96 00C0      		rjmp .L172
+ 2567               	.LSM411:
+ 2568 0d98 85E0      		ldi r24,lo8(5)
+ 2569 0d9a 898F      		std Y+25,r24
+ 2570               	.LSM412:
+ 2571 0d9c 198A      		std Y+17,__zero_reg__
+ 2572 0d9e 188A      		std Y+16,__zero_reg__
+ 2573 0da0 00C0      		rjmp .L73
+ 2574               	.L140:
+ 2575               	.LSM413:
+ 2576 0da2 8091 0000 		lds r24,uip_len
+ 2577 0da6 9091 0000 		lds r25,(uip_len)+1
+ 2578 0daa 0097      		sbiw r24,0
+ 2579 0dac 01F0      		breq .L171
+ 2580               	.LSM414:
+ 2581 0dae 0E94 0000 		call uip_add_rcv_nxt
+ 2582               	.L171:
+ 2583               	.LSM415:
+ 2584 0db2 8091 0000 		lds r24,uip_buf+47
+ 2585 0db6 80FF      		sbrs r24,0
+ 2586 0db8 00C0      		rjmp .L172
+ 2587               	.LSM416:
+ 2588 0dba 87E0      		ldi r24,lo8(7)
+ 2589 0dbc 898F      		std Y+25,r24
+ 2590               	.LSM417:
+ 2591 0dbe 1A8E      		std Y+26,__zero_reg__
+ 2592               	.L183:
+ 2593               	.LSM418:
+ 2594 0dc0 81E0      		ldi r24,lo8(1)
+ 2595 0dc2 90E0      		ldi r25,hi8(1)
+ 2596 0dc4 0E94 0000 		call uip_add_rcv_nxt
+ 2597               	.LSM419:
+ 2598 0dc8 80E1      		ldi r24,lo8(16)
+ 2599 0dca 8093 0000 		sts uip_flags,r24
+ 2600               	.LSM420:
+ 2601 0dce 0E94 0000 		call uIPManagement_TCPCallback
+ 2602 0dd2 00C0      		rjmp .L133
+ 2603               	.L172:
+ 2604               	.LSM421:
+ 2605 0dd4 8091 0000 		lds r24,uip_len
+ 2606 0dd8 9091 0000 		lds r25,(uip_len)+1
+ 2607 0ddc 892B      		or r24,r25
+ 2608 0dde 01F4      		brne .L133
+ 2609 0de0 00C0      		rjmp .L73
+ 2610               	.L141:
+ 2611               	.LSM422:
+ 2612 0de2 8091 0000 		lds r24,uip_flags
+ 2613 0de6 80FF      		sbrs r24,0
+ 2614 0de8 00C0      		rjmp .L73
+ 2615               	.LSM423:
+ 2616 0dea 87E0      		ldi r24,lo8(7)
+ 2617 0dec 898F      		std Y+25,r24
+ 2618               	.LSM424:
+ 2619 0dee 1A8E      		std Y+26,__zero_reg__
+ 2620 0df0 00C0      		rjmp .L73
+ 2621               	.L133:
+ 2622               	.LSM425:
+ 2623 0df2 80E1      		ldi r24,lo8(16)
+ 2624 0df4 F801      		movw r30,r16
+ 2625 0df6 81A3      		std Z+33,r24
+ 2626               	.L82:
+ 2627               	.LSM426:
+ 2628 0df8 88E2      		ldi r24,lo8(40)
+ 2629 0dfa 90E0      		ldi r25,hi8(40)
+ 2630 0dfc 9093 0000 		sts (uip_len)+1,r25
+ 2631 0e00 8093 0000 		sts uip_len,r24
+ 2632               	.L165:
+ 2633               	.LSM427:
+ 2634 0e04 80E5      		ldi r24,lo8(80)
+ 2635               	.L186:
+ 2636 0e06 8093 0000 		sts uip_buf+46,r24
+ 2637               	.L128:
+ 2638               	.LSM428:
+ 2639 0e0a 8885      		ldd r24,Y+8
+ 2640 0e0c 8093 0000 		sts uip_buf+42,r24
+ 2641               	.LSM429:
+ 2642 0e10 8985      		ldd r24,Y+9
+ 2643 0e12 8093 0000 		sts uip_buf+43,r24
+ 2644               	.LSM430:
+ 2645 0e16 8A85      		ldd r24,Y+10
+ 2646 0e18 8093 0000 		sts uip_buf+44,r24
+ 2647               	.LSM431:
+ 2648 0e1c 8B85      		ldd r24,Y+11
+ 2649 0e1e 8093 0000 		sts uip_buf+45,r24
+ 2650               	.LSM432:
+ 2651 0e22 8C85      		ldd r24,Y+12
+ 2652 0e24 8093 0000 		sts uip_buf+38,r24
+ 2653               	.LSM433:
+ 2654 0e28 8D85      		ldd r24,Y+13
+ 2655 0e2a 8093 0000 		sts uip_buf+39,r24
+ 2656               	.LSM434:
+ 2657 0e2e 8E85      		ldd r24,Y+14
+ 2658 0e30 8093 0000 		sts uip_buf+40,r24
+ 2659               	.LSM435:
+ 2660 0e34 8F85      		ldd r24,Y+15
+ 2661 0e36 8093 0000 		sts uip_buf+41,r24
+ 2662               	.LSM436:
+ 2663 0e3a 86E0      		ldi r24,lo8(6)
+ 2664 0e3c 8093 0000 		sts uip_buf+23,r24
+ 2665               	.LSM437:
+ 2666 0e40 8C81      		ldd r24,Y+4
+ 2667 0e42 9D81      		ldd r25,Y+5
+ 2668 0e44 9093 0000 		sts (uip_buf+34)+1,r25
+ 2669 0e48 8093 0000 		sts uip_buf+34,r24
+ 2670               	.LSM438:
+ 2671 0e4c 8E81      		ldd r24,Y+6
+ 2672 0e4e 9F81      		ldd r25,Y+7
+ 2673 0e50 9093 0000 		sts (uip_buf+36)+1,r25
+ 2674 0e54 8093 0000 		sts uip_buf+36,r24
+ 2675               	.LSM439:
+ 2676 0e58 8091 0000 		lds r24,uip_hostaddr
+ 2677 0e5c 9091 0000 		lds r25,(uip_hostaddr)+1
+ 2678 0e60 A091 0000 		lds r26,(uip_hostaddr)+2
+ 2679 0e64 B091 0000 		lds r27,(uip_hostaddr)+3
+ 2680 0e68 8093 0000 		sts uip_buf+26,r24
+ 2681 0e6c 9093 0000 		sts (uip_buf+26)+1,r25
+ 2682 0e70 A093 0000 		sts (uip_buf+26)+2,r26
+ 2683 0e74 B093 0000 		sts (uip_buf+26)+3,r27
+ 2684               	.LSM440:
+ 2685 0e78 8881      		ld r24,Y
+ 2686 0e7a 9981      		ldd r25,Y+1
+ 2687 0e7c AA81      		ldd r26,Y+2
+ 2688 0e7e BB81      		ldd r27,Y+3
+ 2689 0e80 8093 0000 		sts uip_buf+30,r24
+ 2690 0e84 9093 0000 		sts (uip_buf+30)+1,r25
+ 2691 0e88 A093 0000 		sts (uip_buf+30)+2,r26
+ 2692 0e8c B093 0000 		sts (uip_buf+30)+3,r27
+ 2693               	.LSM441:
+ 2694 0e90 898D      		ldd r24,Y+25
+ 2695 0e92 84FF      		sbrs r24,4
+ 2696 0e94 00C0      		rjmp .L173
+ 2697               	.LSM442:
+ 2698 0e96 1092 0000 		sts uip_buf+49,__zero_reg__
+ 2699 0e9a 1092 0000 		sts uip_buf+48,__zero_reg__
+ 2700 0e9e 00C0      		rjmp .L116
+ 2701               	.L173:
+ 2702               	.LSM443:
+ 2703 0ea0 85E0      		ldi r24,lo8(5)
+ 2704 0ea2 8093 0000 		sts uip_buf+48,r24
+ 2705               	.LSM444:
+ 2706 0ea6 84EB      		ldi r24,lo8(-76)
+ 2707 0ea8 8093 0000 		sts uip_buf+49,r24
+ 2708               	.L116:
+ 2709               	.LSM445:
+ 2710 0eac 80E4      		ldi r24,lo8(64)
+ 2711 0eae 8093 0000 		sts uip_buf+22,r24
+ 2712               	.LSM446:
+ 2713 0eb2 8091 0000 		lds r24,uip_len+1
+ 2714 0eb6 8093 0000 		sts uip_buf+16,r24
+ 2715               	.LSM447:
+ 2716 0eba 8091 0000 		lds r24,uip_len
+ 2717 0ebe 8093 0000 		sts uip_buf+17,r24
+ 2718               	.LSM448:
+ 2719 0ec2 1092 0000 		sts uip_buf+53,__zero_reg__
+ 2720 0ec6 1092 0000 		sts uip_buf+52,__zero_reg__
+ 2721               	.LSM449:
+ 2722 0eca 1092 0000 		sts (uip_buf+50)+1,__zero_reg__
+ 2723 0ece 1092 0000 		sts uip_buf+50,__zero_reg__
+ 2724               	.LSM450:
+ 2725 0ed2 0E94 0000 		call uip_tcpchksum
+ 2726 0ed6 8095      		com r24
+ 2727 0ed8 9095      		com r25
+ 2728 0eda 9093 0000 		sts (uip_buf+50)+1,r25
+ 2729 0ede 8093 0000 		sts uip_buf+50,r24
+ 2730               	.L99:
+ 2731               	.LSM451:
+ 2732 0ee2 85E4      		ldi r24,lo8(69)
+ 2733 0ee4 8093 0000 		sts uip_buf+14,r24
+ 2734               	.LSM452:
+ 2735 0ee8 1092 0000 		sts uip_buf+15,__zero_reg__
+ 2736               	.LSM453:
+ 2737 0eec 1092 0000 		sts uip_buf+21,__zero_reg__
+ 2738 0ef0 1092 0000 		sts uip_buf+20,__zero_reg__
+ 2739               	.LSM454:
+ 2740 0ef4 8091 0000 		lds r24,ipid
+ 2741 0ef8 9091 0000 		lds r25,(ipid)+1
+ 2742 0efc 0196      		adiw r24,1
+ 2743 0efe 9093 0000 		sts (ipid)+1,r25
+ 2744 0f02 8093 0000 		sts ipid,r24
+ 2745               	.LSM455:
+ 2746 0f06 9093 0000 		sts uip_buf+18,r25
+ 2747               	.LSM456:
+ 2748 0f0a 8093 0000 		sts uip_buf+19,r24
+ 2749               	.LSM457:
+ 2750 0f0e 1092 0000 		sts (uip_buf+24)+1,__zero_reg__
+ 2751 0f12 1092 0000 		sts uip_buf+24,__zero_reg__
+ 2752               	.LSM458:
+ 2753 0f16 0E94 0000 		call uip_ipchksum
+ 2754 0f1a 8095      		com r24
+ 2755 0f1c 9095      		com r25
+ 2756 0f1e 9093 0000 		sts (uip_buf+24)+1,r25
+ 2757 0f22 8093 0000 		sts uip_buf+24,r24
+ 2758 0f26 00C0      		rjmp .L188
+ 2759               	.LVL82:
+ 2760               	.L73:
+ 2761               	.LSM459:
+ 2762 0f28 1092 0000 		sts (uip_len)+1,__zero_reg__
+ 2763 0f2c 1092 0000 		sts uip_len,__zero_reg__
+ 2764               	.L188:
+ 2765               	.LSM460:
+ 2766 0f30 1092 0000 		sts uip_flags,__zero_reg__
+ 2767               	/* epilogue start */
+ 2768               	.LSM461:
+ 2769 0f34 DF91      		pop r29
+ 2770 0f36 CF91      		pop r28
+ 2771               	.LVL83:
+ 2772 0f38 1F91      		pop r17
+ 2773 0f3a 0F91      		pop r16
+ 2774 0f3c 0895      		ret
+ 2775               	.LFE20:
+ 2777               		.section	.text.uip_udp_new,"ax",@progbits
+ 2778               	.global	uip_udp_new
+ 2780               	uip_udp_new:
+ 2781               	.LFB16:
+ 2782               	.LSM462:
+ 2783               	.LVL84:
+ 2784 0000 CF92      		push r12
+ 2785 0002 DF92      		push r13
+ 2786 0004 EF92      		push r14
+ 2787 0006 FF92      		push r15
+ 2788 0008 0F93      		push r16
+ 2789 000a 1F93      		push r17
+ 2790 000c CF93      		push r28
+ 2791 000e DF93      		push r29
+ 2792               	/* prologue: function */
+ 2793               	/* frame size = 0 */
+ 2794 0010 7C01      		movw r14,r24
+ 2795 0012 6B01      		movw r12,r22
+ 2796               	.L197:
+ 2797               	.LSM463:
+ 2798 0014 0091 0000 		lds r16,uip_udp_conns+4
+ 2799 0018 1091 0000 		lds r17,(uip_udp_conns+4)+1
+ 2800 001c C091 0000 		lds r28,lastport
+ 2801 0020 D091 0000 		lds r29,(lastport)+1
+ 2802               	.LVL85:
+ 2803               	.L200:
+ 2804               	.LSM464:
+ 2805 0024 2196      		adiw r28,1
+ 2806               	.LSM465:
+ 2807 0026 8DE7      		ldi r24,hi8(32000)
+ 2808 0028 C030      		cpi r28,lo8(32000)
+ 2809 002a D807      		cpc r29,r24
+ 2810 002c 00F0      		brlo .L201
+ 2811 002e C0E0      		ldi r28,lo8(4096)
+ 2812 0030 D0E1      		ldi r29,hi8(4096)
+ 2813               	.L201:
+ 2814               	.LSM466:
+ 2815 0032 CE01      		movw r24,r28
+ 2816 0034 0E94 0000 		call htons
+ 2817 0038 0817      		cp r16,r24
+ 2818 003a 1907      		cpc r17,r25
+ 2819 003c 01F0      		breq .L200
+ 2820               	.LSM467:
+ 2821 003e C093 0000 		sts lastport,r28
+ 2822 0042 D093 0000 		sts lastport+1,r29
+ 2823               	.LSM468:
+ 2824 0046 012B      		or r16,r17
+ 2825 0048 01F4      		brne .L203
+ 2826 004a 1092 0000 		sts c,__zero_reg__
+ 2827               	.LSM469:
+ 2828 004e D093 0000 		sts uip_udp_conns+4,r29
+ 2829 0052 C093 0000 		sts uip_udp_conns+5,r28
+ 2830               	.LSM470:
+ 2831 0056 D092 0000 		sts (uip_udp_conns+6)+1,r13
+ 2832 005a C092 0000 		sts uip_udp_conns+6,r12
+ 2833               	.LSM471:
+ 2834 005e E114      		cp r14,__zero_reg__
+ 2835 0060 F104      		cpc r15,__zero_reg__
+ 2836 0062 01F4      		brne .L211
+ 2837 0064 00C0      		rjmp .L212
+ 2838               	.L203:
+ 2839 0066 81E0      		ldi r24,lo8(1)
+ 2840               	.LSM472:
+ 2841 0068 8093 0000 		sts c,r24
+ 2842 006c 20E0      		ldi r18,lo8(0)
+ 2843 006e 30E0      		ldi r19,hi8(0)
+ 2844               	.LVL86:
+ 2845 0070 00C0      		rjmp .L207
+ 2846               	.LVL87:
+ 2847               	.L212:
+ 2848               	.LSM473:
+ 2849 0072 1092 0000 		sts uip_udp_conns,__zero_reg__
+ 2850 0076 1092 0000 		sts (uip_udp_conns)+1,__zero_reg__
+ 2851 007a 1092 0000 		sts (uip_udp_conns)+2,__zero_reg__
+ 2852 007e 1092 0000 		sts (uip_udp_conns)+3,__zero_reg__
+ 2853 0082 00C0      		rjmp .L208
+ 2854               	.L211:
+ 2855               	.LSM474:
+ 2856 0084 F701      		movw r30,r14
+ 2857 0086 8081      		ld r24,Z
+ 2858 0088 9181      		ldd r25,Z+1
+ 2859 008a A281      		ldd r26,Z+2
+ 2860 008c B381      		ldd r27,Z+3
+ 2861 008e 8093 0000 		sts uip_udp_conns,r24
+ 2862 0092 9093 0000 		sts (uip_udp_conns)+1,r25
+ 2863 0096 A093 0000 		sts (uip_udp_conns)+2,r26
+ 2864 009a B093 0000 		sts (uip_udp_conns)+3,r27
+ 2865               	.L208:
+ 2866               	.LSM475:
+ 2867 009e 80E4      		ldi r24,lo8(64)
+ 2868 00a0 8093 0000 		sts uip_udp_conns+8,r24
+ 2869 00a4 20E0      		ldi r18,lo8(uip_udp_conns)
+ 2870 00a6 30E0      		ldi r19,hi8(uip_udp_conns)
+ 2871               	.LVL88:
+ 2872               	.L207:
+ 2873               	.LSM476:
+ 2874 00a8 C901      		movw r24,r18
+ 2875               	.LVL89:
+ 2876               	/* epilogue start */
+ 2877 00aa DF91      		pop r29
+ 2878 00ac CF91      		pop r28
+ 2879 00ae 1F91      		pop r17
+ 2880 00b0 0F91      		pop r16
+ 2881 00b2 FF90      		pop r15
+ 2882 00b4 EF90      		pop r14
+ 2883               	.LVL90:
+ 2884 00b6 DF90      		pop r13
+ 2885 00b8 CF90      		pop r12
+ 2886               	.LVL91:
+ 2887 00ba 0895      		ret
+ 2888               	.LFE16:
+ 2890               	.global	uip_broadcast_addr
+ 2891               		.data
+ 2894               	uip_broadcast_addr:
+ 2895 0000 FF        		.byte	-1
+ 2896 0001 FF        		.byte	-1
+ 2897 0002 FF        		.byte	-1
+ 2898 0003 FF        		.byte	-1
+ 2899               	.global	uip_all_zeroes_addr
+ 2902               	uip_all_zeroes_addr:
+ 2903 0004 0000 0000 		.skip 4,0
+ 2904               	.global	uip_ethaddr
+ 2905               	.global	uip_ethaddr
+ 2906               		.section .bss
+ 2909               	uip_ethaddr:
+ 2910 0000 0000 0000 		.skip 6,0
+ 2910      0000 
+ 2911               		.lcomm ipid,2
+ 2912               		.lcomm iss,4
+ 2913               		.lcomm lastport,2
+ 2914               		.lcomm c,1
+ 2915               		.lcomm opt,1
+ 2916               		.lcomm tmp16,2
+ 2917               		.comm uip_buf,1516,1
+ 2918               		.comm uip_appdata,2,1
+ 2919               		.comm uip_len,2,1
+ 2920               		.comm uip_conn,2,1
+ 2921               		.comm uip_conns,339,1
+ 2922               		.comm uip_acc32,4,1
+ 2923               		.comm uip_udp_conn,2,1
+ 2924               		.comm uip_udp_conns,30,1
+ 2925               		.comm uip_flags,1,1
+ 2926               		.comm uip_hostaddr,4,1
+ 2927               		.comm uip_netmask,4,1
+ 2928               		.comm uip_draddr,4,1
+ 2929               		.comm uip_sappdata,2,1
+ 2930               		.comm uip_slen,2,1
+ 2931               		.comm uip_listenports,10,1
+ 3076               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 uip.c
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:2      *ABS*:0000003f __SREG__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:3      *ABS*:0000003e __SP_H__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:4      *ABS*:0000003d __SP_L__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:5      *ABS*:00000034 __CCP__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:19     .text.uip_setipid:00000000 uip_setipid
+                             .bss:00000006 ipid
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:35     .text.uip_add32:00000000 uip_add32
+                            *COM*:00000004 uip_acc32
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:109    .text.chksum:00000000 chksum
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:187    .text.uip_init:00000000 uip_init
+                            *COM*:0000000a uip_listenports
+                            *COM*:00000153 uip_conns
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:2912   .bss:0000000c lastport
+                            *COM*:0000001e uip_udp_conns
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:2913   .bss:0000000e c
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:251    .text.uip_unlisten:00000000 uip_unlisten
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:298    .text.uip_listen:00000000 uip_listen
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:343    .text.uip_add_rcv_nxt:00000000 uip_add_rcv_nxt
+                            *COM*:00000002 uip_conn
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:385    .text.htons:00000000 htons
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:404    .text.uip_connect:00000000 uip_connect
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:2911   .bss:00000008 iss
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:603    .text.uip_tcpchksum:00000000 uip_tcpchksum
+                            *COM*:000005ec uip_buf
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:667    .text.uip_ipchksum:00000000 uip_ipchksum
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:703    .text.uip_chksum:00000000 uip_chksum
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:728    .text.htonl:00000000 htonl
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:775    .text.uip_send:00000000 uip_send
+                            *COM*:00000002 uip_sappdata
+                            *COM*:00000002 uip_slen
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:823    .text.uip_process:00000000 uip_process
+                            *COM*:00000002 uip_appdata
+                            *COM*:00000002 uip_len
+                            *COM*:00000001 uip_flags
+                            *COM*:00000002 uip_udp_conn
+                            *COM*:00000004 uip_hostaddr
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:2902   .data:00000004 uip_all_zeroes_addr
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:2894   .data:00000000 uip_broadcast_addr
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:2915   .bss:00000010 tmp16
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:2914   .bss:0000000f opt
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:2780   .text.uip_udp_new:00000000 uip_udp_new
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//cc6r48nC.s:2909   .bss:00000000 uip_ethaddr
+                            *COM*:00000004 uip_netmask
+                            *COM*:00000004 uip_draddr
+
+UNDEFINED SYMBOLS
+memcpy
+uIPManagement_TCPCallback
+uIPManagement_UDPCallback
+__do_copy_data
+__do_clear_bss

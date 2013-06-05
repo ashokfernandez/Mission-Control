@@ -1,0 +1,167 @@
+   1               		.file	"uip-split.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.uip_split_output,"ax",@progbits
+  17               	.global	uip_split_output
+  19               	uip_split_output:
+  20               	.LFB196:
+  21               	.LSM0:
+  22 0000 EF92      		push r14
+  23 0002 FF92      		push r15
+  24 0004 0F93      		push r16
+  25 0006 1F93      		push r17
+  26               	/* prologue: function */
+  27               	/* frame size = 0 */
+  28               	.LSM1:
+  29 0008 8091 0000 		lds r24,uip_buf+23
+  30 000c 8630      		cpi r24,lo8(6)
+  31 000e 01F0      		breq .+2
+  32 0010 00C0      		rjmp .L2
+  33 0012 8091 0000 		lds r24,uip_len
+  34 0016 9091 0000 		lds r25,(uip_len)+1
+  35 001a 8A5E      		subi r24,lo8(1514)
+  36 001c 9540      		sbci r25,hi8(1514)
+  37 001e 01F0      		breq .+2
+  38 0020 00C0      		rjmp .L2
+  39               	.LSM2:
+  40 0022 00E1      		ldi r16,lo8(784)
+  41 0024 13E0      		ldi r17,hi8(784)
+  42 0026 1093 0000 		sts (uip_len)+1,r17
+  43 002a 0093 0000 		sts uip_len,r16
+  44               	.LSM3:
+  45 002e 93E0      		ldi r25,lo8(3)
+  46 0030 E92E      		mov r14,r25
+  47 0032 E092 0000 		sts uip_buf+16,r14
+  48               	.LSM4:
+  49 0036 82E0      		ldi r24,lo8(2)
+  50 0038 F82E      		mov r15,r24
+  51 003a F092 0000 		sts uip_buf+17,r15
+  52               	.LSM5:
+  53 003e 1092 0000 		sts (uip_buf+50)+1,__zero_reg__
+  54 0042 1092 0000 		sts uip_buf+50,__zero_reg__
+  55               	.LSM6:
+  56 0046 0E94 0000 		call uip_tcpchksum
+  57 004a 8095      		com r24
+  58 004c 9095      		com r25
+  59 004e 9093 0000 		sts (uip_buf+50)+1,r25
+  60 0052 8093 0000 		sts uip_buf+50,r24
+  61               	.LSM7:
+  62 0056 1092 0000 		sts (uip_buf+24)+1,__zero_reg__
+  63 005a 1092 0000 		sts uip_buf+24,__zero_reg__
+  64               	.LSM8:
+  65 005e 0E94 0000 		call uip_ipchksum
+  66 0062 8095      		com r24
+  67 0064 9095      		com r25
+  68 0066 9093 0000 		sts (uip_buf+24)+1,r25
+  69 006a 8093 0000 		sts uip_buf+24,r24
+  70               	.LSM9:
+  71 006e 4091 0000 		lds r20,uip_len
+  72 0072 5091 0000 		lds r21,(uip_len)+1
+  73 0076 80E0      		ldi r24,lo8(Ethernet_RNDIS_Interface)
+  74 0078 90E0      		ldi r25,hi8(Ethernet_RNDIS_Interface)
+  75 007a 60E0      		ldi r22,lo8(uip_buf+14)
+  76 007c 70E0      		ldi r23,hi8(uip_buf+14)
+  77 007e 6E50      		subi r22,lo8(-(-14))
+  78 0080 7040      		sbci r23,hi8(-(-14))
+  79 0082 0E94 0000 		call RNDIS_Host_SendPacket
+  80               	.LSM10:
+  81 0086 1093 0000 		sts (uip_len)+1,r17
+  82 008a 0093 0000 		sts uip_len,r16
+  83               	.LSM11:
+  84 008e E092 0000 		sts uip_buf+16,r14
+  85               	.LSM12:
+  86 0092 F092 0000 		sts uip_buf+17,r15
+  87               	.LSM13:
+  88 0096 2091 0000 		lds r18,uip_appdata
+  89 009a 3091 0000 		lds r19,uip_appdata+1
+  90 009e C901      		movw r24,r18
+  91 00a0 FC01      		movw r30,r24
+  92 00a2 DC01      		movw r26,r24
+  93 00a4 A652      		subi r26,lo8(-(730))
+  94 00a6 BD4F      		sbci r27,hi8(-(730))
+  95 00a8 8AED      		ldi r24,lo8(730)
+  96 00aa 92E0      		ldi r25,hi8(730)
+  97               	.L3:
+  98 00ac 0D90      		ld r0,X+
+  99 00ae 0192      		st Z+,r0
+ 100 00b0 0197      		sbiw r24,1
+ 101 00b2 01F4      		brne .L3
+ 102               	.LSM14:
+ 103 00b4 80E0      		ldi r24,lo8(uip_buf+38)
+ 104 00b6 90E0      		ldi r25,hi8(uip_buf+38)
+ 105 00b8 6AED      		ldi r22,lo8(730)
+ 106 00ba 72E0      		ldi r23,hi8(730)
+ 107 00bc 0E94 0000 		call uip_add32
+ 108               	.LSM15:
+ 109 00c0 8091 0000 		lds r24,uip_acc32
+ 110 00c4 8093 0000 		sts uip_buf+38,r24
+ 111               	.LSM16:
+ 112 00c8 8091 0000 		lds r24,uip_acc32+1
+ 113 00cc 8093 0000 		sts uip_buf+39,r24
+ 114               	.LSM17:
+ 115 00d0 8091 0000 		lds r24,uip_acc32+2
+ 116 00d4 8093 0000 		sts uip_buf+40,r24
+ 117               	.LSM18:
+ 118 00d8 8091 0000 		lds r24,uip_acc32+3
+ 119 00dc 8093 0000 		sts uip_buf+41,r24
+ 120               	.LSM19:
+ 121 00e0 1092 0000 		sts (uip_buf+50)+1,__zero_reg__
+ 122 00e4 1092 0000 		sts uip_buf+50,__zero_reg__
+ 123               	.LSM20:
+ 124 00e8 0E94 0000 		call uip_tcpchksum
+ 125 00ec 8095      		com r24
+ 126 00ee 9095      		com r25
+ 127 00f0 9093 0000 		sts (uip_buf+50)+1,r25
+ 128 00f4 8093 0000 		sts uip_buf+50,r24
+ 129               	.LSM21:
+ 130 00f8 1092 0000 		sts (uip_buf+24)+1,__zero_reg__
+ 131 00fc 1092 0000 		sts uip_buf+24,__zero_reg__
+ 132               	.LSM22:
+ 133 0100 0E94 0000 		call uip_ipchksum
+ 134 0104 8095      		com r24
+ 135 0106 9095      		com r25
+ 136 0108 9093 0000 		sts (uip_buf+24)+1,r25
+ 137 010c 8093 0000 		sts uip_buf+24,r24
+ 138               	.L2:
+ 139               	.LSM23:
+ 140 0110 4091 0000 		lds r20,uip_len
+ 141 0114 5091 0000 		lds r21,(uip_len)+1
+ 142 0118 80E0      		ldi r24,lo8(Ethernet_RNDIS_Interface)
+ 143 011a 90E0      		ldi r25,hi8(Ethernet_RNDIS_Interface)
+ 144 011c 60E0      		ldi r22,lo8(uip_buf)
+ 145 011e 70E0      		ldi r23,hi8(uip_buf)
+ 146 0120 0E94 0000 		call RNDIS_Host_SendPacket
+ 147               	/* epilogue start */
+ 148               	.LSM24:
+ 149 0124 1F91      		pop r17
+ 150 0126 0F91      		pop r16
+ 151 0128 FF90      		pop r15
+ 152 012a EF90      		pop r14
+ 153 012c 0895      		ret
+ 154               	.LFE196:
+ 180               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 uip-split.c
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccp6nXQD.s:2      *ABS*:0000003f __SREG__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccp6nXQD.s:3      *ABS*:0000003e __SP_H__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccp6nXQD.s:4      *ABS*:0000003d __SP_L__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccp6nXQD.s:5      *ABS*:00000034 __CCP__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccp6nXQD.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccp6nXQD.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccp6nXQD.s:19     .text.uip_split_output:00000000 uip_split_output
+
+UNDEFINED SYMBOLS
+uip_buf
+uip_len
+uip_tcpchksum
+uip_ipchksum
+Ethernet_RNDIS_Interface
+RNDIS_Host_SendPacket
+uip_appdata
+uip_add32
+uip_acc32

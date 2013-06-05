@@ -1,0 +1,728 @@
+   1               		.file	"XPLAINBridge.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.EVENT_USB_Device_Connect,"ax",@progbits
+  17               	.global	EVENT_USB_Device_Connect
+  19               	EVENT_USB_Device_Connect:
+  20               	.LFB134:
+  21               	.LSM0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LBB111:
+  25               	.LBB112:
+  26               	.LSM1:
+  27 0000 2E98      		cbi 37-32,6
+  28               	/* epilogue start */
+  29               	.LBE112:
+  30               	.LBE111:
+  31               	.LSM2:
+  32 0002 0895      		ret
+  33               	.LFE134:
+  35               		.section	.text.EVENT_USB_Device_Disconnect,"ax",@progbits
+  36               	.global	EVENT_USB_Device_Disconnect
+  38               	EVENT_USB_Device_Disconnect:
+  39               	.LFB135:
+  40               	.LSM3:
+  41               	/* prologue: function */
+  42               	/* frame size = 0 */
+  43               	.LBB113:
+  44               	.LBB114:
+  45               	.LSM4:
+  46 0000 2E98      		cbi 37-32,6
+  47               	/* epilogue start */
+  48               	.LBE114:
+  49               	.LBE113:
+  50               	.LSM5:
+  51 0002 0895      		ret
+  52               	.LFE135:
+  54               		.section	.text.EVENT_CDC_Device_LineEncodingChanged,"ax",@progbits
+  55               	.global	EVENT_CDC_Device_LineEncodingChanged
+  57               	EVENT_CDC_Device_LineEncodingChanged:
+  58               	.LFB136:
+  59               	.LSM6:
+  60               	.LVL0:
+  61               	/* prologue: function */
+  62               	/* frame size = 0 */
+  63               	.LBB115:
+  64               	.LBB116:
+  65               	.LSM7:
+  66 0000 FC01      		movw r30,r24
+  67 0002 2785      		ldd r18,Z+15
+  68 0004 3089      		ldd r19,Z+16
+  69 0006 4189      		ldd r20,Z+17
+  70 0008 5289      		ldd r21,Z+18
+  71 000a 60E0      		ldi r22,lo8(8000000)
+  72 000c 72E1      		ldi r23,hi8(8000000)
+  73 000e 8AE7      		ldi r24,hlo8(8000000)
+  74 0010 90E0      		ldi r25,hhi8(8000000)
+  75 0012 0E94 0000 		call __udivmodsi4
+  76 0016 2150      		subi r18,lo8(-(-1))
+  77 0018 3040      		sbci r19,hi8(-(-1))
+  78               	.LVL1:
+  79               	.LSM8:
+  80 001a 3093 8700 		sts (134)+1,r19
+  81 001e 2093 8600 		sts 134,r18
+  82               	.LSM9:
+  83 0022 3093 9700 		sts (150)+1,r19
+  84 0026 2093 9600 		sts 150,r18
+  85               	/* epilogue start */
+  86               	.LBE116:
+  87               	.LBE115:
+  88               	.LSM10:
+  89 002a 0895      		ret
+  90               	.LFE136:
+  92               		.section	.text.CALLBACK_USB_GetDescriptor,"ax",@progbits
+  93               	.global	CALLBACK_USB_GetDescriptor
+  95               	CALLBACK_USB_GetDescriptor:
+  96               	.LFB137:
+  97               	.LSM11:
+  98               	.LVL2:
+  99               	/* prologue: function */
+ 100               	/* frame size = 0 */
+ 101 0000 9C01      		movw r18,r24
+ 102               	.LSM12:
+ 103 0002 8091 0000 		lds r24,CurrentFirmwareMode
+ 104               	.LVL3:
+ 105 0006 8823      		tst r24
+ 106 0008 01F4      		brne .L8
+ 107               	.LSM13:
+ 108 000a C901      		movw r24,r18
+ 109 000c 0E94 0000 		call USART_GetDescriptor
+ 110               	.LVL4:
+ 111 0010 0895      		ret
+ 112               	.LVL5:
+ 113               	.L8:
+ 114               	.LSM14:
+ 115 0012 C901      		movw r24,r18
+ 116 0014 0E94 0000 		call AVRISP_GetDescriptor
+ 117               	.LVL6:
+ 118               	.LSM15:
+ 119 0018 0895      		ret
+ 120               	.LFE137:
+ 122               		.section	.text.EVENT_USB_Device_ControlRequest,"ax",@progbits
+ 123               	.global	EVENT_USB_Device_ControlRequest
+ 125               	EVENT_USB_Device_ControlRequest:
+ 126               	.LFB133:
+ 127               	.LSM16:
+ 128               	/* prologue: function */
+ 129               	/* frame size = 0 */
+ 130               	.LSM17:
+ 131 0000 8091 0000 		lds r24,CurrentFirmwareMode
+ 132 0004 8823      		tst r24
+ 133 0006 01F4      		brne .L13
+ 134               	.LSM18:
+ 135 0008 80E0      		ldi r24,lo8(VirtualSerial_CDC_Interface)
+ 136 000a 90E0      		ldi r25,hi8(VirtualSerial_CDC_Interface)
+ 137 000c 0E94 0000 		call CDC_Device_ProcessControlRequest
+ 138               	.L13:
+ 139 0010 0895      		ret
+ 140               	.LFE133:
+ 142               		.section	.text.EVENT_USB_Device_ConfigurationChanged,"ax",@progbits
+ 143               	.global	EVENT_USB_Device_ConfigurationChanged
+ 145               	EVENT_USB_Device_ConfigurationChanged:
+ 146               	.LFB132:
+ 147               	.LSM19:
+ 148 0000 1F93      		push r17
+ 149               	/* prologue: function */
+ 150               	/* frame size = 0 */
+ 151               	.LSM20:
+ 152 0002 8091 0000 		lds r24,CurrentFirmwareMode
+ 153 0006 8823      		tst r24
+ 154 0008 01F4      		brne .L15
+ 155               	.LSM21:
+ 156 000a 80E0      		ldi r24,lo8(VirtualSerial_CDC_Interface)
+ 157 000c 90E0      		ldi r25,hi8(VirtualSerial_CDC_Interface)
+ 158 000e 0E94 0000 		call CDC_Device_ConfigureEndpoints
+ 159 0012 182F      		mov r17,r24
+ 160               	.LVL7:
+ 161 0014 1170      		andi r17,lo8(1)
+ 162               	.LSM22:
+ 163 0016 85E0      		ldi r24,lo8(5)
+ 164 0018 85BD      		out 69-32,r24
+ 165               	.LBB117:
+ 166               	.LBB118:
+ 167               	.LBB119:
+ 168               	.LSM23:
+ 169 001a 2FB7      		in r18,__SREG__
+ 170               	.LBB120:
+ 171               	.LBB121:
+ 172               	.LSM24:
+ 173               	/* #APP */
+ 174               	 ;  50 "/usr/local/CrossPack-AVR-20100115/lib/gcc/avr/4.3.3/../../../../avr/include/util/atomic.h" 
+ 175 001c F894      		cli
+ 176               	 ;  0 "" 2
+ 177               	/* #NOAPP */
+ 178               	.LBE121:
+ 179               	.LBE120:
+ 180               	.LSM25:
+ 181 001e 80E0      		ldi r24,lo8(USBtoUART_Buffer)
+ 182 0020 90E0      		ldi r25,hi8(USBtoUART_Buffer)
+ 183 0022 9093 0000 		sts (USBtoUART_Buffer+255)+1,r25
+ 184 0026 8093 0000 		sts USBtoUART_Buffer+255,r24
+ 185               	.LSM26:
+ 186 002a 9093 0000 		sts (USBtoUART_Buffer+257)+1,r25
+ 187 002e 8093 0000 		sts USBtoUART_Buffer+257,r24
+ 188               	.LBB122:
+ 189               	.LBB123:
+ 190               	.LSM27:
+ 191 0032 2FBF      		out __SREG__,r18
+ 192               	.LSM28:
+ 193               	.LBE123:
+ 194               	.LBE122:
+ 195               	.LBE119:
+ 196               	.LBE118:
+ 197               	.LBE117:
+ 198               	.LBB124:
+ 199               	.LBB125:
+ 200               	.LBB126:
+ 201               	.LSM29:
+ 202 0034 2FB7      		in r18,__SREG__
+ 203               	.LBB127:
+ 204               	.LBB128:
+ 205               	.LSM30:
+ 206               	/* #APP */
+ 207               	 ;  50 "/usr/local/CrossPack-AVR-20100115/lib/gcc/avr/4.3.3/../../../../avr/include/util/atomic.h" 
+ 208 0036 F894      		cli
+ 209               	 ;  0 "" 2
+ 210               	/* #NOAPP */
+ 211               	.LBE128:
+ 212               	.LBE127:
+ 213               	.LSM31:
+ 214 0038 80E0      		ldi r24,lo8(UARTtoUSB_Buffer)
+ 215 003a 90E0      		ldi r25,hi8(UARTtoUSB_Buffer)
+ 216 003c 9093 0000 		sts (UARTtoUSB_Buffer+255)+1,r25
+ 217 0040 8093 0000 		sts UARTtoUSB_Buffer+255,r24
+ 218               	.LSM32:
+ 219 0044 9093 0000 		sts (UARTtoUSB_Buffer+257)+1,r25
+ 220 0048 8093 0000 		sts UARTtoUSB_Buffer+257,r24
+ 221               	.LBB129:
+ 222               	.LBB130:
+ 223               	.LSM33:
+ 224 004c 2FBF      		out __SREG__,r18
+ 225               	.LSM34:
+ 226               	.LBE130:
+ 227               	.LBE129:
+ 228               	.LBE126:
+ 229               	.LBE125:
+ 230               	.LBE124:
+ 231               	.LSM35:
+ 232 004e 0E94 0000 		call SoftUART_Init
+ 233 0052 00C0      		rjmp .L16
+ 234               	.LVL8:
+ 235               	.L15:
+ 236               	.LBB131:
+ 237               	.LSM36:
+ 238 0054 82E0      		ldi r24,lo8(2)
+ 239 0056 60E8      		ldi r22,lo8(-128)
+ 240 0058 42E3      		ldi r20,lo8(50)
+ 241 005a 0E94 0000 		call Endpoint_ConfigureEndpoint_Prv
+ 242               	.LBE131:
+ 243               	.LSM37:
+ 244 005e 182F      		mov r17,r24
+ 245               	.LVL9:
+ 246 0060 1170      		andi r17,lo8(1)
+ 247               	.LSM38:
+ 248 0062 0E94 0000 		call V2Protocol_Init
+ 249               	.L16:
+ 250               	.LSM39:
+ 251 0066 1123      		tst r17
+ 252 0068 01F4      		brne .L17
+ 253 006a 90E4      		ldi r25,lo8(64)
+ 254 006c 00C0      		rjmp .L18
+ 255               	.L17:
+ 256 006e 90E0      		ldi r25,lo8(0)
+ 257               	.L18:
+ 258               	.LBB132:
+ 259               	.LBB133:
+ 260               	.LSM40:
+ 261 0070 85B1      		in r24,37-32
+ 262 0072 9095      		com r25
+ 263 0074 8064      		ori r24,lo8(64)
+ 264 0076 9823      		and r25,r24
+ 265 0078 95B9      		out 37-32,r25
+ 266               	/* epilogue start */
+ 267               	.LBE133:
+ 268               	.LBE132:
+ 269               	.LSM41:
+ 270 007a 1F91      		pop r17
+ 271               	.LVL10:
+ 272 007c 0895      		ret
+ 273               	.LFE132:
+ 275               		.section	.text.SetupHardware,"ax",@progbits
+ 276               	.global	SetupHardware
+ 278               	SetupHardware:
+ 279               	.LFB131:
+ 280               	.LSM42:
+ 281               	/* prologue: function */
+ 282               	/* frame size = 0 */
+ 283               	.LSM43:
+ 284 0000 84B7      		in r24,84-32
+ 285 0002 877F      		andi r24,lo8(-9)
+ 286 0004 84BF      		out 84-32,r24
+ 287               	.LSM44:
+ 288 0006 88E1      		ldi r24,lo8(24)
+ 289               	/* #APP */
+ 290               	 ;  152 "XPLAINBridge.c" 1
+ 291 0008 0FB6      		in __tmp_reg__, __SREG__
+ 292 000a F894      		cli
+ 293 000c 8093 6000 		sts 96, r24
+ 294 0010 1092 6000 		sts 96, __zero_reg__
+ 295 0014 0FBE      		out __SREG__,__tmp_reg__
+ 296               		
+ 297               	 ;  0 "" 2
+ 298               	/* #NOAPP */
+ 299               	.LBB134:
+ 300               	.LSM45:
+ 301 0016 80E0      		ldi r24,lo8(0)
+ 302 0018 90E0      		ldi r25,hi8(0)
+ 303 001a 20E8      		ldi r18,lo8(-128)
+ 304               	/* #APP */
+ 305               	 ;  155 "XPLAINBridge.c" 1
+ 306 001c 0FB6      		in __tmp_reg__,__SREG__
+ 307 001e F894      		cli
+ 308 0020 2093 6100 		sts 97, r18
+ 309 0024 8093 6100 		sts 97, r24
+ 310 0028 0FBE      		out __SREG__, __tmp_reg__
+ 311               	 ;  0 "" 2
+ 312               	/* #NOAPP */
+ 313               	.LBE134:
+ 314               	.LSM46:
+ 315 002a 0E94 0000 		call SoftUART_Init
+ 316               	.LBB135:
+ 317               	.LBB136:
+ 318               	.LSM47:
+ 319 002e 269A      		sbi 36-32,6
+ 320               	.LSM48:
+ 321 0030 2E9A      		sbi 37-32,6
+ 322               	.LBE136:
+ 323               	.LBE135:
+ 324               	.LSM49:
+ 325 0032 0E94 0000 		call USB_Init
+ 326               	.LSM50:
+ 327 0036 85B7      		in r24,85-32
+ 328 0038 8068      		ori r24,lo8(-128)
+ 329 003a 85BF      		out 85-32,r24
+ 330               	.LSM51:
+ 331 003c 85B7      		in r24,85-32
+ 332 003e 8068      		ori r24,lo8(-128)
+ 333 0040 85BF      		out 85-32,r24
+ 334               	.LSM52:
+ 335 0042 8F9A      		sbi 49-32,7
+ 336               	.LBB137:
+ 337               	.LBB138:
+ 338               	.LBB139:
+ 339               	.LBB140:
+ 340               	.LSM53:
+ 341 0044 80E2      		ldi r24,lo8(20000)
+ 342 0046 9EE4      		ldi r25,hi8(20000)
+ 343               	.LVL11:
+ 344               	/* #APP */
+ 345               	 ;  105 "/usr/local/CrossPack-AVR-20100115/lib/gcc/avr/4.3.3/../../../../avr/include/util/delay_bas
+ 346 0048 0197      		1: sbiw r24,1
+ 347 004a 01F4      		brne 1b
+ 348               	 ;  0 "" 2
+ 349               	/* #NOAPP */
+ 350               	.LBE140:
+ 351               	.LBE139:
+ 352               	.LBE138:
+ 353               	.LBE137:
+ 354               	.LSM54:
+ 355 004c 8FB1      		in r24,47-32
+ 356               	.LVL12:
+ 357 004e 1092 0000 		sts CurrentFirmwareMode,__zero_reg__
+ 358 0052 87FD      		sbrc r24,7
+ 359 0054 00C0      		rjmp .L21
+ 360 0056 81E0      		ldi r24,lo8(1)
+ 361 0058 8093 0000 		sts CurrentFirmwareMode,r24
+ 362               	.L21:
+ 363               	.LSM55:
+ 364 005c 85B7      		in r24,85-32
+ 365 005e 8F77      		andi r24,lo8(127)
+ 366 0060 85BF      		out 85-32,r24
+ 367               	.LSM56:
+ 368 0062 85B7      		in r24,85-32
+ 369 0064 8F77      		andi r24,lo8(127)
+ 370 0066 85BF      		out 85-32,r24
+ 371               	/* epilogue start */
+ 372               	.LSM57:
+ 373 0068 0895      		ret
+ 374               	.LFE131:
+ 376               		.section	.text.UARTBridge_Task,"ax",@progbits
+ 377               	.global	UARTBridge_Task
+ 379               	UARTBridge_Task:
+ 380               	.LFB130:
+ 381               	.LSM58:
+ 382 0000 1F93      		push r17
+ 383 0002 CF93      		push r28
+ 384 0004 DF93      		push r29
+ 385               	/* prologue: function */
+ 386               	/* frame size = 0 */
+ 387               	.LSM59:
+ 388 0006 8EB3      		in r24,62-32
+ 389 0008 8430      		cpi r24,lo8(4)
+ 390 000a 01F0      		breq .+2
+ 391 000c 00C0      		rjmp .L32
+ 392               	.LBB141:
+ 393               	.LBB142:
+ 394               	.LBB143:
+ 395               	.LBB144:
+ 396               	.LBB145:
+ 397               	.LSM60:
+ 398 000e 8FB7      		in r24,__SREG__
+ 399               	.LBB146:
+ 400               	.LBB147:
+ 401               	.LSM61:
+ 402               	/* #APP */
+ 403               	 ;  50 "/usr/local/CrossPack-AVR-20100115/lib/gcc/avr/4.3.3/../../../../avr/include/util/atomic.h" 
+ 404 0010 F894      		cli
+ 405               	 ;  0 "" 2
+ 406               	/* #NOAPP */
+ 407               	.LBE147:
+ 408               	.LBE146:
+ 409               	.LSM62:
+ 410 0012 9091 0000 		lds r25,USBtoUART_Buffer+259
+ 411               	.LVL13:
+ 412               	.LBB148:
+ 413               	.LBB149:
+ 414               	.LSM63:
+ 415 0016 8FBF      		out __SREG__,r24
+ 416               	.LSM64:
+ 417               	.LBE149:
+ 418               	.LBE148:
+ 419               	.LBE145:
+ 420               	.LBE144:
+ 421               	.LBE143:
+ 422               	.LBE142:
+ 423               	.LBE141:
+ 424               	.LSM65:
+ 425 0018 9F3F      		cpi r25,lo8(-1)
+ 426 001a 01F0      		breq .L25
+ 427               	.LBB150:
+ 428               	.LSM66:
+ 429 001c 80E0      		ldi r24,lo8(VirtualSerial_CDC_Interface)
+ 430 001e 90E0      		ldi r25,hi8(VirtualSerial_CDC_Interface)
+ 431 0020 0E94 0000 		call CDC_Device_ReceiveByte
+ 432               	.LVL14:
+ 433               	.LSM67:
+ 434 0024 97FD      		sbrc r25,7
+ 435 0026 00C0      		rjmp .L25
+ 436               	.LVL15:
+ 437               	.LBB151:
+ 438               	.LBB152:
+ 439               	.LSM68:
+ 440 0028 E091 0000 		lds r30,USBtoUART_Buffer+255
+ 441 002c F091 0000 		lds r31,(USBtoUART_Buffer+255)+1
+ 442 0030 8083      		st Z,r24
+ 443               	.LSM69:
+ 444 0032 E091 0000 		lds r30,USBtoUART_Buffer+255
+ 445 0036 F091 0000 		lds r31,(USBtoUART_Buffer+255)+1
+ 446 003a CF01      		movw r24,r30
+ 447               	.LVL16:
+ 448 003c 0196      		adiw r24,1
+ 449 003e 9093 0000 		sts (USBtoUART_Buffer+255)+1,r25
+ 450 0042 8093 0000 		sts USBtoUART_Buffer+255,r24
+ 451 0046 8050      		subi r24,lo8(USBtoUART_Buffer+255)
+ 452 0048 9040      		sbci r25,hi8(USBtoUART_Buffer+255)
+ 453 004a 01F4      		brne .L26
+ 454               	.LSM70:
+ 455 004c 80E0      		ldi r24,lo8(USBtoUART_Buffer)
+ 456 004e 90E0      		ldi r25,hi8(USBtoUART_Buffer)
+ 457 0050 9283      		std Z+2,r25
+ 458 0052 8183      		std Z+1,r24
+ 459               	.L26:
+ 460               	.LBB153:
+ 461               	.LSM71:
+ 462 0054 9FB7      		in r25,__SREG__
+ 463               	.LBB154:
+ 464               	.LBB155:
+ 465               	.LSM72:
+ 466               	/* #APP */
+ 467               	 ;  50 "/usr/local/CrossPack-AVR-20100115/lib/gcc/avr/4.3.3/../../../../avr/include/util/atomic.h" 
+ 468 0056 F894      		cli
+ 469               	 ;  0 "" 2
+ 470               	/* #NOAPP */
+ 471               	.LBE155:
+ 472               	.LBE154:
+ 473               	.LSM73:
+ 474 0058 8091 0000 		lds r24,USBtoUART_Buffer+259
+ 475 005c 8F5F      		subi r24,lo8(-(1))
+ 476 005e 8093 0000 		sts USBtoUART_Buffer+259,r24
+ 477               	.LBB156:
+ 478               	.LBB157:
+ 479               	.LSM74:
+ 480 0062 9FBF      		out __SREG__,r25
+ 481               	.LSM75:
+ 482               	.LVL17:
+ 483               	.L25:
+ 484               	.LBE157:
+ 485               	.LBE156:
+ 486               	.LBE153:
+ 487               	.LBE152:
+ 488               	.LBE151:
+ 489               	.LBE150:
+ 490               	.LBB158:
+ 491               	.LBB159:
+ 492               	.LBB160:
+ 493               	.LSM76:
+ 494 0064 8FB7      		in r24,__SREG__
+ 495               	.LVL18:
+ 496               	.LBB161:
+ 497               	.LBB162:
+ 498               	.LSM77:
+ 499               	/* #APP */
+ 500               	 ;  50 "/usr/local/CrossPack-AVR-20100115/lib/gcc/avr/4.3.3/../../../../avr/include/util/atomic.h" 
+ 501 0066 F894      		cli
+ 502               	 ;  0 "" 2
+ 503               	/* #NOAPP */
+ 504               	.LBE162:
+ 505               	.LBE161:
+ 506               	.LSM78:
+ 507 0068 1091 0000 		lds r17,UARTtoUSB_Buffer+259
+ 508               	.LVL19:
+ 509               	.LBB163:
+ 510               	.LBB164:
+ 511               	.LSM79:
+ 512 006c 8FBF      		out __SREG__,r24
+ 513               	.LSM80:
+ 514               	.LBE164:
+ 515               	.LBE163:
+ 516               	.LBE160:
+ 517               	.LBE159:
+ 518               	.LBE158:
+ 519               	.LSM81:
+ 520 006e A899      		sbic 53-32,0
+ 521 0070 00C0      		rjmp .L27
+ 522 0072 193C      		cpi r17,lo8(-55)
+ 523 0074 00F0      		brlo .L28
+ 524               	.L27:
+ 525               	.LSM82:
+ 526 0076 A89A      		sbi 53-32,0
+ 527               	.LBB165:
+ 528               	.LBB166:
+ 529               	.LSM83:
+ 530 0078 C0E0      		ldi r28,lo8(UARTtoUSB_Buffer)
+ 531 007a D0E0      		ldi r29,hi8(UARTtoUSB_Buffer)
+ 532 007c 00C0      		rjmp .L29
+ 533               	.L31:
+ 534               	.LSM84:
+ 535 007e E091 0000 		lds r30,UARTtoUSB_Buffer+257
+ 536 0082 F091 0000 		lds r31,(UARTtoUSB_Buffer+257)+1
+ 537 0086 6191      		ld r22,Z+
+ 538               	.LVL20:
+ 539               	.LSM85:
+ 540 0088 F093 0000 		sts (UARTtoUSB_Buffer+257)+1,r31
+ 541 008c E093 0000 		sts UARTtoUSB_Buffer+257,r30
+ 542 0090 E050      		subi r30,lo8(UARTtoUSB_Buffer+255)
+ 543 0092 F040      		sbci r31,hi8(UARTtoUSB_Buffer+255)
+ 544 0094 01F4      		brne .L30
+ 545               	.LSM86:
+ 546 0096 D093 0000 		sts (UARTtoUSB_Buffer+257)+1,r29
+ 547 009a C093 0000 		sts UARTtoUSB_Buffer+257,r28
+ 548               	.L30:
+ 549               	.LBB167:
+ 550               	.LSM87:
+ 551 009e 9FB7      		in r25,__SREG__
+ 552               	.LVL21:
+ 553               	.LBB168:
+ 554               	.LBB169:
+ 555               	.LSM88:
+ 556               	/* #APP */
+ 557               	 ;  50 "/usr/local/CrossPack-AVR-20100115/lib/gcc/avr/4.3.3/../../../../avr/include/util/atomic.h" 
+ 558 00a0 F894      		cli
+ 559               	 ;  0 "" 2
+ 560               	/* #NOAPP */
+ 561               	.LBE169:
+ 562               	.LBE168:
+ 563               	.LSM89:
+ 564 00a2 8091 0000 		lds r24,UARTtoUSB_Buffer+259
+ 565 00a6 8150      		subi r24,lo8(-(-1))
+ 566 00a8 8093 0000 		sts UARTtoUSB_Buffer+259,r24
+ 567               	.LBB170:
+ 568               	.LBB171:
+ 569               	.LSM90:
+ 570 00ac 9FBF      		out __SREG__,r25
+ 571               	.LSM91:
+ 572               	.LBE171:
+ 573               	.LBE170:
+ 574               	.LBE167:
+ 575               	.LBE166:
+ 576               	.LBE165:
+ 577               	.LSM92:
+ 578 00ae 80E0      		ldi r24,lo8(VirtualSerial_CDC_Interface)
+ 579 00b0 90E0      		ldi r25,hi8(VirtualSerial_CDC_Interface)
+ 580 00b2 0E94 0000 		call CDC_Device_SendByte
+ 581               	.LVL22:
+ 582 00b6 1150      		subi r17,lo8(-(-1))
+ 583               	.LVL23:
+ 584               	.L29:
+ 585               	.LSM93:
+ 586 00b8 1123      		tst r17
+ 587 00ba 01F4      		brne .L31
+ 588               	.L28:
+ 589               	.LSM94:
+ 590 00bc 80E0      		ldi r24,lo8(VirtualSerial_CDC_Interface)
+ 591 00be 90E0      		ldi r25,hi8(VirtualSerial_CDC_Interface)
+ 592 00c0 0E94 0000 		call CDC_Device_USBTask
+ 593               	.LVL24:
+ 594               	.L32:
+ 595               	/* epilogue start */
+ 596               	.LSM95:
+ 597 00c4 DF91      		pop r29
+ 598 00c6 CF91      		pop r28
+ 599 00c8 1F91      		pop r17
+ 600               	.LVL25:
+ 601 00ca 0895      		ret
+ 602               	.LFE130:
+ 604               		.section	.text.AVRISP_Task,"ax",@progbits
+ 605               	.global	AVRISP_Task
+ 607               	AVRISP_Task:
+ 608               	.LFB129:
+ 609               	.LSM96:
+ 610               	/* prologue: function */
+ 611               	/* frame size = 0 */
+ 612               	.LSM97:
+ 613 0000 8EB3      		in r24,62-32
+ 614 0002 8430      		cpi r24,lo8(4)
+ 615 0004 01F4      		brne .L35
+ 616               	.LSM98:
+ 617 0006 0E94 0000 		call V2Params_UpdateParamValues
+ 618               	.LBB172:
+ 619               	.LBB173:
+ 620               	.LSM99:
+ 621 000a 82E0      		ldi r24,lo8(2)
+ 622 000c 8093 E900 		sts 233,r24
+ 623               	.LBE173:
+ 624               	.LBE172:
+ 625               	.LBB174:
+ 626               	.LBB175:
+ 627               	.LSM100:
+ 628 0010 8091 E800 		lds r24,232
+ 629               	.LBE175:
+ 630               	.LBE174:
+ 631               	.LSM101:
+ 632 0014 82FF      		sbrs r24,2
+ 633 0016 00C0      		rjmp .L35
+ 634               	.LBB176:
+ 635               	.LBB177:
+ 636               	.LSM102:
+ 637 0018 2E98      		cbi 37-32,6
+ 638               	.LBE177:
+ 639               	.LBE176:
+ 640               	.LSM103:
+ 641 001a 0E94 0000 		call V2Protocol_ProcessCommand
+ 642               	.LBB178:
+ 643               	.LBB179:
+ 644               	.LSM104:
+ 645 001e 2E9A      		sbi 37-32,6
+ 646               	.L35:
+ 647 0020 0895      		ret
+ 648               	.LBE179:
+ 649               	.LBE178:
+ 650               	.LFE129:
+ 652               		.section	.text.main,"ax",@progbits
+ 653               	.global	main
+ 655               	main:
+ 656               	.LFB128:
+ 657               	.LSM105:
+ 658               	/* prologue: function */
+ 659               	/* frame size = 0 */
+ 660               	.LSM106:
+ 661 0000 0E94 0000 		call SetupHardware
+ 662               	.LBB180:
+ 663               	.LBB181:
+ 664               	.LSM107:
+ 665 0004 2E98      		cbi 37-32,6
+ 666               	.LBE181:
+ 667               	.LBE180:
+ 668               	.LSM108:
+ 669               	/* #APP */
+ 670               	 ;  81 "XPLAINBridge.c" 1
+ 671 0006 7894      		sei
+ 672               	 ;  0 "" 2
+ 673               	/* #NOAPP */
+ 674               	.L39:
+ 675               	.LSM109:
+ 676 0008 8091 0000 		lds r24,CurrentFirmwareMode
+ 677 000c 8823      		tst r24
+ 678 000e 01F4      		brne .L37
+ 679               	.LSM110:
+ 680 0010 0E94 0000 		call UARTBridge_Task
+ 681 0014 00C0      		rjmp .L38
+ 682               	.L37:
+ 683               	.LSM111:
+ 684 0016 0E94 0000 		call AVRISP_Task
+ 685               	.L38:
+ 686               	.LSM112:
+ 687 001a 0E94 0000 		call USB_USBTask
+ 688 001e 00C0      		rjmp .L39
+ 689               	.LFE128:
+ 691               	.global	CurrentFirmwareMode
+ 692               	.global	CurrentFirmwareMode
+ 693               		.section .bss
+ 696               	CurrentFirmwareMode:
+ 697 0000 00        		.skip 1,0
+ 698               	.global	VirtualSerial_CDC_Interface
+ 699               		.data
+ 702               	VirtualSerial_CDC_Interface:
+ 703 0000 00        		.byte	0
+ 704 0001 03        		.byte	3
+ 705 0002 1000      		.word	16
+ 706 0004 01        		.byte	1
+ 707 0005 04        		.byte	4
+ 708 0006 1000      		.word	16
+ 709 0008 01        		.byte	1
+ 710 0009 02        		.byte	2
+ 711 000a 0800      		.word	8
+ 712 000c 00        		.byte	0
+ 713 000d 0000 0000 		.skip 9,0
+ 713      0000 0000 
+ 713      00
+ 714               		.comm UARTtoUSB_Buffer,260,1
+ 715               		.comm USBtoUART_Buffer,260,1
+ 812               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 XPLAINBridge.c
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGP2mvt.s:2      *ABS*:0000003f __SREG__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGP2mvt.s:3      *ABS*:0000003e __SP_H__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGP2mvt.s:4      *ABS*:0000003d __SP_L__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGP2mvt.s:5      *ABS*:00000034 __CCP__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGP2mvt.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGP2mvt.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGP2mvt.s:19     .text.EVENT_USB_Device_Connect:00000000 EVENT_USB_Device_Connect
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGP2mvt.s:38     .text.EVENT_USB_Device_Disconnect:00000000 EVENT_USB_Device_Disconnect
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGP2mvt.s:57     .text.EVENT_CDC_Device_LineEncodingChanged:00000000 EVENT_CDC_Device_LineEncodingChanged
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGP2mvt.s:95     .text.CALLBACK_USB_GetDescriptor:00000000 CALLBACK_USB_GetDescriptor
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGP2mvt.s:696    .bss:00000000 CurrentFirmwareMode
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGP2mvt.s:125    .text.EVENT_USB_Device_ControlRequest:00000000 EVENT_USB_Device_ControlRequest
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGP2mvt.s:702    .data:00000000 VirtualSerial_CDC_Interface
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGP2mvt.s:145    .text.EVENT_USB_Device_ConfigurationChanged:00000000 EVENT_USB_Device_ConfigurationChanged
+                            *COM*:00000104 USBtoUART_Buffer
+                            *COM*:00000104 UARTtoUSB_Buffer
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGP2mvt.s:278    .text.SetupHardware:00000000 SetupHardware
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGP2mvt.s:379    .text.UARTBridge_Task:00000000 UARTBridge_Task
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGP2mvt.s:607    .text.AVRISP_Task:00000000 AVRISP_Task
+/var/folders/fy/fkrt37kj6jd3by75mtf4gsxr0000gn/T//ccGP2mvt.s:655    .text.main:00000000 main
+
+UNDEFINED SYMBOLS
+__udivmodsi4
+USART_GetDescriptor
+AVRISP_GetDescriptor
+CDC_Device_ProcessControlRequest
+CDC_Device_ConfigureEndpoints
+SoftUART_Init
+Endpoint_ConfigureEndpoint_Prv
+V2Protocol_Init
+USB_Init
+CDC_Device_ReceiveByte
+CDC_Device_SendByte
+CDC_Device_USBTask
+V2Params_UpdateParamValues
+V2Protocol_ProcessCommand
+USB_USBTask
+__do_copy_data
+__do_clear_bss
