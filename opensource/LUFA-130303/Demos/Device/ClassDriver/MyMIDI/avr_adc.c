@@ -5,7 +5,7 @@
             a level of hardware abstraction
 */
 
-#include "adc.h"
+#include "avr_adc.h"
 #include <avr/io.h>
 #include "bits.h" // Bitwise Macros
 

@@ -36,80 +36,44 @@
 
 #include "MIDI.h"
 #include "adc.h"
+#include <HAL/include/USBMIDI.h>
 
 // My CC midi definitions
  #define MIDI_CC_CHANGE 0xB0
  #define GENERAL_PURPOSE_CC_CHANGE 0x10
 
-/** LUFA MIDI Class driver interface configuration and state information. This structure is
- *  passed to all MIDI Class driver functions, so that multiple instances of the same class
- *  within a device can be differentiated from one another.
- */
-USB_ClassInfo_MIDI_Device_t Keyboard_MIDI_Interface =
-	{
-		.Config =
-			{
-				.StreamingInterfaceNumber = 1,
-				.DataINEndpoint           =
-					{
-						.Address          = MIDI_STREAM_IN_EPADDR,
-						.Size             = MIDI_STREAM_EPSIZE,
-						.Banks            = 1,
-					},
-				.DataOUTEndpoint          =
-					{
-						.Address          = MIDI_STREAM_OUT_EPADDR,
-						.Size             = MIDI_STREAM_EPSIZE,
-						.Banks            = 1,
-					},
-			},
-	};
-
-/** Main program entry point. This routine contains the overall program flow, including initial
- *  setup of all components and the main program loop.
- */
-int main(void)
-{
-	SetupHardware();
-
-	LEDs_SetAllLEDs(LEDMASK_USB_NOTREADY);
-	sei();
-
-	for (;;)
-	{
-		CheckButtonPress();
-		CheckDialChange();
-
-		MIDI_EventPacket_t ReceivedMIDIEvent;
-		while (MIDI_Device_ReceiveEventPacket(&Keyboard_MIDI_Interface, &ReceivedMIDIEvent))
-		{
-			if ((ReceivedMIDIEvent.Event == MIDI_EVENT(0, MIDI_COMMAND_NOTE_ON)) && (ReceivedMIDIEvent.Data3 > 0))
-			  LEDs_SetAllLEDs(ReceivedMIDIEvent.Data2 > 64 ? LEDS_LED1 : LEDS_LED2);
-			else
-			  LEDs_SetAllLEDs(LEDS_NO_LEDS);
-		}
-
-		MIDI_Device_USBTask(&Keyboard_MIDI_Interface);
-		USB_USBTask();
-	}
-}
-
-/** Configures the board hardware and chip peripherals for the demo's functionality. */
-void SetupHardware(void)
-{
+void System_Init(void){
 	/* Disable watchdog if enabled by bootloader/fuses */
 	MCUSR &= ~(1 << WDRF);
 	wdt_disable();
 
 	/* Disable clock division */
 	clock_prescale_set(clock_div_1);
+}
 
-	/* Hardware Initialization */
+/** Main program entry point. This routine contains the overall program flow, including initial
+ *  setup of all components and the main program loop.
+ */
+int main(void)
+{
+	/* Initialise System */
+	System_Init();
+	USBMIDI_Init();
+
+	/* Initialise User Tasks */
 	adc_init(ADC_REF_AVCC | ADC_8_BIT | ADC_SINGLE_ENDED | ADC_PRESCALE_2);
 	LEDs_Init();
 	Buttons_Init();
-	USB_Init();
+
+	for (;;)
+	{
+		CheckButtonPress();
+		CheckDialChange();
+		USBMIDI_Update();
+	}
 }
+
+
 
 /** Checks for changes in the position of the board joystick, sending MIDI events to the host upon each change. */
 void CheckButtonPress(void)
@@ -124,24 +88,22 @@ void CheckButtonPress(void)
 	uint8_t ButtonChanged = (ButtonPress ^ PrevButtonPress);
 
 	/* Get board button status - if pressed use channel 10 (percussion), otherwise use channel 1 */
-	uint8_t Channel = MIDI_CHANNEL(1);
+	uint8_t Channel = 1;
 
 	if (ButtonChanged)
 	{
 		MIDICommand = (ButtonPress ? MIDI_COMMAND_NOTE_ON : MIDI_COMMAND_NOTE_OFF);
 		MIDIPitch   = 0x3C;
 	
-		MIDI_EventPacket_t MIDIEvent = (MIDI_EventPacket_t)
+		USBMIDIEvent_t MIDIEvent = 
 			{
-				.Event    	 = MIDI_EVENT(0, MIDICommand),
-
-				.Data1       = MIDICommand | Channel,
-				.Data2       = MIDIPitch,
-				.Data3       = MIDI_STANDARD_VELOCITY,
+				.Type    	 = MIDICommand,
+				.Channel     = Channel,
+				.Key       	 = MIDIPitch,
+				.Value       = MIDI_STANDARD_VELOCITY,
 			};
 
-		MIDI_Device_SendEventPacket(&Keyboard_MIDI_Interface, &MIDIEvent);
-		MIDI_Device_Flush(&Keyboard_MIDI_Interface);
+		USBMIDI_SendMessage(MIDIEvent);
 	}
 
 	PrevButtonPress = ButtonPress;
@@ -161,21 +123,19 @@ void CheckDialChange(void)
 	DialValue = DialValue >> 1; // Convert to 7 bit
 
 	/* Get board button status - if pressed use channel 10 (percussion), otherwise use channel 1 */
-	uint8_t Channel = MIDI_CHANNEL(1);
+	uint8_t Channel = 1;
 
 	if (DialValue != PrevDialValue)
 	{
-		MIDI_EventPacket_t MIDIEvent = (MIDI_EventPacket_t)
+		USBMIDIEvent_t MIDIEvent = 
 			{
-				.Event 		 = MIDI_EVENT(0, MIDI_CC_CHANGE),
-
-				.Data1       = MIDI_CC_CHANGE | Channel,
-				.Data2       = GENERAL_PURPOSE_CC_CHANGE,
-				.Data3       = DialValue,
+				.Type 		 = MIDI_CC_CHANGE,
+				.Channel     = Channel,
+				.Key         = GENERAL_PURPOSE_CC_CHANGE,
+				.Value       = DialValue,
 			};
 
-		MIDI_Device_SendEventPacket(&Keyboard_MIDI_Interface, &MIDIEvent);
-		MIDI_Device_Flush(&Keyboard_MIDI_Interface);
+		USBMIDI_SendMessage(MIDIEvent);
 	}
 
 	PrevDialValue = DialValue;
