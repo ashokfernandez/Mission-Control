@@ -95,7 +95,7 @@ main.o: main.c main.h Descriptors.h \
  ../../../../LUFA/../LUFA/Drivers/Board/AVR8/OLIMEX32U4/../../../../Common/Common.h \
  ../../../../LUFA/../LUFA/Drivers/Board/Buttons.h \
  ../../../../LUFA/../LUFA/Drivers/Board/AVR8/OLIMEX32U4/Buttons.h \
- Task_SingleDigital.h avr_adc.h USBMIDI.h MIDIDefinitions.h
+ Task_SingleDigital.h Task_SingleAnalogue.h USBMIDI.h
 
 main.h:
 
@@ -295,8 +295,6 @@ Config/LUFAConfig.h:
 
 Task_SingleDigital.h:
 
-avr_adc.h:
+Task_SingleAnalogue.h:
 
 USBMIDI.h:
-
-MIDIDefinitions.h:

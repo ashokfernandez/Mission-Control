@@ -1,12 +1,14 @@
 #include "Task_SingleAnalogue.h"
 #include "main.h"
-#include "avr_adc.h"
+#include "Analogue.h"
 #include "USBMIDI.h"
 #include "MidiDefinitions.h"
 
+#define DIAL_PIN 7
+
 void Task_SingleAnalogue_Init(void)
 {
-	adc_init(ADC_REF_AVCC | ADC_8_BIT | ADC_SINGLE_ENDED | ADC_PRESCALE_2);
+	Analogue_Init();
 }
 
 void Task_SingleAnalogue_Run(void)
@@ -17,8 +19,7 @@ void Task_SingleAnalogue_Run(void)
 	uint8_t MIDIPitch;
 
 	/* Get current joystick mask, XOR with previous to detect joystick changes */
-	adc_startConversion(7);
-	uint8_t DialValue  = adc_read();
+	uint8_t DialValue  = Analogue_Read(DIAL_PIN);
 	DialValue = DialValue >> 1; // Convert to 7 bit
 
 	/* Get board button status - if pressed use channel 10 (percussion), otherwise use channel 1 */

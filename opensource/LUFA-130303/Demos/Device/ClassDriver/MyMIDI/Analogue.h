@@ -6,10 +6,10 @@
     		with concern of the platform that the implementation will occur on
 */
 
-#include <DataType.h>
+#include <DataTypes.h>
 #include <stdint.h>
 
 
 void Analogue_Init(void);
 
-uint8_t Analogue_Read(pin_t);
+uint8_t Analogue_Read(Pin_Analogue_t pin);

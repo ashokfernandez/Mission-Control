@@ -1,8 +1,8 @@
 #include "main.h"
 #include "Task_SingleDigital.h"
-#include "avr_adc.h"
+#include "Task_SingleAnalogue.h"
 #include "USBMIDI.h"
-#include "MIDIDefinitions.h"
+//#include "MIDIDefinitions.h"
 
 void System_Init(void){
 	/* Disable watchdog if enabled by bootloader/fuses */
