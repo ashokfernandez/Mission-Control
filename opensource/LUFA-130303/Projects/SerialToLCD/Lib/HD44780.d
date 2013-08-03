@@ -1,3 +1,0 @@
-Lib/HD44780.o: Lib/HD44780.c Lib/HD44780.h
-
-Lib/HD44780.h:
