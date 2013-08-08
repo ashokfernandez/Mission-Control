@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<design>
+	<target>Olimex32u4</target>
+
+	<!-- Analogue Task -->
+	<recipe name="single_pot">
+		<connection>
+			<recipe_pin>pot</recipe_pin>
+			<target>A0</target>
+		</connection>
+	</recipe>
+
+	<!-- Digital Task -->
+	<recipe name="single_button">
+		<connection>
+			<recipe_pin>button</recipe_pin>
+			<target>D7</target>
+		</connection>
+	</recipe>
+
+</design>

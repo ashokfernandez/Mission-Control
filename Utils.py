@@ -4,10 +4,9 @@ import unittest
 # Exception class for when an executable is not found
 class LocateExecutableError(Exception):
     ''' Exception thats thrown when the which command fails to find the requested executable'''
-    def __init__(self, requestedExecutable):
-        self.requestedExecutable = requestedExecutable
-
-
+    def __init__(self, message):
+        # Call the base class constructor with the parameters it needs
+        Exception.__init__(self, message)
 
 # Adapted from http://stackoverflow.com/questions/377017/test-if-executable-exists-in-python
 def which(program):

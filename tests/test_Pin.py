@@ -35,6 +35,17 @@ class TestModule_Pin(unittest.TestCase):
     	self.assertTrue(type(self.pinA) != type(AnaloguePin()))
     	self.assertTrue(type(self.pinC) == type(AnaloguePin()))
 
+    def test_exceptionCatch(self):
+        caught = False
+
+        try:
+            raise InvalidPinTypeError("Test exception")
+        except InvalidPinTypeError:
+            caught = True
+
+        self.assertTrue(caught)
+
+        
 # If the module is loaded as __main__ : run the unit tests
 if __name__ == "__main__":
     unittest.main()

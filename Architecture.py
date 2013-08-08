@@ -27,3 +27,4 @@ class Architecture(object):
 			print "Compiler '%s' couldn't be located. Check it is installed and on the system path"
 
 
+

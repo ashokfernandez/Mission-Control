@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<target name="My Board">
+	<architecture>avr8</architecture> 
+
+	<!-- Information about the particular chip used on the board. Needed for compilation -->
+	<mcu>m32u4</mcu> <!-- Identifier of the microcontroller, as refered to by the flash loader -->
+
+	<!-- Pins on the target board -->
+	<pins>
+		<analogue>A1</analogue>
+		<analogue>A2</analogue>
+		<analogue>A3</analogue>
+		<analogue>A4</analogue>
+		
+		<digital>D1</digital>
+		<digital>D2</digital>
+		<digital>D3</digital>
+		<digital>D4</digital>
+	</pins>
+
+</target>

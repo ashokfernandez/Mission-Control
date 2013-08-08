@@ -13,13 +13,6 @@ void System_Init(void){
 	clock_prescale_set(clock_div_1);
 }
 
-/* 
-Task *Task_1 = BitShifter(Pin1, Pin2, Pin3);
-Task *Task_2 = BitShifter(Pin6, Pin5, Pin4);
-
-Task_1->run();
-Task_2->run();
-*/
 
 /** Main program entry point. This routine contains the overall program flow, including initial
  *  setup of all components and the main program loop.
@@ -46,4 +39,3 @@ int main(void)
 }
 
 
-// allan.mcinnes@gmail.com 
