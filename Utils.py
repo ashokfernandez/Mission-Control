@@ -1,9 +1,12 @@
 import os
 import unittest
 
-root = './'
-pattern = "_*.xml"  # Pattern to match XML node identifier files
-c_file_pattern = "*.c"
+# Exception class for when an executable is not found
+class LocateExecutableError(Exception):
+    ''' Exception thats thrown when the which command fails to find the requested executable'''
+    def __init__(self, requestedExecutable):
+        self.requestedExecutable = requestedExecutable
+
 
 
 # Adapted from http://stackoverflow.com/questions/377017/test-if-executable-exists-in-python
@@ -32,5 +35,9 @@ def which(program):
             if is_exe(exe_file):
                 pathToExecutable = exe_file
 
+    # If the executable wasn't found, raise an exception
+    if pathToExecutable == None:
+        raise LocateExecutableError("Unable to find an executable named '%s'. Make sure it is on the system path." % program)
+    
     return pathToExecutable
 

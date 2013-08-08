@@ -1,7 +1,7 @@
 # Add the parent folder to the import path
-import sys
-import os.path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
+# import sys
+# import os.path
+# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 
 # Import the module to test from the parent directory
 from Pin import *
