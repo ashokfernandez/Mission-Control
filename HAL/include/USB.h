@@ -18,7 +18,7 @@ extern "C" {
 		uint8_t  Channel; 	/**< MIDI Channel to send the command down */
 		uint8_t  Key; 		/**< Key to be pressed or type of control change that has occured */
 		uint8_t  Value; 	/**< Value of the event, typically either a velocity for a key press or a 7 bit value for a CC change */
-	} MIDIEvent_t
+	} MIDIEvent_t;
 
 	void USBMIDI_Init(void);
 	void USBMIDI_SendMidiMessage(MIDIEvent_t event);

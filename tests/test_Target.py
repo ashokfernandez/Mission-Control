@@ -8,12 +8,12 @@ class TestModule_Target(unittest.TestCase):
     '''Unit Test for the Utils module'''
 
     def setUp(self):
-    	self.arch = Architecture("AVR8")
-    	self.target = Target("MyBoard",self.arch)
+    	# self.arch = Architecture("AVR8")
+    	self.target = Target("MyBoard")
 
     def test_init(self):
-		self.pinA = AnaloguePin()
-		self.pinD = DigitalPin()
+		self.pinA = AnaloguePin('a1', 'PORT_A', 4, 0)
+		self.pinD = DigitalPin('d1', 'PORT_A', 4)
 
 		self.target.addPin(self.pinA)
 		self.target.addPin(self.pinD)
@@ -21,7 +21,7 @@ class TestModule_Target(unittest.TestCase):
 
     def test_whichException(self):
     	# Add a generic pin - this should throw an exception
-    	thisPin = Pin()
+    	thisPin = Pin('p1', 'PORT_A', 4)
     	caught = False
     	try:
 			self.target.addPin(thisPin)

@@ -1,32 +1,32 @@
-../../../../LUFA/Drivers/USB/Core/Events.o: \
- ../../../../LUFA/Drivers/USB/Core/Events.c \
- ../../../../LUFA/Drivers/USB/Core/Events.h \
- ../../../../LUFA/Drivers/USB/Core/../../../Common/Common.h \
- ../../../../LUFA/Drivers/USB/Core/../../../Common/Architectures.h \
- ../../../../LUFA/Drivers/USB/Core/../../../Common/BoardTypes.h \
- ../../../../LUFA/Drivers/USB/Core/../../../Common/ArchitectureSpecific.h \
- ../../../../LUFA/Drivers/USB/Core/../../../Common/CompilerSpecific.h \
- ../../../../LUFA/Drivers/USB/Core/../../../Common/Attributes.h \
- Config/LUFAConfig.h \
- ../../../../LUFA/Drivers/USB/Core/../../../Common/Endianness.h \
- ../../../../LUFA/Drivers/USB/Core/USBMode.h
+../HAL/src/AVR8/LUFA-130303/LUFA/Drivers/USB/Core/Events.o: \
+ ../HAL/src/AVR8/LUFA-130303/LUFA/Drivers/USB/Core/Events.c \
+ ../HAL/src/AVR8/LUFA-130303/LUFA/Drivers/USB/Core/Events.h \
+ ../HAL/src/AVR8/LUFA-130303/LUFA/Drivers/USB/Core/../../../Common/Common.h \
+ ../HAL/src/AVR8/LUFA-130303/LUFA/Drivers/USB/Core/../../../Common/Architectures.h \
+ ../HAL/src/AVR8/LUFA-130303/LUFA/Drivers/USB/Core/../../../Common/BoardTypes.h \
+ ../HAL/src/AVR8/LUFA-130303/LUFA/Drivers/USB/Core/../../../Common/ArchitectureSpecific.h \
+ ../HAL/src/AVR8/LUFA-130303/LUFA/Drivers/USB/Core/../../../Common/CompilerSpecific.h \
+ ../HAL/src/AVR8/LUFA-130303/LUFA/Drivers/USB/Core/../../../Common/Attributes.h \
+ ../HAL/src/AVR8/LUFAConfig.h \
+ ../HAL/src/AVR8/LUFA-130303/LUFA/Drivers/USB/Core/../../../Common/Endianness.h \
+ ../HAL/src/AVR8/LUFA-130303/LUFA/Drivers/USB/Core/USBMode.h
 
-../../../../LUFA/Drivers/USB/Core/Events.h:
+../HAL/src/AVR8/LUFA-130303/LUFA/Drivers/USB/Core/Events.h:
 
-../../../../LUFA/Drivers/USB/Core/../../../Common/Common.h:
+../HAL/src/AVR8/LUFA-130303/LUFA/Drivers/USB/Core/../../../Common/Common.h:
 
-../../../../LUFA/Drivers/USB/Core/../../../Common/Architectures.h:
+../HAL/src/AVR8/LUFA-130303/LUFA/Drivers/USB/Core/../../../Common/Architectures.h:
 
-../../../../LUFA/Drivers/USB/Core/../../../Common/BoardTypes.h:
+../HAL/src/AVR8/LUFA-130303/LUFA/Drivers/USB/Core/../../../Common/BoardTypes.h:
 
-../../../../LUFA/Drivers/USB/Core/../../../Common/ArchitectureSpecific.h:
+../HAL/src/AVR8/LUFA-130303/LUFA/Drivers/USB/Core/../../../Common/ArchitectureSpecific.h:
 
-../../../../LUFA/Drivers/USB/Core/../../../Common/CompilerSpecific.h:
+../HAL/src/AVR8/LUFA-130303/LUFA/Drivers/USB/Core/../../../Common/CompilerSpecific.h:
 
-../../../../LUFA/Drivers/USB/Core/../../../Common/Attributes.h:
+../HAL/src/AVR8/LUFA-130303/LUFA/Drivers/USB/Core/../../../Common/Attributes.h:
 
-Config/LUFAConfig.h:
+../HAL/src/AVR8/LUFAConfig.h:
 
-../../../../LUFA/Drivers/USB/Core/../../../Common/Endianness.h:
+../HAL/src/AVR8/LUFA-130303/LUFA/Drivers/USB/Core/../../../Common/Endianness.h:
 
-../../../../LUFA/Drivers/USB/Core/USBMode.h:
+../HAL/src/AVR8/LUFA-130303/LUFA/Drivers/USB/Core/USBMode.h:

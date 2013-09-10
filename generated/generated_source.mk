@@ -1,0 +1,1 @@
+SRC += $(RECIPES_DIR)/SinglePot.c $(RECIPES_DIR)/SingleButton.c 

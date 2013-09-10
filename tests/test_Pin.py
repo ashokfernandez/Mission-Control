@@ -12,9 +12,9 @@ class TestModule_Pin(unittest.TestCase):
     '''Unit Test for the Utils module'''
 
     def setUp(self):
-    	self.pinA = DigitalPin()
-    	self.pinB = DigitalPin()
-    	self.pinC = AnaloguePin()
+    	self.pinA = DigitalPin('d1','PORT_A', 2)
+    	self.pinB = DigitalPin('d2', 'PORT_A', 3)
+    	self.pinC = AnaloguePin('a1', 'PORT_A', 4, 0)
 
     	self.pinA.connectTo(self.pinB)
 
@@ -32,8 +32,8 @@ class TestModule_Pin(unittest.TestCase):
     	self.assertFalse(a_to_c)
 
     def test_typeCheck(self):
-    	self.assertTrue(type(self.pinA) != type(AnaloguePin()))
-    	self.assertTrue(type(self.pinC) == type(AnaloguePin()))
+    	self.assertTrue(type(self.pinA) != type(AnaloguePin('a1','PORT_A', 4, 0)))
+    	self.assertTrue(type(self.pinC) == type(AnaloguePin('a2', 'PORT_A', 4, 0)))
 
     def test_exceptionCatch(self):
         caught = False

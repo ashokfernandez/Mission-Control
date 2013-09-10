@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<design>
+	<target>Olimex32u4</target>
+	
+	<!-- Recipe for a singal analogue potentiometer -->
+	<recipe name="SinglePot">
+		<connection name="potentiometer">
+			<pin>analogue_0</pin>
+		</connection>
+	</recipe>
+	
+	<!-- Recipe for a single active-high push button -->
+	<recipe name="SingleButton">
+		<connection name="pushbutton">
+			<pin>digital_0</pin>
+		</connection>
+	</recipe>
+
+
+</design>

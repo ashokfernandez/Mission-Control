@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<target name="Olimex32u4">
+
+	<architecture>avr8</architecture> 
+
+	<!-- Information about the particular chip used on the board. Needed for compilation -->
+	<mcu>m32u4</mcu> <!-- Identifier of the microcontroller, as refered to by the flash loader -->
+
+	<!-- Pins on the target board -->
+	<pins>
+		<analogue name="analogue_0">
+			<port>PORT_F</port>
+			<pin>7</pin>
+			<channel>7</channel>
+		</analogue>
+
+		<analogue name="analogue_1">
+			<port>PORT_F</port>
+			<pin>6</pin>
+			<channel>6</channel>
+		</analogue>
+		
+		<analogue name="analogue_2">
+			<port>PORT_F</port>
+			<pin>5</pin>
+			<channel>5</channel>
+		</analogue>
+		
+		<analogue name="analogue_3">
+			<port>PORT_F</port>
+			<pin>4</pin>
+			<channel>4</channel>
+		</analogue>
+		
+		<analogue name="analogue_4">
+			<port>PORT_F</port>
+			<pin>1</pin>
+			<channel>1</channel>
+		</analogue>
+		
+		<analogue name="analogue_5">
+			<port>PORT_F</port>
+			<pin>0</pin>
+			<channel>0</channel>
+		</analogue>
+		
+
+
+		
+		<digital name="digital_0">
+			<port>PORT_D</port>
+			<pin>2</pin>
+		</digital>
+
+		<digital name="digital_1">
+			<port>PORT_D</port>
+			<pin>3</pin>
+		</digital>
+
+		<digital name="digital_2">
+			<port>PORT_D</port>
+			<pin>1</pin>
+		</digital>
+
+		<digital name="digital_3">
+			<port>PORT_D</port>
+			<pin>0</pin>
+		</digital>
+
+		<digital name="digital_4">
+			<port>PORT_D</port>
+			<pin>4</pin>
+		</digital>
+
+		<digital name="digital_5">
+			<port>PORT_C</port>
+			<pin>6</pin>
+		</digital>
+
+		<digital name="digital_6">
+			<port>PORT_D</port>
+			<pin>7</pin>
+		</digital>
+
+		<digital name="digital_7">
+			<port>PORT_E</port>
+			<pin>6</pin>
+		</digital>
+
+		<digital name="digital_8">
+			<port>PORT_B</port>
+			<pin>4</pin>
+		</digital>
+
+		<digital name="digital_9">
+			<port>PORT_B</port>
+			<pin>5</pin>
+		</digital>
+
+		<digital name="digital_10">
+			<port>PORT_B</port>
+			<pin>6</pin>
+		</digital>
+
+		<digital name="digital_11">
+			<port>PORT_B</port>
+			<pin>7</pin>
+		</digital>
+
+		<digital name="digital_12">
+			<port>PORT_D</port>
+			<pin>6</pin>
+		</digital>
+
+		<digital name="digital_13">
+			<port>PORT_C</port>
+			<pin>7</pin>
+		</digital>
+
+		<digital name="digital_14">
+			<port>PORT_B</port>
+			<pin>0</pin>
+		</digital>
+
+		<digital name="digital_15">
+			<port>PORT_B</port>
+			<pin>1</pin>
+		</digital>
+
+		<digital name="digital_16">
+			<port>PORT_B</port>
+			<pin>2</pin>
+		</digital>
+
+		<digital name="digital_17">
+			<port>PORT_B</port>
+			<pin>3</pin>
+		</digital>
+
+		
+	</pins>
+
+</target>

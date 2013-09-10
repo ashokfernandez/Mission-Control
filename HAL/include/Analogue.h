@@ -9,7 +9,15 @@
 #include <DataTypes.h>
 #include <stdint.h>
 
+/**
+ * Initialises the given pin as an analogue pin (is possible)
+ * @param pin Pin to initialise as an analogue input
+ */
+void Analogue_Init(Pin_Analogue_t pin);
 
-void Analogue_Init(void);
-
+/**
+ * Reads the value of the given analogue pin
+ * @param  pin Pin to read
+ * @return     Value of the pin (between 0 - 255)
+ */
 uint8_t Analogue_Read(Pin_Analogue_t pin);
